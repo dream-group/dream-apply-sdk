@@ -1,0 +1,22 @@
+{
+    "name": "dream-group/dream-apply-sdk",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "require-dev": {
+        "psy/psysh": "^0.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dream\\DreamApply\\Client\\": "src"
+        }
+    },
+    "license": "private",
+    "authors": [
+        {
+            "name": "Anton Smirnov",
+            "email": "anton.smirnov@dreamapply.com"
+        }
+    ]
+}
