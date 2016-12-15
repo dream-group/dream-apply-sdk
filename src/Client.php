@@ -8,13 +8,37 @@
 
 namespace Dream\DreamApply\Client;
 
-use Dream\DreamApply\Client\Exceptions as e;
-use Dream\DreamApply\Client\Models as m;
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
+use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Models\Applicant;
+use Dream\DreamApply\Client\Models\ApplicantCollection;
+use Dream\DreamApply\Client\Models\Application;
+use Dream\DreamApply\Client\Models\Collection;
+use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
 use GuzzleHttp as g;
 
+/**
+ * Class Client
+ * @package Dream\DreamApply\Client
+ *
+ * @property-read ApplicantCollection|Applicant[] $applicants
+ * @method        ApplicantCollection|Applicant[] applicants(array $filter)
+ *
+ * @property-read Collection|Application[] $applications
+ * @method        Collection|Application[] applications(array $filter)
+ */
 class Client
 {
     private $http;
+
+    protected $collectionLinks = [
+        'applicants'    => Applicant::class,
+        'applications'  => Application::class,
+    ];
+
+    use CollectionLinks;
 
     public function __construct($endpoint, $apiKey)
     {
@@ -33,14 +57,33 @@ class Client
         ]);
     }
 
-    /* root collections */
+    /* root collections handling */
 
-    /**
-     * @return m\Collection|m\Application[]
-     */
-    public function applications()
+    private function getCollection($name, $filter = [])
     {
-        return new m\Collection($this, 'applications', m\Application::class);
+        return $this->resolveCollectionLink($this, $name, $name, $filter);
+    }
+
+    public function __get($name)
+    {
+        $collection = $this->getCollection($name);
+        if ($collection) {
+            return $collection;
+        }
+
+        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
+    }
+
+    public function __call($name, $arguments)
+    {
+        $filter = isset($arguments[0]) ? $arguments[0] : [];
+
+        $collection = $this->getCollection($name, $filter);
+        if ($collection) {
+            return $collection;
+        }
+
+        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
     /* HTTP Functions */
@@ -85,9 +128,9 @@ class Client
             return g\json_decode(strval($response->getBody()), true);
         }
         if ($response->getStatusCode() === 404) {
-            throw new e\ItemNotFoundException();
+            throw new ItemNotFoundException();
         }
 
-        throw e\HttpFailResponseException::fromResponse($response);
+        throw HttpFailResponseException::fromResponse($response);
     }
 }

@@ -9,11 +9,14 @@
 namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions as e;
+use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
+use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Stringy\Stringy;
 
 abstract class Record
 {
-    const IS_BINARY = false;
+    const IS_BINARY         = false;
+    const COLLECTION_CLASS  = Collection::class;
 
     /**
      * @var Client
@@ -23,6 +26,18 @@ abstract class Record
     protected $url;
     protected $partial;
 
+    /* links handling */
+
+    protected $collectionLinks = [
+        /* 'link_name' => ClassName::class, // will generate method $this->linkName($filter = []) */
+    ];
+    protected $objectLinks = [
+        /* 'link_name' => ClassName::class, // will generate property $this->linkName */
+    ];
+
+    use Concerns\CollectionLinks;
+    use Concerns\ObjectLinks;
+
     public function __construct($client, $url, $data = [], $partial = false)
     {
         $this->client   = $client;
@@ -31,17 +46,24 @@ abstract class Record
         $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
     }
 
-    public function __get($field)
+    public function __get($name)
     {
-        if ($this->partial && !array_key_exists($field, $this->data)) {
+        $snakeName = $this->makeFieldName($name);
+
+        if ($this->partial && !array_key_exists($snakeName, $this->data)) {
             $this->resolvePartial();
         }
 
-        if (array_key_exists($field, $this->data)) {
-            return $this->data[$field];
+        $link = $this->resolveLink($snakeName);
+        if ($link) {
+            return $link;
         }
 
-        throw new e\InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $field, static::class));
+        if (array_key_exists($snakeName, $this->data)) {
+            return $this->data[$snakeName];
+        }
+
+        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
     }
 
     public function getData($requestFull = false)
@@ -53,6 +75,19 @@ abstract class Record
         return $this->data;
     }
 
+    public function __call($name, $arguments)
+    {
+        $snakeName  = $this->makeFieldName($name);
+        $filter     = isset($arguments[0]) ? $arguments[0] : [];
+
+        $link = $this->resolveLink($snakeName, $filter);
+        if ($link) {
+            return $link;
+        }
+
+        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
+    }
+
     private function resolvePartial()
     {
         if (empty($this->data) || $this->partial) {
@@ -60,5 +95,19 @@ abstract class Record
             $this->data = $data;
             $this->partial = false;
         }
+    }
+
+    private function resolveLink($name, $filter = [])
+    {
+        $link =
+            $this->resolveObjectLink($this->client, $this->data[$name], $name) ?:
+            $this->resolveCollectionLink($this->client, $this->data[$name], $name, $filter);
+
+        return $link;
+    }
+
+    private function makeFieldName($methodName)
+    {
+        return strval(Stringy::create($methodName)->underscored());
     }
 }

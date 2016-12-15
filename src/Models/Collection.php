@@ -8,9 +8,11 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-use Dream\DreamApply\Client\Exceptions as e;
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
+use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
 
-class Collection implements \IteratorAggregate, \Countable
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * @var \Dream\DreamApply\Client\Client
@@ -29,10 +31,14 @@ class Collection implements \IteratorAggregate, \Countable
      */
     private $filter;
 
+    protected $collectionLinks = [];
+
+    use Concerns\CollectionLinks;
+
     public function __construct($client, $baseUrl, $itemClass, $filter = [])
     {
         if (is_subclass_of($itemClass, Record::class) === false) {
-            throw new e\InvalidArgumentException(sprintf('$itemClass must be subclass of "%s", "%s" given', Record::class, $itemClass));
+            throw new InvalidArgumentException(sprintf('$itemClass must be subclass of "%s", "%s" given', Record::class, $itemClass));
         }
 
         $this->client       = $client;
@@ -76,7 +82,7 @@ class Collection implements \IteratorAggregate, \Countable
             return false;
         }
 
-        throw e\HttpFailResponseException::fromResponse($response);
+        throw HttpFailResponseException::fromResponse($response);
     }
 
     /**
@@ -116,7 +122,7 @@ class Collection implements \IteratorAggregate, \Countable
         $response = $this->client->httpHead($this->baseUrl, $this->filter);
 
         if ($response->getStatusCode() !== 200) {
-            throw e\HttpFailResponseException::fromResponse($response);
+            throw HttpFailResponseException::fromResponse($response);
         }
 
         $countHeader = $response->getHeader('X-Count');
@@ -143,5 +149,58 @@ class Collection implements \IteratorAggregate, \Countable
     protected function urlForId($id)
     {
         return $this->baseUrl . '/' . intval($id);
+    }
+
+    /* array access */
+
+    public function offsetExists($offset)
+    {
+        return $this->exists($offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new InvalidMethodException('Collection is immutable');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new InvalidMethodException('Collection is immutable');
+    }
+
+    /* junior collections */
+
+    private function resolveChildCollectionLink($name, $filter = [])
+    {
+        $url = implode('/', [$this->baseUrl, $name]);
+
+        return $this->resolveCollectionLink($this->client, $url, $name, $filter);
+    }
+
+    public function __get($name)
+    {
+        $link = $this->resolveChildCollectionLink($name);
+        if ($link) {
+            return $link;
+        }
+
+        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
+    }
+
+    public function __call($name, $arguments)
+    {
+        $filter = isset($arguments[0]) ? $arguments[0] : [];
+
+        $link = $this->resolveChildCollectionLink($name, $filter);
+        if ($link) {
+            return $link;
+        }
+
+        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 }
