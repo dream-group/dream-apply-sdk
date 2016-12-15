@@ -36,8 +36,8 @@ class Applicant extends Record
     ];
 
     protected $collectionLinks = [
-        'trackers'      => ApplicantTrackerAssociation::class, // TODO: real class
+        'trackers'      => ApplicantTrackerAssociation::class,
         'documents'     => Record::class, // TODO: real class
-        'studyplans'    => Record::class, // TODO: real class
+        'studyplans'    => StudyPlan::class,
     ];
 }
