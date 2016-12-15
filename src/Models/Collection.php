@@ -173,7 +173,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
         throw new InvalidMethodException('Collection is immutable');
     }
 
-    /* junior collections */
+    /* child collections */
 
     private function resolveChildCollectionLink($name, $filter = [])
     {
