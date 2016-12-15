@@ -30,7 +30,15 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read $submitted
  * @property-read $status
  *
+ * @property-read Record $academicTerm
  * @property-read Applicant $applicant
+ *
+ * @method Collection flags(array $filter = [])
+ * @method Collection courses(array $filter = [])
+ * @method Collection offers(array $filter = [])
+ * @method Collection exports(array $filter = [])
+ * @method Collection documents(array $filter = [])
+ * @method Collection studyplans(array $filter = [])
  */
 class Application extends Record
 {
