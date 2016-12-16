@@ -22,6 +22,7 @@ use Dream\DreamApply\Client\Models\Application;
 use Dream\DreamApply\Client\Models\Collection;
 use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
 use Dream\DreamApply\Client\Models\Course;
+use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
 use GuzzleHttp as g;
@@ -35,6 +36,9 @@ use GuzzleHttp as g;
  *
  * @property-read Collection|Application[] $applications
  * @method        Collection|Application[] applications(array $filter)
+ *
+ * @property-read Collection|Institution[] $institutions
+ * @method        Collection|Institution[] institutions(array $filter)
  *
  * @property-read Collection|Course[] $courses
  * @method        Collection|Course[] courses(array $filter)
@@ -58,6 +62,7 @@ class Client
     protected $collectionLinks = [
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
+        'institutions'      => Institution::class,
         'courses'           => Course::class,
         'intakes'           => Intake::class,
         'invoices'          => Invoice::class,
