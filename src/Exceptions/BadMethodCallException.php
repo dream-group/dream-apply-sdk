@@ -8,4 +8,4 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class InvalidMethodException extends InvalidArgumentException {}
+class BadMethodCallException extends \BadMethodCallException implements BaseException {}

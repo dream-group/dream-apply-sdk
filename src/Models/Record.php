@@ -10,7 +10,7 @@ namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Record
@@ -102,7 +102,7 @@ class Record
             }
         }
 
-        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
+        throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
     private function resolvePartial()

@@ -8,10 +8,8 @@
 
 namespace Dream\DreamApply\Client;
 
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
-use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 use Dream\DreamApply\Client\Models\AcademicTerm;
@@ -28,7 +26,6 @@ use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
 use GuzzleHttp as g;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Client
@@ -119,7 +116,7 @@ class Client
             return $collection;
         }
 
-        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
+        throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
     /* HTTP Functions */

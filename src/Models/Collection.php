@@ -10,7 +10,7 @@ namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
@@ -166,12 +166,12 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function offsetSet($offset, $value)
     {
-        throw new InvalidMethodException('Collection is immutable');
+        throw new BadMethodCallException('Collection is immutable');
     }
 
     public function offsetUnset($offset)
     {
-        throw new InvalidMethodException('Collection is immutable');
+        throw new BadMethodCallException('Collection is immutable');
     }
 
     /* child collections */
@@ -203,6 +203,6 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
             return $link;
         }
 
-        throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
+        throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 }
