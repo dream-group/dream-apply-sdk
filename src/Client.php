@@ -19,6 +19,7 @@ use Dream\DreamApply\Client\Models\AcademicYear;
 use Dream\DreamApply\Client\Models\Applicant;
 use Dream\DreamApply\Client\Models\ApplicantCollection;
 use Dream\DreamApply\Client\Models\Application;
+use Dream\DreamApply\Client\Models\ApplicationCollection;
 use Dream\DreamApply\Client\Models\Collection;
 use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
 use Dream\DreamApply\Client\Models\Course;
@@ -34,8 +35,8 @@ use GuzzleHttp as g;
  * @property-read ApplicantCollection|Applicant[] $applicants
  * @method        ApplicantCollection|Applicant[] applicants(array $filter)
  *
- * @property-read Collection|Application[] $applications
- * @method        Collection|Application[] applications(array $filter)
+ * @property-read ApplicationCollection|Application[] $applications
+ * @method        ApplicationCollection|Application[] applications(array $filter)
  *
  * @property-read Collection|Institution[] $institutions
  * @method        Collection|Institution[] institutions(array $filter)

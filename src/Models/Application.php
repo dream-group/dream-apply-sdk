@@ -42,6 +42,8 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Application extends Record
 {
+    const COLLECTION_CLASS = ApplicationCollection::class;
+
     protected $objectLinks = [
         'academic_term' => AcademicTerm::class,
         'applicant'     => Applicant::class,
