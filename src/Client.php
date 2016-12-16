@@ -12,6 +12,7 @@ use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 use Dream\DreamApply\Client\Models\AcademicTerm;
 use Dream\DreamApply\Client\Models\AcademicTermCollection;
@@ -27,6 +28,7 @@ use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
 use GuzzleHttp as g;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Client
@@ -157,14 +159,24 @@ class Client
     {
         $response = $this->httpGet($url, $query);
 
-        if ($response->getStatusCode() === 200) {
-            // guzzle's json_decode throws exception on invalid json
-            return g\json_decode(strval($response->getBody()), true);
-        }
-        if ($response->getStatusCode() === 404) {
-            throw new ItemNotFoundException();
-        }
+        ResponseHelper::checkExistence($response, true);
 
-        throw HttpFailResponseException::fromResponse($response);
+        // guzzle's json_decode throws exception on invalid json
+        return g\json_decode(strval($response->getBody()), true);
+    }
+
+    public function httpGetBinary($url, $query = [])
+    {
+        $response = $this->httpGet($url, $query);
+
+        ResponseHelper::checkExistence($response, true);
+
+        return [
+            'uploaded'  => $response->getHeaderLine('Last-Modified'),
+            'name'      => ResponseHelper::getFileName($response),
+            'mime'      => $response->getHeaderLine('Content-Type'),
+            'size'      => $response->getBody()->getSize(),
+            'content'   => $response->getBody(),
+        ];
     }
 }

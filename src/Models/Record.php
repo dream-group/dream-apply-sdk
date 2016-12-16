@@ -108,7 +108,11 @@ class Record
     private function resolvePartial()
     {
         if (empty($this->data) || $this->partial) {
-            $data = $this->client->httpGetJson($this->url);
+            if (static::IS_BINARY) {
+                $data = $this->client->httpGetBinary($this->url);
+            } else {
+                $data = $this->client->httpGetJson($this->url);
+            }
             $this->data = $data;
             $this->partial = false;
         }

@@ -60,10 +60,16 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $itemUrl = $this->urlForId($id);
 
-        $data = $this->client->httpGetJson($itemUrl);
+        $class = $this->itemClass;
+
+        if ($class::IS_BINARY) {
+            $data = $this->client->httpGetBinary($itemUrl);
+        } else {
+            $data = $this->client->httpGetJson($itemUrl);
+        }
 
         // set data, declare non partial
-        return new $this->itemClass($this->client, $this->urlForId($id), $data, false);
+        return new $class($this->client, $this->urlForId($id), $data, false);
     }
 
     /**
