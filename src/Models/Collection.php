@@ -11,6 +11,7 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
@@ -177,7 +178,8 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
     private function resolveChildCollectionLink($name, $filter = [])
     {
-        $url = implode('/', [$this->baseUrl, $name]);
+        $uriName    = StringHelper::makeUriName($name);
+        $url        = implode('/', [$this->baseUrl, $uriName]);
 
         return $this->resolveCollectionLink($this->client, $url, $name, $filter);
     }

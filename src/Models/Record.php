@@ -11,7 +11,7 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
-use Stringy\Stringy;
+use Dream\DreamApply\Client\Helpers\StringHelper;
 
 abstract class Record
 {
@@ -48,7 +48,7 @@ abstract class Record
 
     public function __get($name)
     {
-        $snakeName = $this->makeFieldName($name);
+        $snakeName = StringHelper::makeFieldName($name);
 
         if ($this->partial && !array_key_exists($snakeName, $this->data)) {
             $this->resolvePartial();
@@ -77,7 +77,7 @@ abstract class Record
 
     public function __call($name, $arguments)
     {
-        $snakeName  = $this->makeFieldName($name);
+        $snakeName  = StringHelper::makeFieldName($name);
         $filter     = isset($arguments[0]) ? $arguments[0] : [];
 
         $link = $this->resolveLink($snakeName, $filter);
@@ -104,10 +104,5 @@ abstract class Record
             $this->resolveCollectionLink($this->client, $this->data[$name], $name, $filter);
 
         return $link;
-    }
-
-    private function makeFieldName($methodName)
-    {
-        return strval(Stringy::create($methodName)->underscored());
     }
 }

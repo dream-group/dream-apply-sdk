@@ -12,6 +12,10 @@ use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Helpers\StringHelper;
+use Dream\DreamApply\Client\Models\AcademicTerm;
+use Dream\DreamApply\Client\Models\AcademicTermCollection;
+use Dream\DreamApply\Client\Models\AcademicYear;
 use Dream\DreamApply\Client\Models\Applicant;
 use Dream\DreamApply\Client\Models\ApplicantCollection;
 use Dream\DreamApply\Client\Models\Application;
@@ -40,17 +44,25 @@ use GuzzleHttp as g;
  *
  * @property-read Collection|Invoice[] $invoices
  * @method        Collection|Invoice[] invoices(array $filter)
+ *
+ * @property-read AcademicTermCollection|AcademicTerm[] $academicTerms
+ * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter)
+ *
+ * @property-read Collection|AcademicYear[] $academicYears
+ * @method        Collection|AcademicYear[] academicYears(array $filter)
  */
 class Client
 {
     private $http;
 
     protected $collectionLinks = [
-        'applicants'    => Applicant::class,
-        'applications'  => Application::class,
-        'courses'       => Course::class,
-        'intakes'       => Intake::class,
-        'invoices'      => Invoice::class,
+        'applicants'        => Applicant::class,
+        'applications'      => Application::class,
+        'courses'           => Course::class,
+        'intakes'           => Intake::class,
+        'invoices'          => Invoice::class,
+        'academic-terms'    => AcademicTerm::class,
+        'academic-years'    => AcademicYear::class,
     ];
 
     use CollectionLinks;
@@ -76,7 +88,8 @@ class Client
 
     private function getCollection($name, $filter = [])
     {
-        return $this->resolveCollectionLink($this, $name, $name, $filter);
+        $uriName = StringHelper::makeUriName($name);
+        return $this->resolveCollectionLink($this, $uriName, $uriName, $filter);
     }
 
     public function __get($name)
