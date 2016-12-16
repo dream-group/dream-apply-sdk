@@ -43,7 +43,7 @@ namespace Dream\DreamApply\Client\Models;
 class Application extends Record
 {
     protected $objectLinks = [
-        'academic_term' => Record::class, // TODO: real class
+        'academic_term' => AcademicTerm::class,
         'applicant'     => Applicant::class,
     ];
 
@@ -53,6 +53,6 @@ class Application extends Record
         'offers'        => Record::class, // TODO: real class
         'exports'       => Record::class, // TODO: real class
         'documents'     => Record::class, // TODO: real class
-        'studyplans'    => Record::class, // TODO: real class
+        'studyplans'    => StudyPlan::class,
     ];
 }
