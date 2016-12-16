@@ -37,8 +37,8 @@ namespace Dream\DreamApply\Client\Models;
  * @method Collection courses(array $filter = [])
  * @method Collection offers(array $filter = [])
  * @method Collection exports(array $filter = [])
- * @method Collection documents(array $filter = [])
- * @method Collection studyplans(array $filter = [])
+ * @method Collection|Document[] documents(array $filter = [])
+ * @method Collection|StudyPlan[] studyplans(array $filter = [])
  */
 class Application extends Record
 {
@@ -54,7 +54,7 @@ class Application extends Record
         'courses'       => Record::class, // TODO: real class
         'offers'        => Record::class, // TODO: real class
         'exports'       => Record::class, // TODO: real class
-        'documents'     => Record::class, // TODO: real class
+        'documents'     => Document::class,
         'studyplans'    => StudyPlan::class,
     ];
 }
