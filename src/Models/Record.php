@@ -13,7 +13,7 @@ use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
-abstract class Record
+class Record
 {
     const IS_BINARY         = false;
     const COLLECTION_CLASS  = Collection::class;
@@ -32,7 +32,7 @@ abstract class Record
         /* 'link_name' => ClassName::class, // will generate method $this->linkName($filter = []) */
     ];
     protected $objectLinks = [
-        /* 'link_name' => ClassName::class, // will generate property $this->linkName */
+        /* 'link_name' => ClassName::class, // will generate property $this->linkName and method $this->linkNameExists() */
     ];
 
     use Concerns\CollectionLinks;
@@ -75,14 +75,31 @@ abstract class Record
         return $this->data;
     }
 
+    /**
+     * Handle $this->linkedObject(), $this->linkedObjectExists()
+     *
+     * @param $name
+     * @param $arguments
+     * @return null
+     */
     public function __call($name, $arguments)
     {
         $snakeName  = StringHelper::makeFieldName($name);
         $filter     = isset($arguments[0]) ? $arguments[0] : [];
 
-        $link = $this->resolveLink($snakeName, $filter);
-        if ($link) {
-            return $link;
+        if (preg_match('/^(.*)_exists$/', $snakeName, $matches)) {
+            // $this->linkedObjectExists()
+            $snakeName = $matches[1];
+
+            if($this->hasObjectLink($snakeName)) {
+                return $this->objectLinkTargetExists($this->client, $this->data[$snakeName]);
+            }
+        } else {
+            // $this->linkedObject()
+            $link = $this->resolveLink($snakeName, $filter);
+            if ($link !== null) {
+                return $link;
+            }
         }
 
         throw new InvalidMethodException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));

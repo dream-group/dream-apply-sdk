@@ -11,6 +11,7 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\InvalidMethodException;
+use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -38,7 +39,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function __construct($client, $baseUrl, $itemClass, $filter = [])
     {
-        if (is_subclass_of($itemClass, Record::class) === false) {
+        if (is_subclass_of($itemClass, Record::class) === false && ($itemClass !== Record::class)) {
             throw new InvalidArgumentException(sprintf('$itemClass must be subclass of "%s", "%s" given', Record::class, $itemClass));
         }
 
@@ -76,14 +77,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         $response = $this->client->httpHead($this->urlForId($id));
 
-        if ($response->getStatusCode() === 200) {
-            return true;
-        }
-        if ($response->getStatusCode() === 404) {
-            return false;
-        }
-
-        throw HttpFailResponseException::fromResponse($response);
+        return ResponseHelper::checkExistence($response);
     }
 
     /**

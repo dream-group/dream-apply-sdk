@@ -22,6 +22,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $citizenship
  *
  * @property-read Record $photo
+ * @method        bool   photoExists()
  *
  * @method CollectionOfAddable|ApplicantTrackerAssociation[] trackers(array $filter = [])
  * @method Collection documents(array $filter = [])

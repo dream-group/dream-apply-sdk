@@ -33,28 +33,28 @@ use GuzzleHttp as g;
  * @package Dream\DreamApply\Client
  *
  * @property-read ApplicantCollection|Applicant[] $applicants
- * @method        ApplicantCollection|Applicant[] applicants(array $filter)
+ * @method        ApplicantCollection|Applicant[] applicants(array $filter = [])
  *
  * @property-read ApplicationCollection|Application[] $applications
- * @method        ApplicationCollection|Application[] applications(array $filter)
+ * @method        ApplicationCollection|Application[] applications(array $filter = [])
  *
  * @property-read Collection|Institution[] $institutions
- * @method        Collection|Institution[] institutions(array $filter)
+ * @method        Collection|Institution[] institutions(array $filter = [])
  *
  * @property-read Collection|Course[] $courses
- * @method        Collection|Course[] courses(array $filter)
+ * @method        Collection|Course[] courses(array $filter = [])
  *
  * @property-read Collection|Intake[] $intakes
- * @method        Collection|Intake[] intakes(array $filter)
+ * @method        Collection|Intake[] intakes(array $filter = [])
  *
  * @property-read Collection|Invoice[] $invoices
- * @method        Collection|Invoice[] invoices(array $filter)
+ * @method        Collection|Invoice[] invoices(array $filter = [])
  *
  * @property-read AcademicTermCollection|AcademicTerm[] $academicTerms
- * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter)
+ * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter = [])
  *
  * @property-read Collection|AcademicYear[] $academicYears
- * @method        Collection|AcademicYear[] academicYears(array $filter)
+ * @method        Collection|AcademicYear[] academicYears(array $filter = [])
  */
 class Client
 {

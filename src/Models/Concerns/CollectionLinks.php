@@ -8,6 +8,8 @@
 
 namespace Dream\DreamApply\Client\Models\Concerns;
 
+use Dream\DreamApply\Client\Client;
+
 trait CollectionLinks
 {
     /*
@@ -18,7 +20,7 @@ trait CollectionLinks
      *  ];
      */
 
-    protected function resolveCollectionLink($client, $url, $name, $filter = [])
+    protected function resolveCollectionLink(Client $client, $url, $name, $filter = [])
     {
         if (array_key_exists($name, $this->collectionLinks)) {
             $class      = $this->collectionLinks[$name];

@@ -8,6 +8,9 @@
 
 namespace Dream\DreamApply\Client\Models\Concerns;
 
+use Dream\DreamApply\Client\Client;
+use Dream\DreamApply\Client\Helpers\ResponseHelper;
+
 trait ObjectLinks
 {
     /*
@@ -18,7 +21,18 @@ trait ObjectLinks
      *  ];
      */
 
-    protected function resolveObjectLink($client, $url, $name)
+    protected function hasObjectLink($name)
+    {
+        return array_key_exists($name, $this->objectLinks);
+    }
+
+    protected function objectLinkTargetExists(Client $client, $url)
+    {
+        $response = $client->httpHead($url);
+        return ResponseHelper::checkExistence($response);
+    }
+
+    protected function resolveObjectLink(Client $client, $url, $name)
     {
         if (array_key_exists($name, $this->objectLinks)) {
             $class = $this->objectLinks[$name];
