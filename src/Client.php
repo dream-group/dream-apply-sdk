@@ -26,6 +26,7 @@ use Dream\DreamApply\Client\Models\Course;
 use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
+use Dream\DreamApply\Client\Models\InvoiceCollection;
 use Dream\DreamApply\Client\Models\JournalItem;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use GuzzleHttp as g;
@@ -52,8 +53,8 @@ use GuzzleHttp as g;
  * @property-read Collection|Intake[] $intakes
  * @method        Collection|Intake[] intakes(array $filter = [])
  *
- * @property-read Collection|Invoice[] $invoices
- * @method        Collection|Invoice[] invoices(array $filter = [])
+ * @property-read InvoiceCollection|Invoice[] $invoices
+ * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
  *
  * @property-read AcademicTermCollection|AcademicTerm[] $academicTerms
  * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter = [])
