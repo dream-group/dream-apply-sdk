@@ -16,6 +16,8 @@ use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
+    const IS_ITEM_IN_QUERY_PARTIAL = true; // if collection returns full data or only partial
+
     /**
      * @var \Dream\DreamApply\Client\Client
      */
@@ -33,9 +35,9 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     protected $filter;
     /**
-     * @var array
+     * @var array collection query raw data
      */
-    protected $data;
+    protected $data = null;
 
     protected $collectionLinks = [];
 
@@ -110,12 +112,8 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function getIterator()
     {
-        if ($this->data === null) {
-            $this->data = $this->client->httpGetJson($this->baseUrl, $this->filter);
-        }
-
-        foreach ($this->data as $id => $row) {
-            yield $id => new $this->itemClass($this->client, $this->urlForId($id), $row, true);
+        foreach ($this->getRawData() as $id => $row) {
+            yield $id => new $this->itemClass($this->client, $this->urlForId($id), $row, static::IS_ITEM_IN_QUERY_PARTIAL);
         }
     }
 
@@ -126,6 +124,10 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function count()
     {
+        if ($this->data !== null) {
+            return count($this->data);
+        }
+
         $response = $this->client->httpHead($this->baseUrl, $this->filter);
 
         if ($response->getStatusCode() !== 200) {
@@ -156,6 +158,15 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     protected function urlForId($id)
     {
         return $this->baseUrl . '/' . intval($id);
+    }
+
+    public function getRawData()
+    {
+        if ($this->data === null) {
+            $this->data = $this->client->httpGetJson($this->baseUrl, $this->filter);
+        }
+
+        return $this->data;
     }
 
     /* array access */

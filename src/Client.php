@@ -20,17 +20,22 @@ use Dream\DreamApply\Client\Models\ApplicantCollection;
 use Dream\DreamApply\Client\Models\Application;
 use Dream\DreamApply\Client\Models\ApplicationCollection;
 use Dream\DreamApply\Client\Models\Collection;
+use Dream\DreamApply\Client\Models\CollectionWithNoInstances;
 use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
 use Dream\DreamApply\Client\Models\Course;
 use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
+use Dream\DreamApply\Client\Models\JournalItem;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use GuzzleHttp as g;
 
 /**
  * Class Client
  * @package Dream\DreamApply\Client
+ *
+ * @property-read CollectionWithNoInstances|JournalItem[] $journal
+ * @method        CollectionWithNoInstances|JournalItem[] journal(array $filter = [])
  *
  * @property-read ApplicantCollection|Applicant[] $applicants
  * @method        ApplicantCollection|Applicant[] applicants(array $filter = [])
@@ -63,6 +68,7 @@ class Client
     private $http;
 
     protected $collectionLinks = [
+        'journal'           => JournalItem::class,
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
         'institutions'      => Institution::class,

@@ -20,6 +20,11 @@ trait CollectionLinks
      *  ];
      */
 
+    protected function hasCollectionLink($name)
+    {
+        return array_key_exists($name, $this->collectionLinks);
+    }
+
     protected function resolveCollectionLink(Client $client, $url, $name, $filter = [], $isChild = false)
     {
         if (array_key_exists($name, $this->collectionLinks)) {

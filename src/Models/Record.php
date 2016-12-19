@@ -55,9 +55,8 @@ class Record
             $this->resolvePartial();
         }
 
-        $link = $this->resolveLink($snakeName);
-        if ($link) {
-            return $link;
+        if ($this->hasLink($name)) {
+            return $this->resolveLink($snakeName);
         }
 
         if (array_key_exists($snakeName, $this->data)) {
@@ -86,20 +85,19 @@ class Record
     public function __call($name, $arguments)
     {
         $snakeName  = StringHelper::makeFieldName($name);
-        $filter     = isset($arguments[0]) ? $arguments[0] : [];
 
         if (preg_match('/^(.*)_exists$/', $snakeName, $matches)) {
-            // $this->linkedObjectExists()
+            // @method $this->linkedObjectExists()
             $snakeName = $matches[1];
 
             if($this->hasObjectLink($snakeName)) {
                 return $this->objectLinkTargetExists($this->client, $this->data[$snakeName]);
             }
         } else {
-            // $this->linkedObject()
-            $link = $this->resolveLink($snakeName, $filter);
-            if ($link !== null) {
-                return $link;
+            // @method $this->linkedObject()
+            if ($this->hasLink($name)) {
+                $filter = isset($arguments[0]) ? $arguments[0] : [];
+                return $this->resolveLink($snakeName. $filter);
             }
         }
 
@@ -119,16 +117,27 @@ class Record
         }
     }
 
+    private function hasLink($name) {
+        return $this->hasObjectLink($name) || $this->hasCollectionLink($name);
+    }
+
     private function resolveLink($name, $filter = [])
     {
+        if ($this->hasObjectLink($name)) {
+            // this is an object link
+            if (isset($this->data[$name]) === false) { // return anything only when we have an object
+                return null;
+            }
+            return $this->resolveObjectLink($this->client, $this->data[$name], $name);
+        }
+
+        // assume it's a collection link
+
+        // collection urls can be resolved if not set in the object
         $url = isset($this->data[$name]) ?
             $this->data[$name] :
             implode('/', [$this->url, StringHelper::makeUriName($name)]);
 
-        $link =
-            $this->resolveObjectLink($this->client, $url, $name) ?:
-            $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
-
-        return $link;
+        return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
     }
 }
