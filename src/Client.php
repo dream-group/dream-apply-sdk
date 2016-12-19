@@ -25,6 +25,7 @@ use Dream\DreamApply\Client\Models\Course;
 use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
+use Dream\DreamApply\Client\Models\SimpleArray;
 use GuzzleHttp as g;
 
 /**
@@ -54,6 +55,8 @@ use GuzzleHttp as g;
  *
  * @property-read Collection|AcademicYear[] $academicYears
  * @method        Collection|AcademicYear[] academicYears(array $filter = [])
+ *
+ * @property-read SimpleArray $classificators
  */
 class Client
 {
@@ -68,6 +71,7 @@ class Client
         'invoices'          => Invoice::class,
         'academic-terms'    => AcademicTerm::class,
         'academic-years'    => AcademicYear::class,
+        'classificators'    => SimpleArray::class,
     ];
 
     use CollectionLinks;

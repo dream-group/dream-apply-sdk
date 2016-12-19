@@ -67,7 +67,7 @@ class Record
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
     }
 
-    public function getData($requestFull = false)
+    public function getRawData($requestFull = false)
     {
         if ($requestFull) {
             $this->resolvePartial();
