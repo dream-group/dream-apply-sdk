@@ -30,7 +30,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read $submitted
  * @property-read $status
  *
- * @property-read Record $academicTerm
+ * @property-read AcademicTerm $academicTerm
  * @property-read Applicant $applicant
  *
  * @property-read Collection $flags
