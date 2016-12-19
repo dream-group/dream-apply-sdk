@@ -19,19 +19,23 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * @var \Dream\DreamApply\Client\Client
      */
-    private $client;
+    protected $client;
     /**
      * @var string base url for collection
      */
-    private $baseUrl;
+    protected $baseUrl;
     /**
      * @var string class for items of the collection, must be inherited from Record
      */
-    private $itemClass;
+    protected $itemClass;
     /**
      * @var array current filter for the collection
      */
-    private $filter;
+    protected $filter;
+    /**
+     * @var array
+     */
+    protected $data;
 
     protected $collectionLinks = [];
 
@@ -106,9 +110,11 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
      */
     public function getIterator()
     {
-        $data = $this->client->httpGetJson($this->baseUrl, $this->filter);
+        if ($this->data === null) {
+            $this->data = $this->client->httpGetJson($this->baseUrl, $this->filter);
+        }
 
-        foreach ($data as $id => $row) {
+        foreach ($this->data as $id => $row) {
             yield $id => new $this->itemClass($this->client, $this->urlForId($id), $row, true);
         }
     }
@@ -181,7 +187,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
         $uriName    = StringHelper::makeUriName($name);
         $url        = implode('/', [$this->baseUrl, $uriName]);
 
-        return $this->resolveCollectionLink($this->client, $url, $name, $filter);
+        return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
     }
 
     public function __get($name)

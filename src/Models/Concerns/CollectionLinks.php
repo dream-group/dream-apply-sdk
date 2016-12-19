@@ -20,11 +20,15 @@ trait CollectionLinks
      *  ];
      */
 
-    protected function resolveCollectionLink(Client $client, $url, $name, $filter = [])
+    protected function resolveCollectionLink(Client $client, $url, $name, $filter = [], $isChild = false)
     {
         if (array_key_exists($name, $this->collectionLinks)) {
             $class      = $this->collectionLinks[$name];
-            $collection = $class::COLLECTION_CLASS;
+            if ($isChild) {
+                $collection = $class::CHILD_COLLECTION_CLASS ?: $class::COLLECTION_CLASS;
+            } else {
+                $collection = $class::COLLECTION_CLASS;
+            }
             return new $collection($client, $url, $this->collectionLinks[$name], $filter);
         }
 

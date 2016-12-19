@@ -24,9 +24,11 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Photo  $photo
  * @method        bool   photoExists()
  *
- * @method CollectionOfAddable|ApplicantTrackerAssociation[] trackers(array $filter = [])
- * @method Collection|Document[] documents(array $filter = [])
- * @method Collection|StudyPlan[] studyplans(array $filter = [])
+ * @property-read CollectionOfAddable|ApplicantTrackerAssociation[] $trackers
+ * @property-read Collection|Document[] $documents
+ * @property-read Collection|StudyPlan[] $studyplans
+ *
+ * @property-read Collection|Application[] $applications
  */
 class Applicant extends Record
 {
@@ -37,8 +39,12 @@ class Applicant extends Record
     ];
 
     protected $collectionLinks = [
+        // from fields
         'trackers'      => ApplicantTrackerAssociation::class,
         'documents'     => Document::class,
         'studyplans'    => StudyPlan::class,
+
+        // not from fields, just appending collection name
+        'applications'  => Application::class,
     ];
 }

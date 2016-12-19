@@ -33,16 +33,17 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Record $academicTerm
  * @property-read Applicant $applicant
  *
- * @method Collection flags(array $filter = [])
- * @method Collection courses(array $filter = [])
- * @method Collection offers(array $filter = [])
- * @method Collection exports(array $filter = [])
- * @method Collection|Document[] documents(array $filter = [])
- * @method Collection|StudyPlan[] studyplans(array $filter = [])
+ * @property-read Collection $flags
+ * @property-read Collection|Course[] $courses
+ * @property-read Collection $offers
+ * @property-read Collection $exports
+ * @property-read Collection|Document[] $documents
+ * @property-read Collection|StudyPlan[] $studyplans
  */
 class Application extends Record
 {
     const COLLECTION_CLASS = ApplicationCollection::class;
+    const CHILD_COLLECTION_CLASS = Collection::class;
 
     protected $objectLinks = [
         'academic_term' => AcademicTerm::class,
@@ -51,7 +52,7 @@ class Application extends Record
 
     protected $collectionLinks = [
         'flags'         => Record::class, // TODO: real class
-        'courses'       => Record::class, // TODO: real class
+        'courses'       => Course::class,
         'offers'        => Record::class, // TODO: real class
         'exports'       => Record::class, // TODO: real class
         'documents'     => Document::class,

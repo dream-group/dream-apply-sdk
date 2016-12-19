@@ -15,8 +15,9 @@ use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Record
 {
-    const IS_BINARY         = false;
-    const COLLECTION_CLASS  = Collection::class;
+    const IS_BINARY                 = false;
+    const COLLECTION_CLASS          = Collection::class;
+    const CHILD_COLLECTION_CLASS    = null; // null or class to override if collection is a child
 
     /**
      * @var Client
@@ -120,9 +121,13 @@ class Record
 
     private function resolveLink($name, $filter = [])
     {
+        $url = isset($this->data[$name]) ?
+            $this->data[$name] :
+            implode('/', [$this->url, StringHelper::makeUriName($name)]);
+
         $link =
-            $this->resolveObjectLink($this->client, $this->data[$name], $name) ?:
-            $this->resolveCollectionLink($this->client, $this->data[$name], $name, $filter);
+            $this->resolveObjectLink($this->client, $url, $name) ?:
+            $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
 
         return $link;
     }
