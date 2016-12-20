@@ -35,4 +35,19 @@ class StringHelper
     {
         return strval(Stringy::create($methodName)->dasherize());
     }
+
+    /**
+     * Normalize array keys
+     *
+     * @param array $data
+     * @return array
+     */
+    public static function arrayKeysToFieldNames(array $data)
+    {
+        $newData = [];
+        foreach ($data as $key => $value) {
+            $newData[self::makeFieldName($key)] = $value;
+        }
+        return $newData;
+    }
 }

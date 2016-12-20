@@ -43,7 +43,7 @@ class Record
     {
         $this->client   = $client;
         $this->url      = $url;
-        $this->data     = $data;
+        $this->data     = StringHelper::arrayKeysToFieldNames($data);
         $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
     }
 
@@ -112,7 +112,7 @@ class Record
             } else {
                 $data = $this->client->httpGetJson($this->url);
             }
-            $this->data = $data;
+            $this->data = StringHelper::arrayKeysToFieldNames($data);
             $this->partial = false;
         }
     }
