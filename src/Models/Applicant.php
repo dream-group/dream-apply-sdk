@@ -48,5 +48,6 @@ class Applicant extends Record
         // not from fields, just appending collection name
         'applications'  => Application::class,
         'invoices'      => Invoice::class,
+        'wishes'        => Wish::class,
     ];
 }
