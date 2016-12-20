@@ -39,6 +39,8 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Collection $exports
  * @property-read Collection|Document[] $documents
  * @property-read Collection|StudyPlan[] $studyplans
+ *
+ * @property-read Collection|Task[] $tasks
  */
 class Application extends Record
 {
@@ -51,11 +53,15 @@ class Application extends Record
     ];
 
     protected $collectionLinks = [
+        // from fields
         'flags'         => ApplicationFlag::class,
         'courses'       => Course::class,
         'offers'        => Offer::class,
         'exports'       => Record::class, // TODO: real class
         'documents'     => Document::class,
         'studyplans'    => StudyPlan::class,
+
+        // not from fields, just appending collection name
+        'tasks'         => Task::class,
     ];
 }
