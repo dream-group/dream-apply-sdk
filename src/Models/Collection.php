@@ -8,24 +8,16 @@
 
 namespace Dream\DreamApply\Client\Models;
 
+use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
-use Dream\DreamApply\Client\Helpers\StringHelper;
 
-class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
+class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     const IS_ITEM_IN_QUERY_PARTIAL = true; // if collection returns full data or only partial
 
-    /**
-     * @var \Dream\DreamApply\Client\Client
-     */
-    protected $client;
-    /**
-     * @var string base url for collection
-     */
-    protected $baseUrl;
     /**
      * @var string class for items of the collection, must be inherited from Record
      */
@@ -43,14 +35,14 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
     use Concerns\CollectionLinks;
 
-    public function __construct($client, $baseUrl, $itemClass, $filter = [])
+    public function __construct(Client $client, $baseUrl, $itemClass, $filter = [])
     {
         if (is_subclass_of($itemClass, Record::class) === false && ($itemClass !== Record::class)) {
             throw new InvalidArgumentException(sprintf('$itemClass must be subclass of "%s", "%s" given', Record::class, $itemClass));
         }
 
-        $this->client       = $client;
-        $this->baseUrl      = $baseUrl;
+        parent::__construct($client, $baseUrl);
+
         $this->itemClass    = $itemClass;
         $this->filter       = $filter;
     }
@@ -189,37 +181,5 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     public function offsetUnset($offset)
     {
         throw new BadMethodCallException('Collection is immutable');
-    }
-
-    /* child collections */
-
-    private function resolveChildCollectionLink($name, $filter = [])
-    {
-        $uriName    = StringHelper::makeUriName($name);
-        $url        = implode('/', [$this->baseUrl, $uriName]);
-
-        return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
-    }
-
-    public function __get($name)
-    {
-        $link = $this->resolveChildCollectionLink($name);
-        if ($link) {
-            return $link;
-        }
-
-        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
-    }
-
-    public function __call($name, $arguments)
-    {
-        $filter = isset($arguments[0]) ? $arguments[0] : [];
-
-        $link = $this->resolveChildCollectionLink($name, $filter);
-        if ($link) {
-            return $link;
-        }
-
-        throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 }
