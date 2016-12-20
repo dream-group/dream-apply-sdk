@@ -3,7 +3,7 @@
     "type": "library",
     "require": {
         "danielstjules/stringy": "^2.0",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "psy/psysh": "^0.8.0"
