@@ -13,10 +13,14 @@ namespace Dream\DreamApply\Client\Models;
  * @package Dream\DreamApply\Client\Models
  *
  * @property-read Collection|ApplicationFlag[] $flags
+ * @property-read SimpleArray $statuses
+ * @property-read OffersNamespace $offers
  */
 class ApplicationCollection extends Collection
 {
     protected $collectionLinks = [
-        'flags' => ApplicationFlag::class,
+        'flags'     => ApplicationFlag::class,
+        'statuses'  => SimpleArray::class,
+        'offers'    => OffersNamespace::class,
     ];
 }
