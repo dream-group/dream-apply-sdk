@@ -9,7 +9,9 @@
 namespace Dream\DreamApply\Client\Models\Concerns;
 
 use Dream\DreamApply\Client\Client;
+use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Dream\DreamApply\Client\Models\Record;
 
 trait ObjectLinks
 {
@@ -35,8 +37,15 @@ trait ObjectLinks
     protected function resolveObjectLink(Client $client, $url, $name)
     {
         if (array_key_exists($name, $this->objectLinks)) {
-            $class = $this->objectLinks[$name];
-            return new $class($client, $url);
+            try {
+                $class = $this->objectLinks[$name];
+                /** @var Record $object */
+                $object = new $class($client, $url);
+                $object->getRawData(true); // try to load data
+                return $object;
+            } catch (ItemNotFoundException $e) {
+                return null; // if load fails
+            }
         }
 
         return null;
