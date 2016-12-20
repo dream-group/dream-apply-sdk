@@ -26,7 +26,7 @@ namespace Dream\DreamApply\Client\Models;
  */
 class JournalItem extends Record
 {
-    const COLLECTION_CLASS = CollectionWithNoInstances::class;
+    const COLLECTION_CLASS = CollectionWithNoInstanceRequests::class;
 
     protected $objectLinks = [
         'applicant'     => Applicant::class,

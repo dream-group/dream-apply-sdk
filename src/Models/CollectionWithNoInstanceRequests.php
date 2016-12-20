@@ -16,7 +16,7 @@ use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
  *
  * When we have /some-items/ call but no /some-items/ID
  */
-class CollectionWithNoInstances extends Collection
+class CollectionWithNoInstanceRequests extends Collection
 {
     const IS_ITEM_IN_QUERY_PARTIAL = false; // item here is all the data we have
 
