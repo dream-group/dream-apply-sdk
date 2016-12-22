@@ -2,21 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: sandfox
- * Date: 15.12.16
- * Time: 18:37
+ * Date: 19.12.16
+ * Time: 21:52
  */
 
 namespace Dream\DreamApply\Client\Models;
 
 /**
- * Class ApplicantTracker
+ * Class ApplicationFlag
  * @package Dream\DreamApply\Client\Models
  *
  * @property-read string $created
- * @property-read string $code
- * @property-read string $notes
+ * @property-read string $name
  */
-class ApplicantTracker extends Record
+class Flag extends Record
 {
     const COLLECTION_CLASS = CollectionOfCreatable::class;
 }

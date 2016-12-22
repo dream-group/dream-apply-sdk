@@ -14,11 +14,11 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read string $assigned
  *
- * @property-read ApplicationFlag $flag
+ * @property-read Flag $flag
  */
 class ApplicationFlagAssociation extends Association
 {
     protected $objectLinks = [
-        'flag' => ApplicationFlag::class,
+        'flag' => Flag::class,
     ];
 }

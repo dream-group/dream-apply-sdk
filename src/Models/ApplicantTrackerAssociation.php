@@ -14,13 +14,13 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read string $assigned
  *
- * @property-read ApplicantTracker $tracker
+ * @property-read Tracker $tracker
  */
 class ApplicantTrackerAssociation extends Association
 {
     const COLLECTION_CLASS = CollectionOfAddable::class;
 
     protected $objectLinks = [
-        'tracker' => ApplicantTracker::class,
+        'tracker' => Tracker::class,
     ];
 }

@@ -12,11 +12,11 @@ namespace Dream\DreamApply\Client\Models;
  * Class ApplicantCollection
  * @package Dream\DreamApply\Client\Models
  *
- * @property-read CollectionOfCreatable|ApplicantTracker[] $trackers
+ * @property-read CollectionOfCreatable|Tracker[] $trackers
  */
 class ApplicantCollection extends Collection
 {
     protected $collectionLinks = [
-        'trackers' => ApplicantTracker::class,
+        'trackers' => Tracker::class,
     ];
 }
