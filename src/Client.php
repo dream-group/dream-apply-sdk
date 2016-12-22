@@ -187,4 +187,13 @@ class Client
             'content'   => $response->getBody(),
         ];
     }
+
+    /**
+     * @param $url
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function httpDelete($url)
+    {
+        return $this->http->delete($url);
+    }
 }

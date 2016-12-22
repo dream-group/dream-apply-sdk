@@ -23,9 +23,11 @@ class ResponseHelper
      */
     public static function checkExistence(ResponseInterface $response, $throwOnNotExists = false)
     {
-        if ($response->getStatusCode() === 200) {
+        // allow 200 ok and 204 no content
+        if ($response->getStatusCode() === 200 || $response->getStatusCode() === 204) {
             return true;
         }
+        // treat 404 as special case
         if ($response->getStatusCode() === 404) {
             if ($throwOnNotExists) {
                 throw new ItemNotFoundException();
@@ -33,6 +35,7 @@ class ResponseHelper
             return false;
         }
 
+        // everything else is an error
         throw HttpFailResponseException::fromResponse($response);
     }
 

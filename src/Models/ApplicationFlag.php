@@ -15,4 +15,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $created
  * @property-read string $name
  */
-class ApplicationFlag extends Record {}
+class ApplicationFlag extends Record
+{
+    const COLLECTION_CLASS = CollectionOfCreatable::class;
+}

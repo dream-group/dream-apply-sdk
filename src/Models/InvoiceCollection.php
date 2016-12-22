@@ -14,7 +14,7 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read SimpleArray $series
  */
-class InvoiceCollection extends Collection
+class InvoiceCollection extends CollectionOfDeletable
 {
     protected $collectionLinks = [
         'series' => SimpleArray::class,

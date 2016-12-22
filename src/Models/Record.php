@@ -140,4 +140,12 @@ class Record
 
         return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
     }
+
+    /**
+     * @return string item url
+     */
+    public function url()
+    {
+        return $this->url;
+    }
 }
