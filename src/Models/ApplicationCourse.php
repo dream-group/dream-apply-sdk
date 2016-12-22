@@ -18,7 +18,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Course $course
  * @property-read Intake $intake
  */
-class ApplicationCourseAssociation extends Association
+class ApplicationCourse extends Association
 {
     protected $objectLinks = [
         'course' => Course::class,

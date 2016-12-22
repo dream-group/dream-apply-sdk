@@ -24,7 +24,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Photo  $photo
  * @method        bool   photoExists()
  *
- * @property-read CollectionOfAddable|ApplicantTrackerAssociation[] $trackers
+ * @property-read CollectionOfAddable|ApplicantTracker[] $trackers
  * @property-read Collection|Document[] $documents
  * @property-read Collection|StudyPlan[] $studyplans
  *
@@ -41,7 +41,7 @@ class Applicant extends Record
 
     protected $collectionLinks = [
         // from fields
-        'trackers'      => ApplicantTrackerAssociation::class,
+        'trackers'      => ApplicantTracker::class,
         'documents'     => Document::class,
         'studyplans'    => StudyPlan::class,
 

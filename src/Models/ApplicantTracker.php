@@ -16,7 +16,7 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read Tracker $tracker
  */
-class ApplicantTrackerAssociation extends Association
+class ApplicantTracker extends Association
 {
     const COLLECTION_CLASS = CollectionOfAddable::class;
 

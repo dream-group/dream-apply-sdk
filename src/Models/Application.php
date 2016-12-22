@@ -33,8 +33,8 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read AcademicTerm $academicTerm
  * @property-read Applicant $applicant
  *
- * @property-read Collection|ApplicationFlagAssociation[] $flags
- * @property-read Collection|ApplicationCourseAssociation[] $courses
+ * @property-read Collection|ApplicationFlag[] $flags
+ * @property-read Collection|ApplicationCourse[] $courses
  * @property-read Collection|Offer[] $offers
  * @property-read Collection|Export[] $exports
  * @property-read Collection|Document[] $documents
@@ -54,8 +54,8 @@ class Application extends Record
 
     protected $collectionLinks = [
         // from fields
-        'flags'         => ApplicationFlagAssociation::class,
-        'courses'       => ApplicationCourseAssociation::class,
+        'flags'         => ApplicationFlag::class,
+        'courses'       => ApplicationCourse::class,
         'offers'        => Offer::class,
         'exports'       => Export::class,
         'documents'     => Document::class,

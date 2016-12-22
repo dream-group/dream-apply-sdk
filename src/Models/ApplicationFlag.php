@@ -16,7 +16,7 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read Flag $flag
  */
-class ApplicationFlagAssociation extends Association
+class ApplicationFlag extends Association
 {
     protected $objectLinks = [
         'flag' => Flag::class,
