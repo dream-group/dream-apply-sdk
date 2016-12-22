@@ -54,8 +54,8 @@ class Application extends Record
 
     protected $collectionLinks = [
         // from fields
-        'flags'         => Association::class,
-        'courses'       => Association::class,
+        'flags'         => Association::class, // TODO: real class
+        'courses'       => Association::class, // TODO: real class
         'offers'        => Offer::class,
         'exports'       => Record::class, // TODO: real class
         'documents'     => Document::class,
