@@ -29,6 +29,7 @@ use Dream\DreamApply\Client\Models\Invoice;
 use Dream\DreamApply\Client\Models\InvoiceCollection;
 use Dream\DreamApply\Client\Models\JournalItem;
 use Dream\DreamApply\Client\Models\SimpleArray;
+use Dream\DreamApply\Client\Models\TableView;
 use GuzzleHttp as g;
 
 /**
@@ -62,6 +63,9 @@ use GuzzleHttp as g;
  * @property-read Collection|AcademicYear[] $academicYears
  * @method        Collection|AcademicYear[] academicYears(array $filter = [])
  *
+ * @property-read Collection|TableView[] $tableviews
+ * @method        Collection|TableView[] tableviews(array $filter = [])
+ *
  * @property-read SimpleArray $classificators
  */
 class Client
@@ -79,6 +83,7 @@ class Client
         'academic-terms'    => AcademicTerm::class,
         'academic-years'    => AcademicYear::class,
         'classificators'    => SimpleArray::class,
+        'tableviews'        => TableView::class,
     ];
 
     use CollectionLinks;
