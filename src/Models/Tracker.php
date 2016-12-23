@@ -18,5 +18,5 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Tracker extends Record
 {
-    const COLLECTION_CLASS = CollectionOfCreatable::class;
+    const COLLECTION_CLASS = TrackerCollection::class;
 }

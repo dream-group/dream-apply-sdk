@@ -8,10 +8,28 @@
 
 namespace Dream\DreamApply\Client\Models;
 
+use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+
 class CollectionOfCreatable extends CollectionOfDeletable
 {
-    public function create() {
-        // TODO: creation
-        // post here
+    /**
+     * @param $postData
+     * @param string $duplicateMessage
+     * @return Record
+     */
+    protected function doCreate($postData, $duplicateMessage = 'Item already exists')
+    {
+        $response = $this->client->httpPost($this->baseUrl, $postData);
+
+        if ($response->getStatusCode() === 201) {
+            $url = $response->getHeaderLine('Location');
+            return new $this->itemClass($this->client, $url);
+        }
+        if ($response->getStatusCode() === 409) {
+            throw new DuplicateItemException($duplicateMessage);
+        }
+
+        throw HttpFailResponseException::fromResponse($response);
     }
 }

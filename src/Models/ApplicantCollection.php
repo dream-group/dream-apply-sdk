@@ -12,7 +12,7 @@ namespace Dream\DreamApply\Client\Models;
  * Class ApplicantCollection
  * @package Dream\DreamApply\Client\Models
  *
- * @property-read CollectionOfCreatable|Tracker[] $trackers
+ * @property-read TrackerCollection|Tracker[] $trackers
  */
 class ApplicantCollection extends Collection
 {

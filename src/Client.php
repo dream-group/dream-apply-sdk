@@ -196,4 +196,11 @@ class Client
     {
         return $this->http->delete($url);
     }
+
+    public function httpPost($url, $postData)
+    {
+        return $this->http->post($url, [
+            'form_params' => $postData,
+        ]);
+    }
 }

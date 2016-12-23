@@ -17,5 +17,5 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Flag extends Record
 {
-    const COLLECTION_CLASS = CollectionOfCreatable::class;
+    const COLLECTION_CLASS = FlagCollection::class;
 }
