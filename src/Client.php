@@ -10,7 +10,7 @@ namespace Dream\DreamApply\Client;
 
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Dream\DreamApply\Client\Helpers\HttpHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 use Dream\DreamApply\Client\Models\AcademicTerm;
 use Dream\DreamApply\Client\Models\AcademicTermCollection;
@@ -30,7 +30,6 @@ use Dream\DreamApply\Client\Models\InvoiceCollection;
 use Dream\DreamApply\Client\Models\JournalItem;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use Dream\DreamApply\Client\Models\TableView;
-use GuzzleHttp as g;
 
 /**
  * Class Client
@@ -70,6 +69,9 @@ use GuzzleHttp as g;
  */
 class Client
 {
+    /**
+     * @var HttpHelper
+     */
     private $http;
 
     protected $collectionLinks = [
@@ -90,19 +92,7 @@ class Client
 
     public function __construct($endpoint, $apiKey)
     {
-        $handlerStack = new g\HandlerStack(g\choose_handler());
-
-        /* mostly default handler but without cookies and http error handling */
-        $handlerStack->push(g\Middleware::redirect(), 'allow_redirects');
-        $handlerStack->push(g\Middleware::prepareBody(), 'prepare_body');
-
-        $this->http = new g\Client([
-            'base_uri' => $endpoint,
-            'handler' => $handlerStack,
-            'headers' => [
-                'Authorization' => "DREAM apikey=\"{$apiKey}\"",
-            ],
-        ]);
+        $this->http = new HttpHelper($endpoint, $apiKey);
     }
 
     /* root collections handling */
@@ -135,77 +125,11 @@ class Client
         throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
-    /* HTTP Functions */
-
     /**
-     * Perform GET request, return PSR-7 object
-     *
-     * @param string $url
-     * @param array $query
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return HttpHelper
      */
-    public function httpGet($url, $query = [])
+    public function http()
     {
-        return $this->http->get($url, ['query' => $query]);
-    }
-
-    /**
-     * Perform HEAD request, return PSR-7 object
-     *
-     * @param $url
-     * @param array $query
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function httpHead($url, $query = [])
-    {
-        return $this->http->head($url, ['query' => $query]);
-    }
-
-    /**
-     * GET and decode JSON
-     *
-     * @param $url
-     * @param array $query
-     * @return array
-     */
-    public function httpGetJson($url, $query = [])
-    {
-        $response = $this->httpGet($url, $query);
-
-        ResponseHelper::checkExistence($response, true);
-
-        // guzzle's json_decode throws exception on invalid json
-        return g\json_decode(strval($response->getBody()), true);
-    }
-
-    public function httpGetBinary($url, $query = [])
-    {
-        $response = $this->httpGet($url, $query);
-
-        ResponseHelper::checkExistence($response, true);
-
-        return [
-            'uploaded'  => $response->getHeaderLine('Last-Modified'),
-            'name'      => ResponseHelper::getFileName($response),
-            'mime'      => $response->getHeaderLine('Content-Type'),
-            'size'      => $response->getBody()->getSize(),
-            'content'   => $response->getBody(),
-        ];
-    }
-
-    /**
-     * @param $url
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function httpDelete($url)
-    {
-        return $this->http->delete($url);
-    }
-
-    public function httpPost($url, $postData)
-    {
-        return $this->http->post($url, [
-            'form_params' => $postData,
-        ]);
+        return $this->http;
     }
 }

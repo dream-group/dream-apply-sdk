@@ -61,9 +61,9 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
         $class = $this->itemClass;
 
         if ($class::IS_BINARY) {
-            $data = $this->client->httpGetBinary($itemUrl);
+            $data = $this->client->http()->getBinary($itemUrl);
         } else {
-            $data = $this->client->httpGetJson($itemUrl);
+            $data = $this->client->http()->getJson($itemUrl);
         }
 
         // set data, declare non partial
@@ -79,7 +79,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      */
     public function exists($id)
     {
-        $response = $this->client->httpHead($this->urlForId($id));
+        $response = $this->client->http()->head($this->urlForId($id));
 
         return ResponseHelper::checkExistence($response);
     }
@@ -120,7 +120,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
             return count($this->data);
         }
 
-        $response = $this->client->httpHead($this->baseUrl, $this->filter);
+        $response = $this->client->http()->head($this->baseUrl, $this->filter);
 
         if ($response->getStatusCode() !== 200) {
             throw HttpFailResponseException::fromResponse($response);
@@ -155,7 +155,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
     public function getRawData()
     {
         if ($this->data === null) {
-            $this->data = $this->client->httpGetJson($this->baseUrl, $this->filter);
+            $this->data = $this->client->http()->getJson($this->baseUrl, $this->filter);
         }
 
         return $this->data;

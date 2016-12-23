@@ -108,9 +108,9 @@ class Record
     {
         if (empty($this->data) || $this->partial) {
             if (static::IS_BINARY) {
-                $data = $this->client->httpGetBinary($this->url);
+                $data = $this->client->http()->getBinary($this->url);
             } else {
-                $data = $this->client->httpGetJson($this->url);
+                $data = $this->client->http()->getJson($this->url);
             }
             $this->data = StringHelper::arrayKeysToFieldNames($data);
             $this->partial = false;

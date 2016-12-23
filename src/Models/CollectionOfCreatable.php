@@ -20,7 +20,7 @@ class CollectionOfCreatable extends CollectionOfDeletable
      */
     protected function doCreate($postData, $duplicateMessage = 'Item already exists')
     {
-        $response = $this->client->httpPost($this->baseUrl, $postData);
+        $response = $this->client->http()->post($this->baseUrl, $postData);
 
         if ($response->getStatusCode() === 201) {
             $url = $response->getHeaderLine('Location');

@@ -34,7 +34,7 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
 
     private function initArray()
     {
-        $this->data = $this->client->httpGetJson($this->url);
+        $this->data = $this->client->http()->getJson($this->url);
     }
 
     public function getRawData()

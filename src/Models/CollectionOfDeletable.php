@@ -17,7 +17,7 @@ class CollectionOfDeletable extends Collection
     {
         $url = $this->urlByIdOrObject($idOrObject);
 
-        $response = $this->client->httpDelete($url);
+        $response = $this->client->http()->delete($url);
 
         ResponseHelper::checkExistence($response, true); // check response for 404 and unexpected codes
     }
