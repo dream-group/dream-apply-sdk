@@ -34,7 +34,7 @@ class JournalItem extends Record
         'course'        => Course::class,
         'institution'   => Institution::class,
         'invoice'       => Invoice::class,
-        'offer'         => Record::class, // TODO: real class
+        'offer'         => Offer::class,
         'document'      => Document::class,
     ];
 }
