@@ -28,7 +28,7 @@ class CollectionOfDeletable extends Collection
             /** @var Record $object */
             $object = $idOrObject;
 
-            if ($idOrObject instanceof $this->itemClass) {
+            if ($object instanceof $this->itemClass) {
                 return $object->url();
             }
 
