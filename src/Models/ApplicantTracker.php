@@ -19,6 +19,7 @@ namespace Dream\DreamApply\Client\Models;
 class ApplicantTracker extends Association
 {
     const COLLECTION_CLASS = CollectionOfAddable::class;
+    const ASSOCIATED_CLASS = Tracker::class;
 
     protected $objectLinks = [
         'tracker' => Tracker::class,
