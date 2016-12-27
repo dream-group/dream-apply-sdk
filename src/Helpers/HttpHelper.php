@@ -87,6 +87,8 @@ class HttpHelper
     }
 
     /**
+     * Perform DELETE request, return PSR-7 object
+     *
      * @param $url
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -95,10 +97,28 @@ class HttpHelper
         return $this->http->delete($url);
     }
 
+    /**
+     * Perform POST request, return PSR-7 object
+     *
+     * @param $url
+     * @param $postData
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     public function post($url, $postData)
     {
         return $this->http->post($url, [
             'form_params' => $postData,
         ]);
+    }
+
+    /**
+     * Perform PUT request, return PSR-7 object
+     *
+     * @param $url
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function put($url)
+    {
+        return $this->http->put($url);
     }
 }
