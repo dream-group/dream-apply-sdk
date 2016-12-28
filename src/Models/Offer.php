@@ -25,11 +25,17 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $decisionDeadline
  * @property-read string $notes
  *
- * @property-read Course $course,
+ * @property-read Course $course
+ *
+ * @method void setType(string $newType)
  */
 class Offer extends Record
 {
     protected $objectLinks = [
         'course' => Course::class,
+    ];
+
+    protected $settableFields = [
+        'type',
     ];
 }
