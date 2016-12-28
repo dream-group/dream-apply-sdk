@@ -127,14 +127,15 @@ class Record
         throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
+    protected function retrieveData()
+    {
+        return $this->client->http()->getJson($this->url);
+    }
+
     private function resolvePartial()
     {
         if (empty($this->data) || $this->partial) {
-            if (static::IS_BINARY) {
-                $data = $this->client->http()->getBinary($this->url);
-            } else {
-                $data = $this->client->http()->getJson($this->url);
-            }
+            $data = $this->retrieveData();
             $this->data = StringHelper::arrayKeysToFieldNames($data);
             $this->partial = false;
         }

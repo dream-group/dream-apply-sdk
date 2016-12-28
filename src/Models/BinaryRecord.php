@@ -23,4 +23,9 @@ use Psr\Http\Message\StreamInterface;
 class BinaryRecord extends Record
 {
     const IS_BINARY = true;
+
+    protected function retrieveData()
+    {
+        return $this->client->http()->getBinary($this->url);
+    }
 }
