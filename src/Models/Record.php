@@ -39,6 +39,9 @@ class Record
     protected $settableFields = [
         /* 'field_name', // will generate method setFieldName() that will call PUT $url/field-name */
     ];
+    protected $arraysOfRecords = [
+        /* 'record' => Record::class, // $this->records[] */
+    ];
 
     use Concerns\CollectionLinks;
     use Concerns\ObjectLinks;
@@ -61,6 +64,13 @@ class Record
 
         if ($this->hasLink($name)) {
             return $this->resolveLink($snakeName);
+        }
+
+        if (array_key_exists($snakeName, $this->arraysOfRecords)) {
+            $class = $this->arraysOfRecords[$snakeName];
+            $urls  = $this->data[$snakeName];
+
+            return new ArrayOfRecords($this->client, $class, $urls);
         }
 
         if (array_key_exists($snakeName, $this->data)) {

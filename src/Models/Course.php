@@ -30,13 +30,17 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $quota
  * @property-read array  $prospect
  *
+ * @property-read ArrayOfRecords|Intake[] $intakes
+ *
  * @property-read Institution $institution
  */
 class Course extends Record
 {
-    // TODO: intakes[] logic
-
     protected $objectLinks = [
         'institution' => Institution::class,
+    ];
+
+    protected $arraysOfRecords = [
+        'intakes' => Intake::class,
     ];
 }
