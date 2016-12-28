@@ -91,6 +91,7 @@ class HttpHelper
             'mime'      => $response->getHeaderLine('Content-Type'),
             'size'      => $response->getBody()->getSize(),
             'content'   => $response->getBody(),
+            'expires'   => $response->hasHeader('Expires') ? $response->getHeaderLine('Expires') : null,
         ];
     }
 
