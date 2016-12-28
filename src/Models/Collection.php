@@ -149,7 +149,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
     protected function urlForId($id)
     {
-        return $this->baseUrl . '/' . intval($id);
+        return $this->baseUrl . '/' . strval($id);
     }
 
     public function getRawData()
