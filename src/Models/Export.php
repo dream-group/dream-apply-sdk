@@ -18,12 +18,16 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read array  $profile
  *
  * @property-read Offer $offer
+ *
+ * @property-read Collection|ExportBlob[] $blobs
  */
 class Export extends Record
 {
-    // TODO: logic for blobs
-
     protected $objectLinks = [
         'offer' => Offer::class,
+    ];
+
+    protected $collectionLinks = [
+        'blobs' => ExportBlob::class,
     ];
 }
