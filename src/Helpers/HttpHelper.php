@@ -10,6 +10,14 @@ namespace Dream\DreamApply\Client\Helpers;
 
 use GuzzleHttp as g;
 
+/**
+ * Class HttpHelper
+ * @package Dream\DreamApply\Client\Helpers
+ *
+ * Wrapper for PSR-7 compliant HTTP client (currently Guzzle)
+ *
+ * get*() are guarded by headers check, other methods require manual check
+ */
 class HttpHelper
 {
     private $http;
@@ -98,13 +106,13 @@ class HttpHelper
     }
 
     /**
-     * Perform POST request, return PSR-7 object
+     * Perform POST request with urlencoded params, return PSR-7 object
      *
      * @param $url
-     * @param $postData
+     * @param array $postData array of form params to be sent
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function post($url, $postData)
+    public function postFormData($url, $postData)
     {
         return $this->http->post($url, [
             'form_params' => $postData,
@@ -117,8 +125,20 @@ class HttpHelper
      * @param $url
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function put($url)
+    public function putEmpty($url)
     {
         return $this->http->put($url);
+    }
+
+    /**
+     * Perform PUT request with JSON body, return PSR-7 object
+     *
+     * @param $url
+     * @param mixed $data data to be encoded and sent
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function putJson($url, $data)
+    {
+        return $this->http->put($url, ['json' => $data]);
     }
 }

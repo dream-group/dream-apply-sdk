@@ -11,6 +11,7 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
+use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Record
@@ -34,6 +35,9 @@ class Record
     ];
     protected $objectLinks = [
         /* 'link_name' => ClassName::class, // will generate property $this->linkName and method $this->linkNameExists() */
+    ];
+    protected $settableFields = [
+        /* 'field_name', // will generate method setFieldName() that will call PUT $url/field-name */
     ];
 
     use Concerns\CollectionLinks;
@@ -90,8 +94,17 @@ class Record
             // @method $this->linkedObjectExists()
             $snakeName = $matches[1];
 
-            if($this->hasObjectLink($snakeName)) {
+            if ($this->hasObjectLink($snakeName)) {
                 return $this->objectLinkTargetExists($this->client, $this->data[$snakeName]);
+            }
+        } elseif (preg_match('/^set_(.*)$/', $snakeName, $matches)) {
+            // @method $this->setSettableField($value)
+            $snakeName = $matches[1];
+
+            if (in_array($snakeName, $this->settableFields)) {
+                list($value) = $arguments;
+                $this->setSettableField($snakeName, $value);
+                return null;
             }
         } else {
             // @method $this->linkedObject()
@@ -139,6 +152,15 @@ class Record
             implode('/', [$this->url, StringHelper::makeUriName($name)]);
 
         return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
+    }
+
+    private function setSettableField($field, $value)
+    {
+        $response = $this->client->http()->putJson(implode('/', [$this->url, $field]), $value);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        $this->data[$field] = $value; // if response was successful, update value in the object
     }
 
     /**
