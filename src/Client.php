@@ -28,6 +28,8 @@ use Dream\DreamApply\Client\Models\Intake;
 use Dream\DreamApply\Client\Models\Invoice;
 use Dream\DreamApply\Client\Models\InvoiceCollection;
 use Dream\DreamApply\Client\Models\JournalItem;
+use Dream\DreamApply\Client\Models\Report;
+use Dream\DreamApply\Client\Models\Reports;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use Dream\DreamApply\Client\Models\TableView;
 
@@ -66,6 +68,8 @@ use Dream\DreamApply\Client\Models\TableView;
  * @method        Collection|TableView[] tableviews(array $filter = [])
  *
  * @property-read SimpleArray $classificators
+ *
+ * @property-read Reports $reports
  */
 class Client
 {
@@ -86,6 +90,7 @@ class Client
         'academic-years'    => AcademicYear::class,
         'classificators'    => SimpleArray::class,
         'tableviews'        => TableView::class,
+        'reports'           => Report::class,
     ];
 
     use CollectionLinks;
