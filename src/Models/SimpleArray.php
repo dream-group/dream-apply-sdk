@@ -42,6 +42,11 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
         return $this->data;
     }
 
+    public function toArray()
+    {
+        return $this->getRawData();
+    }
+
     public function getIterator()
     {
         return new \ArrayIterator($this->data);
