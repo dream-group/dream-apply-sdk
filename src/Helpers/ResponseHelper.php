@@ -15,13 +15,12 @@ use Psr\Http\Message\ResponseInterface;
 class ResponseHelper
 {
     /**
-     * Determines by HEAD or GET response whether record exists or not
+     * Guardian verification of the response
      *
      * @param ResponseInterface $response
-     * @param bool $throwOnNotExists return false or throw an exception on 404
      * @return bool
      */
-    public static function checkExistence(ResponseInterface $response, $throwOnNotExists = false)
+    public static function verifyResponseSuccessful(ResponseInterface $response)
     {
         // allow 200 ok and 204 no content
         if ($response->getStatusCode() === 200 || $response->getStatusCode() === 204) {
@@ -29,14 +28,27 @@ class ResponseHelper
         }
         // treat 404 as special case
         if ($response->getStatusCode() === 404) {
-            if ($throwOnNotExists) {
-                throw new ItemNotFoundException();
-            }
-            return false;
+            throw new ItemNotFoundException();
         }
 
-        // everything else is an error
+        // everything else is http error
         throw HttpFailResponseException::fromResponse($response);
+    }
+
+    /**
+     * Determines by HEAD or GET response whether record exists or not
+     *
+     * @param ResponseInterface $response
+     * @return bool
+     */
+    public static function resourceExistsByResponse(ResponseInterface $response)
+    {
+        try {
+            self::verifyResponseSuccessful($response);
+            return true;
+        } catch (ItemNotFoundException $e) {
+            return false;
+        }
     }
 
     public static function getFileName(ResponseInterface $response)

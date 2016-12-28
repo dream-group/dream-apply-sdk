@@ -81,7 +81,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
     {
         $response = $this->client->http()->head($this->urlForId($id));
 
-        return ResponseHelper::checkExistence($response);
+        return ResponseHelper::resourceExistsByResponse($response);
     }
 
     /**

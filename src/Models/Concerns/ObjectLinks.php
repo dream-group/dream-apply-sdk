@@ -30,8 +30,8 @@ trait ObjectLinks
 
     protected function objectLinkTargetExists(Client $client, $url)
     {
-        $response = $client->httpHead($url);
-        return ResponseHelper::checkExistence($response);
+        $response = $client->http()->head($url);
+        return ResponseHelper::resourceExistsByResponse($response);
     }
 
     protected function resolveObjectLink(Client $client, $url, $name)

@@ -66,7 +66,7 @@ class HttpHelper
     {
         $response = $this->get($url, $query);
 
-        ResponseHelper::checkExistence($response, true);
+        ResponseHelper::verifyResponseSuccessful($response);
 
         return JsonHelper::decode(strval($response->getBody()));
     }
@@ -75,7 +75,7 @@ class HttpHelper
     {
         $response = $this->get($url, $query);
 
-        ResponseHelper::checkExistence($response, true);
+        ResponseHelper::verifyResponseSuccessful($response);
 
         return [
             'uploaded'  => $response->getHeaderLine('Last-Modified'),

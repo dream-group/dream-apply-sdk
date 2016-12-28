@@ -19,7 +19,7 @@ class CollectionOfAddable extends CollectionOfDeletable
 
         $response = $this->client->http()->put($url);
 
-        ResponseHelper::checkExistence($response, true); // check response for 404 and unexpected codes
+        ResponseHelper::verifyResponseSuccessful($response); // check response for 404 and unexpected codes
     }
 
     /**
