@@ -12,7 +12,7 @@ namespace Dream\DreamApply\Client\Models;
  * Class ApplicationCollection
  * @package Dream\DreamApply\Client\Models
  *
- * @property-read Collection|Flag[] $flags
+ * @property-read FlagCollection|Flag[] $flags
  * @property-read SimpleArray $statuses
  * @property-read OffersNamespace $offers
  */
