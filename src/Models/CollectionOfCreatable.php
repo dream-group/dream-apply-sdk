@@ -9,7 +9,7 @@
 namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 
 class CollectionOfCreatable extends CollectionOfDeletable
 {
@@ -30,6 +30,6 @@ class CollectionOfCreatable extends CollectionOfDeletable
             throw new DuplicateItemException($duplicateMessage);
         }
 
-        throw HttpFailResponseException::fromResponse($response);
+        throw ExceptionHelper::fromResponse($response);
     }
 }

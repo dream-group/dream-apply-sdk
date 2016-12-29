@@ -14,18 +14,14 @@ class HttpFailResponseException extends RuntimeException
 {
     private $httpResponse;
 
-    public static function fromResponse(ResponseInterface $httpResponse)
-    {
-        $exception = new self(
-            implode(' ', ['Unsuccessful HTTP query:', $httpResponse->getStatusCode(), $httpResponse->getReasonPhrase()]),
-            $httpResponse->getStatusCode(),
-            null,
-            $httpResponse
-        );
-
-        return $exception;
-    }
-
+    /**
+     * HttpFailResponseException contains PSR7 $httpResponse for further analysis
+     *
+     * @param string $message
+     * @param int $code
+     * @param \Exception|null $previous
+     * @param ResponseInterface|null $httpResponse
+     */
     public function __construct($message = "", $code = 0, \Exception $previous = null, ResponseInterface $httpResponse = null)
     {
         $this->httpResponse = $httpResponse;

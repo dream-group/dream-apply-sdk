@@ -8,7 +8,6 @@
 
 namespace Dream\DreamApply\Client\Helpers;
 
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -32,7 +31,7 @@ class ResponseHelper
         }
 
         // everything else is http error
-        throw HttpFailResponseException::fromResponse($response);
+        throw ExceptionHelper::fromResponse($response);
     }
 
     /**

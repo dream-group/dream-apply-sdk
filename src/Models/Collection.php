@@ -9,9 +9,9 @@
 namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
+use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 
 class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -123,7 +123,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
         $response = $this->client->http()->head($this->baseUrl, $this->filter);
 
         if ($response->getStatusCode() !== 200) {
-            throw HttpFailResponseException::fromResponse($response);
+            throw ExceptionHelper::fromResponse($response);
         }
 
         $countHeader = $response->getHeader('X-Count');
