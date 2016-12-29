@@ -67,7 +67,7 @@ class ArrayOfRecords implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * @return Record[]
      */
-    public function all()
+    public function toArray()
     {
         return iterator_to_array($this);
     }

@@ -142,7 +142,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      *
      * @return array
      */
-    public function all()
+    public function toArray()
     {
         return iterator_to_array($this);
     }
