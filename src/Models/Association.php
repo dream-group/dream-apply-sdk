@@ -14,6 +14,6 @@ class Association extends Record
 
     public function __construct($client, $url, array $data = [], $_partial = false)
     {
-        parent::__construct($client, $url, $data, false); // association is never partial
+        parent::__construct($client, $url, $data, false); // association is never partial unless data[] is empty
     }
 }
