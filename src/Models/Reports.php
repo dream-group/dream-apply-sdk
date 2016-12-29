@@ -10,7 +10,7 @@ namespace Dream\DreamApply\Client\Models;
 
 class Reports extends UrlNamespace
 {
-    public function all()
+    public function available()
     {
         return $this->client->http()->getJson($this->baseUrl);
     }
