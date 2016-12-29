@@ -19,6 +19,7 @@ use Psr\Http\Message\StreamInterface;
  * @property-read string            $mime
  * @property-read int               $size
  * @property-read StreamInterface   $content
+ * @property-read string            $expires
  */
 class BinaryRecord extends Record
 {
