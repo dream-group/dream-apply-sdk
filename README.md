@@ -144,6 +144,16 @@ $client->applications[1]->flags->delete($flagAssoc);    // delete by association
 $client->applications[1]->flags->delete($newFlag);      // delete by associated record
 ```
 
+### Settable fields
+
+API allows to set some fields like type for offer and task status
+
+```php
+<?php
+$client->applications[21]->tasks[4]->setStatus('This is an example status of a task.');
+$client->applications[32]->offers[76]->setType('Conditionally accepted');
+```
+
 ## Other special cases
 
 ### Simple arrays
