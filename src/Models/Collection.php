@@ -11,6 +11,7 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
+use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 
@@ -111,8 +112,8 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
     /**
      * get items count according to current filter
-     *
      * @return int count
+     * @throws \Exception
      */
     public function count()
     {
@@ -155,7 +156,12 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
     public function getRawData()
     {
         if ($this->data === null) {
-            $this->data = $this->client->http()->getJson($this->baseUrl, $this->filter);
+            try {
+                $this->data = $this->client->http()->getJson($this->baseUrl, $this->filter);
+            } catch (ItemNotFoundException $e) {
+                // item not found should simply result in empty collection
+                $this->data = [];
+            }
         }
 
         return $this->data;
