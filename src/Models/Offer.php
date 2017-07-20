@@ -25,7 +25,8 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $decisionDeadline
  * @property-read string $notes
  *
- * @property-read Course $course
+ * @property-read Course        $course
+ * @property-read OfferScore    $score
  *
  * @method void setType(string $newType)
  */
@@ -38,4 +39,19 @@ class Offer extends Record
     protected $settableFields = [
         'type',
     ];
+
+    /**
+     * Manually create OfferScore object
+     */
+    protected function afterSetData()
+    {
+        if ($this->data['score'] && !($this->data['score'] instanceof OfferScore)) {
+            $this->data['score'] = new OfferScore(
+                $this->client,
+                implode('/', [$this->url, 'score']),
+                $this->data['score'],
+                false
+            );
+        }
+    }
 }
