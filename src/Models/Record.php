@@ -14,7 +14,7 @@ use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Dream\DreamApply\Client\Helpers\StringHelper;
 
-class Record
+class Record implements \ArrayAccess
 {
     const IS_BINARY                 = false;
     const COLLECTION_CLASS          = Collection::class;
@@ -52,6 +52,8 @@ class Record
         $this->url      = $url;
         $this->data     = StringHelper::arrayKeysToFieldNames($data);
         $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
+
+        $this->afterSetData();
     }
 
     public function __get($name)
@@ -132,12 +134,14 @@ class Record
         return $this->client->http()->getJson($this->url);
     }
 
-    private function resolvePartial()
+    protected function resolvePartial()
     {
         if (empty($this->data) || $this->partial) {
             $data = $this->retrieveData();
             $this->data = StringHelper::arrayKeysToFieldNames($data);
             $this->partial = false;
+
+            $this->afterSetData();
         }
     }
 
@@ -180,5 +184,40 @@ class Record
     public function url()
     {
         return $this->url;
+    }
+
+    /**
+     * Callback for instances after data is set from network request (constructor and resolvePartial)
+     */
+    protected function afterSetData()
+    {
+        // nothing by default
+    }
+
+    /* Array Access */
+
+    public function offsetExists($offset)
+    {
+        try {
+            $this->__get($offset);
+            return true;
+        } catch (InvalidArgumentException $e) {
+            return false;
+        }
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->__get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new BadMethodCallException('Record is immutable');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new BadMethodCallException('Record is immutable');
     }
 }
