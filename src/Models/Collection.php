@@ -31,10 +31,6 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      */
     protected $data = null;
 
-    protected $collectionLinks = [];
-
-    use Concerns\CollectionLinks;
-
     public function __construct(Client $client, $baseUrl, $itemClass, $filter = [])
     {
         if (is_subclass_of($itemClass, Record::class) === false && ($itemClass !== Record::class)) {
