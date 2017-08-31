@@ -47,6 +47,18 @@ class Application extends Record
     const COLLECTION_CLASS = ApplicationCollection::class;
     const CHILD_COLLECTION_CLASS = Collection::class;
 
+    const STATUS_BLANK          = 'Blank';
+    const STATUS_PREPARE        = 'Prepare';
+    const STATUS_INACTIVE       = 'Inactive';
+    const STATUS_REOPENED       = 'Reopened';
+    const STATUS_SUBMITTED      = 'Submitted';
+    const STATUS_RESUBMITTED    = 'Resubmitted';
+    const STATUS_ACCEPTED       = 'Accepted';
+    const STATUS_PROBLEMATIC    = 'Problematic';
+    const STATUS_CLOSED         = 'Closed';
+    const STATUS_REJECTED       = 'Rejected';
+    const STATUS_BLOCKED        = 'Blocked';
+
     protected $objectLinks = [
         'academic_term' => AcademicTerm::class,
         'applicant'     => Applicant::class,

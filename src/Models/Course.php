@@ -36,6 +36,16 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Course extends Record
 {
+    const STATUS_ONLINE     = 'Online';
+    const STATUS_STANDBY    = 'Standby';
+    const STATUS_DRAFT      = 'Draft';
+    const STATUS_ARCHIVED   = 'Archived';
+    const STATUS_TEMPLATE   = 'Template';
+    const STATUS_CLOSED     = 'Closed';
+
+    const PARTNERSHIP_INCOMING = 'Incoming';
+    const PARTNERSHIP_OUTGOING = 'Outgoing';
+
     protected $objectLinks = [
         'institution' => Institution::class,
     ];

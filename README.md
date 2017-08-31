@@ -150,8 +150,10 @@ API allows to set some fields like type for offer and task status
 
 ```php
 <?php
+use Dream\DreamApply\Client\Models\Offer;
+
 $client->applications[21]->tasks[4]->setStatus('This is an example status of a task.');
-$client->applications[32]->offers[76]->setType('Conditionally accepted');
+$client->applications[32]->offers[76]->setType(Offer::TYPE_ACCEPTED);
 ```
 
 ## Other special cases

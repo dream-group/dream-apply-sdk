@@ -19,6 +19,7 @@ use Dream\DreamApply\Client\Models\Applicant;
 use Dream\DreamApply\Client\Models\ApplicantCollection;
 use Dream\DreamApply\Client\Models\Application;
 use Dream\DreamApply\Client\Models\ApplicationCollection;
+use Dream\DreamApply\Client\Models\Classificators;
 use Dream\DreamApply\Client\Models\Collection;
 use Dream\DreamApply\Client\Models\CollectionWithNoInstanceRequests;
 use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
@@ -88,7 +89,7 @@ class Client
         'invoices'          => Invoice::class,
         'academic-terms'    => AcademicTerm::class,
         'academic-years'    => AcademicYear::class,
-        'classificators'    => SimpleArray::class,
+        'classificators'    => Classificators::class,
         'tableviews'        => TableView::class,
         'reports'           => Report::class,
     ];
