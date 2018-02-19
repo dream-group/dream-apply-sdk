@@ -39,6 +39,9 @@ class Record implements \ArrayAccess
     protected $settableFields = [
         /* 'field_name', // will generate method setFieldName() that will call PUT $url/field-name */
     ];
+    protected $deletableFields = [
+        /* 'field_name', // will generate method deleteFieldName() that will call DELETE $url/field-name */
+    ];
     protected $arraysOfRecords = [
         /* 'record' => Record::class, // $this->records[] */
     ];
@@ -118,6 +121,14 @@ class Record implements \ArrayAccess
                 $this->setSettableField($snakeName, $value);
                 return null;
             }
+        } elseif (preg_match('/^delete_(.*)$/', $snakeName, $matches)) {
+            // @method $this->setSettableField($value)
+            $snakeName = $matches[1];
+
+            if (in_array($snakeName, $this->deletableFields)) {
+                $this->deleteDeletableField($snakeName);
+                return null;
+            }
         } else {
             // @method $this->linkedObject()
             if ($this->hasLink($name)) {
@@ -176,6 +187,15 @@ class Record implements \ArrayAccess
         ResponseHelper::verifyResponseSuccessful($response);
 
         $this->data[$field] = $value; // if response was successful, update value in the object
+    }
+
+    private function deleteDeletableField($field)
+    {
+        $response = $this->client->http()->delete(implode('/', [$this->url, $field]));
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        $this->data[$field] = null; // if response was successful, update value in the object
     }
 
     /**
