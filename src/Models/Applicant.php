@@ -29,7 +29,9 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Collection|StudyPlan[] $studyplans
  *
  * @property-read Collection|Application[] $applications
+ * @property-read Collection|ApplicantConsent[] $consents
  * @property-read Collection|Invoice[] $invoices
+ * @property-read Collection|Wish[] $wishes
  */
 class Applicant extends Record
 {
@@ -47,6 +49,7 @@ class Applicant extends Record
 
         // not from fields, just appending collection name
         'applications'  => Application::class,
+        'consents'      => ApplicantConsent::class,
         'invoices'      => Invoice::class,
         'wishes'        => Wish::class,
     ];
