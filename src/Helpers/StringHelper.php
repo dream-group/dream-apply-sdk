@@ -21,7 +21,7 @@ class StringHelper
      */
     public static function makeFieldName($methodName)
     {
-        return strval(Stringy::create($methodName)->underscored());
+        return strval(Stringy::create($methodName)->underscored()->replace('_i_d', '_ID'));
     }
 
     /**
