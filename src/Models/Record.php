@@ -133,7 +133,7 @@ class Record implements \ArrayAccess
             // @method $this->linkedObject()
             if ($this->hasLink($name)) {
                 $filter = isset($arguments[0]) ? $arguments[0] : [];
-                return $this->resolveLink($snakeName. $filter);
+                return $this->resolveLink($snakeName, $filter);
             }
         }
 
