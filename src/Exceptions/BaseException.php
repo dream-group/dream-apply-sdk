@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sandfox
- * Date: 14.12.16
- * Time: 17:26
- */
 
 namespace Dream\DreamApply\Client\Exceptions;
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sandfox
- * Date: 29/12/16
- * Time: 17:52
- */
 
 namespace Dream\DreamApply\Client\Helpers;
 
