@@ -1,12 +1,13 @@
 {
     "name": "dream-group/dream-apply-sdk",
+    "description": "Dream Apply SDK",
     "type": "library",
     "require": {
         "danielstjules/stringy": "^2.0|^3.0",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-        "psy/psysh": "^0.8.0"
+        "psy/psysh": "*"
     },
     "autoload": {
         "psr-4": {
