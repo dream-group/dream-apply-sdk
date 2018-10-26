@@ -16,7 +16,7 @@ use Dream\DreamApply\Client\Models\ApplicationCollection;
 use Dream\DreamApply\Client\Models\Classificators;
 use Dream\DreamApply\Client\Models\Collection;
 use Dream\DreamApply\Client\Models\CollectionWithNoInstanceRequests;
-use Dream\DreamApply\Client\Models\Concerns\CollectionLinks;
+use Dream\DreamApply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\DreamApply\Client\Models\Course;
 use Dream\DreamApply\Client\Models\Institution;
 use Dream\DreamApply\Client\Models\Intake;

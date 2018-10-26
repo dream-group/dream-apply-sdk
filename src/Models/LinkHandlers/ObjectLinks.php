@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models\Concerns;
+namespace Dream\DreamApply\Client\Models\LinkHandlers;
 
 use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;

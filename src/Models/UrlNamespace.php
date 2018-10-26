@@ -9,7 +9,7 @@ use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class UrlNamespace
 {
-    use Concerns\CollectionLinks;
+    use LinkHandlers\CollectionLinks;
 
     protected $collectionLinks = [];
 

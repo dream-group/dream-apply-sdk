@@ -40,8 +40,8 @@ class Record implements \ArrayAccess
         /* 'record' => Record::class, // $this->records[] */
     ];
 
-    use Concerns\CollectionLinks;
-    use Concerns\ObjectLinks;
+    use LinkHandlers\CollectionLinks;
+    use LinkHandlers\ObjectLinks;
 
     public function __construct($client, $url, $data = [], $partial = false)
     {
