@@ -2,12 +2,16 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-class TrackerCollection extends CollectionOfCreatable
+class TrackerCollection extends Collection
 {
+    use CollectionPlugins\CollectionOfCreatable;
+    use CollectionPlugins\CollectionOfDeletable;
+
     /**
      * @param $code
      * @param $notes
      * @return Tracker
+     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
      */
     public function create($code, $notes)
     {

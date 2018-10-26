@@ -2,11 +2,15 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-class FlagCollection extends CollectionOfCreatable
+class FlagCollection extends Collection
 {
+    use CollectionPlugins\CollectionOfCreatable;
+    use CollectionPlugins\CollectionOfDeletable;
+
     /**
      * @param $name
      * @return Flag
+     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
      */
     public function create($name)
     {

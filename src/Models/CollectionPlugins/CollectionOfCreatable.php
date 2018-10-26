@@ -1,15 +1,14 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\DreamApply\Client\Models\CollectionPlugins;
 
 use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 use Dream\DreamApply\Client\Helpers\HttpCodes;
+use Dream\DreamApply\Client\Models\Record;
 
-class CollectionOfCreatable extends Collection
+trait CollectionOfCreatable
 {
-    use CollectionPlugins\CollectionOfDeletable;
-
     /**
      * @param        $postData
      * @param string $duplicateMessage
