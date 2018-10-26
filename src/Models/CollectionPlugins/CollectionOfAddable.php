@@ -4,14 +4,16 @@ namespace Dream\DreamApply\Client\Models\CollectionPlugins;
 
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 
-trait CollectionOfDeletable
+trait CollectionOfAddable
 {
-    public function delete($idOrObject)
+    public function add($idOrObject)
     {
         $url = $this->urlByIdOrObject($idOrObject);
 
-        $response = $this->client->http()->delete($url);
+        $response = $this->client->http()->putEmpty($url);
 
         ResponseHelper::verifyResponseSuccessful($response); // check response for 404 and unexpected codes
+
+        return new $this->itemClass($this->client, $url); // return new association
     }
 }

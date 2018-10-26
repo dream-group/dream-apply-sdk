@@ -27,7 +27,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read AcademicTerm $academicTerm
  * @property-read Applicant $applicant
  *
- * @property-read CollectionOfAddable|ApplicationFlag[] $flags
+ * @property-read CollectionOfAddableAssociations|ApplicationFlag[] $flags
  * @property-read Collection|ApplicationCourse[] $courses
  * @property-read Collection|Offer[] $offers
  * @property-read Collection|Export[] $exports

@@ -3,25 +3,14 @@
 namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
 
-class CollectionOfAddable extends Collection
+class CollectionOfAddableAssociations extends Collection
 {
+    use CollectionPlugins\CollectionOfAddable;
     use CollectionPlugins\CollectionOfDeletable;
 
-    public function add($idOrObject)
-    {
-        $url = $this->urlByIdOrObject($idOrObject);
-
-        $response = $this->client->http()->putEmpty($url);
-
-        ResponseHelper::verifyResponseSuccessful($response); // check response for 404 and unexpected codes
-
-        return new $this->itemClass($this->client, $url); // return new association
-    }
-
     /**
-     * Extended version from CollectionOfDeletable:
+     * Extended version:
      * Allow use of associated objects for associations
      *
      * @param $idOrObject

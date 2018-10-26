@@ -143,6 +143,24 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
         return $this->baseUrl . '/' . strval($id);
     }
 
+    protected function urlByIdOrObject($idOrObject)
+    {
+        if (is_object($idOrObject) && $idOrObject instanceof Record) {
+            /** @var Record $object */
+            $object = $idOrObject;
+
+            if ($object instanceof $this->itemClass) {
+                return $object->url();
+            }
+
+            throw new InvalidArgumentException(sprintf('$idOrObject must be an instance of "%s", instance of "%s" given', $this->itemClass, get_class($object)));
+        } else {
+            $id = intval($idOrObject);
+
+            return $this->urlForId($id);
+        }
+    }
+
     public function getRawData()
     {
         if ($this->data === null) {

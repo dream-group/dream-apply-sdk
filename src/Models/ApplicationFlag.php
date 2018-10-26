@@ -12,7 +12,7 @@ namespace Dream\DreamApply\Client\Models;
  */
 class ApplicationFlag extends Association
 {
-    const COLLECTION_CLASS = CollectionOfAddable::class;
+    const COLLECTION_CLASS = CollectionOfAddableAssociations::class;
     const ASSOCIATED_CLASS = Flag::class;
 
     protected $objectLinks = [

@@ -18,7 +18,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Photo  $photo
  * @method        bool   photoExists()
  *
- * @property-read CollectionOfAddable|ApplicantTracker[] $trackers
+ * @property-read CollectionOfAddableAssociations|ApplicantTracker[] $trackers
  * @property-read Collection|Document[] $documents
  * @property-read Collection|StudyPlan[] $studyplans
  *
