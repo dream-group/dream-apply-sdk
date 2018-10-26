@@ -115,7 +115,7 @@ file_put_contents("/tmp/{$photo->name}", $photo->content);
 
 ### Creating (POST)
 
-Flags and Trackers can be created in API
+Flags, Trackers, and Applicants can be created in API
 
 ```php
 <?php
