@@ -12,15 +12,16 @@ class ResponseHelper
      *
      * @param ResponseInterface $response
      * @return bool
+     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
      */
     public static function verifyResponseSuccessful(ResponseInterface $response)
     {
         // allow 200 ok and 204 no content
-        if ($response->getStatusCode() === 200 || $response->getStatusCode() === 204) {
+        if ($response->getStatusCode() === HttpCodes::HTTP_OK || $response->getStatusCode() === HttpCodes::HTTP_NO_CONTENT) {
             return true;
         }
         // treat 404 as special case
-        if ($response->getStatusCode() === 404) {
+        if ($response->getStatusCode() === HttpCodes::HTTP_NOT_FOUND) {
             throw new ItemNotFoundException();
         }
 
@@ -33,6 +34,7 @@ class ResponseHelper
      *
      * @param ResponseInterface $response
      * @return bool
+     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
      */
     public static function resourceExistsByResponse(ResponseInterface $response)
     {

@@ -4,6 +4,7 @@ namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
+use Dream\DreamApply\Client\Helpers\HttpCodes;
 
 class CollectionOfCreatable extends CollectionOfDeletable
 {
@@ -16,11 +17,11 @@ class CollectionOfCreatable extends CollectionOfDeletable
     {
         $response = $this->client->http()->postFormData($this->baseUrl, $postData);
 
-        if ($response->getStatusCode() === 201) {
+        if ($response->getStatusCode() === HttpCodes::HTTP_CREATED) {
             $url = $response->getHeaderLine('Location');
             return new $this->itemClass($this->client, $url);
         }
-        if ($response->getStatusCode() === 409) {
+        if ($response->getStatusCode() === HttpCodes::HTTP_CONFLICT) {
             throw new DuplicateItemException($duplicateMessage);
         }
 

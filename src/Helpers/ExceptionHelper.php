@@ -18,7 +18,7 @@ class ExceptionHelper
     {
         // 2xx, 404 and some special cases should be handled earlier in the code
         switch ($httpResponse->getStatusCode()) {
-            case 429:
+            case HttpCodes::HTTP_TOO_MANY_REQUESTS:
                 return new TooManyRequestsException('Request rate exceeded');
 
             default:
