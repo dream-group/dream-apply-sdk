@@ -1,11 +1,12 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\DreamApply\Client\Models\CollectionPlugins;
 
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Dream\DreamApply\Client\Models\Record;
 
-class CollectionOfDeletable extends Collection
+trait CollectionOfDeletable
 {
     public function delete($idOrObject)
     {

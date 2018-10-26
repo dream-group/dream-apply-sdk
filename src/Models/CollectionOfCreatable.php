@@ -6,12 +6,15 @@ use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 use Dream\DreamApply\Client\Helpers\HttpCodes;
 
-class CollectionOfCreatable extends CollectionOfDeletable
+class CollectionOfCreatable extends Collection
 {
+    use CollectionPlugins\CollectionOfDeletable;
+
     /**
-     * @param $postData
+     * @param        $postData
      * @param string $duplicateMessage
      * @return Record
+     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
      */
     protected function doCreate($postData, $duplicateMessage = 'Item already exists')
     {

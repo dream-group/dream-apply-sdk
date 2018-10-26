@@ -5,8 +5,10 @@ namespace Dream\DreamApply\Client\Models;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 
-class CollectionOfAddable extends CollectionOfDeletable
+class CollectionOfAddable extends Collection
 {
+    use CollectionPlugins\CollectionOfDeletable;
+
     public function add($idOrObject)
     {
         $url = $this->urlByIdOrObject($idOrObject);
