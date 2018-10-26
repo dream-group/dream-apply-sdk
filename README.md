@@ -119,8 +119,13 @@ Flags and Trackers can be created in API
 
 ```php
 <?php
-$newTracker = $client->applicants->trackers->create('tracker code', 'notes');
-$newFlag    = $client->applications->flags->create('flag name');
+$newTracker     = $client->applicants->trackers->create('tracker code', 'notes');
+$newFlag        = $client->applications->flags->create('flag name');
+$newApplicant   = $client->applicants->create([
+    'email'         => 'email@example.com',
+    'name_given'    => 'Name',
+    'name_family'   => 'Surname',
+]);
 ```
 
 ### Adding association
