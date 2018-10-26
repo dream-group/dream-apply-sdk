@@ -10,6 +10,7 @@ trait CollectionOfDeletable
     {
         $url = $this->urlByIdOrObject($idOrObject);
 
+        /** @var \Psr\Http\Message\ResponseInterface $response */
         $response = $this->client->http()->delete($url);
 
         ResponseHelper::verifyResponseSuccessful($response); // check response for 404 and unexpected codes
