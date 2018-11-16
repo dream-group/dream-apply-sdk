@@ -27,6 +27,7 @@ use Dream\DreamApply\Client\Models\Report;
 use Dream\DreamApply\Client\Models\Reports;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use Dream\DreamApply\Client\Models\TableView;
+use Dream\DreamApply\Client\Models\Administrator;
 
 /**
  * Class Client
@@ -61,6 +62,9 @@ use Dream\DreamApply\Client\Models\TableView;
  *
  * @property-read Collection|TableView[] $tableviews
  * @method        Collection|TableView[] tableviews(array $filter = [])
+ * 
+ * @property-read Collection|Administrator[] $administrators
+ * @method        Collection|Administrator[] $administrators(array $filter = [])
  *
  * @property-read SimpleArray $classificators
  *
@@ -86,6 +90,7 @@ class Client
         'classificators'    => Classificators::class,
         'tableviews'        => TableView::class,
         'reports'           => Report::class,
+        'administrators'    => Administrator::class,
     ];
 
     use CollectionLinks;
