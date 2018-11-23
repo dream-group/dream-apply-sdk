@@ -19,6 +19,8 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Email extends Record
 {
+    const COLLECTION_CLASS = EmailCollection::class;
+
     protected $collectionLinks = [
         'attachments' => EmailAttachment::class,
     ];
