@@ -25,6 +25,7 @@ use Dream\DreamApply\Client\Models\InvoiceCollection;
 use Dream\DreamApply\Client\Models\JournalItem;
 use Dream\DreamApply\Client\Models\Report;
 use Dream\DreamApply\Client\Models\Reports;
+use Dream\DreamApply\Client\Models\Scoresheet;
 use Dream\DreamApply\Client\Models\SimpleArray;
 use Dream\DreamApply\Client\Models\TableView;
 use Dream\DreamApply\Client\Models\Administrator;
@@ -62,6 +63,9 @@ use Dream\DreamApply\Client\Models\Administrator;
  *
  * @property-read Collection|TableView[] $tableviews
  * @method        Collection|TableView[] tableviews(array $filter = [])
+ *
+ * @property-read Collection|Scoresheet[] $scoresheets
+ * @method        Collection|Scoresheet[] scoresheets(array $filter = [])
  * 
  * @property-read Collection|Administrator[] $administrators
  * @method        Collection|Administrator[] $administrators(array $filter = [])
@@ -89,6 +93,7 @@ class Client
         'academic-years'    => AcademicYear::class,
         'classificators'    => Classificators::class,
         'tableviews'        => TableView::class,
+        'scoresheets'       => Scoresheet::class,
         'reports'           => Report::class,
         'administrators'    => Administrator::class,
     ];
