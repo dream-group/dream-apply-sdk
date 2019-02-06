@@ -18,5 +18,8 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Scoresheet extends Record
 {
-
+    public function scores($academicTermID)
+    {
+        return $this->client->http()->getJson($this->url . '/scores', ['academicTermID' => intval($academicTermID)]);
+    }
 }
