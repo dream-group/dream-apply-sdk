@@ -201,6 +201,16 @@ class Record implements \ArrayAccess
     }
 
     /**
+     * @return int
+     */
+    public function id()
+    {
+        $urlComponents = explode('/', $this->url());
+
+        return intval(array_pop($urlComponents));
+    }
+
+    /**
      * Callback for instances after data is set from network request (constructor and resolvePartial)
      */
     protected function afterSetData()
