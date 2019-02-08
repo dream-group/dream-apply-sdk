@@ -2,6 +2,8 @@
 
 namespace Dream\DreamApply\Client\Models;
 
+use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
+
 /**
  * Class Scoresheet
  *
@@ -18,8 +20,20 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Scoresheet extends Record
 {
+    /**
+     * @param   int|AcademicTerm $academicTermID
+     * @return  array
+     */
     public function scores($academicTermID)
     {
+        if (is_object($academicTermID)) {
+            if ($academicTermID instanceof AcademicTerm) {
+                $academicTermID = $academicTermID->id();
+            } else {
+                throw new InvalidArgumentException('$academicTermID should be an integer or an instance of AcademicTerm');
+            }
+        }
+
         return $this->client->http()->getJson($this->url . '/scores', ['academicTermID' => intval($academicTermID)]);
     }
 }
