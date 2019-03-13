@@ -17,18 +17,20 @@ class SimpleArray implements \IteratorAggregate, \ArrayAccess, \Countable
     private $url;
     private $client;
     private $data;
+    private $filter;
 
-    public function __construct(Client $client, $url)
+    public function __construct(Client $client, $url, /** @noinspection PhpUnusedParameterInspection */ $itemClass, $filter = [])
     {
         $this->client   = $client;
         $this->url      = $url;
+        $this->filter   = $filter;
 
         $this->initArray();
     }
 
     private function initArray()
     {
-        $this->data = $this->client->http()->getJson($this->url);
+        $this->data = $this->client->http()->getJson($this->url, $this->filter);
     }
 
     public function getRawData()
