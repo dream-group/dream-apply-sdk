@@ -2,8 +2,6 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-
 /**
  * Class Scoresheet
  *
@@ -17,23 +15,11 @@ use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
  * @property-read int    $scale
  * @property-read string $instructions
  *
+ * @method CollectionWithNoInstanceRequests|Score[] scores($filter) use [byAcademicTermID => ...]
  */
 class Scoresheet extends Record
 {
-    /**
-     * @param   int|AcademicTerm $byAcademicTermID
-     * @return  array
-     */
-    public function scores($byAcademicTermID)
-    {
-        if (is_object($byAcademicTermID)) {
-            if ($byAcademicTermID instanceof AcademicTerm) {
-                $byAcademicTermID = $byAcademicTermID->id();
-            } else {
-                throw new InvalidArgumentException('$academicTermID should be an integer or an instance of AcademicTerm');
-            }
-        }
-
-        return $this->client->http()->getJson($this->url . '/scores', ['byAcademicTermID' => intval($byAcademicTermID)]);
-    }
+    protected $collectionLinks = [
+        'scores' => Score::class,
+    ];
 }
