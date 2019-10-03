@@ -16,12 +16,10 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $registration
  *
  * @property-read Collection|InstitutionDepartment[] $departments
- * @property-read Collection|InstitutionContact[] $contacts
  */
 class Institution extends Record
 {
     protected $collectionLinks = [
         'departments'   => InstitutionDepartment::class,
-        'contacts'      => InstitutionContact::class,
     ];
 }
