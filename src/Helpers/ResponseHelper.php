@@ -3,6 +3,7 @@
 namespace Dream\DreamApply\Client\Helpers;
 
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseHelper
@@ -18,13 +19,13 @@ class ResponseHelper
     {
         // allow 200 ok and 204 no content
         if (
-            $response->getStatusCode() === HttpCodes::HTTP_OK ||
-            $response->getStatusCode() === HttpCodes::HTTP_NO_CONTENT
+            $response->getStatusCode() === StatusCode::STATUS_OK ||
+            $response->getStatusCode() === StatusCode::STATUS_NO_CONTENT
         ) {
             return true;
         }
         // treat 404 as special case
-        if ($response->getStatusCode() === HttpCodes::HTTP_NOT_FOUND) {
+        if ($response->getStatusCode() === StatusCode::STATUS_NOT_FOUND) {
             throw new ItemNotFoundException();
         }
 

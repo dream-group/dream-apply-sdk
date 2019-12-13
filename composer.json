@@ -20,6 +20,7 @@
     "require": {
         "php": ">= 5.5",
         "danielstjules/stringy": "^2.0|^3.0",
+        "fig/http-message-util": "^1.1",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {

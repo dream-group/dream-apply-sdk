@@ -4,6 +4,7 @@ namespace Dream\DreamApply\Client\Helpers;
 
 use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ResponseInterface;
 
 class ExceptionHelper
@@ -18,7 +19,7 @@ class ExceptionHelper
     {
         // 2xx, 404 and some special cases should be handled earlier in the code
         switch ($httpResponse->getStatusCode()) {
-            case HttpCodes::HTTP_TOO_MANY_REQUESTS:
+            case StatusCode::STATUS_TOO_MANY_REQUESTS:
                 return new TooManyRequestsException('Request rate exceeded');
 
             default:

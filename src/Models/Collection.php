@@ -6,8 +6,8 @@ use Dream\DreamApply\Client\Client;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
-use Dream\DreamApply\Client\Helpers\HttpCodes;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
 
 class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \IteratorAggregate
 {
@@ -122,7 +122,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
         $response = $this->client->http()->head($this->baseUrl, $this->filter);
 
-        if ($response->getStatusCode() !== HttpCodes::HTTP_OK) {
+        if ($response->getStatusCode() !== StatusCode::STATUS_OK) {
             throw ExceptionHelper::fromResponse($response);
         }
 
