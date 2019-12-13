@@ -10,13 +10,17 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $amount
  * @property-read string $inserted
  * @property-read string $collected
- * @property-read string $payment
  *
  * @property-read Invoice $invoice
+ * @property-read Payment $payment
  */
 class Transaction extends Record
 {
     protected $objectLinks = [
         'invoice' => Invoice::class,
+    ];
+
+    protected $childRecords = [
+        'payment' => Payment::class,
     ];
 }

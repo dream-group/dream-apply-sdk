@@ -39,6 +39,9 @@ class Record implements \ArrayAccess
     protected $arraysOfRecords = [
         /* 'record' => Record::class, // $this->records[] */
     ];
+    protected $childRecords = [
+        /* 'record' => Record::class, // $this->record will be a record object created from child array */
+    ];
 
     use LinkHandlers\CollectionLinks;
     use LinkHandlers\ObjectLinks;
@@ -70,6 +73,19 @@ class Record implements \ArrayAccess
             $urls  = $this->data[$snakeName];
 
             return new ArrayOfRecords($this->client, $class, $urls);
+        }
+
+        if (array_key_exists($snakeName, $this->childRecords)) {
+            $class = $this->childRecords[$snakeName];
+            $data  = $this->data[$snakeName];
+
+            if ($data === null) {
+                return null;
+            }
+
+            $url = $this->url . '/' . StringHelper::makeUriName($name);
+
+            return new $class($class,  $url, $data, false);
         }
 
         if (array_key_exists($snakeName, $this->data)) {
@@ -123,12 +139,10 @@ class Record implements \ArrayAccess
                 $this->deleteDeletableField($snakeName);
                 return null;
             }
-        } else {
+        } elseif ($this->hasLink($name)) {
             // @method $this->linkedObject()
-            if ($this->hasLink($name)) {
-                $filter = isset($arguments[0]) ? $arguments[0] : [];
-                return $this->resolveLink($snakeName, $filter);
-            }
+            $filter = isset($arguments[0]) ? $arguments[0] : [];
+            return $this->resolveLink($snakeName, $filter);
         }
 
         throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
