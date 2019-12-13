@@ -18,6 +18,8 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read array  $payer
  *
  * @property-read Applicant $applicant
+ *
+ * @property-read Collection|Transaction[] $transactions
  */
 class Invoice extends Record
 {
@@ -26,5 +28,9 @@ class Invoice extends Record
 
     protected $objectLinks = [
         'applicant' => Applicant::class,
+    ];
+
+    protected $collectionLinks = [
+        'transactions' => Transaction::class,
     ];
 }

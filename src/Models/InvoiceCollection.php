@@ -7,6 +7,9 @@ namespace Dream\DreamApply\Client\Models;
  * @package Dream\DreamApply\Client\Models
  *
  * @property-read SimpleArray $series
+ *
+ * @property-read Collection|Transaction[] $transactions
+ * @method        Collection|Transaction[] transactions(array $filter = [])
  */
 class InvoiceCollection extends Collection
 {
@@ -14,5 +17,6 @@ class InvoiceCollection extends Collection
 
     protected $collectionLinks = [
         'series' => SimpleArray::class,
+        'transactions' => Transaction::class,
     ];
 }
