@@ -23,7 +23,11 @@ class ExceptionHelper
 
             default:
                 return new HttpFailResponseException(
-                    implode(' ', ['Unsuccessful HTTP query:', $httpResponse->getStatusCode(), $httpResponse->getReasonPhrase()]),
+                    implode(' ', [
+                        'Unsuccessful HTTP query:',
+                        $httpResponse->getStatusCode(),
+                        $httpResponse->getReasonPhrase()
+                    ]),
                     $httpResponse->getStatusCode(),
                     null,
                     $httpResponse

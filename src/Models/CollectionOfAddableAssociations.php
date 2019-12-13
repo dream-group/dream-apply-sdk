@@ -38,7 +38,11 @@ class CollectionOfAddableAssociations extends Collection
                 throw new InvalidArgumentException('$idOrObject is an record with incorrect url: ' . $url);
             }
 
-            throw new InvalidArgumentException(sprintf('$idOrObject must be an instance of "%s", instance of "%s" given', $this->itemClass, get_class($object)));
+            throw new InvalidArgumentException(sprintf(
+                '$idOrObject must be an instance of "%s", instance of "%s" given',
+                $this->itemClass,
+                get_class($object)
+            ));
         } else {
             $id = intval($idOrObject);
 

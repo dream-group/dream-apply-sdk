@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class DuplicateItemException extends ItemCreationException {}
+class DuplicateItemException extends ItemCreationException
+{
+}

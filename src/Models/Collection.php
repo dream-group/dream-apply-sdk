@@ -29,7 +29,11 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
     public function __construct(Client $client, $baseUrl, $itemClass, $filter = [])
     {
         if (is_subclass_of($itemClass, Record::class) === false && ($itemClass !== Record::class)) {
-            throw new InvalidArgumentException(sprintf('$itemClass must be subclass of "%s", "%s" given', Record::class, $itemClass));
+            throw new InvalidArgumentException(sprintf(
+                '$itemClass must be subclass of "%s", "%s" given',
+                Record::class,
+                $itemClass
+            ));
         }
 
         parent::__construct($client, $baseUrl);
@@ -96,7 +100,12 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
     public function getIterator()
     {
         foreach ($this->getRawData() as $id => $row) {
-            yield $id => new $this->itemClass($this->client, $this->urlForId($id), $row, static::IS_ITEM_IN_QUERY_PARTIAL);
+            yield $id => new $this->itemClass(
+                $this->client,
+                $this->urlForId($id),
+                $row,
+                static::IS_ITEM_IN_QUERY_PARTIAL
+            );
         }
     }
 
@@ -153,7 +162,11 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
                 return $object->url();
             }
 
-            throw new InvalidArgumentException(sprintf('$idOrObject must be an instance of "%s", instance of "%s" given', $this->itemClass, get_class($object)));
+            throw new InvalidArgumentException(sprintf(
+                '$idOrObject must be an instance of "%s", instance of "%s" given',
+                $this->itemClass,
+                get_class($object)
+            ));
         } else {
             $id = intval($idOrObject);
 

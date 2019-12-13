@@ -10,6 +10,9 @@ use Dream\DreamApply\Client\Helpers\StringHelper;
 
 class Record implements \ArrayAccess
 {
+    use LinkHandlers\CollectionLinks;
+    use LinkHandlers\ObjectLinks;
+
     const IS_BINARY                 = false;
     const COLLECTION_CLASS          = Collection::class;
     const CHILD_COLLECTION_CLASS    = null; // null or class to override if collection is a child
@@ -25,26 +28,29 @@ class Record implements \ArrayAccess
     /* links handling */
 
     protected $collectionLinks = [
-        /* 'link_name' => ClassName::class, // will generate method $this->linkName($filter = []) */
+        // will generate method $this->linkName($filter = [])
+        /* 'link_name' => ClassName::class, */
     ];
     protected $objectLinks = [
-        /* 'link_name' => ClassName::class, // will generate property $this->linkName and method $this->linkNameExists() */
+        // will generate property $this->linkName and method $this->linkNameExists()
+        /* 'link_name' => ClassName::class, */
     ];
     protected $settableFields = [
-        /* 'field_name', // will generate method setFieldName() that will call PUT $url/field-name */
+        // will generate method setFieldName() that will call PUT $url/field-name
+        /* 'field_name', */
     ];
     protected $deletableFields = [
-        /* 'field_name', // will generate method deleteFieldName() that will call DELETE $url/field-name */
+        // will generate method deleteFieldName() that will call DELETE $url/field-name
+        /* 'field_name', */
     ];
     protected $arraysOfRecords = [
-        /* 'record' => Record::class, // $this->records[] */
+        // $this->records[]
+        /* 'records' => Record::class, */
     ];
     protected $childRecords = [
-        /* 'record' => Record::class, // $this->record will be a record object created from child array */
+        // $this->record will be a record object created from child array
+        /* 'record' => Record::class, */
     ];
-
-    use LinkHandlers\CollectionLinks;
-    use LinkHandlers\ObjectLinks;
 
     public function __construct($client, $url, $data = [], $partial = false)
     {
@@ -85,7 +91,7 @@ class Record implements \ArrayAccess
 
             $url = $this->url . '/' . StringHelper::makeUriName($name);
 
-            return new $class($class,  $url, $data, false);
+            return new $class($class, $url, $data, false);
         }
 
         if (array_key_exists($snakeName, $this->data)) {
@@ -164,7 +170,8 @@ class Record implements \ArrayAccess
         }
     }
 
-    private function hasLink($name) {
+    private function hasLink($name)
+    {
         return $this->hasObjectLink($name) || $this->hasCollectionLink($name);
     }
 

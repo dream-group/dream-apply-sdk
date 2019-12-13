@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class ItemCreationException extends RuntimeException {}
+class ItemCreationException extends RuntimeException
+{
+}

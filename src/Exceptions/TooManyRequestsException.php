@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class TooManyRequestsException extends RuntimeException {}
+class TooManyRequestsException extends RuntimeException
+{
+}

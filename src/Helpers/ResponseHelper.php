@@ -17,7 +17,10 @@ class ResponseHelper
     public static function verifyResponseSuccessful(ResponseInterface $response)
     {
         // allow 200 ok and 204 no content
-        if ($response->getStatusCode() === HttpCodes::HTTP_OK || $response->getStatusCode() === HttpCodes::HTTP_NO_CONTENT) {
+        if (
+            $response->getStatusCode() === HttpCodes::HTTP_OK ||
+            $response->getStatusCode() === HttpCodes::HTTP_NO_CONTENT
+        ) {
             return true;
         }
         // treat 404 as special case

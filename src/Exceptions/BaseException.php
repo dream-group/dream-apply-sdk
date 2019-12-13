@@ -13,4 +13,6 @@ namespace Dream\DreamApply\Client\Exceptions;
  *
  * @package Dream\DreamApply\Client\Exceptions
  */
-interface BaseException {}
+interface BaseException
+{
+}

@@ -11,4 +11,6 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $location
  * @property-read string $www
  */
-class InstitutionDepartment extends Record {}
+class InstitutionDepartment extends Record
+{
+}

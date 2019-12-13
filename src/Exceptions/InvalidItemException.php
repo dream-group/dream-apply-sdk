@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class InvalidItemException extends ItemCreationException {}
+class InvalidItemException extends ItemCreationException
+{
+}

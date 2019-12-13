@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-class TableData extends BinaryRecord {}
+class TableData extends BinaryRecord
+{
+}

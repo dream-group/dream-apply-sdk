@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class InvalidArgumentException extends \InvalidArgumentException implements BaseException {}
+class InvalidArgumentException extends \InvalidArgumentException implements BaseException
+{
+}

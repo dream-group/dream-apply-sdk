@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Exceptions;
 
-class RuntimeException extends \RuntimeException implements BaseException {}
+class RuntimeException extends \RuntimeException implements BaseException
+{
+}

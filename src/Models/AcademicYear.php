@@ -9,4 +9,6 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $name
  * @property-read string $start
  */
-class AcademicYear extends Record {}
+class AcademicYear extends Record
+{
+}

@@ -66,7 +66,7 @@ use Dream\DreamApply\Client\Models\Administrator;
  *
  * @property-read Collection|Scoresheet[] $scoresheets
  * @method        Collection|Scoresheet[] scoresheets(array $filter = [])
- * 
+ *
  * @property-read Collection|Administrator[] $administrators
  * @method        Collection|Administrator[] $administrators(array $filter = [])
  *
@@ -76,6 +76,8 @@ use Dream\DreamApply\Client\Models\Administrator;
  */
 class Client
 {
+    use CollectionLinks;
+
     /**
      * @var HttpHelper
      */
@@ -97,8 +99,6 @@ class Client
         'reports'           => Report::class,
         'administrators'    => Administrator::class,
     ];
-
-    use CollectionLinks;
 
     public function __construct($endpoint, $apiKey)
     {

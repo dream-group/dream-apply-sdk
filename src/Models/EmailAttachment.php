@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-class EmailAttachment extends BinaryRecord {}
+class EmailAttachment extends BinaryRecord
+{
+}

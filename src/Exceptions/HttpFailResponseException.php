@@ -16,8 +16,12 @@ class HttpFailResponseException extends RuntimeException
      * @param \Exception|null $previous
      * @param ResponseInterface|null $httpResponse
      */
-    public function __construct($message = "", $code = 0, \Exception $previous = null, ResponseInterface $httpResponse = null)
-    {
+    public function __construct(
+        $message = '',
+        $code = 0,
+        \Exception $previous = null,
+        ResponseInterface $httpResponse = null
+    ) {
         $this->httpResponse = $httpResponse;
         parent::__construct($message, $code, $previous);
     }

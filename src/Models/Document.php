@@ -2,4 +2,6 @@
 
 namespace Dream\DreamApply\Client\Models;
 
-class Document extends BinaryRecord {}
+class Document extends BinaryRecord
+{
+}
