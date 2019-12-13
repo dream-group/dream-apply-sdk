@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+    @see https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-Ruleset
+-->
+<ruleset name="Custom Standard" namespace="MyProject\CS\Standard">
+    <!-- In general, we enforce the PSR-12 Standard -->
+    <!-- @see https://www.php-fig.org/psr/psr-1/ -->
+    <!-- @see https://www.php-fig.org/psr/psr-12/ -->
+    <rule ref="PSR12">
+        <!-- `use` blocks are usually managed automatically and folded in the IDE -->
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <!-- Only for 7.1+ -->
+        <exclude name="PSR12.Properties.ConstantVisibility.NotFound"/>
+    </rule>
+    <rule ref="PHPCompatibility"/>
+    <config name="testVersion" value="5.5-"/>
+    <!-- Paths to be checked -->
+    <file>src</file>
+    <!-- do not check vendor libraries even when explicitly called -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- Runtime config -->
+    <ini name="memory_limit" value="2G"/>
+</ruleset>
