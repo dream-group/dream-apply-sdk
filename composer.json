@@ -2,23 +2,25 @@
     "name": "dream-group/dream-apply-sdk",
     "description": "Dream Apply SDK",
     "type": "library",
-    "require": {
-        "danielstjules/stringy": "^2.0|^3.0",
-        "guzzlehttp/guzzle": "^6.2"
-    },
-    "require-dev": {
-        "psy/psysh": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "Dream\\DreamApply\\Client\\": "src"
-        }
-    },
     "license": "private",
     "authors": [
         {
             "name": "Anton Smirnov",
             "email": "anton.smirnov@dreamapply.com"
         }
-    ]
+    ],
+    "config": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Dream\\DreamApply\\Client\\": "src"
+        }
+    },
+    "require": {
+        "danielstjules/stringy": "^2.0|^3.0",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "psy/psysh": "*"
+    }
 }
