@@ -2,7 +2,9 @@
 
 namespace Dream\DreamApply\Client\Helpers;
 
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,7 +15,7 @@ class ResponseHelper
      *
      * @param ResponseInterface $response
      * @return bool
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
      */
     public static function verifyResponseSuccessful(ResponseInterface $response)
     {
@@ -38,7 +40,7 @@ class ResponseHelper
      *
      * @param ResponseInterface $response
      * @return bool
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws HttpFailResponseException|TooManyRequestsException
      */
     public static function resourceExistsByResponse(ResponseInterface $response)
     {

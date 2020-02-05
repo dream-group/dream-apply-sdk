@@ -3,8 +3,11 @@
 namespace Dream\DreamApply\Client\Models;
 
 use Dream\DreamApply\Client\Client;
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
+use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
 use Dream\DreamApply\Client\Helpers\ExceptionHelper;
 use Dream\DreamApply\Client\Helpers\ResponseHelper;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
@@ -47,7 +50,8 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      * NOTE: ignores filter
      *
      * @param $id
-     * @return Record|null
+     * @return Record
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
      */
     public function get($id)
     {
@@ -71,6 +75,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      *
      * @param $id
      * @return bool
+     * @throws HttpFailResponseException|TooManyRequestsException
      */
     public function exists($id)
     {
@@ -185,11 +190,27 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
     /* array access */
 
+    /**
+     * Check if item with this id exists
+     * NOTE: ignores filter
+     *
+     * @param $offset
+     * @return bool
+     * @throws HttpFailResponseException|TooManyRequestsException
+     */
     public function offsetExists($offset)
     {
         return $this->exists($offset);
     }
 
+    /**
+     * Get collection item by id
+     * NOTE: ignores filter
+     *
+     * @param int $offset
+     * @return Record
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
+     */
     public function offsetGet($offset)
     {
         return $this->get($offset);

@@ -13,7 +13,7 @@ class ExceptionHelper
      * Handle some special cases and return general HTTP exception in other cases
      *
      * @param ResponseInterface $httpResponse
-     * @return \Exception|\Dream\DreamApply\Client\Exceptions\BaseException
+     * @return HttpFailResponseException|TooManyRequestsException
      */
     public static function fromResponse(ResponseInterface $httpResponse)
     {

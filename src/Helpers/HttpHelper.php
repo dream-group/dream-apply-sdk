@@ -2,6 +2,9 @@
 
 namespace Dream\DreamApply\Client\Helpers;
 
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
+use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
 use GuzzleHttp as g;
 
 /**
@@ -60,9 +63,10 @@ class HttpHelper
     /**
      * GET and decode JSON
      *
-     * @param $url
-     * @param array $query
+     * @param string $url
+     * @param array  $query
      * @return array
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
      */
     public function getJson($url, $query = [])
     {
@@ -73,6 +77,12 @@ class HttpHelper
         return JsonHelper::decode(strval($response->getBody()));
     }
 
+    /**
+     * @param string $url
+     * @param array  $query
+     * @return array
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
+     */
     public function getBinary($url, $query = [])
     {
         $response = $this->get($url, $query);
