@@ -30,6 +30,9 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Course extends Record
 {
+    const COLLECTION_CLASS = CourseCollection::class;
+    const CHILD_COLLECTION_CLASS = Collection::class;
+
     const STATUS_ONLINE     = 'Online';
     const STATUS_STANDBY    = 'Standby';
     const STATUS_DRAFT      = 'Draft';

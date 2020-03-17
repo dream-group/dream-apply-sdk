@@ -16,6 +16,7 @@ use Dream\DreamApply\Client\Models\ApplicationCollection;
 use Dream\DreamApply\Client\Models\Classificators;
 use Dream\DreamApply\Client\Models\Collection;
 use Dream\DreamApply\Client\Models\CollectionWithNoInstanceRequests;
+use Dream\DreamApply\Client\Models\CourseCollection;
 use Dream\DreamApply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\DreamApply\Client\Models\Course;
 use Dream\DreamApply\Client\Models\Institution;
@@ -46,8 +47,8 @@ use Dream\DreamApply\Client\Models\Administrator;
  * @property-read Collection|Institution[] $institutions
  * @method        Collection|Institution[] institutions(array $filter = [])
  *
- * @property-read Collection|Course[] $courses
- * @method        Collection|Course[] courses(array $filter = [])
+ * @property-read CourseCollection|Course[] $courses
+ * @method        CourseCollection|Course[] courses(array $filter = [])
  *
  * @property-read Collection|Intake[] $intakes
  * @method        Collection|Intake[] intakes(array $filter = [])
