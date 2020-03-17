@@ -15,6 +15,9 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read string $phone
  * @property-read string $citizenship
  *
+ * @property-read string $reference
+ * @method        void   setReference(string $reference)
+ *
  * @property-read Photo  $photo
  * @method        bool   photoExists()
  *
@@ -48,5 +51,9 @@ class Applicant extends Record
         'emails'        => Email::class,
         'invoices'      => Invoice::class,
         'wishes'        => Wish::class,
+    ];
+
+    protected $settableFields = [
+        'reference',
     ];
 }
