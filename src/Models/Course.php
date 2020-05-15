@@ -47,7 +47,7 @@ class Course extends Record
         'institution' => Institution::class,
     ];
 
-    protected $arraysOfRecords = [
+    protected $arraysOfObjectLinks = [
         'intakes' => Intake::class,
     ];
 }

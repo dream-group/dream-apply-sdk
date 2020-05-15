@@ -8,15 +8,20 @@ use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 
 class ArrayOfRecords implements \IteratorAggregate, \ArrayAccess, \Countable
 {
+    const TYPE_URLS = 'urls';
+    const TYPE_RAW_DATA = 'data';
+
     private $client;
     private $itemClass;
     private $data;
+    private $type;
 
-    public function __construct(Client $client, $itemClass, array $urls = [])
+    public function __construct(Client $client, $itemClass, array $data, $type)
     {
         $this->client    = $client;
         $this->itemClass = $itemClass;
-        $this->data      = $urls;
+        $this->data      = $data;
+        $this->type      = $type;
     }
 
     /**
@@ -34,9 +39,18 @@ class ArrayOfRecords implements \IteratorAggregate, \ArrayAccess, \Countable
         return null;
     }
 
-    private function createInstance($url)
+    private function createInstance($recordData)
     {
-        return new $this->itemClass($this->client, $url);
+        switch ($this->type) {
+            case self::TYPE_URLS:
+                return new $this->itemClass($this->client, $recordData);
+
+            case self::TYPE_RAW_DATA:
+                return new $this->itemClass($this->client, null, $recordData);
+
+            default:
+                throw new \LogicException('Unknown ArrayOfRecords type');
+        }
     }
 
     /**

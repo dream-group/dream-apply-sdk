@@ -43,13 +43,17 @@ class Record implements \ArrayAccess
         // will generate method deleteFieldName() that will call DELETE $url/field-name
         /* 'field_name', */
     ];
-    protected $arraysOfRecords = [
+    protected $arraysOfObjectLinks = [
         // $this->records[]
         /* 'records' => Record::class, */
     ];
     protected $childRecords = [
         // $this->record will be a record object created from child array
         /* 'record' => Record::class, */
+    ];
+    protected $arraysOfChildRecords = [
+        // $this->records[] will be an array of record objects created from child array
+        /* 'records' => Record::class, */
     ];
 
     public function __construct($client, $url, $data = [], $partial = false)
@@ -74,11 +78,11 @@ class Record implements \ArrayAccess
             return $this->resolveLink($snakeName);
         }
 
-        if (array_key_exists($snakeName, $this->arraysOfRecords)) {
-            $class = $this->arraysOfRecords[$snakeName];
+        if (array_key_exists($snakeName, $this->arraysOfObjectLinks)) {
+            $class = $this->arraysOfObjectLinks[$snakeName];
             $urls  = $this->data[$snakeName];
 
-            return new ArrayOfRecords($this->client, $class, $urls);
+            return new ArrayOfRecords($this->client, $class, $urls, ArrayOfRecords::TYPE_URLS);
         }
 
         if (array_key_exists($snakeName, $this->childRecords)) {
@@ -92,6 +96,13 @@ class Record implements \ArrayAccess
             $url = $this->url . '/' . StringHelper::makeUriName($name);
 
             return new $class($class, $url, $data, false);
+        }
+
+        if (array_key_exists($snakeName, $this->arraysOfChildRecords)) {
+            $class = $this->arraysOfChildRecords[$snakeName];
+            $data  = $this->data[$snakeName];
+
+            return new ArrayOfRecords($this->client, $class, $data, ArrayOfRecords::TYPE_RAW_DATA);
         }
 
         if (array_key_exists($snakeName, $this->data)) {
