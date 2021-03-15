@@ -23,6 +23,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read OfferScore    $score
  *
  * @method void setType(string $newType)
+ * @method void confirm()
  */
 class Offer extends Record
 {
@@ -75,6 +76,10 @@ class Offer extends Record
 
     protected $settableFields = [
         'type',
+    ];
+
+    protected $methods = [
+        'confirm',
     ];
 
     /**

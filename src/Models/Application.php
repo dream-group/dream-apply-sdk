@@ -36,6 +36,9 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read Collection|Task[] $tasks
  * @property-read CollectionWithNoInstanceRequests|Score[] $scores
+ *
+ * @method void freeze()
+ * @method void unfreeze()
  */
 class Application extends Record
 {
@@ -71,5 +74,10 @@ class Application extends Record
         // not from fields, just appending collection name
         'tasks'         => Task::class,
         'scores'        => Score::class,
+    ];
+
+    protected $methods = [
+        'freeze',
+        'unfreeze',
     ];
 }

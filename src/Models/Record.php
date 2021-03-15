@@ -55,6 +55,11 @@ class Record implements \ArrayAccess
         // $this->records[] will be an array of record objects created from child array
         /* 'records' => Record::class, */
     ];
+    protected $methods = [
+        // will generate method methodName() that will call POST $url/method-name
+        // NOTE: use underscore field-style name
+        /* 'method_name', */
+    ];
 
     public function __construct($client, $url, $data = [], $partial = false)
     {
@@ -132,7 +137,11 @@ class Record implements \ArrayAccess
     {
         $snakeName  = StringHelper::makeFieldName($name);
 
-        if (preg_match('/^(.*)_exists$/', $snakeName, $matches)) {
+        if (in_array($snakeName, $this->methods)) {
+            // defined method
+
+            return $this->callMethod($snakeName, $arguments);
+        } elseif (preg_match('/^(.*)_exists$/', $snakeName, $matches)) {
             // @method $this->linkedObjectExists()
             $snakeName = $matches[1];
 
@@ -204,6 +213,16 @@ class Record implements \ArrayAccess
             implode('/', [$this->url, StringHelper::makeUriName($name)]);
 
         return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
+    }
+
+    private function callMethod($methodName, $params = [])
+    {
+        // currently only void return and no params
+        $response = $this->client->http()->postFormData(implode('/', [$this->url, $methodName]), $params);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        return null; // we don't currently have any method-like calls that return non empty results
     }
 
     private function setSettableField($field, $value)
