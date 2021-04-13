@@ -49,20 +49,42 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      * Get collection item by id
      * NOTE: ignores filter
      *
-     * @param $id
+     * @param int $id
+     * @param string|array|bool $expand
+     *          Pass expand param.
+     *          false = do not expand
+     *          true = expand all
+     *          string is a comma separated list
      * @return Record
      * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
      */
-    public function get($id)
+    public function get($id, $expand = false)
     {
         $itemUrl = $this->urlForId($id);
 
         $class = $this->itemClass;
 
+        // build string out of other possible types
+        if ($expand === true) {
+            $expand = '*';
+        } elseif (is_array($expand)) {
+            $expand = implode(',', $expand);
+        }
+
+        if (is_string($expand)) {
+            $query = ['expand' => $expand];
+        } elseif ($expand === false) {
+            $query = [];
+        } else {
+            throw new InvalidArgumentException(
+                '$expand must be a boolean or a list of expansion fields'
+            );
+        }
+
         if ($class::IS_BINARY) {
             $data = $this->client->http()->getBinary($itemUrl);
         } else {
-            $data = $this->client->http()->getJson($itemUrl);
+            $data = $this->client->http()->getJson($itemUrl, $query);
         }
 
         // set data, declare non partial

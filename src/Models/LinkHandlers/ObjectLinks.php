@@ -34,8 +34,12 @@ trait ObjectLinks
             try {
                 $class = $this->objectLinks[$name];
                 /** @var Record $object */
-                $object = new $class($client, $url);
-                $object->getRawData(true); // try to load data
+                if (is_string($url)) {
+                    $object = new $class($client, $url);
+                    $object->getRawData(true); // try to load data
+                } else {
+                    $object = new $class($client, null, $url, false);
+                }
                 return $object;
             } catch (ItemNotFoundException $e) {
                 return null; // if load fails
