@@ -76,6 +76,7 @@ class Offer extends Record
 
     protected $settableFields = [
         'type',
+        'decision',
     ];
 
     protected $methods = [
