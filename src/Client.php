@@ -2,6 +2,7 @@
 
 namespace Dream\DreamApply\Client;
 
+use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
 use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
 use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
 use Dream\DreamApply\Client\Helpers\HttpHelper;
@@ -109,6 +110,18 @@ class Client
     public function __construct($endpoint, $apiKey)
     {
         $this->http = new HttpHelper($endpoint, $apiKey);
+    }
+
+    /* root actions */
+
+    /**
+     * @return int current timestamp on success
+     * @throws HttpFailResponseException on fail
+     */
+    public function ping()
+    {
+        $data = $this->http()->getJson('ping');
+        return $data['pong'];
     }
 
     /* root collections handling */
