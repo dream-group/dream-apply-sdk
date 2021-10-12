@@ -16,6 +16,8 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Transaction extends Record
 {
+    const COLLECTION_CLASS = TransactionCollection::class;
+
     protected $objectLinks = [
         'invoice' => Invoice::class,
     ];

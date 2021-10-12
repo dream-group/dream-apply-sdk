@@ -19,7 +19,7 @@ namespace Dream\DreamApply\Client\Models;
  *
  * @property-read Applicant $applicant
  *
- * @property-read Collection|Transaction[] $transactions
+ * @property-read TransactionCollection|Transaction[] $transactions
  */
 class Invoice extends Record
 {
