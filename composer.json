@@ -25,7 +25,6 @@
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "*",
-        "improved/iterable": "*",
         "phpcompatibility/php-compatibility": "*",
         "psy/psysh": "*",
         "squizlabs/php_codesniffer": "*"
