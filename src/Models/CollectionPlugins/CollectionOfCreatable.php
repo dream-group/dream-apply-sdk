@@ -18,7 +18,6 @@ trait CollectionOfCreatable
      */
     protected function doCreate($postData, $duplicateMessage = 'Item already exists')
     {
-        /** @var \Psr\Http\Message\ResponseInterface $response */
         $response = $this->client->http()->postFormData($this->baseUrl, $postData);
 
         if ($response->getStatusCode() === StatusCode::STATUS_CREATED) {
