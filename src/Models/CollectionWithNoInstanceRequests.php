@@ -14,7 +14,7 @@ class CollectionWithNoInstanceRequests extends Collection
 {
     const IS_ITEM_IN_QUERY_PARTIAL = false; // item here is all the data we have
 
-    public function get($id)
+    public function get($id, $expand = false)
     {
         $data = $this->getRawData();
 
