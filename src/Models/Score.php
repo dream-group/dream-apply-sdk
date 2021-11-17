@@ -14,7 +14,7 @@ namespace Dream\DreamApply\Client\Models;
  */
 class Score extends Record
 {
-    const COLLECTION_CLASS = CollectionWithNoInstanceRequests::class;
+    const COLLECTION_CLASS = ScoreCollection::class;
 
     protected $objectLinks = [
         'application'   => Application::class,
