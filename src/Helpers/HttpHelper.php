@@ -19,8 +19,14 @@ class HttpHelper
 {
     private $http;
 
+    private $endpoint;
+    private $apiKey;
+
     public function __construct($endpoint, $apiKey)
     {
+        $this->endpoint = $endpoint;
+        $this->apiKey   = $apiKey;
+
         $handlerStack = new g\HandlerStack(g\choose_handler());
 
         /* mostly default handler but without cookies and http error handling */
@@ -28,12 +34,25 @@ class HttpHelper
         $handlerStack->push(g\Middleware::prepareBody(), 'prepare_body');
 
         $this->http = new g\Client([
-            'base_uri' => $endpoint,
+            'base_uri' => $this->endpoint,
             'handler' => $handlerStack,
             'headers' => [
-                'Authorization' => "DREAM apikey=\"{$apiKey}\"",
+                'Authorization' => "DREAM apikey=\"{$this->apiKey}\"",
             ],
         ]);
+    }
+
+    public function __sleep()
+    {
+        return [
+            'endpoint',
+            'apiKey',
+        ];
+    }
+
+    public function __wakeup()
+    {
+        $this->__construct($this->endpoint, $this->apiKey);
     }
 
     /**
