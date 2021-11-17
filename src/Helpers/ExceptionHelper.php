@@ -27,7 +27,8 @@ class ExceptionHelper
                     implode(' ', [
                         'Unsuccessful HTTP query:',
                         $httpResponse->getStatusCode(),
-                        $httpResponse->getReasonPhrase()
+                        $httpResponse->getReasonPhrase(),
+                        $httpResponse->getBody()->getContents()
                     ]),
                     $httpResponse->getStatusCode(),
                     null,
