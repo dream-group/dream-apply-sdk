@@ -29,7 +29,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
      */
     protected $data = null;
 
-    public function __construct(Client $client, $baseUrl, $itemClass, $filter = [])
+    public function __construct(Client $client, $baseUrl, $itemClass, $filter = [], $data = null)
     {
         if (is_subclass_of($itemClass, Record::class) === false && ($itemClass !== Record::class)) {
             throw new InvalidArgumentException(sprintf(
@@ -43,6 +43,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
         $this->itemClass    = $itemClass;
         $this->filter       = $filter;
+        $this->data         = $data;
     }
 
     /**

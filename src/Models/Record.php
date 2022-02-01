@@ -208,9 +208,16 @@ class Record implements \ArrayAccess
         // assume it's a collection link
 
         // collection urls can be resolved if not set in the object
-        $url = isset($this->data[$name]) ?
-            $this->data[$name] :
-            implode('/', [$this->url, StringHelper::makeUriName($name)]);
+        $url = isset($this->data[$name]) && is_string($this->data[$name])
+            ? $this->data[$name]
+            : '/api/' . implode('/', [$this->url, StringHelper::makeUriName($name)]);
+
+        // check if the collection has laready been expanded
+        if (isset($this->data[$name]) && is_array($this->data[$name])) {
+            $class      = $this->collectionLinks[$name];
+            $collection = $class::CHILD_COLLECTION_CLASS ?: $class::COLLECTION_CLASS;
+            return new $collection($this->client, $url, $class, $filter);
+        }
 
         return $this->resolveCollectionLink($this->client, $url, $name, $filter, true);
     }
