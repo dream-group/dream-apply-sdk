@@ -11,6 +11,11 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read Scoresheet  $scoresheet
  * @property-read string      $points       Decimal
  * @property-read string      $comments
+ *
+ * @method void setPoints(string $points)
+ * @method void deletePoints()
+ * @method void setComments(string $comments)
+ * @method void deleteComments()
  */
 class Score extends Record
 {
@@ -19,5 +24,15 @@ class Score extends Record
     protected $objectLinks = [
         'application'   => Application::class,
         'scoresheet'    => Scoresheet::class,
+    ];
+
+    protected $settableFields = [
+        'points',
+        'comments',
+    ];
+
+    protected $deletableFields = [
+        'points',
+        'comments',
     ];
 }

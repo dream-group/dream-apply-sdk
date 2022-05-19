@@ -15,7 +15,7 @@ namespace Dream\DreamApply\Client\Models;
  * @property-read int    $scale
  * @property-read string $instructions
  *
- * @method ScoreCollection|Score[] $scores($filter) use [byAcademicTermID => ...]
+ * @method ScoreCollection|Score[] scores($filter) use [byAcademicTermID => ...]
  */
 class Scoresheet extends Record
 {
