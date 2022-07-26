@@ -55,6 +55,10 @@ final class Consent implements ArrayAccess
 
     public function __isset($name)
     {
-        return \in_array($name, ['type', 'text', 'link']) && $this->$name !== null;
+        return \in_array($name, [
+            'type',
+            'text',
+            'link',
+        ]) && $this->$name !== null;
     }
 }

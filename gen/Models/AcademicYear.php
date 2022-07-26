@@ -43,6 +43,9 @@ final class AcademicYear implements ArrayAccess
 
     public function __isset($name)
     {
-        return \in_array($name, ['name', 'start']) && $this->$name !== null;
+        return \in_array($name, [
+            'name',
+            'start',
+        ]) && $this->$name !== null;
     }
 }
