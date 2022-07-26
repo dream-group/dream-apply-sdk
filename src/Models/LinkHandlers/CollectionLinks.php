@@ -1,8 +1,8 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models\LinkHandlers;
+namespace Dream\Apply\Client\Models\LinkHandlers;
 
-use Dream\DreamApply\Client\Client;
+use Dream\Apply\Client\Client;
 
 trait CollectionLinks
 {

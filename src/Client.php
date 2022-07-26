@@ -1,37 +1,37 @@
 <?php
 
-namespace Dream\DreamApply\Client;
+namespace Dream\Apply\Client;
 
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
-use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
-use Dream\DreamApply\Client\Helpers\HttpHelper;
-use Dream\DreamApply\Client\Helpers\StringHelper;
-use Dream\DreamApply\Client\Models\AcademicTerm;
-use Dream\DreamApply\Client\Models\AcademicTermCollection;
-use Dream\DreamApply\Client\Models\AcademicYear;
-use Dream\DreamApply\Client\Models\Applicant;
-use Dream\DreamApply\Client\Models\ApplicantCollection;
-use Dream\DreamApply\Client\Models\Application;
-use Dream\DreamApply\Client\Models\ApplicationCollection;
-use Dream\DreamApply\Client\Models\Classificators;
-use Dream\DreamApply\Client\Models\Collection;
-use Dream\DreamApply\Client\Models\CollectionWithNoInstanceRequests;
-use Dream\DreamApply\Client\Models\CourseCollection;
-use Dream\DreamApply\Client\Models\Fee;
-use Dream\DreamApply\Client\Models\LinkHandlers\CollectionLinks;
-use Dream\DreamApply\Client\Models\Course;
-use Dream\DreamApply\Client\Models\Institution;
-use Dream\DreamApply\Client\Models\Intake;
-use Dream\DreamApply\Client\Models\Invoice;
-use Dream\DreamApply\Client\Models\InvoiceCollection;
-use Dream\DreamApply\Client\Models\JournalItem;
-use Dream\DreamApply\Client\Models\Report;
-use Dream\DreamApply\Client\Models\Reports;
-use Dream\DreamApply\Client\Models\Scoresheet;
-use Dream\DreamApply\Client\Models\SimpleArray;
-use Dream\DreamApply\Client\Models\TableView;
-use Dream\DreamApply\Client\Models\Administrator;
+use Dream\Apply\Client\Exceptions\HttpFailResponseException;
+use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\BadMethodCallException;
+use Dream\Apply\Client\Helpers\HttpHelper;
+use Dream\Apply\Client\Helpers\StringHelper;
+use Dream\Apply\Client\Models\AcademicTerm;
+use Dream\Apply\Client\Models\AcademicTermCollection;
+use Dream\Apply\Client\Models\AcademicYear;
+use Dream\Apply\Client\Models\Applicant;
+use Dream\Apply\Client\Models\ApplicantCollection;
+use Dream\Apply\Client\Models\Application;
+use Dream\Apply\Client\Models\ApplicationCollection;
+use Dream\Apply\Client\Models\Classificators;
+use Dream\Apply\Client\Models\Collection;
+use Dream\Apply\Client\Models\CollectionWithNoInstanceRequests;
+use Dream\Apply\Client\Models\CourseCollection;
+use Dream\Apply\Client\Models\Fee;
+use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
+use Dream\Apply\Client\Models\Course;
+use Dream\Apply\Client\Models\Institution;
+use Dream\Apply\Client\Models\Intake;
+use Dream\Apply\Client\Models\Invoice;
+use Dream\Apply\Client\Models\InvoiceCollection;
+use Dream\Apply\Client\Models\JournalItem;
+use Dream\Apply\Client\Models\Report;
+use Dream\Apply\Client\Models\Reports;
+use Dream\Apply\Client\Models\Scoresheet;
+use Dream\Apply\Client\Models\SimpleArray;
+use Dream\Apply\Client\Models\TableView;
+use Dream\Apply\Client\Models\Administrator;
 
 /**
  * Class Client

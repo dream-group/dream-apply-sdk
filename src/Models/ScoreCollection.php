@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 class ScoreCollection extends Collection
 {
@@ -10,7 +10,7 @@ class ScoreCollection extends Collection
      * @param int|string $application (ID)
      * @param float|string $points (decimal)
      * @param string|null $comments
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($application, $points, $comments = null)
     {

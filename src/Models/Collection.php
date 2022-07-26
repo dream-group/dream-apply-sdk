@@ -1,15 +1,15 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
-use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
-use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
-use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
-use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
-use Dream\DreamApply\Client\Helpers\ExceptionHelper;
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Dream\Apply\Client\Client;
+use Dream\Apply\Client\Exceptions\HttpFailResponseException;
+use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\BadMethodCallException;
+use Dream\Apply\Client\Exceptions\ItemNotFoundException;
+use Dream\Apply\Client\Exceptions\TooManyRequestsException;
+use Dream\Apply\Client\Helpers\ExceptionHelper;
+use Dream\Apply\Client\Helpers\ResponseHelper;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 
 class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \IteratorAggregate

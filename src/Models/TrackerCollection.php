@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 class TrackerCollection extends Collection
 {
@@ -11,7 +11,7 @@ class TrackerCollection extends Collection
      * @param $code
      * @param $notes
      * @return Tracker
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($code, $notes)
     {

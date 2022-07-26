@@ -1,9 +1,9 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
-use Dream\DreamApply\Client\Exceptions\BaseException;
-use Dream\DreamApply\Client\Models\CollectionPlugins\CollectionOfCreatable;
+use Dream\Apply\Client\Exceptions\BaseException;
+use Dream\Apply\Client\Models\CollectionPlugins\CollectionOfCreatable;
 
 class CourseCollection extends Collection
 {

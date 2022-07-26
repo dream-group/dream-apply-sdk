@@ -1,8 +1,8 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models\CollectionPlugins;
+namespace Dream\Apply\Client\Models\CollectionPlugins;
 
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
+use Dream\Apply\Client\Helpers\ResponseHelper;
 
 trait CollectionOfDeletable
 {

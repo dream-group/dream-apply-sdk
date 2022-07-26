@@ -1,9 +1,9 @@
 <?php
 
-namespace Dream\DreamApply\Client\Helpers;
+namespace Dream\Apply\Client\Helpers;
 
-use Dream\DreamApply\Client\Exceptions\HttpFailResponseException;
-use Dream\DreamApply\Client\Exceptions\TooManyRequestsException;
+use Dream\Apply\Client\Exceptions\HttpFailResponseException;
+use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ResponseInterface;
 
