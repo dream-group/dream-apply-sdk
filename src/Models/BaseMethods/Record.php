@@ -9,6 +9,9 @@ use Dream\Apply\Client\Helpers\StringHelper;
 
 trait Record
 {
+    abstract public function getField($name);
+    abstract public function hasField($name);
+
     /** @var Client */
     protected $client;
     /** @var array */
@@ -39,7 +42,7 @@ trait Record
 
     protected function retrieveData()
     {
-        return $this->client->http()->getJson($this->url);
+        return $this->client->http()->getJson($this->url());
     }
 
     protected function resolvePartial()
@@ -58,6 +61,9 @@ trait Record
      */
     public function url()
     {
+        if ($this->url === null) {
+            throw new \RuntimeException('No url for this object');
+        }
         return $this->url;
     }
 
@@ -79,33 +85,69 @@ trait Record
         // nothing by default
     }
 
-    protected function hasData($field)
+    protected function hasRawData($field)
     {
-        if ($this->partial && !array_key_exists($field, $this->data)) {
+        if ($this->partial && !\array_key_exists($field, $this->data)) {
             $this->resolvePartial();
         }
         return \array_key_exists($field, $this->data);
     }
 
-    protected function getData($field)
+    protected function getRawField($field)
     {
-        if ($this->hasData($field)) {
+        if ($this->hasRawData($field)) {
             return $this->data[$field];
         }
 
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $field, self::class));
     }
 
+    protected function getObjectField($field, $class)
+    {
+        $data  = $this->data[$field];
+
+        if ($data === null) {
+            return null;
+        }
+
+        return new $class($class, null, $data, false);
+    }
+
+    /* Magic */
+
+    public function __get($name)
+    {
+        if ($this->hasField($name) === false) {
+            throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
+        }
+        return $this->getResolvedField($name);
+    }
+
+    public function __isset($name)
+    {
+        return $this->hasField($name) && $this->getRawField($name) !== null;
+    }
+
+    public function __set($name, $value)
+    {
+        throw new BadMethodCallException('Record is immutable');
+    }
+
+    public function __unset($name)
+    {
+        throw new BadMethodCallException('Record is immutable');
+    }
+
     /* Array Access */
 
     public function offsetGet($offset)
     {
-        return $this->hasData($offset) ? $this->getData($offset) : null;
+        return $this->hasField($offset) ? $this->getResolvedField($offset) : null;
     }
 
     public function offsetExists($offset)
     {
-        return $this->hasData($offset);
+        return $this->hasField($offset);
     }
 
     public function offsetSet($offset, $value)

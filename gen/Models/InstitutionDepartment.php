@@ -7,6 +7,7 @@ use ArrayAccess;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $name
  * @property-read string $country
  * @property-read string $location
@@ -17,11 +18,19 @@ final class InstitutionDepartment implements ArrayAccess
     use BaseMethods\Record;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
-        return $this->getData('name');
+        return $this->getRawField('name');
     }
 
     /**
@@ -29,7 +38,7 @@ final class InstitutionDepartment implements ArrayAccess
      */
     public function getCountry()
     {
-        return $this->getData('country');
+        return $this->getRawField('country');
     }
 
     /**
@@ -37,7 +46,7 @@ final class InstitutionDepartment implements ArrayAccess
      */
     public function getLocation()
     {
-        return $this->getData('location');
+        return $this->getRawField('location');
     }
 
     /**
@@ -45,33 +54,37 @@ final class InstitutionDepartment implements ArrayAccess
      */
     public function getWww()
     {
-        return $this->getData('www');
+        return $this->getRawField('www');
     }
 
-    public function __get($name)
+    public function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'name') {
-            return $this->getData('name');
+            return $this->getRawField('name');
         }
         if ($name === 'country') {
-            return $this->getData('country');
+            return $this->getRawField('country');
         }
         if ($name === 'location') {
-            return $this->getData('location');
+            return $this->getRawField('location');
         }
         if ($name === 'www') {
-            return $this->getData('www');
+            return $this->getRawField('www');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function __isset($name)
+    public function hasField($name)
     {
         return \in_array($name, [
+            'id',
             'name',
             'country',
             'location',
             'www',
-        ]) && $this->$name !== null;
+        ]);
     }
 }

@@ -44,21 +44,21 @@ final class AcademicTermType implements ArrayAccess
      */
     public function getName()
     {
-        return $this->getData('name');
+        return $this->getRawField('name');
     }
 
-    public function __get($name)
+    public function getField($name)
     {
         if ($name === 'name') {
-            return $this->getData('name');
+            return $this->getRawField('name');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function __isset($name)
+    public function hasField($name)
     {
         return \in_array($name, [
             'name',
-        ]) && $this->$name !== null;
+        ]);
     }
 }
