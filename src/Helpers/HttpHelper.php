@@ -5,7 +5,22 @@ namespace Dream\Apply\Client\Helpers;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
-use GuzzleHttp as g;
+use Fig\Http\Message\RequestMethodInterface;
+use Fig\Http\Message\StatusCodeInterface;
+use Http\Client\HttpClient;
+use Http\Discovery\Exception\NotFoundException;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
+use Http\Discovery\UriFactoryDiscovery;
+use Http\Message\MessageFactory;
+use Http\Message\UriFactory;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Class HttpHelper
@@ -15,31 +30,68 @@ use GuzzleHttp as g;
  *
  * get*() are guarded by headers check, other methods require manual check
  */
-class HttpHelper
+final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
 {
+    /** @var HttpClient|ClientInterface */
     private $http;
+    /** @var MessageFactory|RequestFactoryInterface */
+    private $requestFactory;
+    /** @var UriFactory|UriFactoryInterface */
+    private $uriFactory;
 
     private $endpoint;
     private $apiKey;
 
-    public function __construct($endpoint, $apiKey)
+    public function __construct($endpoint, $apiKey, $client, $requestFactory, $uriFactory)
     {
-        $this->endpoint = $endpoint;
+        $this->endpoint = rtrim($endpoint, '/') . '/'; // be tolerant to ending slash
         $this->apiKey   = $apiKey;
 
-        $handlerStack = new g\HandlerStack(g\choose_handler());
+        if ($client === null) {
+            try {
+                $client = Psr18ClientDiscovery::find();
+            } catch (NotFoundException $e) {
+                $client = HttpClientDiscovery::find();
+            }
+        } elseif (!($client instanceof HttpClient || $client instanceof ClientInterface)) {
+            throw new \InvalidArgumentException(
+                '$client must be an instance of PSR-18 client or Httplug client'
+            );
+        }
 
-        /* mostly default handler but without cookies and http error handling */
-        $handlerStack->push(g\Middleware::redirect(), 'allow_redirects');
-        $handlerStack->push(g\Middleware::prepareBody(), 'prepare_body');
+        if ($requestFactory === null) {
+            try {
+                if (!class_exists(Psr17FactoryDiscovery::class)) {
+                    throw new NotFoundException();
+                }
+                $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+            } catch (NotFoundException $e) {
+                $requestFactory = MessageFactoryDiscovery::find();
+            }
+        } elseif (!($requestFactory instanceof RequestFactoryInterface || $requestFactory instanceof MessageFactory)) {
+            throw new \InvalidArgumentException(
+                '$requestFactory must be an instance of PSR-17 factory or Httplug factory'
+            );
+        }
 
-        $this->http = new g\Client([
-            'base_uri' => $this->endpoint,
-            'handler' => $handlerStack,
-            'headers' => [
-                'Authorization' => "DREAM apikey=\"{$this->apiKey}\"",
-            ],
-        ]);
+        if ($uriFactory === null) {
+            try {
+                if (!class_exists(Psr17FactoryDiscovery::class)) {
+                    throw new NotFoundException();
+                }
+                $uriFactory = Psr17FactoryDiscovery::findUriFactory();
+            } catch (NotFoundException $e) {
+                $uriFactory = UriFactoryDiscovery::find();
+            }
+        } elseif (!($uriFactory instanceof UriFactoryInterface || $uriFactory instanceof UriFactory)) {
+            throw new \InvalidArgumentException(
+                '$requestFactory must be an instance of PSR-17 factory or Httplug factory'
+            );
+        }
+
+        $this->http = $client;
+        $this->requestFactory = $requestFactory;
+        $this->uriFactory = $uriFactory;
     }
 
     public function __sleep()
@@ -52,7 +104,7 @@ class HttpHelper
 
     public function __wakeup()
     {
-        $this->__construct($this->endpoint, $this->apiKey);
+        $this->__construct($this->endpoint, $this->apiKey, null, null, null);
     }
 
     /**
@@ -60,11 +112,19 @@ class HttpHelper
      *
      * @param string $url
      * @param array $query
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function get($url, $query = [])
     {
-        return $this->http->get($url, ['query' => $query]);
+        $uri = $this->uriFactory
+            ->createUri($this->endpoint . $url)
+            ->withQuery(http_build_query($query))
+        ;
+        $request = $this->requestFactory
+            ->createRequest(self::METHOD_GET, $uri)
+        ;
+        return $this->http->sendRequest($request);
     }
 
     /**
@@ -72,11 +132,19 @@ class HttpHelper
      *
      * @param $url
      * @param array $query
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function head($url, $query = [])
     {
-        return $this->http->head($url, ['query' => $query]);
+        $uri = $this->uriFactory
+            ->createUri($this->endpoint . $url)
+            ->withQuery(http_build_query($query))
+        ;
+        $request = $this->requestFactory
+            ->createRequest(self::METHOD_HEAD, $uri)
+        ;
+        return $this->http->sendRequest($request);
     }
 
     /**
@@ -85,7 +153,7 @@ class HttpHelper
      * @param string $url
      * @param array  $query
      * @return array
-     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
      */
     public function getJson($url, $query = [])
     {
@@ -100,7 +168,7 @@ class HttpHelper
      * @param string $url
      * @param array  $query
      * @return array
-     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
      */
     public function getBinary($url, $query = [])
     {
@@ -122,11 +190,13 @@ class HttpHelper
      * Perform DELETE request, return PSR-7 object
      *
      * @param $url
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function delete($url)
     {
-        return $this->http->delete($url);
+        $request = $this->requestFactory->createRequest('DELETE', $this->endpoint . $url);
+        return $this->http->sendRequest($request);
     }
 
     /**
@@ -134,24 +204,30 @@ class HttpHelper
      *
      * @param $url
      * @param array $postData array of form params to be sent
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function postFormData($url, $postData)
     {
-        return $this->http->post($url, [
-            'form_params' => $postData,
-        ]);
+        $request = $this->requestFactory
+            ->createRequest('POST', $this->endpoint . $url)
+            ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
+        ;
+        $request->getBody()->write(http_build_query($postData));
+        return $this->http->sendRequest($request);
     }
 
     /**
      * Perform PUT request, return PSR-7 object
      *
      * @param $url
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function putEmpty($url)
     {
-        return $this->http->put($url);
+        $request = $this->requestFactory->createRequest('PUT', $this->endpoint . $url);
+        return $this->http->sendRequest($request);
     }
 
     /**
@@ -159,10 +235,16 @@ class HttpHelper
      *
      * @param $url
      * @param mixed $data data to be encoded and sent
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
      */
     public function putJson($url, $data)
     {
-        return $this->http->put($url, ['json' => $data]);
+        $request = $this->requestFactory
+            ->createRequest('PUT', $this->endpoint . $url)
+            ->withHeader('Content-Type', 'application/json')
+        ;
+        $request->getBody()->write(JsonHelper::encode($data));
+        return $this->http->sendRequest($request);
     }
 }

@@ -4,7 +4,7 @@ namespace Dream\Apply\Client\Helpers;
 
 use Stringy\Stringy;
 
-class StringHelper
+final class StringHelper
 {
     /**
      * Convert camelCase and dashes-notation to snake_case
