@@ -67,6 +67,11 @@ final class InstitutionDepartment implements ArrayAccess
 
     public function __isset($name)
     {
-        return \in_array($name, ['name', 'country', 'location', 'www']) && $this->$name !== null;
+        return \in_array($name, [
+            'name',
+            'country',
+            'location',
+            'www',
+        ]) && $this->$name !== null;
     }
 }

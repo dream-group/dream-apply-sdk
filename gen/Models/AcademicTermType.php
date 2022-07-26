@@ -57,6 +57,8 @@ final class AcademicTermType implements ArrayAccess
 
     public function __isset($name)
     {
-        return \in_array($name, ['name']) && $this->$name !== null;
+        return \in_array($name, [
+            'name',
+        ]) && $this->$name !== null;
     }
 }

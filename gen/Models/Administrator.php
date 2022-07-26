@@ -67,6 +67,11 @@ final class Administrator implements ArrayAccess
 
     public function __isset($name)
     {
-        return \in_array($name, ['name', 'email', 'phone', 'function']) && $this->$name !== null;
+        return \in_array($name, [
+            'name',
+            'email',
+            'phone',
+            'function',
+        ]) && $this->$name !== null;
     }
 }
