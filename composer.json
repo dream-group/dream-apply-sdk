@@ -17,8 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dream\\Apply\\Client\\": "src",
-            "Dream\\Apply\\Client\\": "gen"
+            "Dream\\Apply\\Client\\": ["src", "gen"]
         },
         "files": [
             "bootstrap.php"
