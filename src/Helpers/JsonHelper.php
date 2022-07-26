@@ -8,7 +8,7 @@ namespace Dream\Apply\Client\Helpers;
  *
  * Wrappers for json_encode and json_decode from Guzzle that throw exceptions on invalid json
  */
-class JsonHelper
+final class JsonHelper
 {
     /**
      * @param mixed $data
@@ -16,7 +16,13 @@ class JsonHelper
      */
     public static function encode($data)
     {
-        return \GuzzleHttp\json_encode($data);
+        $encoded = json_encode($data);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \RuntimeException('Json encoding failed');
+        }
+
+        return $encoded;
     }
 
     /**
@@ -25,6 +31,12 @@ class JsonHelper
      */
     public static function decode($json)
     {
-        return \GuzzleHttp\json_decode($json, true);
+        $decoded = json_decode($json, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \RuntimeException('Json decoding failed');
+        }
+
+        return $decoded;
     }
 }

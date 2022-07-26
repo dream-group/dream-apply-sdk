@@ -9,8 +9,8 @@ use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Helpers\ExceptionHelper;
+use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\ResponseHelper;
-use Fig\Http\Message\StatusCodeInterface as StatusCode;
 
 class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \IteratorAggregate
 {
@@ -150,7 +150,7 @@ class Collection extends UrlNamespace implements \ArrayAccess, \Countable, \Iter
 
         $response = $this->client->http()->head($this->baseUrl, $this->filter);
 
-        if ($response->getStatusCode() !== StatusCode::STATUS_OK) {
+        if ($response->getStatusCode() !== HttpHelper::STATUS_OK) {
             throw ExceptionHelper::fromResponse($response);
         }
 

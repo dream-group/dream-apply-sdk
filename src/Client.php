@@ -32,6 +32,12 @@ use Dream\Apply\Client\Models\Scoresheet;
 use Dream\Apply\Client\Models\SimpleArray;
 use Dream\Apply\Client\Models\TableView;
 use Dream\Apply\Client\Models\Administrator;
+use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
+use Http\Message\UriFactory;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Class Client
@@ -80,7 +86,7 @@ use Dream\Apply\Client\Models\Administrator;
  *
  * @property-read Reports $reports
  */
-class Client
+final class Client
 {
     use CollectionLinks;
 
@@ -107,9 +113,16 @@ class Client
         'fees'              => Fee::class,
     ];
 
-    public function __construct($endpoint, $apiKey)
+    /**
+     * @param $endpoint
+     * @param $apiKey
+     * @param HttpClient|ClientInterface $client
+     * @param MessageFactory|RequestFactoryInterface $requestFactory
+     * @param UriFactoryInterface|UriFactory $uriFactory
+     */
+    public function __construct($endpoint, $apiKey, $client = null, $requestFactory = null, $uriFactory = null)
     {
-        $this->http = new HttpHelper($endpoint, $apiKey);
+        $this->http = new HttpHelper($endpoint, $apiKey, $client, $requestFactory, $uriFactory);
     }
 
     /* root actions */

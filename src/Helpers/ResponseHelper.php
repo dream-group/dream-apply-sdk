@@ -5,10 +5,9 @@ namespace Dream\Apply\Client\Helpers;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
-use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ResponseInterface;
 
-class ResponseHelper
+final class ResponseHelper
 {
     /**
      * Guardian verification of the response
@@ -21,13 +20,13 @@ class ResponseHelper
     {
         // allow 200 ok and 204 no content
         if (
-            $response->getStatusCode() === StatusCode::STATUS_OK ||
-            $response->getStatusCode() === StatusCode::STATUS_NO_CONTENT
+            $response->getStatusCode() === HttpHelper::STATUS_OK ||
+            $response->getStatusCode() === HttpHelper::STATUS_NO_CONTENT
         ) {
             return true;
         }
         // treat 404 as special case
-        if ($response->getStatusCode() === StatusCode::STATUS_NOT_FOUND) {
+        if ($response->getStatusCode() === HttpHelper::STATUS_NOT_FOUND) {
             throw new ItemNotFoundException();
         }
 

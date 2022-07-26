@@ -25,12 +25,16 @@
     },
     "require": {
         "php": ">= 5.5",
+        "ext-json": "*",
         "danielstjules/stringy": "^2.0 || ^3.0",
         "fig/http-message-util": "^1.1",
-        "guzzlehttp/guzzle": "^6.2 || ^7.0"
+        "php-http/discovery": "^1.0",
+        "php-http/httplug": "^1 | ^2"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "nyholm/psr7": "^1.5",
+        "php-http/curl-client": "*",
         "phpcompatibility/php-compatibility": "*",
         "psy/psysh": "*",
         "squizlabs/php_codesniffer": "*"
