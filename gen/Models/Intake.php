@@ -35,7 +35,7 @@ final class Intake implements ArrayAccess
      */
     public function getName()
     {
-        return $this->getData('name');
+        return $this->getRawField('name');
     }
 
     /**
@@ -43,7 +43,7 @@ final class Intake implements ArrayAccess
      */
     public function getStart()
     {
-        return $this->getData('start');
+        return $this->getRawField('start');
     }
 
     /**
@@ -51,7 +51,7 @@ final class Intake implements ArrayAccess
      */
     public function getPre()
     {
-        return $this->getData('pre');
+        return $this->getRawField('pre');
     }
 
     /**
@@ -59,7 +59,7 @@ final class Intake implements ArrayAccess
      */
     public function getPolicy()
     {
-        return $this->getData('policy');
+        return $this->getRawField('policy');
     }
 
     /**
@@ -67,7 +67,7 @@ final class Intake implements ArrayAccess
      */
     public function getDeadlines()
     {
-        return $this->getData('deadlines');
+        return $this->getRawField('deadlines');
     }
 
     /**
@@ -75,7 +75,7 @@ final class Intake implements ArrayAccess
      */
     public function getDecision()
     {
-        return $this->getData('decision');
+        return $this->getRawField('decision');
     }
 
     /**
@@ -83,7 +83,7 @@ final class Intake implements ArrayAccess
      */
     public function getArrival()
     {
-        return $this->getData('arrival');
+        return $this->getRawField('arrival');
     }
 
     /**
@@ -91,39 +91,39 @@ final class Intake implements ArrayAccess
      */
     public function getCommence()
     {
-        return $this->getData('commence');
+        return $this->getRawField('commence');
     }
 
-    public function __get($name)
+    public function getField($name)
     {
         if ($name === 'name') {
-            return $this->getData('name');
+            return $this->getRawField('name');
         }
         if ($name === 'start') {
-            return $this->getData('start');
+            return $this->getRawField('start');
         }
         if ($name === 'pre') {
-            return $this->getData('pre');
+            return $this->getRawField('pre');
         }
         if ($name === 'policy') {
-            return $this->getData('policy');
+            return $this->getRawField('policy');
         }
         if ($name === 'deadlines') {
-            return $this->getData('deadlines');
+            return $this->getRawField('deadlines');
         }
         if ($name === 'decision') {
-            return $this->getData('decision');
+            return $this->getRawField('decision');
         }
         if ($name === 'arrival') {
-            return $this->getData('arrival');
+            return $this->getRawField('arrival');
         }
         if ($name === 'commence') {
-            return $this->getData('commence');
+            return $this->getRawField('commence');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function __isset($name)
+    public function hasField($name)
     {
         return \in_array($name, [
             'name',
@@ -134,6 +134,6 @@ final class Intake implements ArrayAccess
             'decision',
             'arrival',
             'commence',
-        ]) && $this->$name !== null;
+        ]);
     }
 }

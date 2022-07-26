@@ -7,6 +7,7 @@ use ArrayAccess;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $name
  * @property-read string $email
  * @property-read string $phone
@@ -17,11 +18,19 @@ final class Administrator implements ArrayAccess
     use BaseMethods\Record;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
-        return $this->getData('name');
+        return $this->getRawField('name');
     }
 
     /**
@@ -29,7 +38,7 @@ final class Administrator implements ArrayAccess
      */
     public function getEmail()
     {
-        return $this->getData('email');
+        return $this->getRawField('email');
     }
 
     /**
@@ -37,7 +46,7 @@ final class Administrator implements ArrayAccess
      */
     public function getPhone()
     {
-        return $this->getData('phone');
+        return $this->getRawField('phone');
     }
 
     /**
@@ -45,33 +54,37 @@ final class Administrator implements ArrayAccess
      */
     public function getFunction()
     {
-        return $this->getData('function');
+        return $this->getRawField('function');
     }
 
-    public function __get($name)
+    public function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'name') {
-            return $this->getData('name');
+            return $this->getRawField('name');
         }
         if ($name === 'email') {
-            return $this->getData('email');
+            return $this->getRawField('email');
         }
         if ($name === 'phone') {
-            return $this->getData('phone');
+            return $this->getRawField('phone');
         }
         if ($name === 'function') {
-            return $this->getData('function');
+            return $this->getRawField('function');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function __isset($name)
+    public function hasField($name)
     {
         return \in_array($name, [
+            'id',
             'name',
             'email',
             'phone',
             'function',
-        ]) && $this->$name !== null;
+        ]);
     }
 }

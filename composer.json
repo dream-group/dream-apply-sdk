@@ -28,6 +28,7 @@
         "ext-json": "*",
         "danielstjules/stringy": "^2.0 || ^3.0",
         "fig/http-message-util": "^1.1",
+        "laminas/laminas-filter": "^2.0",
         "php-http/discovery": "^1.0",
         "php-http/httplug": "^1 | ^2"
     },

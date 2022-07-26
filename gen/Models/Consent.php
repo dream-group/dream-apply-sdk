@@ -20,7 +20,7 @@ final class Consent implements ArrayAccess
      */
     public function getType()
     {
-        return $this->getData('type');
+        return $this->getRawField('type');
     }
 
     /**
@@ -28,7 +28,7 @@ final class Consent implements ArrayAccess
      */
     public function getText()
     {
-        return $this->getData('text');
+        return $this->getRawField('text');
     }
 
     /**
@@ -36,29 +36,29 @@ final class Consent implements ArrayAccess
      */
     public function getLink()
     {
-        return $this->getData('link');
+        return $this->getRawField('link');
     }
 
-    public function __get($name)
+    public function getField($name)
     {
         if ($name === 'type') {
-            return $this->getData('type');
+            return $this->getRawField('type');
         }
         if ($name === 'text') {
-            return $this->getData('text');
+            return $this->getRawField('text');
         }
         if ($name === 'link') {
-            return $this->getData('link');
+            return $this->getRawField('link');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function __isset($name)
+    public function hasField($name)
     {
         return \in_array($name, [
             'type',
             'text',
             'link',
-        ]) && $this->$name !== null;
+        ]);
     }
 }

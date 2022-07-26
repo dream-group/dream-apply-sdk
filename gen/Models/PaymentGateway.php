@@ -7,15 +7,24 @@ use ArrayAccess;
 
 /**
  * @generated
- * @property-read string $name
- * @property-read string $start
+ * @property-read int|null $id
+ * @property-read string|null $name
+ * @property-read string|null $adapter
  */
-final class AcademicYear implements ArrayAccess
+final class PaymentGateway implements ArrayAccess
 {
     use BaseMethods\Record;
 
     /**
-     * @return string
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
+
+    /**
+     * @return string|null
      */
     public function getName()
     {
@@ -23,20 +32,23 @@ final class AcademicYear implements ArrayAccess
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStart()
+    public function getAdapter()
     {
-        return $this->getRawField('start');
+        return $this->getRawField('adapter');
     }
 
     public function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'name') {
             return $this->getRawField('name');
         }
-        if ($name === 'start') {
-            return $this->getRawField('start');
+        if ($name === 'adapter') {
+            return $this->getRawField('adapter');
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
@@ -44,8 +56,9 @@ final class AcademicYear implements ArrayAccess
     public function hasField($name)
     {
         return \in_array($name, [
+            'id',
             'name',
-            'start',
+            'adapter',
         ]);
     }
 }

@@ -35,6 +35,7 @@ use Dream\Apply\Client\Models\Administrator;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
@@ -129,7 +130,7 @@ final class Client
 
     /**
      * @return int current timestamp on success
-     * @throws HttpFailResponseException on fail
+     * @throws HttpFailResponseException|ClientExceptionInterface on fail
      */
     public function ping()
     {
