@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "Dream\\Apply\\Client\\": "src"
-        }
+        },
+        "files": [
+            "bootstrap.php"
+        ]
     },
     "require": {
         "php": ">= 5.5",
