@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Helpers;
+namespace Dream\Apply\Client\Helpers;
 
 /**
  * Class JsonHelper

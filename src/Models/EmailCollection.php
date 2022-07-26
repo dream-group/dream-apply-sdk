@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 class EmailCollection extends Collection
 {
@@ -10,7 +10,7 @@ class EmailCollection extends Collection
      * @param $subject
      * @param $message
      * @return Email
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($subject, $message)
     {

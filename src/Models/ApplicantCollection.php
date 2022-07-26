@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 /**
  * Class ApplicantCollection
@@ -21,7 +21,7 @@ class ApplicantCollection extends Collection
     /**
      * @param $data
      * @return Applicant
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($data)
     {

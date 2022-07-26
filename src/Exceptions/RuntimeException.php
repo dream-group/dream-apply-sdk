@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Exceptions;
+namespace Dream\Apply\Client\Exceptions;
 
 class RuntimeException extends \RuntimeException implements BaseException
 {

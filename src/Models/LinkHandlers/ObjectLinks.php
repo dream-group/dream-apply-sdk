@@ -1,11 +1,11 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models\LinkHandlers;
+namespace Dream\Apply\Client\Models\LinkHandlers;
 
-use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
-use Dream\DreamApply\Client\Models\Record;
+use Dream\Apply\Client\Client;
+use Dream\Apply\Client\Exceptions\ItemNotFoundException;
+use Dream\Apply\Client\Helpers\ResponseHelper;
+use Dream\Apply\Client\Models\Record;
 
 trait ObjectLinks
 {

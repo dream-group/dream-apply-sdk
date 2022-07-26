@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 class TransactionCollection extends Collection
 {
@@ -9,7 +9,7 @@ class TransactionCollection extends Collection
     /**
      * @param float|string $amount (decimal)
      * @param string $currency
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($amount, $currency)
     {

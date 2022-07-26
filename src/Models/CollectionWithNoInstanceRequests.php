@@ -1,8 +1,8 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
-use Dream\DreamApply\Client\Exceptions\ItemNotFoundException;
+use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 
 /**
  * Class CollectionWithNoInstances

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 
-use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
+use Dream\Apply\Client\Client;
+use Dream\Apply\Client\Exceptions\BadMethodCallException;
 
 class ArrayOfRecords implements \IteratorAggregate, \ArrayAccess, \Countable
 {

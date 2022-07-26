@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 /**
  * For /api/applications/ID/offers/ID/score/extra

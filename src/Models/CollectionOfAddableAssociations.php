@@ -1,8 +1,8 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
-use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 class CollectionOfAddableAssociations extends Collection
 {

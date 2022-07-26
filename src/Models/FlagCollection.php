@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
 class FlagCollection extends Collection
 {
@@ -10,7 +10,7 @@ class FlagCollection extends Collection
     /**
      * @param $name
      * @return Flag
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     public function create($name)
     {

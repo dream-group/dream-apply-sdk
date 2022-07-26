@@ -1,12 +1,12 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models;
+namespace Dream\Apply\Client\Models;
 
-use Dream\DreamApply\Client\Client;
-use Dream\DreamApply\Client\Exceptions\InvalidArgumentException;
-use Dream\DreamApply\Client\Exceptions\BadMethodCallException;
-use Dream\DreamApply\Client\Helpers\ResponseHelper;
-use Dream\DreamApply\Client\Helpers\StringHelper;
+use Dream\Apply\Client\Client;
+use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\BadMethodCallException;
+use Dream\Apply\Client\Helpers\ResponseHelper;
+use Dream\Apply\Client\Helpers\StringHelper;
 
 class Record implements \ArrayAccess
 {

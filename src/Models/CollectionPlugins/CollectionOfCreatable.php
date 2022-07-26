@@ -1,11 +1,11 @@
 <?php
 
-namespace Dream\DreamApply\Client\Models\CollectionPlugins;
+namespace Dream\Apply\Client\Models\CollectionPlugins;
 
-use Dream\DreamApply\Client\Exceptions\DuplicateItemException;
-use Dream\DreamApply\Client\Exceptions\InvalidItemException;
-use Dream\DreamApply\Client\Helpers\ExceptionHelper;
-use Dream\DreamApply\Client\Models\Record;
+use Dream\Apply\Client\Exceptions\DuplicateItemException;
+use Dream\Apply\Client\Exceptions\InvalidItemException;
+use Dream\Apply\Client\Helpers\ExceptionHelper;
+use Dream\Apply\Client\Models\Record;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 
 trait CollectionOfCreatable
@@ -14,7 +14,7 @@ trait CollectionOfCreatable
      * @param        $postData
      * @param string $duplicateMessage
      * @return Record
-     * @throws \Dream\DreamApply\Client\Exceptions\BaseException
+     * @throws \Dream\Apply\Client\Exceptions\BaseException
      */
     protected function doCreate($postData, $duplicateMessage = 'Item already exists')
     {
