@@ -3,7 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use ArrayAccess;
+use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
@@ -13,10 +13,8 @@ use ArrayAccess;
  * @property-read string $location
  * @property-read string $www
  */
-final class InstitutionDepartment implements ArrayAccess
+final class InstitutionDepartment extends Record
 {
-    use BaseMethods\Record;
-
     /**
      * @return int
      */
