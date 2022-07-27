@@ -3,7 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use ArrayAccess;
+use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
@@ -15,10 +15,8 @@ use ArrayAccess;
  * @property-read string $updated
  * @property-read PaymentGateway $gateway
  */
-final class Payment implements ArrayAccess
+final class Payment extends Record
 {
-    use BaseMethods\Record;
-
     /**
      * @return string
      */

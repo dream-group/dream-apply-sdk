@@ -3,7 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use ArrayAccess;
+use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
@@ -16,10 +16,8 @@ use ArrayAccess;
  * @property-read string $arrival
  * @property-read string $commence
  */
-final class Intake implements ArrayAccess
+final class Intake extends Record
 {
-    use BaseMethods\Record;
-
     const POLICY_STRICT_COURSE = 'Strict (course)';
 
     const POLICY_STRICT_SUBMIT = 'Strict (submit)';

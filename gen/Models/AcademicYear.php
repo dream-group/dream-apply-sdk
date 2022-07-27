@@ -3,17 +3,15 @@
 namespace Dream\Apply\Client\Models;
 
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use ArrayAccess;
+use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
  * @property-read string $name
  * @property-read string $start
  */
-final class AcademicYear implements ArrayAccess
+final class AcademicYear extends Record
 {
-    use BaseMethods\Record;
-
     /**
      * @return string
      */

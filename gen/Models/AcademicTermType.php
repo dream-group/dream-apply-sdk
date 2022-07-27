@@ -3,16 +3,14 @@
 namespace Dream\Apply\Client\Models;
 
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use ArrayAccess;
+use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
  * @property-read string $name
  */
-final class AcademicTermType implements ArrayAccess
+final class AcademicTermType extends Record
 {
-    use BaseMethods\Record;
-
     const NAME_SEMESTER_FALL = 'Fall semester';
 
     const NAME_SEMESTER_AUTUMN = 'Autumn semester';
