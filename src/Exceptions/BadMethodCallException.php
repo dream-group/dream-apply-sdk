@@ -2,6 +2,6 @@
 
 namespace Dream\Apply\Client\Exceptions;
 
-class BadMethodCallException extends \BadMethodCallException implements BaseException
+final class BadMethodCallException extends \BadMethodCallException implements BaseException
 {
 }

@@ -2,8 +2,10 @@
 
 namespace Dream\Apply\Client\Helpers;
 
+use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class ExceptionHelper
@@ -34,5 +36,18 @@ final class ExceptionHelper
                     $httpResponse
                 );
         }
+    }
+
+    /**
+     * @param ClientExceptionInterface $exception
+     * @return HttpClientException
+     */
+    public static function fromClientException(ClientExceptionInterface $exception)
+    {
+        return new HttpClientException(
+            $exception->getMessage(),
+            $exception->getCode(),
+            $exception
+        );
     }
 }
