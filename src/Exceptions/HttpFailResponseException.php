@@ -4,7 +4,7 @@ namespace Dream\Apply\Client\Exceptions;
 
 use Psr\Http\Message\ResponseInterface;
 
-class HttpFailResponseException extends RuntimeException
+final class HttpFailResponseException extends RuntimeException
 {
     private $httpResponse;
 

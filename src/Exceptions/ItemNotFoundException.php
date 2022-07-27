@@ -2,6 +2,6 @@
 
 namespace Dream\Apply\Client\Exceptions;
 
-class ItemNotFoundException extends RuntimeException
+final class ItemNotFoundException extends RuntimeException
 {
 }

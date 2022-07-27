@@ -6,6 +6,7 @@ use ArrayAccess;
 use Countable;
 use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
+use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
@@ -15,7 +16,6 @@ use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\ResponseHelper;
 use Dream\Apply\Client\Models\Record;
 use IteratorAggregate;
-use Psr\Http\Client\ClientExceptionInterface;
 
 abstract class Collection extends UrlNamespace implements Countable, ArrayAccess, IteratorAggregate
 {
@@ -42,7 +42,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
     }
 
     /**
-     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function get($id, $expand = false)
     {
@@ -78,7 +78,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
     }
 
     /**
-     * @throws HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function find($id, $expand = false)
     {
@@ -100,7 +100,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
      *
      * @param $id
      * @return bool
-     * @throws HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function exists($id)
     {
@@ -219,7 +219,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
      *
      * @param $offset
      * @return bool
-     * @throws HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function offsetExists($offset)
     {
@@ -232,7 +232,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
      *
      * @param int $offset
      * @return Record
-     * @throws HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function offsetGet($offset)
     {

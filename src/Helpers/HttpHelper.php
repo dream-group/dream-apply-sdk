@@ -2,6 +2,7 @@
 
 namespace Dream\Apply\Client\Helpers;
 
+use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
@@ -19,6 +20,7 @@ use Http\Message\UriFactory;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
@@ -115,12 +117,26 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
     }
 
     /**
+     * @param RequestInterface $request
+     * @return ResponseInterface
+     * @throws HttpClientException
+     */
+    private function sendRequest(RequestInterface $request)
+    {
+        try {
+            return $this->http->sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            throw ExceptionHelper::fromClientException($e);
+        }
+    }
+
+    /**
      * Perform GET request, return PSR-7 object
      *
      * @param string $url
      * @param array $query
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function get($url, $query = [])
     {
@@ -128,9 +144,8 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->createUri($this->endpoint . $url)
             ->withQuery(http_build_query($query))
         ;
-        $request = $this->createRequest(self::METHOD_GET, $uri)
-        ;
-        return $this->http->sendRequest($request);
+        $request = $this->createRequest(self::METHOD_GET, $uri);
+        return $this->sendRequest($request);
     }
 
     /**
@@ -139,7 +154,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      * @param $url
      * @param array $query
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function head($url, $query = [])
     {
@@ -148,7 +163,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->withQuery(http_build_query($query))
         ;
         $request = $this->createRequest(self::METHOD_HEAD, $uri);
-        return $this->http->sendRequest($request);
+        return $this->sendRequest($request);
     }
 
     /**
@@ -157,7 +172,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      * @param string $url
      * @param array  $query
      * @return array
-     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function getJson($url, $query = [])
     {
@@ -172,7 +187,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      * @param string $url
      * @param array  $query
      * @return array
-     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|ClientExceptionInterface
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|HttpClientException
      */
     public function getBinary($url, $query = [])
     {
@@ -195,12 +210,12 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      *
      * @param $url
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function delete($url)
     {
         $request = $this->createRequest('DELETE', $this->endpoint . $url);
-        return $this->http->sendRequest($request);
+        return $this->sendRequest($request);
     }
 
     /**
@@ -209,7 +224,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      * @param $url
      * @param array $postData array of form params to be sent
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function postFormData($url, $postData)
     {
@@ -217,7 +232,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
         ;
         $request->getBody()->write(http_build_query($postData));
-        return $this->http->sendRequest($request);
+        return $this->sendRequest($request);
     }
 
     /**
@@ -225,12 +240,12 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      *
      * @param $url
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function putEmpty($url)
     {
         $request = $this->createRequest('PUT', $this->endpoint . $url);
-        return $this->http->sendRequest($request);
+        return $this->sendRequest($request);
     }
 
     /**
@@ -239,7 +254,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      * @param $url
      * @param mixed $data data to be encoded and sent
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws HttpClientException
      */
     public function putJson($url, $data)
     {
@@ -247,6 +262,6 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->withHeader('Content-Type', 'application/json')
         ;
         $request->getBody()->write(JsonHelper::encode($data));
-        return $this->http->sendRequest($request);
+        return $this->sendRequest($request);
     }
 }
