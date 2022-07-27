@@ -8,6 +8,7 @@ use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Fig\Http\Message\RequestMethodInterface;
 use Fig\Http\Message\StatusCodeInterface;
+use Http\Client\Exception as HttplugException;
 use Http\Client\HttpClient;
 use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
@@ -125,6 +126,8 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
     {
         try {
             return $this->http->sendRequest($request);
+        } catch (HttplugException $e) {
+            throw ExceptionHelper::fromClientException($e);
         } catch (ClientExceptionInterface $e) {
             throw ExceptionHelper::fromClientException($e);
         }
