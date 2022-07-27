@@ -107,6 +107,13 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
         $this->__construct($this->endpoint, $this->apiKey, null, null, null);
     }
 
+    private function createRequest($method, $uri)
+    {
+        return $this->requestFactory
+            ->createRequest($method, $uri)
+            ->withHeader('Authorization', "DREAM apikey=\"{$this->apiKey}\"");
+    }
+
     /**
      * Perform GET request, return PSR-7 object
      *
@@ -121,8 +128,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->createUri($this->endpoint . $url)
             ->withQuery(http_build_query($query))
         ;
-        $request = $this->requestFactory
-            ->createRequest(self::METHOD_GET, $uri)
+        $request = $this->createRequest(self::METHOD_GET, $uri)
         ;
         return $this->http->sendRequest($request);
     }
@@ -141,9 +147,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             ->createUri($this->endpoint . $url)
             ->withQuery(http_build_query($query))
         ;
-        $request = $this->requestFactory
-            ->createRequest(self::METHOD_HEAD, $uri)
-        ;
+        $request = $this->createRequest(self::METHOD_HEAD, $uri);
         return $this->http->sendRequest($request);
     }
 
@@ -195,7 +199,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function delete($url)
     {
-        $request = $this->requestFactory->createRequest('DELETE', $this->endpoint . $url);
+        $request = $this->createRequest('DELETE', $this->endpoint . $url);
         return $this->http->sendRequest($request);
     }
 
@@ -209,8 +213,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function postFormData($url, $postData)
     {
-        $request = $this->requestFactory
-            ->createRequest('POST', $this->endpoint . $url)
+        $request = $this->createRequest('POST', $this->endpoint . $url)
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
         ;
         $request->getBody()->write(http_build_query($postData));
@@ -226,7 +229,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function putEmpty($url)
     {
-        $request = $this->requestFactory->createRequest('PUT', $this->endpoint . $url);
+        $request = $this->createRequest('PUT', $this->endpoint . $url);
         return $this->http->sendRequest($request);
     }
 
@@ -240,8 +243,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function putJson($url, $data)
     {
-        $request = $this->requestFactory
-            ->createRequest('PUT', $this->endpoint . $url)
+        $request = $this->createRequest('PUT', $this->endpoint . $url)
             ->withHeader('Content-Type', 'application/json')
         ;
         $request->getBody()->write(JsonHelper::encode($data));
