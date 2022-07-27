@@ -1,22 +1,32 @@
 <?php
 
-namespace Dream\Apply\Client\Models\BaseMethods;
+namespace Dream\Apply\Client\Models\Base;
 
+use ArrayAccess;
 use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\RuntimeException;
 use Dream\Apply\Client\Helpers\StringHelper;
 
-trait Record
+abstract class Record implements ArrayAccess
 {
+    /**
+     * @param string $name
+     * @return mixed
+     */
     abstract public function getField($name);
+    /**
+     * @param string $name
+     * @return bool
+     */
     abstract public function hasField($name);
 
     /** @var Client */
     protected $client;
     /** @var array */
     protected $data;
-    /** @var string */
+    /** @var string|null */
     protected $url;
     /** @var bool */
     protected $partial;
@@ -62,7 +72,7 @@ trait Record
     public function url()
     {
         if ($this->url === null) {
-            throw new \RuntimeException('No url for this object');
+            throw new RuntimeException('No url for this object');
         }
         return $this->url;
     }
@@ -99,7 +109,9 @@ trait Record
             return $this->data[$field];
         }
 
-        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $field, self::class));
+        throw new InvalidArgumentException(
+            sprintf('Field "%s" does not exist in class "%s"', $field, static::class)
+        );
     }
 
     protected function getObjectField($field, $class)
@@ -118,9 +130,11 @@ trait Record
     public function __get($name)
     {
         if ($this->hasField($name) === false) {
-            throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
+            throw new InvalidArgumentException(
+                sprintf('Field "%s" does not exist in class "%s"', $name, static::class)
+            );
         }
-        return $this->getResolvedField($name);
+        return $this->getField($name);
     }
 
     public function __isset($name)
@@ -142,7 +156,7 @@ trait Record
 
     public function offsetGet($offset)
     {
-        return $this->hasField($offset) ? $this->getResolvedField($offset) : null;
+        return $this->hasField($offset) ? $this->getField($offset) : null;
     }
 
     public function offsetExists($offset)
