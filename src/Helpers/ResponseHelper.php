@@ -55,9 +55,21 @@ class ResponseHelper
     public static function getFileName(ResponseInterface $response)
     {
         $disp = $response->getHeaderLine('Content-Disposition');
+        $components = array_map('trim', explode(';', $disp));
 
-        if (preg_match('/^attachment;\s*filename="(.*)"$/i', $disp, $matches)) {
-            return $matches[1];
+        // search for filename*=
+        foreach ($components as $component) {
+            // support only utf-8
+            if (preg_match("/filename\*=UTF-8'[-_\w]*'(.*)$/i", $component, $matches)) {
+                return rawurldecode($matches[1]);
+            }
+        }
+
+        // search for filename=
+        foreach ($components as $component) {
+            if (preg_match('/^filename="(.*)"$/i', $component, $matches)) {
+                return $matches[1];
+            }
         }
 
         return null;
