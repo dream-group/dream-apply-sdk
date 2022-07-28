@@ -24,6 +24,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriFactoryInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Class HttpHelper
@@ -110,7 +111,16 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
         $this->__construct($this->endpoint, $this->apiKey, null, null, null);
     }
 
-    private function createRequest($method, $uri)
+    private function createUri($url)
+    {
+        if ($url[0] === '/') { // absolute
+            return $this->uriFactory->createUri($this->endpoint)->withPath($url);
+        } else { // relative
+            return $this->uriFactory->createUri($this->endpoint . $url);
+        }
+    }
+
+    private function createRequest($method, UriInterface $uri)
     {
         return $this->requestFactory
             ->createRequest($method, $uri)
@@ -143,8 +153,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function get($url, $query = [])
     {
-        $uri = $this->uriFactory
-            ->createUri($this->endpoint . $url)
+        $uri = $this->createUri($url)
             ->withQuery(http_build_query($query))
         ;
         $request = $this->createRequest(self::METHOD_GET, $uri);
@@ -161,8 +170,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function head($url, $query = [])
     {
-        $uri = $this->uriFactory
-            ->createUri($this->endpoint . $url)
+        $uri = $this->createUri($url)
             ->withQuery(http_build_query($query))
         ;
         $request = $this->createRequest(self::METHOD_HEAD, $uri);
@@ -198,6 +206,8 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
 
         ResponseHelper::verifyResponseSuccessful($response);
 
+        var_dump($response->getHeaders());
+
         return [
             'uploaded'  => $response->getHeaderLine('Last-Modified'),
             'name'      => ResponseHelper::getFileName($response),
@@ -217,7 +227,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function delete($url)
     {
-        $request = $this->createRequest('DELETE', $this->endpoint . $url);
+        $request = $this->createRequest('DELETE', $this->createUri($url));
         return $this->sendRequest($request);
     }
 
@@ -231,7 +241,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function postFormData($url, $postData)
     {
-        $request = $this->createRequest('POST', $this->endpoint . $url)
+        $request = $this->createRequest('POST', $this->createUri($url))
             ->withHeader('Content-Type', 'application/x-www-form-urlencoded')
         ;
         $request->getBody()->write(http_build_query($postData));
@@ -247,7 +257,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function putEmpty($url)
     {
-        $request = $this->createRequest('PUT', $this->endpoint . $url);
+        $request = $this->createRequest('PUT', $this->createUri($url));
         return $this->sendRequest($request);
     }
 
@@ -261,7 +271,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
      */
     public function putJson($url, $data)
     {
-        $request = $this->createRequest('PUT', $this->endpoint . $url)
+        $request = $this->createRequest('PUT', $this->createUri($url))
             ->withHeader('Content-Type', 'application/json')
         ;
         $request->getBody()->write(JsonHelper::encode($data));
