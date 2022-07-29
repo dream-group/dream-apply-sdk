@@ -2,6 +2,7 @@
 
 namespace Dream\Apply\Client;
 
+use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
@@ -14,6 +15,7 @@ use Dream\Apply\Client\Models\Applicant;
 use Dream\Apply\Client\Models\ApplicantCollection;
 use Dream\Apply\Client\Models\Application;
 use Dream\Apply\Client\Models\ApplicationCollection;
+use Dream\Apply\Client\Models\Base\UrlNamespace;
 use Dream\Apply\Client\Models\Classificators;
 use Dream\Apply\Client\Models\Collection;
 use Dream\Apply\Client\Models\CollectionWithNoInstanceRequests;
@@ -35,7 +37,6 @@ use Dream\Apply\Client\Models\Administrator;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
@@ -87,9 +88,10 @@ use Psr\Http\Message\UriFactoryInterface;
  *
  * @property-read Reports $reports
  */
-final class Client
+final class Client extends UrlNamespace
 {
     use CollectionLinks;
+    use Models\RootNamespace;
 
     /**
      * @var HttpHelper
@@ -124,13 +126,14 @@ final class Client
     public function __construct($endpoint, $apiKey, $client = null, $requestFactory = null, $uriFactory = null)
     {
         $this->http = new HttpHelper($endpoint, $apiKey, $client, $requestFactory, $uriFactory);
+        parent::__construct($this, '');
     }
 
     /* root actions */
 
     /**
      * @return int current timestamp on success
-     * @throws HttpFailResponseException|ClientExceptionInterface on fail
+     * @throws HttpFailResponseException|HttpClientException on fail
      */
     public function ping()
     {

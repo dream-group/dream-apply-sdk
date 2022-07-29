@@ -53,10 +53,10 @@ final class AcademicTermType extends Record
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
-    public function hasField($name)
+    protected function getFieldList()
     {
-        return \in_array($name, [
+        return [
             'name',
-        ]);
+        ];
     }
 }
