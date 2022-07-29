@@ -7,14 +7,15 @@ use Dream\Apply\Client\Models\Base\Record;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $name
  * @property-read string $start
- * @property-read array $pre
  * @property-read string $policy
  * @property-read array $deadlines
- * @property-read array $decision
  * @property-read string $arrival
  * @property-read string $commence
+ * @property-read IntakePre $pre
+ * @property-read IntakeDecision $decision
  */
 final class Intake extends Record
 {
@@ -27,6 +28,14 @@ final class Intake extends Record
     const POLICY_FLEXIBLE = 'Flexible';
 
     const POLICY_ROLLING = 'Rolling';
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
 
     /**
      * @return string
@@ -42,14 +51,6 @@ final class Intake extends Record
     public function getStart()
     {
         return $this->getRawField('start');
-    }
-
-    /**
-     * @return array
-     */
-    public function getPre()
-    {
-        return $this->getRawField('pre');
     }
 
     /**
@@ -69,14 +70,6 @@ final class Intake extends Record
     }
 
     /**
-     * @return array
-     */
-    public function getDecision()
-    {
-        return $this->getRawField('decision');
-    }
-
-    /**
      * @return string
      */
     public function getArrival()
@@ -92,16 +85,32 @@ final class Intake extends Record
         return $this->getRawField('commence');
     }
 
+    /**
+     * @return IntakePre
+     */
+    public function getPre()
+    {
+        return $this->getObjectField('pre', IntakePre::class);
+    }
+
+    /**
+     * @return IntakeDecision
+     */
+    public function getDecision()
+    {
+        return $this->getObjectField('decision', IntakeDecision::class);
+    }
+
     protected function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'name') {
             return $this->getRawField('name');
         }
         if ($name === 'start') {
             return $this->getRawField('start');
-        }
-        if ($name === 'pre') {
-            return $this->getRawField('pre');
         }
         if ($name === 'policy') {
             return $this->getRawField('policy');
@@ -109,14 +118,17 @@ final class Intake extends Record
         if ($name === 'deadlines') {
             return $this->getRawField('deadlines');
         }
-        if ($name === 'decision') {
-            return $this->getRawField('decision');
-        }
         if ($name === 'arrival') {
             return $this->getRawField('arrival');
         }
         if ($name === 'commence') {
             return $this->getRawField('commence');
+        }
+        if ($name === 'pre') {
+            return $this->getObjectField('pre', IntakePre::class);
+        }
+        if ($name === 'decision') {
+            return $this->getObjectField('decision', IntakeDecision::class);
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
@@ -124,14 +136,15 @@ final class Intake extends Record
     protected function getFieldList()
     {
         return [
+            'id',
             'name',
             'start',
-            'pre',
             'policy',
             'deadlines',
-            'decision',
             'arrival',
             'commence',
+            'pre',
+            'decision',
         ];
     }
 

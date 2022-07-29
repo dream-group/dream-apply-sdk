@@ -102,23 +102,10 @@ abstract class Record implements ArrayAccess
         // nothing by default
     }
 
-    protected function hasRawData($field)
-    {
-        if ($this->partial && !\array_key_exists($field, $this->data)) {
-            $this->resolvePartial();
-        }
-        return \array_key_exists($field, $this->data);
-    }
-
     protected function getRawField($field)
     {
-        if ($this->hasRawData($field)) {
-            return $this->data[$field];
-        }
-
-        throw new InvalidArgumentException(
-            sprintf('Field "%s" does not exist in class "%s"', $field, static::class)
-        );
+        $this->resolvePartial();
+        return isset($this->data[$field]) ? $this->data[$field] : null;
     }
 
     protected function getObjectField($field, $class)
@@ -129,7 +116,7 @@ abstract class Record implements ArrayAccess
             return null;
         }
 
-        return new $class($class, null, $data, false);
+        return new $class($this->client, null, $data, false);
     }
 
     protected function hasField($name)

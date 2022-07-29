@@ -9,6 +9,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read AcademicYearCollection $academicYears
  * @property-read AdministratorCollection $administrators
  * @property-read InstitutionCollection $institutions
+ * @property-read IntakeCollection $intakes
  */
 trait RootNamespace
 {
@@ -36,6 +37,14 @@ trait RootNamespace
         return new InstitutionCollection($this->client, $this->baseUrl . '/institutions', null, $filter);
     }
 
+    /**
+     * @return IntakeCollection
+     */
+    public function intakes()
+    {
+        return new IntakeCollection($this->client, $this->baseUrl . '/intakes', null, []);
+    }
+
     protected function getNamespace($name)
     {
         if ($name === 'academicYears') {
@@ -47,6 +56,9 @@ trait RootNamespace
         if ($name === 'institutions') {
             return new InstitutionCollection($this->client, $this->baseUrl . '/institutions', null, []);
         }
+        if ($name === 'intakes') {
+            return new IntakeCollection($this->client, $this->baseUrl . '/intakes', null, []);
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -56,6 +68,7 @@ trait RootNamespace
             'academicYears',
             'administrators',
             'institutions',
+            'intakes',
         ];
     }
 }
