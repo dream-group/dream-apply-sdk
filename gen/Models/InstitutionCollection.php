@@ -10,17 +10,20 @@ use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Models\Base\CollectionWithFilter;
 
 /**
  * @generated
- * @implements ArrayAccess<int, AcademicYear>
- * @implements IteratorAggregate<int, AcademicYear>
+ * @implements ArrayAccess<int, Institution>
+ * @implements IteratorAggregate<int, Institution>
  */
-final class AcademicYearCollection extends Collection
+final class InstitutionCollection extends Collection
 {
+    use CollectionWithFilter;
+
     protected function getItemClass()
     {
-        return AcademicYear::class;
+        return Institution::class;
     }
 
     protected function isItemInQueryPartial()
@@ -38,7 +41,7 @@ final class AcademicYearCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicYear
+     * @return Institution
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -59,7 +62,7 @@ final class AcademicYearCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicYear
+     * @return Institution
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
