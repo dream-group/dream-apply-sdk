@@ -23,10 +23,10 @@ trait ChildNamespaces
     {
         if (is_array($urlOrData)) {
             // data
-            return new $class($class, null, $urlOrData, $filter);
+            return new $class($this->client, null, $urlOrData, $filter);
         } else {
             // url
-            return new $class($class, $urlOrData, null, $filter);
+            return new $class($this->client, $urlOrData, null, $filter);
         }
     }
 

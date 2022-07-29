@@ -110,17 +110,17 @@ abstract class Record implements ArrayAccess
 
     protected function getObjectField($field, $class)
     {
-        $data = $this->data[$field];
+        $dataOrUrl = $this->data[$field];
 
-        if ($data === null) {
+        if ($dataOrUrl === null) {
             return null;
         }
 
-        if (is_string($data)) {
-            return new $class($this->client, $data, [], true);
+        if (is_string($dataOrUrl)) {
+            return new $class($this->client, $dataOrUrl, [], true);
         }
 
-        return new $class($this->client, null, $data, false);
+        return new $class($this->client, null, $dataOrUrl, false);
     }
 
     protected function hasField($name)

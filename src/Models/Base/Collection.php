@@ -126,6 +126,10 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
      */
     public function exists($id)
     {
+        if (isset($this->data[$id])) {
+            return true;
+        }
+
         $response = $this->client->http()->head($this->urlForId($id));
 
         return ResponseHelper::resourceExistsByResponse($response);
