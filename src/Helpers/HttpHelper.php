@@ -46,8 +46,14 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
     private $endpoint;
     private $apiKey;
 
-    public function __construct($endpoint, $apiKey, $client, $requestFactory, $uriFactory)
-    {
+    public function __construct(
+        $endpoint,
+        #[\SensitiveParameter]
+        $apiKey,
+        $client,
+        $requestFactory,
+        $uriFactory
+    ) {
         $this->endpoint = rtrim($endpoint, '/') . '/'; // be tolerant to ending slash
         $this->apiKey   = $apiKey;
 

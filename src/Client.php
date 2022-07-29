@@ -107,8 +107,14 @@ final class Client extends UrlNamespace
      * @param MessageFactory|RequestFactoryInterface $requestFactory
      * @param UriFactoryInterface|UriFactory $uriFactory
      */
-    public function __construct($endpoint, $apiKey, $client = null, $requestFactory = null, $uriFactory = null)
-    {
+    public function __construct(
+        $endpoint,
+        #[\SensitiveParameter]
+        $apiKey,
+        $client = null,
+        $requestFactory = null,
+        $uriFactory = null
+    ) {
         $this->http = new HttpHelper($endpoint, $apiKey, $client, $requestFactory, $uriFactory);
         parent::__construct($this, '.');
     }
