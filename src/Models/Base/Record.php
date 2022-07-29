@@ -30,11 +30,17 @@ abstract class Record implements ArrayAccess
     /** @var bool */
     protected $partial;
 
-    public function __construct($client, $url, $data = [], $partial = false)
+    /**
+     * @param Client $client
+     * @param string|null $url
+     * @param array $data
+     * @param bool $partial
+     */
+    public function __construct(Client $client, $url, array $data, $partial)
     {
         $this->client   = $client;
         $this->url      = $url;
-        $this->data     = StringHelper::arrayKeysToFieldNames($data);
+        $this->data     = $data;
         $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
 
         $this->afterSetData();
@@ -124,9 +130,9 @@ abstract class Record implements ArrayAccess
         return new $class($class, null, $data, false);
     }
 
-    public function hasField()
+    public function hasField($name)
     {
-        return in_array($this->getFieldList());
+        return in_array($name, $this->getFieldList());
     }
 
     /* Magic */
