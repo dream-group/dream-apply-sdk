@@ -4,13 +4,11 @@ namespace Dream\Apply\Client;
 
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
-use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\StringHelper;
 use Dream\Apply\Client\Models\AcademicTerm;
 use Dream\Apply\Client\Models\AcademicTermCollection;
-use Dream\Apply\Client\Models\AcademicYear;
 use Dream\Apply\Client\Models\Applicant;
 use Dream\Apply\Client\Models\ApplicantCollection;
 use Dream\Apply\Client\Models\Application;
@@ -23,7 +21,6 @@ use Dream\Apply\Client\Models\CourseCollection;
 use Dream\Apply\Client\Models\Fee;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\Apply\Client\Models\Course;
-use Dream\Apply\Client\Models\Institution;
 use Dream\Apply\Client\Models\Intake;
 use Dream\Apply\Client\Models\Invoice;
 use Dream\Apply\Client\Models\InvoiceCollection;
@@ -33,7 +30,6 @@ use Dream\Apply\Client\Models\Reports;
 use Dream\Apply\Client\Models\Scoresheet;
 use Dream\Apply\Client\Models\SimpleArray;
 use Dream\Apply\Client\Models\TableView;
-use Dream\Apply\Client\Models\Administrator;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
@@ -72,9 +68,6 @@ use Psr\Http\Message\UriFactoryInterface;
  * @property-read Collection|Scoresheet[] $scoresheets
  * @method        Collection|Scoresheet[] scoresheets(array $filter = [])
  *
- * @property-read Collection|Administrator[] $administrators
- * @method        Collection|Administrator[] administrators(array $filter = [])
- *
  * @property-read Collection|Fee[] $fees
  * @method        Collection|Fee[] fees(array $filter = [])
  *
@@ -96,17 +89,14 @@ final class Client extends UrlNamespace
         'journal'           => JournalItem::class,
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
-        'institutions'      => Institution::class,
         'courses'           => Course::class,
         'intakes'           => Intake::class,
         'invoices'          => Invoice::class,
         'academic-terms'    => AcademicTerm::class,
-        'academic-years'    => AcademicYear::class,
         'classificators'    => Classificators::class,
         'tableviews'        => TableView::class,
         'scoresheets'       => Scoresheet::class,
         'reports'           => Report::class,
-        'administrators'    => Administrator::class,
         'fees'              => Fee::class,
     ];
 
