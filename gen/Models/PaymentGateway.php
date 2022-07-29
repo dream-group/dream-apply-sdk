@@ -37,7 +37,7 @@ final class PaymentGateway extends Record
         return $this->getRawField('adapter');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'id') {
             return $this->getRawField('id');
@@ -57,6 +57,17 @@ final class PaymentGateway extends Record
             'id',
             'name',
             'adapter',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

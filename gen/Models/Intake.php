@@ -92,7 +92,7 @@ final class Intake extends Record
         return $this->getRawField('commence');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'name') {
             return $this->getRawField('name');
@@ -132,6 +132,17 @@ final class Intake extends Record
             'decision',
             'arrival',
             'commence',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

@@ -11,11 +11,13 @@ use Dream\Apply\Client\Helpers\StringHelper;
 
 abstract class Record implements ArrayAccess
 {
+    use ChildNamespaces;
+
     /**
      * @param string $name
      * @return mixed
      */
-    abstract public function getField($name);
+    abstract protected function getField($name);
     /**
      * @return array
      */
@@ -130,7 +132,7 @@ abstract class Record implements ArrayAccess
         return new $class($class, null, $data, false);
     }
 
-    public function hasField($name)
+    protected function hasField($name)
     {
         return in_array($name, $this->getFieldList());
     }
@@ -139,17 +141,22 @@ abstract class Record implements ArrayAccess
 
     public function __get($name)
     {
-        if ($this->hasField($name) === false) {
-            throw new InvalidArgumentException(
-                sprintf('Field "%s" does not exist in class "%s"', $name, static::class)
-            );
+        if ($this->hasField($name)) {
+            return $this->getField($name);
         }
-        return $this->getField($name);
+        if ($this->hasNamespace($name)) {
+            return $this->getNamespace($name);
+        }
+        throw new InvalidArgumentException(
+            sprintf('Property "%s" does not exist in class "%s"', $name, static::class)
+        );
     }
 
     public function __isset($name)
     {
-        return $this->hasField($name) && $this->getRawField($name) !== null;
+        return
+            $this->hasField($name) && $this->getRawField($name) !== null ||
+            $this->hasNamespace($name);
     }
 
     public function __set($name, $value)

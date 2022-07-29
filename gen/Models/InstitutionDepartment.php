@@ -55,7 +55,7 @@ final class InstitutionDepartment extends Record
         return $this->getRawField('www');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'id') {
             return $this->getRawField('id');
@@ -83,6 +83,17 @@ final class InstitutionDepartment extends Record
             'country',
             'location',
             'www',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }
