@@ -37,7 +37,7 @@ final class Consent extends Record
         return $this->getRawField('link');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'type') {
             return $this->getRawField('type');
@@ -57,6 +57,17 @@ final class Consent extends Record
             'type',
             'text',
             'link',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

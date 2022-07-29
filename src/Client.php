@@ -69,9 +69,6 @@ use Psr\Http\Message\UriFactoryInterface;
  * @property-read AcademicTermCollection|AcademicTerm[] $academicTerms
  * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter = [])
  *
- * @property-read Collection|AcademicYear[] $academicYears
- * @method        Collection|AcademicYear[] academicYears(array $filter = [])
- *
  * @property-read Collection|TableView[] $tableviews
  * @method        Collection|TableView[] tableviews(array $filter = [])
  *
@@ -126,7 +123,7 @@ final class Client extends UrlNamespace
     public function __construct($endpoint, $apiKey, $client = null, $requestFactory = null, $uriFactory = null)
     {
         $this->http = new HttpHelper($endpoint, $apiKey, $client, $requestFactory, $uriFactory);
-        parent::__construct($this, '');
+        parent::__construct($this, '.');
     }
 
     /* root actions */
@@ -147,16 +144,6 @@ final class Client extends UrlNamespace
     {
         $uriName = StringHelper::makeUriName($name);
         return $this->resolveCollectionLink($this, $uriName, $uriName, $filter);
-    }
-
-    public function __get($name)
-    {
-        $collection = $this->getCollection($name);
-        if ($collection) {
-            return $collection;
-        }
-
-        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, static::class));
     }
 
     public function __call($name, $arguments)

@@ -73,7 +73,7 @@ final class Payment extends Record
         return $this->getObjectField('gateway', PaymentGateway::class);
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'payment') {
             return $this->getRawField('payment');
@@ -109,6 +109,17 @@ final class Payment extends Record
             'inserted',
             'updated',
             'gateway',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

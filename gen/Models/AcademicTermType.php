@@ -45,7 +45,7 @@ final class AcademicTermType extends Record
         return $this->getRawField('name');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'name') {
             return $this->getRawField('name');
@@ -57,6 +57,17 @@ final class AcademicTermType extends Record
     {
         return [
             'name',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

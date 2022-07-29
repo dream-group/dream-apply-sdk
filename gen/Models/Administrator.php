@@ -55,7 +55,7 @@ final class Administrator extends Record
         return $this->getRawField('function');
     }
 
-    public function getField($name)
+    protected function getField($name)
     {
         if ($name === 'id') {
             return $this->getRawField('id');
@@ -83,6 +83,17 @@ final class Administrator extends Record
             'email',
             'phone',
             'function',
+        ];
+    }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
         ];
     }
 }

@@ -67,4 +67,15 @@ final class AcademicYearCollection extends Collection
     {
         return parent::find($id, $expand);
     }
+
+    protected function getNamespace($name)
+    {
+        throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getNamespaceList()
+    {
+        return [
+        ];
+    }
 }
