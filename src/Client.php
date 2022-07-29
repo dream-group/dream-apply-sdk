@@ -54,9 +54,6 @@ use Psr\Http\Message\UriFactoryInterface;
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
  *
- * @property-read Collection|Institution[] $institutions
- * @method        Collection|Institution[] institutions(array $filter = [])
- *
  * @property-read CourseCollection|Course[] $courses
  * @method        CourseCollection|Course[] courses(array $filter = [])
  *
