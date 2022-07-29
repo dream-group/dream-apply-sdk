@@ -64,7 +64,7 @@ abstract class Record implements ArrayAccess
 
     protected function resolvePartial()
     {
-        if (empty($this->data) || $this->partial) {
+        if ($this->partial) {
             $data = $this->retrieveData();
             $this->data = StringHelper::arrayKeysToFieldNames($data);
             $this->partial = false;
@@ -110,10 +110,14 @@ abstract class Record implements ArrayAccess
 
     protected function getObjectField($field, $class)
     {
-        $data  = $this->data[$field];
+        $data = $this->data[$field];
 
         if ($data === null) {
             return null;
+        }
+
+        if (is_string($data)) {
+            return new $class($this->client, $data, [], true);
         }
 
         return new $class($this->client, null, $data, false);
