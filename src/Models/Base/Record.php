@@ -17,10 +17,9 @@ abstract class Record implements ArrayAccess
      */
     abstract public function getField($name);
     /**
-     * @param string $name
-     * @return bool
+     * @return array
      */
-    abstract public function hasField($name);
+    abstract protected function getFieldList();
 
     /** @var Client */
     protected $client;
@@ -123,6 +122,11 @@ abstract class Record implements ArrayAccess
         }
 
         return new $class($class, null, $data, false);
+    }
+
+    public function hasField()
+    {
+        return in_array($this->getFieldList());
     }
 
     /* Magic */
