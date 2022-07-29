@@ -21,7 +21,6 @@ use Dream\Apply\Client\Models\CourseCollection;
 use Dream\Apply\Client\Models\Fee;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\Apply\Client\Models\Course;
-use Dream\Apply\Client\Models\Intake;
 use Dream\Apply\Client\Models\Invoice;
 use Dream\Apply\Client\Models\InvoiceCollection;
 use Dream\Apply\Client\Models\JournalItem;
@@ -52,9 +51,6 @@ use Psr\Http\Message\UriFactoryInterface;
  *
  * @property-read CourseCollection|Course[] $courses
  * @method        CourseCollection|Course[] courses(array $filter = [])
- *
- * @property-read Collection|Intake[] $intakes
- * @method        Collection|Intake[] intakes(array $filter = [])
  *
  * @property-read InvoiceCollection|Invoice[] $invoices
  * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
@@ -90,7 +86,6 @@ final class Client extends UrlNamespace
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
         'courses'           => Course::class,
-        'intakes'           => Intake::class,
         'invoices'          => Invoice::class,
         'academic-terms'    => AcademicTerm::class,
         'classificators'    => Classificators::class,
