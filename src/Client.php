@@ -16,14 +16,12 @@ use Dream\Apply\Client\Models\ApplicationCollection;
 use Dream\Apply\Client\Models\Base\UrlNamespace;
 use Dream\Apply\Client\Models\Classificators;
 use Dream\Apply\Client\Models\Collection;
-use Dream\Apply\Client\Models\CollectionWithNoInstanceRequests;
 use Dream\Apply\Client\Models\CourseCollection;
 use Dream\Apply\Client\Models\Fee;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\Apply\Client\Models\Course;
 use Dream\Apply\Client\Models\Invoice;
 use Dream\Apply\Client\Models\InvoiceCollection;
-use Dream\Apply\Client\Models\JournalItem;
 use Dream\Apply\Client\Models\Report;
 use Dream\Apply\Client\Models\Reports;
 use Dream\Apply\Client\Models\Scoresheet;
@@ -39,9 +37,6 @@ use Psr\Http\Message\UriFactoryInterface;
 /**
  * Class Client
  * @package Dream\DreamApply\Client
- *
- * @property-read CollectionWithNoInstanceRequests|JournalItem[] $journal
- * @method        CollectionWithNoInstanceRequests|JournalItem[] journal(array $filter = [])
  *
  * @property-read ApplicantCollection|Applicant[] $applicants
  * @method        ApplicantCollection|Applicant[] applicants(array $filter = [])
@@ -82,7 +77,6 @@ final class Client extends UrlNamespace
     private $http;
 
     protected $collectionLinks = [
-        'journal'           => JournalItem::class,
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
         'courses'           => Course::class,
