@@ -56,6 +56,10 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
 
         $class = $this->getItemClass();
 
+        if (isset($this->data[$id]) && !$expand) {
+            return new $class($this->client, $this->urlForId($id), $this->data[$id], $this->isItemInQueryPartial());
+        }
+
         // build string out of other possible types
         if ($expand === true) {
             $expand = '*';
@@ -93,6 +97,18 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
         } catch (ItemNotFoundException $e) {
             return null;
         }
+    }
+
+    /**
+     * @throws ItemNotFoundException|HttpFailResponseException|TooManyRequestsException|HttpClientException
+     */
+    public function lazy($id)
+    {
+        $class = $this->getItemClass();
+        if (isset($this->data[$id])) {
+            return new $class($this->client, $this->urlForId($id), $this->data[$id], $this->isItemInQueryPartial());
+        }
+        return new $class($this->client, $this->urlForId($id), [], true);
     }
 
     protected function urlForId($id)

@@ -15,7 +15,9 @@
     <rule ref="PHPCompatibility"/>
     <config name="testVersion" value="5.5-"/>
     <!-- Paths to be checked -->
+    <file>gen</file>
     <file>src</file>
+    <file>bootstrap.php</file>
     <!-- do not check vendor libraries even when explicitly called -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <!-- Runtime config -->

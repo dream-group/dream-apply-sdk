@@ -115,7 +115,11 @@ final class Institution extends Record
      */
     public function departments($filter = [])
     {
-        return new InstitutionDepartmentCollection($this->client, $this->getRawField('departments'), null, $filter);
+        return $this->buildCollection(
+            InstitutionDepartmentCollection::class,
+            $this->getRawField('departments'),
+            $filter
+        );
     }
 
     protected function getField($name)
@@ -176,7 +180,11 @@ final class Institution extends Record
     protected function getNamespace($name)
     {
         if ($name === 'departments') {
-            return new InstitutionDepartmentCollection($this->client, $this->getRawField('departments'), null, []);
+            return $this->buildCollection(
+                InstitutionDepartmentCollection::class,
+                $this->getRawField('departments'),
+                []
+            );
         }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
