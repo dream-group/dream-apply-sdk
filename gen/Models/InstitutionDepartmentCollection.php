@@ -28,7 +28,7 @@ final class InstitutionDepartmentCollection extends Collection
 
     protected function isItemInQueryPartial()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -70,6 +70,25 @@ final class InstitutionDepartmentCollection extends Collection
     public function find($id, $expand = false)
     {
         return parent::find($id, $expand);
+    }
+
+    /**
+     * Get collection item without http request (if possible)
+     *
+     * NOTE: ignores filter
+     *
+     * NOTE: may throw later when retrieving a field or a child
+     *
+     * @param int $id
+     * @return InstitutionDepartment
+     * @throws ItemNotFoundException
+     * @throws HttpFailResponseException
+     * @throws TooManyRequestsException
+     * @throws HttpClientException
+     */
+    public function lazy($id)
+    {
+        return parent::lazy($id);
     }
 
     protected function getNamespace($name)

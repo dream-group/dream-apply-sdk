@@ -18,7 +18,11 @@ trait RootNamespace
      */
     public function academicYears()
     {
-        return new AcademicYearCollection($this->client, $this->baseUrl . '/academic-years', null, []);
+        return $this->buildCollection(
+            AcademicYearCollection::class,
+            $this->baseUrl . '/academic-years',
+            []
+        );
     }
 
     /**
@@ -26,7 +30,11 @@ trait RootNamespace
      */
     public function administrators()
     {
-        return new AdministratorCollection($this->client, $this->baseUrl . '/administrators', null, []);
+        return $this->buildCollection(
+            AdministratorCollection::class,
+            $this->baseUrl . '/administrators',
+            []
+        );
     }
 
     /**
@@ -34,7 +42,11 @@ trait RootNamespace
      */
     public function institutions($filter = [])
     {
-        return new InstitutionCollection($this->client, $this->baseUrl . '/institutions', null, $filter);
+        return $this->buildCollection(
+            InstitutionCollection::class,
+            $this->baseUrl . '/institutions',
+            $filter
+        );
     }
 
     /**
@@ -42,22 +54,42 @@ trait RootNamespace
      */
     public function intakes()
     {
-        return new IntakeCollection($this->client, $this->baseUrl . '/intakes', null, []);
+        return $this->buildCollection(
+            IntakeCollection::class,
+            $this->baseUrl . '/intakes',
+            []
+        );
     }
 
     protected function getNamespace($name)
     {
         if ($name === 'academicYears') {
-            return new AcademicYearCollection($this->client, $this->baseUrl . '/academic-years', null, []);
+            return $this->buildCollection(
+                AcademicYearCollection::class,
+                $this->baseUrl . '/academic-years',
+                []
+            );
         }
         if ($name === 'administrators') {
-            return new AdministratorCollection($this->client, $this->baseUrl . '/administrators', null, []);
+            return $this->buildCollection(
+                AdministratorCollection::class,
+                $this->baseUrl . '/administrators',
+                []
+            );
         }
         if ($name === 'institutions') {
-            return new InstitutionCollection($this->client, $this->baseUrl . '/institutions', null, []);
+            return $this->buildCollection(
+                InstitutionCollection::class,
+                $this->baseUrl . '/institutions',
+                []
+            );
         }
         if ($name === 'intakes') {
-            return new IntakeCollection($this->client, $this->baseUrl . '/intakes', null, []);
+            return $this->buildCollection(
+                IntakeCollection::class,
+                $this->baseUrl . '/intakes',
+                []
+            );
         }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
