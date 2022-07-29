@@ -31,9 +31,15 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
     /** @var array current filter for the collection */
     protected $filter;
     /** @var array collection query raw data */
-    protected $data = null;
+    protected $data;
 
-    public function __construct(Client $client, $baseUrl, $filter = [], $data = null)
+    /**
+     * @param Client $client
+     * @param string $baseUrl
+     * @param array|null $data
+     * @param array $filter
+     */
+    public function __construct(Client $client, $baseUrl, $data, $filter = [])
     {
         parent::__construct($client, $baseUrl);
 
@@ -107,19 +113,6 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
         $response = $this->client->http()->head($this->urlForId($id));
 
         return ResponseHelper::resourceExistsByResponse($response);
-    }
-
-    /**
-     * Apply filter to the collection
-     *
-     * @param array $filter
-     * @return static
-     */
-    public function filter(array $filter = [])
-    {
-        $newFilter = array_merge($this->filter, $filter);
-
-        return new static($this->client, $this->baseUrl, $newFilter);
     }
 
     /**
