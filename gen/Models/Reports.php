@@ -2,8 +2,8 @@
 
 namespace Dream\Apply\Client\Models;
 
-use Dream\Apply\Client\Models\Base\UrlNamespace;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Models\Base\UrlNamespace;
 
 /**
  * @generated

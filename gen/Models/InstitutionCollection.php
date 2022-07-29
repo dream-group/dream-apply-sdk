@@ -2,15 +2,15 @@
 
 namespace Dream\Apply\Client\Models;
 
-use Dream\Apply\Client\Models\Base\Collection;
 use ArrayAccess;
-use IteratorAggregate;
-use Dream\Apply\Client\Exceptions\ItemNotFoundException;
-use Dream\Apply\Client\Exceptions\HttpFailResponseException;
-use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Exceptions\HttpClientException;
+use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Exceptions\ItemNotFoundException;
+use Dream\Apply\Client\Exceptions\TooManyRequestsException;
+use Dream\Apply\Client\Models\Base\Collection;
 use Dream\Apply\Client\Models\Base\CollectionWithFilter;
+use IteratorAggregate;
 
 /**
  * @generated
@@ -34,7 +34,7 @@ final class InstitutionCollection extends Collection
     /**
      * Get collection item by id or throw ItemNotFoundException
      *
-     * NOTE: ignores filter
+     * NOTE: ignores filter if child objects can be requested by url
      *
      * @param int $id
      * @param string|array|bool $expand Pass expand param.
@@ -55,7 +55,7 @@ final class InstitutionCollection extends Collection
     /**
      * Get collection item by id or null
      *
-     * NOTE: ignores filter
+     * NOTE: ignores filter if child objects can be requested by url
      *
      * @param int $id
      * @param string|array|bool $expand Pass expand param.
@@ -75,7 +75,7 @@ final class InstitutionCollection extends Collection
     /**
      * Get collection item without http request (if possible)
      *
-     * NOTE: ignores filter
+     * NOTE: ignores filter if child objects can be requested by url
      *
      * NOTE: may throw later when retrieving a field or a child
      *

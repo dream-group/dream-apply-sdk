@@ -10,6 +10,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read AdministratorCollection $administrators
  * @property-read InstitutionCollection $institutions
  * @property-read IntakeCollection $intakes
+ * @property-read Journal $journal
  */
 trait RootNamespace
 {
@@ -61,6 +62,18 @@ trait RootNamespace
         );
     }
 
+    /**
+     * @return Journal
+     */
+    public function journal($filter = [])
+    {
+        return $this->buildCollection(
+            Journal::class,
+            $this->baseUrl . '/journal',
+            $filter
+        );
+    }
+
     protected function getNamespace($name)
     {
         if ($name === 'academicYears') {
@@ -91,6 +104,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'journal') {
+            return $this->buildCollection(
+                Journal::class,
+                $this->baseUrl . '/journal',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -101,6 +121,7 @@ trait RootNamespace
             'administrators',
             'institutions',
             'intakes',
+            'journal',
         ];
     }
 }
