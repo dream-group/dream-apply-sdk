@@ -18,7 +18,7 @@ final class FeeAmount extends Record
     /**
      * @return string
      */
-    public function getQualifier()
+    public function qualifier()
     {
         return $this->getRawField('qualifier');
     }
@@ -26,7 +26,7 @@ final class FeeAmount extends Record
     /**
      * @return string
      */
-    public function getCurrency()
+    public function currency()
     {
         return $this->getRawField('currency');
     }
@@ -34,7 +34,7 @@ final class FeeAmount extends Record
     /**
      * @return string
      */
-    public function getAmount()
+    public function amount()
     {
         return $this->getRawField('amount');
     }
@@ -42,7 +42,7 @@ final class FeeAmount extends Record
     /**
      * @return string
      */
-    public function getInfo()
+    public function info()
     {
         return $this->getRawField('info');
     }
@@ -50,7 +50,7 @@ final class FeeAmount extends Record
     /**
      * @return string
      */
-    public function getBasis()
+    public function basis()
     {
         return $this->getRawField('basis');
     }

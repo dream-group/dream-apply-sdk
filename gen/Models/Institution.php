@@ -33,7 +33,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getStatus()
+    public function status()
     {
         return $this->getRawField('status');
     }
@@ -41,7 +41,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -49,7 +49,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getCountry()
+    public function country()
     {
         return $this->getRawField('country');
     }
@@ -57,7 +57,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getLocation()
+    public function location()
     {
         return $this->getRawField('location');
     }
@@ -65,7 +65,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getWww()
+    public function www()
     {
         return $this->getRawField('www');
     }
@@ -73,7 +73,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getErasmus()
+    public function erasmus()
     {
         return $this->getRawField('erasmus');
     }
@@ -81,7 +81,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getAddress()
+    public function address()
     {
         return $this->getRawField('address');
     }
@@ -89,7 +89,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getVat()
+    public function vat()
     {
         return $this->getRawField('vat');
     }
@@ -97,7 +97,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getIban()
+    public function iban()
     {
         return $this->getRawField('iban');
     }
@@ -105,7 +105,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function getRegistration()
+    public function registration()
     {
         return $this->getRawField('registration');
     }

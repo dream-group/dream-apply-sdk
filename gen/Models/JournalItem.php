@@ -26,7 +26,7 @@ final class JournalItem extends Record
     /**
      * @return string
      */
-    public function getLogged()
+    public function logged()
     {
         return $this->getRawField('logged');
     }
@@ -34,7 +34,7 @@ final class JournalItem extends Record
     /**
      * @return string
      */
-    public function getEvent()
+    public function event()
     {
         return $this->getRawField('event');
     }
@@ -42,7 +42,7 @@ final class JournalItem extends Record
     /**
      * @return array
      */
-    public function getBind()
+    public function bind()
     {
         return $this->getRawField('bind');
     }
@@ -50,7 +50,7 @@ final class JournalItem extends Record
     /**
      * @return Institution|null
      */
-    public function getInstitution()
+    public function institution()
     {
         return $this->getObjectField('institution', Institution::class);
     }

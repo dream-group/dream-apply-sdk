@@ -17,7 +17,7 @@ final class Fee extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -25,7 +25,7 @@ final class Fee extends Record
     /**
      * @return string
      */
-    public function getType()
+    public function type()
     {
         return $this->getRawField('type');
     }
@@ -33,7 +33,7 @@ final class Fee extends Record
     /**
      * @return string
      */
-    public function getNotes()
+    public function notes()
     {
         return $this->getRawField('notes');
     }

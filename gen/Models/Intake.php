@@ -40,7 +40,7 @@ final class Intake extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -48,7 +48,7 @@ final class Intake extends Record
     /**
      * @return string
      */
-    public function getStart()
+    public function start()
     {
         return $this->getRawField('start');
     }
@@ -56,7 +56,7 @@ final class Intake extends Record
     /**
      * @return string
      */
-    public function getPolicy()
+    public function policy()
     {
         return $this->getRawField('policy');
     }
@@ -64,7 +64,7 @@ final class Intake extends Record
     /**
      * @return array
      */
-    public function getDeadlines()
+    public function deadlines()
     {
         return $this->getRawField('deadlines');
     }
@@ -72,7 +72,7 @@ final class Intake extends Record
     /**
      * @return string
      */
-    public function getArrival()
+    public function arrival()
     {
         return $this->getRawField('arrival');
     }
@@ -80,7 +80,7 @@ final class Intake extends Record
     /**
      * @return string
      */
-    public function getCommence()
+    public function commence()
     {
         return $this->getRawField('commence');
     }
@@ -88,7 +88,7 @@ final class Intake extends Record
     /**
      * @return IntakePre
      */
-    public function getPre()
+    public function pre()
     {
         return $this->getObjectField('pre', IntakePre::class);
     }
@@ -96,7 +96,7 @@ final class Intake extends Record
     /**
      * @return IntakeDecision
      */
-    public function getDecision()
+    public function decision()
     {
         return $this->getObjectField('decision', IntakeDecision::class);
     }

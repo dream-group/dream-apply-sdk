@@ -20,7 +20,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getPayment()
+    public function payment()
     {
         return $this->getRawField('payment');
     }
@@ -28,7 +28,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getExternalId()
+    public function externalId()
     {
         return $this->getRawField('external_id');
     }
@@ -36,7 +36,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getStatus()
+    public function status()
     {
         return $this->getRawField('status');
     }
@@ -44,7 +44,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getMessage()
+    public function message()
     {
         return $this->getRawField('message');
     }
@@ -52,7 +52,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getInserted()
+    public function inserted()
     {
         return $this->getRawField('inserted');
     }
@@ -60,7 +60,7 @@ final class Payment extends Record
     /**
      * @return string
      */
-    public function getUpdated()
+    public function updated()
     {
         return $this->getRawField('updated');
     }
@@ -68,7 +68,7 @@ final class Payment extends Record
     /**
      * @return PaymentGateway
      */
-    public function getGateway()
+    public function gateway()
     {
         return $this->getObjectField('gateway', PaymentGateway::class);
     }

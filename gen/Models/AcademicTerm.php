@@ -19,7 +19,7 @@ final class AcademicTerm extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -27,7 +27,7 @@ final class AcademicTerm extends Record
     /**
      * @return string
      */
-    public function getStart()
+    public function start()
     {
         return $this->getRawField('start');
     }
@@ -35,7 +35,7 @@ final class AcademicTerm extends Record
     /**
      * @return string
      */
-    public function getGrace()
+    public function grace()
     {
         return $this->getRawField('grace');
     }
@@ -43,7 +43,7 @@ final class AcademicTerm extends Record
     /**
      * @return string
      */
-    public function getFinish()
+    public function finish()
     {
         return $this->getRawField('finish');
     }
@@ -51,7 +51,7 @@ final class AcademicTerm extends Record
     /**
      * @return AcademicYear
      */
-    public function getYear()
+    public function year()
     {
         return $this->getObjectField('year', AcademicYear::class);
     }
@@ -59,7 +59,7 @@ final class AcademicTerm extends Record
     /**
      * @return AcademicTermType
      */
-    public function getType()
+    public function type()
     {
         return $this->getObjectField('type', AcademicTermType::class);
     }

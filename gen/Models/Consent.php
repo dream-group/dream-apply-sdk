@@ -16,7 +16,7 @@ final class Consent extends Record
     /**
      * @return string
      */
-    public function getType()
+    public function type()
     {
         return $this->getRawField('type');
     }
@@ -24,7 +24,7 @@ final class Consent extends Record
     /**
      * @return string
      */
-    public function getText()
+    public function text()
     {
         return $this->getRawField('text');
     }
@@ -32,7 +32,7 @@ final class Consent extends Record
     /**
      * @return string
      */
-    public function getLink()
+    public function link()
     {
         return $this->getRawField('link');
     }
