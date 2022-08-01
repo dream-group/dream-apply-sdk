@@ -50,17 +50,11 @@ use Psr\Http\Message\UriFactoryInterface;
  * @property-read InvoiceCollection|Invoice[] $invoices
  * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
  *
- * @property-read AcademicTermCollection|AcademicTerm[] $academicTerms
- * @method        AcademicTermCollection|AcademicTerm[] academicTerms(array $filter = [])
- *
  * @property-read Collection|TableView[] $tableviews
  * @method        Collection|TableView[] tableviews(array $filter = [])
  *
  * @property-read Collection|Scoresheet[] $scoresheets
  * @method        Collection|Scoresheet[] scoresheets(array $filter = [])
- *
- * @property-read Collection|Fee[] $fees
- * @method        Collection|Fee[] fees(array $filter = [])
  *
  * @property-read SimpleArray $classificators
  *
