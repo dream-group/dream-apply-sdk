@@ -7,7 +7,6 @@ use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\RuntimeException;
-use Dream\Apply\Client\Helpers\StringHelper;
 
 abstract class Record implements ArrayAccess
 {
@@ -59,7 +58,7 @@ abstract class Record implements ArrayAccess
 
     protected function retrieveData()
     {
-        return $this->client->http()->getJson($this->url());
+        return $this->client->http()->getJson($this->getUrl());
     }
 
     protected function resolvePartial()
@@ -75,7 +74,7 @@ abstract class Record implements ArrayAccess
     /**
      * @return string item url
      */
-    public function url()
+    public function getUrl()
     {
         if ($this->url === null) {
             throw new RuntimeException('No url for this object');
@@ -86,9 +85,9 @@ abstract class Record implements ArrayAccess
     /**
      * @return int
      */
-    public function id()
+    public function getId()
     {
-        $urlComponents = explode('/', $this->url());
+        $urlComponents = explode('/', $this->getUrl());
 
         return intval(array_pop($urlComponents));
     }

@@ -24,7 +24,7 @@ final class PaymentGateway extends Record
     /**
      * @return string|null
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -32,7 +32,7 @@ final class PaymentGateway extends Record
     /**
      * @return string|null
      */
-    public function getAdapter()
+    public function adapter()
     {
         return $this->getRawField('adapter');
     }

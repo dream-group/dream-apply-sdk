@@ -26,7 +26,7 @@ final class InstitutionDepartment extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -34,7 +34,7 @@ final class InstitutionDepartment extends Record
     /**
      * @return string
      */
-    public function getCountry()
+    public function country()
     {
         return $this->getRawField('country');
     }
@@ -42,7 +42,7 @@ final class InstitutionDepartment extends Record
     /**
      * @return string
      */
-    public function getLocation()
+    public function location()
     {
         return $this->getRawField('location');
     }
@@ -50,7 +50,7 @@ final class InstitutionDepartment extends Record
     /**
      * @return string
      */
-    public function getWww()
+    public function www()
     {
         return $this->getRawField('www');
     }

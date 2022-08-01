@@ -15,7 +15,7 @@ final class AcademicYear extends Record
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->getRawField('name');
     }
@@ -23,7 +23,7 @@ final class AcademicYear extends Record
     /**
      * @return string
      */
-    public function getStart()
+    public function start()
     {
         return $this->getRawField('start');
     }

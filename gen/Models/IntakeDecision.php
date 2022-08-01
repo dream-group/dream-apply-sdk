@@ -16,7 +16,7 @@ final class IntakeDecision extends Record
     /**
      * @return string
      */
-    public function getPolicy()
+    public function policy()
     {
         return $this->getRawField('policy');
     }
@@ -24,7 +24,7 @@ final class IntakeDecision extends Record
     /**
      * @return int|null
      */
-    public function getDays()
+    public function days()
     {
         return $this->getRawField('days');
     }
@@ -32,7 +32,7 @@ final class IntakeDecision extends Record
     /**
      * @return string|null
      */
-    public function getDate()
+    public function date()
     {
         return $this->getRawField('date');
     }
