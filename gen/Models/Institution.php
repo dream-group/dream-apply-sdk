@@ -18,7 +18,7 @@ use Dream\Apply\Client\Models\Base\Record;
  * @property-read string $vat
  * @property-read string $iban
  * @property-read string $registration
- * @property-read InstitutionDepartmentCollection $departments
+ * @property-read InstitutionDepartments $departments
  */
 final class Institution extends Record
 {
@@ -111,12 +111,12 @@ final class Institution extends Record
     }
 
     /**
-     * @return InstitutionDepartmentCollection
+     * @return InstitutionDepartments
      */
     public function departments($filter = [])
     {
         return $this->buildCollection(
-            InstitutionDepartmentCollection::class,
+            InstitutionDepartments::class,
             $this->getRawField('departments'),
             $filter
         );
@@ -181,7 +181,7 @@ final class Institution extends Record
     {
         if ($name === 'departments') {
             return $this->buildCollection(
-                InstitutionDepartmentCollection::class,
+                InstitutionDepartments::class,
                 $this->getRawField('departments'),
                 []
             );

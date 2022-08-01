@@ -6,57 +6,57 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
- * @property-read AcademicYearCollection $academicYears
- * @property-read AdministratorCollection $administrators
- * @property-read InstitutionCollection $institutions
- * @property-read IntakeCollection $intakes
+ * @property-read AcademicYears $academicYears
+ * @property-read Administrators $administrators
+ * @property-read Institutions $institutions
+ * @property-read Intakes $intakes
  * @property-read Journal $journal
  */
 trait RootNamespace
 {
     /**
-     * @return AcademicYearCollection
+     * @return AcademicYears
      */
     public function academicYears()
     {
         return $this->buildCollection(
-            AcademicYearCollection::class,
+            AcademicYears::class,
             $this->baseUrl . '/academic-years',
             []
         );
     }
 
     /**
-     * @return AdministratorCollection
+     * @return Administrators
      */
     public function administrators()
     {
         return $this->buildCollection(
-            AdministratorCollection::class,
+            Administrators::class,
             $this->baseUrl . '/administrators',
             []
         );
     }
 
     /**
-     * @return InstitutionCollection
+     * @return Institutions
      */
     public function institutions($filter = [])
     {
         return $this->buildCollection(
-            InstitutionCollection::class,
+            Institutions::class,
             $this->baseUrl . '/institutions',
             $filter
         );
     }
 
     /**
-     * @return IntakeCollection
+     * @return Intakes
      */
     public function intakes()
     {
         return $this->buildCollection(
-            IntakeCollection::class,
+            Intakes::class,
             $this->baseUrl . '/intakes',
             []
         );
@@ -78,28 +78,28 @@ trait RootNamespace
     {
         if ($name === 'academicYears') {
             return $this->buildCollection(
-                AcademicYearCollection::class,
+                AcademicYears::class,
                 $this->baseUrl . '/academic-years',
                 []
             );
         }
         if ($name === 'administrators') {
             return $this->buildCollection(
-                AdministratorCollection::class,
+                Administrators::class,
                 $this->baseUrl . '/administrators',
                 []
             );
         }
         if ($name === 'institutions') {
             return $this->buildCollection(
-                InstitutionCollection::class,
+                Institutions::class,
                 $this->baseUrl . '/institutions',
                 []
             );
         }
         if ($name === 'intakes') {
             return $this->buildCollection(
-                IntakeCollection::class,
+                Intakes::class,
                 $this->baseUrl . '/intakes',
                 []
             );

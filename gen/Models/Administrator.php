@@ -12,6 +12,7 @@ use Dream\Apply\Client\Models\Base\Record;
  * @property-read string $email
  * @property-read string $phone
  * @property-read string $function
+ * @property-read AdministratorRoles $roles
  */
 final class Administrator extends Record
 {
@@ -55,6 +56,18 @@ final class Administrator extends Record
         return $this->getRawField('function');
     }
 
+    /**
+     * @return AdministratorRoles
+     */
+    public function roles()
+    {
+        return $this->buildCollection(
+            AdministratorRoles::class,
+            $this->getRawField('roles'),
+            []
+        );
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -88,12 +101,20 @@ final class Administrator extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'roles') {
+            return $this->buildCollection(
+                AdministratorRoles::class,
+                $this->getRawField('roles'),
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'roles',
         ];
     }
 }

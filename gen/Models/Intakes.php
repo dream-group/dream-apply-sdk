@@ -9,21 +9,18 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Models\Base\Collection;
-use Dream\Apply\Client\Models\Base\CollectionWithFilter;
 use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, Institution>
- * @implements IteratorAggregate<int, Institution>
+ * @implements ArrayAccess<int, Intake>
+ * @implements IteratorAggregate<int, Intake>
  */
-final class InstitutionCollection extends Collection
+final class Intakes extends Collection
 {
-    use CollectionWithFilter;
-
     protected function getItemClass()
     {
-        return Institution::class;
+        return Intake::class;
     }
 
     protected function isItemInQueryPartial()
@@ -41,7 +38,7 @@ final class InstitutionCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Institution
+     * @return Intake
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -62,7 +59,7 @@ final class InstitutionCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Institution
+     * @return Intake
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -80,7 +77,7 @@ final class InstitutionCollection extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int $id
-     * @return Institution
+     * @return Intake
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException

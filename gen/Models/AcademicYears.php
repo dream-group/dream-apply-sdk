@@ -16,7 +16,7 @@ use IteratorAggregate;
  * @implements ArrayAccess<int, AcademicYear>
  * @implements IteratorAggregate<int, AcademicYear>
  */
-final class AcademicYearCollection extends Collection
+final class AcademicYears extends Collection
 {
     protected function getItemClass()
     {

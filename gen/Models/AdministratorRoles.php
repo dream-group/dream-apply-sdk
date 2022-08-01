@@ -8,24 +8,19 @@ use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
-use Dream\Apply\Client\Models\Base\Collection;
+use Dream\Apply\Client\Models\Base\CollectionWithNoRecordRequests;
 use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, Intake>
- * @implements IteratorAggregate<int, Intake>
+ * @implements ArrayAccess<int, AdministratorRole>
+ * @implements IteratorAggregate<int, AdministratorRole>
  */
-final class IntakeCollection extends Collection
+final class AdministratorRoles extends CollectionWithNoRecordRequests
 {
     protected function getItemClass()
     {
-        return Intake::class;
-    }
-
-    protected function isItemInQueryPartial()
-    {
-        return false;
+        return AdministratorRole::class;
     }
 
     /**
@@ -38,7 +33,7 @@ final class IntakeCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Intake
+     * @return AdministratorRole
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -59,7 +54,7 @@ final class IntakeCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Intake
+     * @return AdministratorRole
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -77,7 +72,7 @@ final class IntakeCollection extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int $id
-     * @return Intake
+     * @return AdministratorRole
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
