@@ -6,14 +6,28 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
+ * @property-read AcademicTerms $academicTerms
  * @property-read AcademicYears $academicYears
  * @property-read Administrators $administrators
+ * @property-read Fees $fees
  * @property-read Institutions $institutions
  * @property-read Intakes $intakes
  * @property-read Journal $journal
  */
 trait RootNamespace
 {
+    /**
+     * @return AcademicTerms
+     */
+    public function academicTerms()
+    {
+        return $this->buildCollection(
+            AcademicTerms::class,
+            $this->baseUrl . '/academic-terms',
+            []
+        );
+    }
+
     /**
      * @return AcademicYears
      */
@@ -34,6 +48,18 @@ trait RootNamespace
         return $this->buildCollection(
             Administrators::class,
             $this->baseUrl . '/administrators',
+            []
+        );
+    }
+
+    /**
+     * @return Fees
+     */
+    public function fees()
+    {
+        return $this->buildCollection(
+            Fees::class,
+            $this->baseUrl . '/fees',
             []
         );
     }
@@ -76,6 +102,13 @@ trait RootNamespace
 
     protected function getNamespace($name)
     {
+        if ($name === 'academicTerms') {
+            return $this->buildCollection(
+                AcademicTerms::class,
+                $this->baseUrl . '/academic-terms',
+                []
+            );
+        }
         if ($name === 'academicYears') {
             return $this->buildCollection(
                 AcademicYears::class,
@@ -87,6 +120,13 @@ trait RootNamespace
             return $this->buildCollection(
                 Administrators::class,
                 $this->baseUrl . '/administrators',
+                []
+            );
+        }
+        if ($name === 'fees') {
+            return $this->buildCollection(
+                Fees::class,
+                $this->baseUrl . '/fees',
                 []
             );
         }
@@ -117,8 +157,10 @@ trait RootNamespace
     protected function getNamespaceList()
     {
         return [
+            'academicTerms',
             'academicYears',
             'administrators',
+            'fees',
             'institutions',
             'intakes',
             'journal',
