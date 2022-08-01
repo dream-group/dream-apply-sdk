@@ -9,18 +9,21 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Models\Base\Collection;
+use Dream\Apply\Client\Models\Base\CollectionWithFilter;
 use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, Administrator>
- * @implements IteratorAggregate<int, Administrator>
+ * @implements ArrayAccess<int, InstitutionDepartment>
+ * @implements IteratorAggregate<int, InstitutionDepartment>
  */
-final class AdministratorCollection extends Collection
+final class InstitutionDepartments extends Collection
 {
+    use CollectionWithFilter;
+
     protected function getItemClass()
     {
-        return Administrator::class;
+        return InstitutionDepartment::class;
     }
 
     protected function isItemInQueryPartial()
@@ -38,7 +41,7 @@ final class AdministratorCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Administrator
+     * @return InstitutionDepartment
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -59,7 +62,7 @@ final class AdministratorCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Administrator
+     * @return InstitutionDepartment
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -77,7 +80,7 @@ final class AdministratorCollection extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int $id
-     * @return Administrator
+     * @return InstitutionDepartment
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException

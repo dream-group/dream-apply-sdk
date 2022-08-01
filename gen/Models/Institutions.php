@@ -14,16 +14,16 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, InstitutionDepartment>
- * @implements IteratorAggregate<int, InstitutionDepartment>
+ * @implements ArrayAccess<int, Institution>
+ * @implements IteratorAggregate<int, Institution>
  */
-final class InstitutionDepartmentCollection extends Collection
+final class Institutions extends Collection
 {
     use CollectionWithFilter;
 
     protected function getItemClass()
     {
-        return InstitutionDepartment::class;
+        return Institution::class;
     }
 
     protected function isItemInQueryPartial()
@@ -41,7 +41,7 @@ final class InstitutionDepartmentCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return InstitutionDepartment
+     * @return Institution
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -62,7 +62,7 @@ final class InstitutionDepartmentCollection extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return InstitutionDepartment
+     * @return Institution
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -80,7 +80,7 @@ final class InstitutionDepartmentCollection extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int $id
-     * @return InstitutionDepartment
+     * @return Institution
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
