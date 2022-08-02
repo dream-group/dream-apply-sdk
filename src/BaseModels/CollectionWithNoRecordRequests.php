@@ -1,6 +1,6 @@
 <?php
 
-namespace Dream\Apply\Client\Models\Base;
+namespace Dream\Apply\Client\BaseModels;
 
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 

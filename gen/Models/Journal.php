@@ -3,13 +3,13 @@
 namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
+use Dream\Apply\Client\BaseModels\CollectionWithFilter;
+use Dream\Apply\Client\BaseModels\CollectionWithNoRecordRequests;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
 use Dream\Apply\Client\Exceptions\TooManyRequestsException;
-use Dream\Apply\Client\Models\Base\CollectionWithFilter;
-use Dream\Apply\Client\Models\Base\CollectionWithNoRecordRequests;
 use IteratorAggregate;
 
 /**

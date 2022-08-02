@@ -2,6 +2,7 @@
 
 namespace Dream\Apply\Client;
 
+use Dream\Apply\Client\BaseModels\UrlNamespace;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
@@ -11,7 +12,6 @@ use Dream\Apply\Client\Models\Applicant;
 use Dream\Apply\Client\Models\ApplicantCollection;
 use Dream\Apply\Client\Models\Application;
 use Dream\Apply\Client\Models\ApplicationCollection;
-use Dream\Apply\Client\Models\Base\UrlNamespace;
 use Dream\Apply\Client\Models\Classificators;
 use Dream\Apply\Client\Models\Collection;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
