@@ -8,12 +8,12 @@ use Dream\Apply\Client\Models\Base\Record;
 /**
  * @generated
  * @property-read int $id
- * @property-read string $logged
- * @property-read string $event
- * @property-read array $bind
- * @property-read Institution|null $institution
+ * @property-read string $created
+ * @property-read string $modified
+ * @property-read string $title
+ * @property-read BinaryRecord $tabledata
  */
-final class JournalItem extends Record
+final class TableView extends Record
 {
     /**
      * @return int
@@ -26,33 +26,33 @@ final class JournalItem extends Record
     /**
      * @return string
      */
-    public function logged()
+    public function created()
     {
-        return $this->getRawField('logged');
+        return $this->getRawField('created');
     }
 
     /**
      * @return string
      */
-    public function event()
+    public function modified()
     {
-        return $this->getRawField('event');
+        return $this->getRawField('modified');
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function bind()
+    public function title()
     {
-        return $this->getRawField('bind');
+        return $this->getRawField('title');
     }
 
     /**
-     * @return Institution|null
+     * @return BinaryRecord
      */
-    public function institution()
+    public function tabledata()
     {
-        return $this->getObjectField('institution', Institution::class);
+        return $this->getObjectField('tabledata', BinaryRecord::class);
     }
 
     protected function getField($name)
@@ -60,17 +60,17 @@ final class JournalItem extends Record
         if ($name === 'id') {
             return $this->getRawField('id');
         }
-        if ($name === 'logged') {
-            return $this->getRawField('logged');
+        if ($name === 'created') {
+            return $this->getRawField('created');
         }
-        if ($name === 'event') {
-            return $this->getRawField('event');
+        if ($name === 'modified') {
+            return $this->getRawField('modified');
         }
-        if ($name === 'bind') {
-            return $this->getRawField('bind');
+        if ($name === 'title') {
+            return $this->getRawField('title');
         }
-        if ($name === 'institution') {
-            return $this->getObjectField('institution', Institution::class);
+        if ($name === 'tabledata') {
+            return $this->getObjectField('tabledata', BinaryRecord::class);
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
@@ -79,10 +79,10 @@ final class JournalItem extends Record
     {
         return [
             'id',
-            'logged',
-            'event',
-            'bind',
-            'institution',
+            'created',
+            'modified',
+            'title',
+            'tabledata',
         ];
     }
 

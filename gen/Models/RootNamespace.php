@@ -13,6 +13,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Institutions $institutions
  * @property-read Intakes $intakes
  * @property-read Journal $journal
+ * @property-read TableViews $tableviews
  */
 trait RootNamespace
 {
@@ -100,6 +101,18 @@ trait RootNamespace
         );
     }
 
+    /**
+     * @return TableViews
+     */
+    public function tableviews()
+    {
+        return $this->buildCollection(
+            TableViews::class,
+            $this->baseUrl . '/tableviews',
+            []
+        );
+    }
+
     protected function getNamespace($name)
     {
         if ($name === 'academicTerms') {
@@ -151,6 +164,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'tableviews') {
+            return $this->buildCollection(
+                TableViews::class,
+                $this->baseUrl . '/tableviews',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -164,6 +184,7 @@ trait RootNamespace
             'institutions',
             'intakes',
             'journal',
+            'tableviews',
         ];
     }
 }

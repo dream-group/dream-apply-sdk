@@ -14,6 +14,7 @@ use Dream\Apply\Client\Exceptions\TooManyRequestsException;
 use Dream\Apply\Client\Helpers\ExceptionHelper;
 use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\ResponseHelper;
+use Dream\Apply\Client\Models\BinaryRecord;
 use Dream\Apply\Client\Models\Record;
 use IteratorAggregate;
 
@@ -77,7 +78,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
             );
         }
 
-        if (is_subclass_of($class, BinaryRecord::class)) {
+        if ($class === BinaryRecord::class || is_subclass_of($class, BinaryRecord::class)) {
             $data = $this->client->http()->getBinary($itemUrl);
         } else {
             $data = $this->client->http()->getJson($itemUrl, $query);
@@ -191,9 +192,9 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
         return iterator_to_array($this);
     }
 
-    public function getRawData()
+    public function getRawData($requestFull = false)
     {
-        if ($this->data === null) {
+        if ($this->data === null && $requestFull) {
             $this->data = $this->client->http()->getJson($this->baseUrl, $this->filter);
         }
 

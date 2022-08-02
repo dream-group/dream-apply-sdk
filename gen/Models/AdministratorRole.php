@@ -15,7 +15,7 @@ final class AdministratorRole extends Record
     /**
      * @return int
      */
-    public function getId()
+    public function id()
     {
         return $this->getRawField('id');
     }
