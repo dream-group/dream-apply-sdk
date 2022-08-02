@@ -11,6 +11,8 @@
         <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
         <!-- Only for 7.1+ -->
         <exclude name="PSR12.Properties.ConstantVisibility.NotFound"/>
+        <!-- Laminas Code generates it -->
+        <exclude name="PSR12.Traits.UseDeclaration.MultipleImport"/>
     </rule>
     <rule ref="PHPCompatibility"/>
     <config name="testVersion" value="5.5-"/>
