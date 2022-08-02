@@ -58,7 +58,12 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
         $class = $this->getItemClass();
 
         if (isset($this->data[$id]) && !$expand) {
-            return new $class($this->client, $this->urlForId($id), $this->data[$id], $this->isItemInQueryPartial());
+            if (is_string($this->data[$id])) {
+                // array of urls
+                return new $class($this->client, $this->data[$id], [], true);
+            } else {
+                return new $class($this->client, $this->urlForId($id), $this->data[$id], $this->isItemInQueryPartial());
+            }
         }
 
         // build string out of other possible types
@@ -114,7 +119,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
 
     protected function urlForId($id)
     {
-        return $this->baseUrl . '/' . $id;
+        return $this->baseUrl ? $this->baseUrl . '/' . $id : null;
     }
 
     /**
@@ -180,6 +185,14 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
         list($count) = $countHeader; // get first header which is expected to be the only one
 
         return intval($count);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return $this->count() === 0;
     }
 
     /**

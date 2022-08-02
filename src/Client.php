@@ -14,9 +14,7 @@ use Dream\Apply\Client\Models\ApplicationCollection;
 use Dream\Apply\Client\Models\Base\UrlNamespace;
 use Dream\Apply\Client\Models\Classificators;
 use Dream\Apply\Client\Models\Collection;
-use Dream\Apply\Client\Models\CourseCollection;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
-use Dream\Apply\Client\Models\Course;
 use Dream\Apply\Client\Models\Invoice;
 use Dream\Apply\Client\Models\InvoiceCollection;
 use Dream\Apply\Client\Models\Report;
@@ -29,6 +27,7 @@ use Http\Message\UriFactory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
+use SensitiveParameter;
 
 /**
  * Class Client
@@ -39,9 +38,6 @@ use Psr\Http\Message\UriFactoryInterface;
  *
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
- *
- * @property-read CourseCollection|Course[] $courses
- * @method        CourseCollection|Course[] courses(array $filter = [])
  *
  * @property-read InvoiceCollection|Invoice[] $invoices
  * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
@@ -66,7 +62,6 @@ final class Client extends UrlNamespace
     protected $collectionLinks = [
         'applicants'        => Applicant::class,
         'applications'      => Application::class,
-        'courses'           => Course::class,
         'invoices'          => Invoice::class,
         'classificators'    => Classificators::class,
         'scoresheets'       => Scoresheet::class,
@@ -82,7 +77,7 @@ final class Client extends UrlNamespace
      */
     public function __construct(
         $endpoint,
-        #[\SensitiveParameter]
+        #[SensitiveParameter]
         $apiKey,
         $client = null,
         $requestFactory = null,

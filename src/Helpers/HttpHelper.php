@@ -25,6 +25,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
+use SensitiveParameter;
 
 /**
  * Class HttpHelper
@@ -48,7 +49,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
 
     public function __construct(
         $endpoint,
-        #[\SensitiveParameter]
+        #[SensitiveParameter]
         $apiKey,
         $client,
         $requestFactory,
