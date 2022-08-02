@@ -15,7 +15,7 @@ use Psr\Http\Message\StreamInterface;
  * @property-read StreamInterface   $content
  * @property-read string            $expires
  */
-class BinaryRecord extends Record
+class BinaryRecordV1 extends Record
 {
     const IS_BINARY = true;
 
