@@ -4,7 +4,9 @@ namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
+use Dream\Apply\Client\BaseModels\CollectionOfCreatable;
 use Dream\Apply\Client\BaseModels\CollectionWithFilter;
+use Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -19,7 +21,7 @@ use IteratorAggregate;
  */
 final class Courses extends Collection
 {
-    use CollectionWithFilter;
+    use CollectionWithFilter, CollectionOfCreatable;
 
     protected function getItemClass()
     {
@@ -100,5 +102,13 @@ final class Courses extends Collection
     {
         return [
         ];
+    }
+
+    /**
+     * @return Course
+     */
+    public function create(CreatableModels\Course $object)
+    {
+        return $this->doCreate($object);
     }
 }

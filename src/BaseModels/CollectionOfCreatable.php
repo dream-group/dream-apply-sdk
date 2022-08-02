@@ -24,7 +24,7 @@ trait CollectionOfCreatable
     /**
      * @param CreatableModel $model
      * @param string $duplicateMessage
-     * @return Record
+     * @return mixed
      * @throws DuplicateItemException|InvalidItemException
      */
     protected function doCreate(CreatableModel $model, $duplicateMessage = 'Item already exists')
@@ -36,7 +36,7 @@ trait CollectionOfCreatable
         if ($response->getStatusCode() === HttpHelper::STATUS_CREATED) {
             $url = $response->getHeaderLine('Location');
             $class = $this->getItemClass();
-            return new $class($this->client, $url);
+            return new $class($this->client, $url, [], true);
         }
         if ($response->getStatusCode() === HttpHelper::STATUS_CONFLICT) {
             throw new DuplicateItemException($duplicateMessage);
