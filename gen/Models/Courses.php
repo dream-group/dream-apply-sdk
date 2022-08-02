@@ -36,7 +36,7 @@ final class Courses extends Collection
      *
      * NOTE: ignores filter if child objects can be requested by url
      *
-     * @param int $id
+     * @param int|string $id
      * @param string|array|bool $expand Pass expand param.
      *         false = do not expand
      *         true = expand all
@@ -57,7 +57,7 @@ final class Courses extends Collection
      *
      * NOTE: ignores filter if child objects can be requested by url
      *
-     * @param int $id
+     * @param int|string $id
      * @param string|array|bool $expand Pass expand param.
      *         false = do not expand
      *         true = expand all
@@ -79,7 +79,7 @@ final class Courses extends Collection
      *
      * NOTE: may throw later when retrieving a field or a child
      *
-     * @param int $id
+     * @param int|string $id
      * @return Course
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
