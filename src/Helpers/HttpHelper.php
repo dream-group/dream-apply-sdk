@@ -212,8 +212,6 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
 
         ResponseHelper::verifyResponseSuccessful($response);
 
-        var_dump($response->getHeaders());
-
         return [
             'uploaded'  => $response->getHeaderLine('Last-Modified'),
             'name'      => ResponseHelper::getFileName($response),
