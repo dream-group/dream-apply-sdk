@@ -11,11 +11,11 @@ use Dream\Apply\Client\Models\Base\Record;
  * @property-read string $name
  * @property-read string $start
  * @property-read string $policy
- * @property-read array $deadlines
  * @property-read string $arrival
  * @property-read string $commence
  * @property-read IntakePre $pre
  * @property-read IntakeDecision $decision
+ * @property-read IntakeDeadlines $deadlines
  */
 final class Intake extends Record
 {
@@ -62,14 +62,6 @@ final class Intake extends Record
     }
 
     /**
-     * @return array
-     */
-    public function deadlines()
-    {
-        return $this->getRawField('deadlines');
-    }
-
-    /**
      * @return string
      */
     public function arrival()
@@ -101,6 +93,18 @@ final class Intake extends Record
         return $this->getObjectField('decision', IntakeDecision::class);
     }
 
+    /**
+     * @return IntakeDeadlines
+     */
+    public function deadlines()
+    {
+        return $this->buildCollection(
+            IntakeDeadlines::class,
+            $this->getRawField('deadlines'),
+            []
+        );
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -114,9 +118,6 @@ final class Intake extends Record
         }
         if ($name === 'policy') {
             return $this->getRawField('policy');
-        }
-        if ($name === 'deadlines') {
-            return $this->getRawField('deadlines');
         }
         if ($name === 'arrival') {
             return $this->getRawField('arrival');
@@ -140,7 +141,6 @@ final class Intake extends Record
             'name',
             'start',
             'policy',
-            'deadlines',
             'arrival',
             'commence',
             'pre',
@@ -150,12 +150,20 @@ final class Intake extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'deadlines') {
+            return $this->buildCollection(
+                IntakeDeadlines::class,
+                $this->getRawField('deadlines'),
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'deadlines',
         ];
     }
 }

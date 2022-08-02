@@ -21,13 +21,17 @@ trait ChildNamespaces
 
     protected function buildCollection($class, $urlOrData, $filter)
     {
-        if (is_array($urlOrData)) {
-            // data
-            return new $class($this->client, null, $urlOrData, $filter);
-        } else {
+        if ($urlOrData === null) {
+            // empty collection with no url
+            return new $class($this->client, null, [], $filter);
+        }
+        if (is_string($urlOrData)) {
             // url
             return new $class($this->client, $urlOrData, null, $filter);
         }
+
+        // data
+        return new $class($this->client, null, $urlOrData, $filter);
     }
 
     protected function hasNamespace($name)

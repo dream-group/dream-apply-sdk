@@ -28,7 +28,7 @@ abstract class Record implements ArrayAccess
     /** @var array */
     protected $data;
     /** @var string|null */
-    protected $url;
+    protected $baseUrl;
     /** @var bool */
     protected $partial;
 
@@ -41,7 +41,7 @@ abstract class Record implements ArrayAccess
     public function __construct(Client $client, $url, array $data, $partial)
     {
         $this->client   = $client;
-        $this->url      = $url;
+        $this->baseUrl  = $url;
         $this->data     = $data;
         $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
 
@@ -81,10 +81,10 @@ abstract class Record implements ArrayAccess
      */
     public function getUrl()
     {
-        if ($this->url === null) {
+        if ($this->baseUrl === null) {
             throw new RuntimeException('No url for this object');
         }
-        return $this->url;
+        return $this->baseUrl;
     }
 
     /**
@@ -113,6 +113,7 @@ abstract class Record implements ArrayAccess
 
     protected function getObjectField($field, $class)
     {
+        $this->resolvePartial();
         $dataOrUrl = $this->data[$field];
 
         if ($dataOrUrl === null) {
