@@ -2,6 +2,6 @@
 
 namespace Dream\Apply\Client\Models;
 
-class ExportBlob extends BinaryRecord
+class ExportBlob extends BinaryRecordV1
 {
 }
