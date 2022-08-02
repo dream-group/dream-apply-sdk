@@ -16,7 +16,7 @@ final class PaymentGateway extends Record
     /**
      * @return int|null
      */
-    public function getId()
+    public function id()
     {
         return $this->getRawField('id');
     }
