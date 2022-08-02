@@ -7,6 +7,7 @@ use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\RuntimeException;
+use Dream\Apply\Client\Models\BinaryRecord;
 
 abstract class Record implements ArrayAccess
 {
@@ -58,7 +59,11 @@ abstract class Record implements ArrayAccess
 
     protected function retrieveData()
     {
-        return $this->client->http()->getJson($this->getUrl());
+        if ($this instanceof BinaryRecord) {
+            return $this->client->http()->getBinary($this->getUrl());
+        } else {
+            return $this->client->http()->getJson($this->getUrl());
+        }
     }
 
     protected function resolvePartial()
