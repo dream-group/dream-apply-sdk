@@ -15,7 +15,7 @@ final class IntakeDeadline extends Record
     /**
      * @return string
      */
-    public function deadline()
+    public function getDeadline()
     {
         return $this->getRawField('deadline');
     }
@@ -23,7 +23,7 @@ final class IntakeDeadline extends Record
     /**
      * @return string
      */
-    public function info()
+    public function getInfo()
     {
         return $this->getRawField('info');
     }

@@ -22,7 +22,7 @@ final class AcademicTerms extends Collection
     /**
      * @return AcademicTermTypes
      */
-    public function types()
+    public function getTypes()
     {
         return $this->buildCollection(
             AcademicTermTypes::class,

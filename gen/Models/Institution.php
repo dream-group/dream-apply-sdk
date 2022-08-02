@@ -25,7 +25,7 @@ final class Institution extends Record
     /**
      * @return int
      */
-    public function id()
+    public function getId()
     {
         return $this->getRawField('id');
     }
@@ -33,7 +33,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function status()
+    public function getStatus()
     {
         return $this->getRawField('status');
     }
@@ -41,7 +41,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function name()
+    public function getName()
     {
         return $this->getRawField('name');
     }
@@ -49,7 +49,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function country()
+    public function getCountry()
     {
         return $this->getRawField('country');
     }
@@ -57,7 +57,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function location()
+    public function getLocation()
     {
         return $this->getRawField('location');
     }
@@ -65,7 +65,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function www()
+    public function getWww()
     {
         return $this->getRawField('www');
     }
@@ -73,7 +73,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function erasmus()
+    public function getErasmus()
     {
         return $this->getRawField('erasmus');
     }
@@ -81,7 +81,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function address()
+    public function getAddress()
     {
         return $this->getRawField('address');
     }
@@ -89,7 +89,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function vat()
+    public function getVat()
     {
         return $this->getRawField('vat');
     }
@@ -97,7 +97,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function iban()
+    public function getIban()
     {
         return $this->getRawField('iban');
     }
@@ -105,7 +105,7 @@ final class Institution extends Record
     /**
      * @return string
      */
-    public function registration()
+    public function getRegistration()
     {
         return $this->getRawField('registration');
     }
@@ -113,7 +113,7 @@ final class Institution extends Record
     /**
      * @return InstitutionDepartments
      */
-    public function departments($filter = [])
+    public function getDepartments($filter = [])
     {
         return $this->buildCollection(
             InstitutionDepartments::class,

@@ -19,7 +19,7 @@ final class Administrator extends Record
     /**
      * @return int
      */
-    public function id()
+    public function getId()
     {
         return $this->getRawField('id');
     }
@@ -27,7 +27,7 @@ final class Administrator extends Record
     /**
      * @return string
      */
-    public function name()
+    public function getName()
     {
         return $this->getRawField('name');
     }
@@ -35,7 +35,7 @@ final class Administrator extends Record
     /**
      * @return string
      */
-    public function email()
+    public function getEmail()
     {
         return $this->getRawField('email');
     }
@@ -43,7 +43,7 @@ final class Administrator extends Record
     /**
      * @return string
      */
-    public function phone()
+    public function getPhone()
     {
         return $this->getRawField('phone');
     }
@@ -51,7 +51,7 @@ final class Administrator extends Record
     /**
      * @return string
      */
-    public function function()
+    public function getFunction()
     {
         return $this->getRawField('function');
     }
@@ -59,7 +59,7 @@ final class Administrator extends Record
     /**
      * @return AdministratorRoles
      */
-    public function roles()
+    public function getRoles()
     {
         return $this->buildCollection(
             AdministratorRoles::class,

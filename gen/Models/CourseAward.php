@@ -15,7 +15,7 @@ final class CourseAward extends Record
     /**
      * @return string
      */
-    public function abbr()
+    public function getAbbr()
     {
         return $this->getRawField('abbr');
     }
@@ -23,7 +23,7 @@ final class CourseAward extends Record
     /**
      * @return string
      */
-    public function full()
+    public function getFull()
     {
         return $this->getRawField('full');
     }

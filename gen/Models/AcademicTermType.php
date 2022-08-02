@@ -40,7 +40,7 @@ final class AcademicTermType extends Record
     /**
      * @return string
      */
-    public function name()
+    public function getName()
     {
         return $this->getRawField('name');
     }
