@@ -2,8 +2,8 @@
 
 namespace Dream\Apply\Client\CreatableModels;
 
+use Dream\Apply\Client\BaseModels\CreatableModel;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use Dream\Apply\Client\Models\Base\CreatableModel;
 use Dream\Apply\Client\Models\Institution;
 
 /**

@@ -2,8 +2,8 @@
 
 namespace Dream\Apply\Client\Models;
 
+use Dream\Apply\Client\BaseModels\Record;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
-use Dream\Apply\Client\Models\Base\Record;
 use Psr\Http\Message\StreamInterface;
 
 /**
