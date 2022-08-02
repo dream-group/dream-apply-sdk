@@ -14,7 +14,7 @@ final class CourseProspect extends Record
     /**
      * @return string
      */
-    public function url()
+    public function getUrl()
     {
         return $this->getRawField('url');
     }

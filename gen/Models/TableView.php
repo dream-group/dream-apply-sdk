@@ -18,7 +18,7 @@ final class TableView extends Record
     /**
      * @return int
      */
-    public function id()
+    public function getId()
     {
         return $this->getRawField('id');
     }
@@ -26,7 +26,7 @@ final class TableView extends Record
     /**
      * @return string
      */
-    public function created()
+    public function getCreated()
     {
         return $this->getRawField('created');
     }
@@ -34,7 +34,7 @@ final class TableView extends Record
     /**
      * @return string
      */
-    public function modified()
+    public function getModified()
     {
         return $this->getRawField('modified');
     }
@@ -42,7 +42,7 @@ final class TableView extends Record
     /**
      * @return string
      */
-    public function title()
+    public function getTitle()
     {
         return $this->getRawField('title');
     }
@@ -50,7 +50,7 @@ final class TableView extends Record
     /**
      * @return BinaryRecord
      */
-    public function tabledata()
+    public function getTabledata()
     {
         return $this->getObjectField('tabledata', BinaryRecord::class);
     }

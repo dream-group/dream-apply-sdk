@@ -44,7 +44,7 @@ final class Course extends Record
     /**
      * @return int
      */
-    public function id()
+    public function getId()
     {
         return $this->getRawField('id');
     }
@@ -52,7 +52,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function status()
+    public function getStatus()
     {
         return $this->getRawField('status');
     }
@@ -60,7 +60,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function updated()
+    public function getUpdated()
     {
         return $this->getRawField('updated');
     }
@@ -68,7 +68,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function featured()
+    public function getFeatured()
     {
         return $this->getRawField('featured');
     }
@@ -76,7 +76,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function type()
+    public function getType()
     {
         return $this->getRawField('type');
     }
@@ -84,7 +84,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function name()
+    public function getName()
     {
         return $this->getRawField('name');
     }
@@ -92,7 +92,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function mode()
+    public function getMode()
     {
         return $this->getRawField('mode');
     }
@@ -100,7 +100,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function duration()
+    public function getDuration()
     {
         return $this->getRawField('duration');
     }
@@ -108,7 +108,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function credits()
+    public function getCredits()
     {
         return $this->getRawField('credits');
     }
@@ -116,7 +116,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function language()
+    public function getLanguage()
     {
         return $this->getRawField('language');
     }
@@ -124,7 +124,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function country()
+    public function getCountry()
     {
         return $this->getRawField('country');
     }
@@ -132,7 +132,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function location()
+    public function getLocation()
     {
         return $this->getRawField('location');
     }
@@ -140,7 +140,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function code()
+    public function getCode()
     {
         return $this->getRawField('code');
     }
@@ -148,7 +148,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function accreditation()
+    public function getAccreditation()
     {
         return $this->getRawField('accreditation');
     }
@@ -156,7 +156,7 @@ final class Course extends Record
     /**
      * @return string
      */
-    public function quota()
+    public function getQuota()
     {
         return $this->getRawField('quota');
     }
@@ -164,7 +164,7 @@ final class Course extends Record
     /**
      * @return string|null
      */
-    public function codeInternal()
+    public function getCodeInternal()
     {
         return $this->getRawField('code_internal');
     }
@@ -172,7 +172,7 @@ final class Course extends Record
     /**
      * @return Institution
      */
-    public function institution()
+    public function getInstitution()
     {
         return $this->getObjectField('institution', Institution::class);
     }
@@ -180,7 +180,7 @@ final class Course extends Record
     /**
      * @return CourseIntakes
      */
-    public function intakes()
+    public function getIntakes()
     {
         return $this->buildCollection(
             CourseIntakes::class,
@@ -192,7 +192,7 @@ final class Course extends Record
     /**
      * @return CourseAwards
      */
-    public function awards()
+    public function getAwards()
     {
         return $this->buildCollection(
             CourseAwards::class,

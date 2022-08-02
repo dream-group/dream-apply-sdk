@@ -21,7 +21,7 @@ trait RootNamespace
     /**
      * @return AcademicTerms
      */
-    public function academicTerms()
+    public function getAcademicTerms()
     {
         return $this->buildCollection(
             AcademicTerms::class,
@@ -33,7 +33,7 @@ trait RootNamespace
     /**
      * @return AcademicYears
      */
-    public function academicYears()
+    public function getAcademicYears()
     {
         return $this->buildCollection(
             AcademicYears::class,
@@ -45,7 +45,7 @@ trait RootNamespace
     /**
      * @return Administrators
      */
-    public function administrators()
+    public function getAdministrators()
     {
         return $this->buildCollection(
             Administrators::class,
@@ -57,7 +57,7 @@ trait RootNamespace
     /**
      * @return Courses
      */
-    public function courses($filter = [])
+    public function getCourses($filter = [])
     {
         return $this->buildCollection(
             Courses::class,
@@ -69,7 +69,7 @@ trait RootNamespace
     /**
      * @return Fees
      */
-    public function fees()
+    public function getFees()
     {
         return $this->buildCollection(
             Fees::class,
@@ -81,7 +81,7 @@ trait RootNamespace
     /**
      * @return Institutions
      */
-    public function institutions($filter = [])
+    public function getInstitutions($filter = [])
     {
         return $this->buildCollection(
             Institutions::class,
@@ -93,7 +93,7 @@ trait RootNamespace
     /**
      * @return Intakes
      */
-    public function intakes()
+    public function getIntakes()
     {
         return $this->buildCollection(
             Intakes::class,
@@ -105,7 +105,7 @@ trait RootNamespace
     /**
      * @return Journal
      */
-    public function journal($filter = [])
+    public function getJournal($filter = [])
     {
         return $this->buildCollection(
             Journal::class,
@@ -117,7 +117,7 @@ trait RootNamespace
     /**
      * @return TableViews
      */
-    public function tableviews()
+    public function getTableviews()
     {
         return $this->buildCollection(
             TableViews::class,

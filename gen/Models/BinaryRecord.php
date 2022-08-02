@@ -20,7 +20,7 @@ final class BinaryRecord extends Record
     /**
      * @return string|null
      */
-    public function uploaded()
+    public function getUploaded()
     {
         return $this->getRawField('uploaded');
     }
@@ -28,7 +28,7 @@ final class BinaryRecord extends Record
     /**
      * @return string
      */
-    public function name()
+    public function getName()
     {
         return $this->getRawField('name');
     }
@@ -36,7 +36,7 @@ final class BinaryRecord extends Record
     /**
      * @return string
      */
-    public function mime()
+    public function getMime()
     {
         return $this->getRawField('mime');
     }
@@ -44,7 +44,7 @@ final class BinaryRecord extends Record
     /**
      * @return int
      */
-    public function size()
+    public function getSize()
     {
         return $this->getRawField('size');
     }
@@ -52,7 +52,7 @@ final class BinaryRecord extends Record
     /**
      * @return StreamInterface
      */
-    public function content()
+    public function getContent()
     {
         return $this->getRawField('content');
     }
@@ -60,7 +60,7 @@ final class BinaryRecord extends Record
     /**
      * @return string|null
      */
-    public function expires()
+    public function getExpires()
     {
         return $this->getRawField('expires');
     }
