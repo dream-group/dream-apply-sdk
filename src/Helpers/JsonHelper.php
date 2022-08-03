@@ -16,7 +16,7 @@ final class JsonHelper
      */
     public static function encode($data)
     {
-        $encoded = json_encode($data);
+        $encoded = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new \RuntimeException('Json encoding failed');

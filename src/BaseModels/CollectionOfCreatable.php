@@ -7,6 +7,8 @@ use Dream\Apply\Client\Exceptions\DuplicateItemException;
 use Dream\Apply\Client\Exceptions\InvalidItemException;
 use Dream\Apply\Client\Helpers\ExceptionHelper;
 use Dream\Apply\Client\Helpers\HttpHelper;
+use Dream\Apply\Client\Helpers\JsonHelper;
+use Dream\Apply\Client\Helpers\StringHelper;
 use Dream\Apply\Client\Models\Record;
 
 trait CollectionOfCreatable
@@ -36,7 +38,13 @@ trait CollectionOfCreatable
         if ($response->getStatusCode() === HttpHelper::STATUS_CREATED) {
             $url = $response->getHeaderLine('Location');
             $class = $this->getItemClass();
-            return new $class($this->client, $url, [], true);
+            $contentType = $response->getHeaderLine('Content-Type');
+            if ($contentType === 'application/json' || StringHelper::startsWith($contentType, 'application/json;')) {
+                $data = JsonHelper::decode(strval($response->getBody()));
+            } else {
+                $data = [];
+            }
+            return new $class($this->client, $url, $data, true);
         }
         if ($response->getStatusCode() === HttpHelper::STATUS_CONFLICT) {
             throw new DuplicateItemException($duplicateMessage);
