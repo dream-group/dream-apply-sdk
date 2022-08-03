@@ -9,6 +9,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read AcademicTerms $academicTerms
  * @property-read AcademicYears $academicYears
  * @property-read Administrators $administrators
+ * @property-read Applicants $applicants
  * @property-read Courses $courses
  * @property-read Fees $fees
  * @property-read Institutions $institutions
@@ -52,6 +53,18 @@ trait RootNamespace
             Administrators::class,
             $this->baseUrl . '/administrators',
             []
+        );
+    }
+
+    /**
+     * @return Applicants
+     */
+    public function getApplicants($filter = [])
+    {
+        return $this->buildCollection(
+            Applicants::class,
+            $this->baseUrl . '/applicants',
+            $filter
         );
     }
 
@@ -162,6 +175,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'applicants') {
+            return $this->buildCollection(
+                Applicants::class,
+                $this->baseUrl . '/applicants',
+                []
+            );
+        }
         if ($name === 'courses') {
             return $this->buildCollection(
                 Courses::class,
@@ -220,6 +240,7 @@ trait RootNamespace
             'academicTerms',
             'academicYears',
             'administrators',
+            'applicants',
             'courses',
             'fees',
             'institutions',

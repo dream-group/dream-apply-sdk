@@ -8,8 +8,6 @@ use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\StringHelper;
-use Dream\Apply\Client\Models\Applicant;
-use Dream\Apply\Client\Models\ApplicantCollection;
 use Dream\Apply\Client\Models\Application;
 use Dream\Apply\Client\Models\ApplicationCollection;
 use Dream\Apply\Client\Models\Classificators;
@@ -30,9 +28,6 @@ use SensitiveParameter;
 /**
  * Class Client
  * @package Dream\DreamApply\Client
- *
- * @property-read ApplicantCollection|Applicant[] $applicants
- * @method        ApplicantCollection|Applicant[] applicants(array $filter = [])
  *
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
@@ -55,7 +50,6 @@ final class Client extends UrlNamespace
     private $http;
 
     protected $collectionLinks = [
-        'applicants'        => Applicant::class,
         'applications'      => Application::class,
         'invoices'          => Invoice::class,
         'classificators'    => Classificators::class,
