@@ -7,6 +7,7 @@ use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Exceptions\RuntimeException;
+use Dream\Apply\Client\Helpers\ResponseHelper;
 use Dream\Apply\Client\Models\BinaryRecord;
 
 abstract class Record implements ArrayAccess
@@ -60,9 +61,9 @@ abstract class Record implements ArrayAccess
     protected function retrieveData()
     {
         if ($this instanceof BinaryRecord) {
-            return $this->client->http()->getBinary($this->getUrl());
+            return $this->client->http()->getBinary($this->getRecordUrl());
         } else {
-            return $this->client->http()->getJson($this->getUrl());
+            return $this->client->http()->getJson($this->getRecordUrl());
         }
     }
 
@@ -79,7 +80,7 @@ abstract class Record implements ArrayAccess
     /**
      * @return string item url
      */
-    public function getUrl()
+    public function getRecordUrl()
     {
         if ($this->baseUrl === null) {
             throw new RuntimeException('No url for this object');
@@ -90,9 +91,9 @@ abstract class Record implements ArrayAccess
     /**
      * @return int
      */
-    public function getId()
+    public function getRecordId()
     {
-        $urlComponents = explode('/', $this->getUrl());
+        $urlComponents = explode('/', $this->getRecordUrl());
 
         return intval(array_pop($urlComponents));
     }
@@ -130,6 +131,24 @@ abstract class Record implements ArrayAccess
     protected function hasField($name)
     {
         return in_array($name, $this->getFieldList());
+    }
+
+    protected function setField($field, $value)
+    {
+        $response = $this->client->http()->putJson($this->getRecordUrl() . '/' . $field, $value);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        $this->data[$field] = $value; // if response was successful, update value in the object
+    }
+
+    protected function deleteField($field)
+    {
+        $response = $this->client->http()->delete($this->getRecordUrl() . '/' . $field);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        $this->data[$field] = null; // if response was successful, update value in the object
     }
 
     /* Magic */
