@@ -13,13 +13,11 @@ use Dream\Apply\Client\Models\ApplicantCollection;
 use Dream\Apply\Client\Models\Application;
 use Dream\Apply\Client\Models\ApplicationCollection;
 use Dream\Apply\Client\Models\Classificators;
-use Dream\Apply\Client\Models\Collection;
 use Dream\Apply\Client\Models\LinkHandlers\CollectionLinks;
 use Dream\Apply\Client\Models\Invoice;
 use Dream\Apply\Client\Models\InvoiceCollection;
 use Dream\Apply\Client\Models\Report;
 use Dream\Apply\Client\Models\Reports;
-use Dream\Apply\Client\Models\Scoresheet;
 use Dream\Apply\Client\Models\SimpleArray;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
@@ -42,9 +40,6 @@ use SensitiveParameter;
  * @property-read InvoiceCollection|Invoice[] $invoices
  * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
  *
- * @property-read Collection|Scoresheet[] $scoresheets
- * @method        Collection|Scoresheet[] scoresheets(array $filter = [])
- *
  * @property-read SimpleArray $classificators
  *
  * @property-read Reports $reports
@@ -64,7 +59,6 @@ final class Client extends UrlNamespace
         'applications'      => Application::class,
         'invoices'          => Invoice::class,
         'classificators'    => Classificators::class,
-        'scoresheets'       => Scoresheet::class,
         'reports'           => Report::class,
     ];
 
