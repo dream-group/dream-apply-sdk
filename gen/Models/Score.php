@@ -35,6 +35,21 @@ final class Score extends Record
     }
 
     /**
+     * Decimal
+     *
+     * @param string $value
+     */
+    public function setPoints($value)
+    {
+        $this->setField('points', $value);
+    }
+
+    public function deletePoints()
+    {
+        $this->deleteField('points');
+    }
+
+    /**
      * @return array|null
      */
     public function getMapped()
@@ -48,6 +63,19 @@ final class Score extends Record
     public function getComments()
     {
         return $this->getRawField('comments');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setComments($value)
+    {
+        $this->setField('comments', $value);
+    }
+
+    public function deleteComments()
+    {
+        $this->deleteField('comments');
     }
 
     /**
