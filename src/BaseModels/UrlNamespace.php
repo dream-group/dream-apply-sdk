@@ -5,6 +5,7 @@ namespace Dream\Apply\Client\BaseModels;
 use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Helpers\StringHelper;
 
 abstract class UrlNamespace
 {
@@ -17,7 +18,7 @@ abstract class UrlNamespace
 
     public function __construct(Client $client, $baseUrl)
     {
-        if (strncmp($baseUrl, './', 2) === 0) {
+        if (StringHelper::startsWith($baseUrl, './')) {
             $baseUrl = substr($baseUrl, 2);
         }
 
