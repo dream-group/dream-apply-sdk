@@ -12,14 +12,14 @@ namespace Dream\Apply\Client\Models;
  * @property-read string $status
  *
  * @property-read Course $course
- * @property-read Applicant $applicant
+ * @property-read ApplicantV1 $applicant
  * @property-read Application $application
  */
 class StudyPlan extends Record
 {
     protected $objectLinks = [
         'course'        => Course::class,
-        'applicant'     => Applicant::class,
+        'applicant'     => ApplicantV1::class,
         'application'   => Application::class,
     ];
 }

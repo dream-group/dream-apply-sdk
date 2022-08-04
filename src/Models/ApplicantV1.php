@@ -31,7 +31,7 @@ namespace Dream\Apply\Client\Models;
  * @property-read Collection|Invoice[] $invoices
  * @property-read Collection|Wish[] $wishes
  */
-class Applicant extends Record
+class ApplicantV1 extends Record
 {
     const COLLECTION_CLASS = ApplicantCollection::class;
 

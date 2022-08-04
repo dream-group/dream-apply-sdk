@@ -25,7 +25,7 @@ namespace Dream\Apply\Client\Models;
  * @property-read $status
  *
  * @property-read AcademicTerm $academicTerm
- * @property-read Applicant $applicant
+ * @property-read ApplicantV1 $applicant
  * @property-read BinaryRecordV1 $pdf
  *
  * @property-read CollectionOfAddableAssociations|ApplicationFlag[] $flags
@@ -60,7 +60,7 @@ class Application extends Record
 
     protected $objectLinks = [
         'academic_term' => AcademicTerm::class,
-        'applicant'     => Applicant::class,
+        'applicant'     => ApplicantV1::class,
         'pdf'           => BinaryRecordV1::class,
     ];
 
