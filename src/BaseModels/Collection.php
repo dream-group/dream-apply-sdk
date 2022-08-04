@@ -15,7 +15,6 @@ use Dream\Apply\Client\Helpers\ExceptionHelper;
 use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\ResponseHelper;
 use Dream\Apply\Client\Models\BinaryRecord;
-use Dream\Apply\Client\Models\Record;
 use IteratorAggregate;
 
 abstract class Collection extends UrlNamespace implements Countable, ArrayAccess, IteratorAggregate
@@ -223,7 +222,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
             $object = $idOrObject;
 
             if ($object instanceof $class) {
-                return $object->url();
+                return $object->getRecordUrl();
             }
 
             throw new InvalidArgumentException(sprintf(
