@@ -7,17 +7,161 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
+ * @property-read int $id
+ * @property-read string $type
+ * @property-read string $registered
+ * @property-read string $email
+ * @property-read string $phone
+ * @property-read string $reference
+ * @property-read string $citizenship
+ * @property-read string|null $address
+ * @property-read string|null $vatin
+ * @property-read BinaryRecord $photo
  */
 final class Applicant extends Record
 {
+    const TYPE_NATURAL = 'Natural';
+
+    const TYPE_CHILD = 'Child';
+
+    const TYPE_LEGAL = 'Legal';
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getRawField('type');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistered()
+    {
+        return $this->getRawField('registered');
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getRawField('email');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->getRawField('phone');
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->getRawField('reference');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setReference($value)
+    {
+        $this->setField('reference', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCitizenship()
+    {
+        return $this->getRawField('citizenship');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress()
+    {
+        return $this->getRawField('address');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVatin()
+    {
+        return $this->getRawField('vatin');
+    }
+
+    /**
+     * @return BinaryRecord
+     */
+    public function getPhoto()
+    {
+        return $this->getObjectField('photo', BinaryRecord::class);
+    }
+
     protected function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
+        if ($name === 'type') {
+            return $this->getRawField('type');
+        }
+        if ($name === 'registered') {
+            return $this->getRawField('registered');
+        }
+        if ($name === 'email') {
+            return $this->getRawField('email');
+        }
+        if ($name === 'phone') {
+            return $this->getRawField('phone');
+        }
+        if ($name === 'reference') {
+            return $this->getRawField('reference');
+        }
+        if ($name === 'citizenship') {
+            return $this->getRawField('citizenship');
+        }
+        if ($name === 'address') {
+            return $this->getRawField('address');
+        }
+        if ($name === 'vatin') {
+            return $this->getRawField('vatin');
+        }
+        if ($name === 'photo') {
+            return $this->getObjectField('photo', BinaryRecord::class);
+        }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getFieldList()
     {
         return [
+            'id',
+            'type',
+            'registered',
+            'email',
+            'phone',
+            'reference',
+            'citizenship',
+            'address',
+            'vatin',
+            'photo',
         ];
     }
 
