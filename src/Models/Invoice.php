@@ -17,7 +17,7 @@ namespace Dream\Apply\Client\Models;
  * @property-read string $smallprint
  * @property-read array  $payer
  *
- * @property-read Applicant $applicant
+ * @property-read ApplicantV1 $applicant
  *
  * @property-read TransactionCollection|Transaction[] $transactions
  */
@@ -27,7 +27,7 @@ class Invoice extends Record
     const CHILD_COLLECTION_CLASS = Collection::class;
 
     protected $objectLinks = [
-        'applicant' => Applicant::class,
+        'applicant' => ApplicantV1::class,
     ];
 
     protected $collectionLinks = [
