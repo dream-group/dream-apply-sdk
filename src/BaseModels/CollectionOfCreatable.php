@@ -9,7 +9,6 @@ use Dream\Apply\Client\Helpers\ExceptionHelper;
 use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\JsonHelper;
 use Dream\Apply\Client\Helpers\StringHelper;
-use Dream\Apply\Client\Models\Record;
 
 trait CollectionOfCreatable
 {
