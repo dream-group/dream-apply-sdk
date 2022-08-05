@@ -19,6 +19,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string|null $vatin
  * @property-read BinaryRecord $photo
  * @property-read Documents $documents
+ * @property-read ApplicantInvoices $invoices
  * @property-read Wishes $wishes
  * @property-read Emails $emails
  */
@@ -160,6 +161,18 @@ final class Applicant extends Record
     }
 
     /**
+     * @return ApplicantInvoices
+     */
+    public function getInvoices()
+    {
+        return $this->buildCollection(
+            ApplicantInvoices::class,
+            $this->getRawField('invoices'),
+            []
+        );
+    }
+
+    /**
      * @return Wishes
      */
     public function getWishes()
@@ -247,6 +260,13 @@ final class Applicant extends Record
                 []
             );
         }
+        if ($name === 'invoices') {
+            return $this->buildCollection(
+                ApplicantInvoices::class,
+                $this->getRawField('invoices'),
+                []
+            );
+        }
         if ($name === 'wishes') {
             return $this->buildCollection(
                 Wishes::class,
@@ -268,6 +288,7 @@ final class Applicant extends Record
     {
         return [
             'documents',
+            'invoices',
             'wishes',
             'emails',
         ];
