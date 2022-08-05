@@ -142,6 +142,18 @@ abstract class Record implements ArrayAccess
         $this->data[$field] = $value; // if response was successful, update value in the object
     }
 
+    protected function patchField($field, $value)
+    {
+        $response = $this->client->http()->patchJson($this->getRecordUrl() . '/' . $field, $value);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        // if response was successful, update value in the object
+        // we don't know how the value was updated so unset it and mark object as partial
+        unset($this->data[$field]);
+        $this->partial = true;
+    }
+
     protected function deleteField($field)
     {
         $response = $this->client->http()->delete($this->getRecordUrl() . '/' . $field);

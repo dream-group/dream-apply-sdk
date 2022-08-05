@@ -14,9 +14,13 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $phone
  * @property-read string $reference
  * @property-read string $citizenship
+ * @property-read string $notes
  * @property-read string|null $address
  * @property-read string|null $vatin
  * @property-read BinaryRecord $photo
+ * @property-read Documents $documents
+ * @property-read Wishes $wishes
+ * @property-read Emails $emails
  */
 final class Applicant extends Record
 {
@@ -91,6 +95,35 @@ final class Applicant extends Record
     }
 
     /**
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->getRawField('notes');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setNotes($value)
+    {
+        $this->setField('notes', $value);
+    }
+
+    /**
+     * @param string $value
+     */
+    public function appendNotes($value)
+    {
+        $this->patchField('notes', $value);
+    }
+
+    public function deleteNotes()
+    {
+        $this->deleteField('notes');
+    }
+
+    /**
      * @return string|null
      */
     public function getAddress()
@@ -112,6 +145,42 @@ final class Applicant extends Record
     public function getPhoto()
     {
         return $this->getObjectField('photo', BinaryRecord::class);
+    }
+
+    /**
+     * @return Documents
+     */
+    public function getDocuments()
+    {
+        return $this->buildCollection(
+            Documents::class,
+            $this->getRawField('documents'),
+            []
+        );
+    }
+
+    /**
+     * @return Wishes
+     */
+    public function getWishes()
+    {
+        return $this->buildCollection(
+            Wishes::class,
+            $this->getRawField('wishes'),
+            []
+        );
+    }
+
+    /**
+     * @return Emails
+     */
+    public function getEmails()
+    {
+        return $this->buildCollection(
+            Emails::class,
+            $this->baseUrl . '/emails',
+            []
+        );
     }
 
     protected function getField($name)
@@ -137,6 +206,9 @@ final class Applicant extends Record
         if ($name === 'citizenship') {
             return $this->getRawField('citizenship');
         }
+        if ($name === 'notes') {
+            return $this->getRawField('notes');
+        }
         if ($name === 'address') {
             return $this->getRawField('address');
         }
@@ -159,6 +231,7 @@ final class Applicant extends Record
             'phone',
             'reference',
             'citizenship',
+            'notes',
             'address',
             'vatin',
             'photo',
@@ -167,12 +240,36 @@ final class Applicant extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'documents') {
+            return $this->buildCollection(
+                Documents::class,
+                $this->getRawField('documents'),
+                []
+            );
+        }
+        if ($name === 'wishes') {
+            return $this->buildCollection(
+                Wishes::class,
+                $this->getRawField('wishes'),
+                []
+            );
+        }
+        if ($name === 'emails') {
+            return $this->buildCollection(
+                Emails::class,
+                $this->baseUrl . '/emails',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'documents',
+            'wishes',
+            'emails',
         ];
     }
 }

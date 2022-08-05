@@ -5,7 +5,6 @@ namespace Dream\Apply\Client\Models;
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
 use Dream\Apply\Client\BaseModels\CollectionOfCreatable;
-use Dream\Apply\Client\BaseModels\CollectionWithFilter;
 use Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
@@ -16,42 +15,16 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, Applicant>
- * @implements IteratorAggregate<int, Applicant>
- * @property-read Consents $consents
- * @property-read Trackers $trackers
+ * @implements ArrayAccess<int, Email>
+ * @implements IteratorAggregate<int, Email>
  */
-final class Applicants extends Collection
+final class Emails extends Collection
 {
-    use CollectionWithFilter, CollectionOfCreatable;
-
-    /**
-     * @return Consents
-     */
-    public function getConsents()
-    {
-        return $this->buildCollection(
-            Consents::class,
-            $this->baseUrl . '/consents',
-            []
-        );
-    }
-
-    /**
-     * @return Trackers
-     */
-    public function getTrackers()
-    {
-        return $this->buildCollection(
-            Trackers::class,
-            $this->baseUrl . '/trackers',
-            []
-        );
-    }
+    use CollectionOfCreatable;
 
     protected function getItemClass()
     {
-        return Applicant::class;
+        return Email::class;
     }
 
     protected function isItemInQueryPartial()
@@ -69,7 +42,7 @@ final class Applicants extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Applicant
+     * @return Email
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -90,7 +63,7 @@ final class Applicants extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Applicant
+     * @return Email
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -108,7 +81,7 @@ final class Applicants extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int|string $id
-     * @return Applicant
+     * @return Email
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -121,36 +94,20 @@ final class Applicants extends Collection
 
     protected function getNamespace($name)
     {
-        if ($name === 'consents') {
-            return $this->buildCollection(
-                Consents::class,
-                $this->baseUrl . '/consents',
-                []
-            );
-        }
-        if ($name === 'trackers') {
-            return $this->buildCollection(
-                Trackers::class,
-                $this->baseUrl . '/trackers',
-                []
-            );
-        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
-            'consents',
-            'trackers',
         ];
     }
 
     /**
-     * @return Applicant
+     * @return Email
      */
-    public function create(CreatableModels\Applicant $object)
+    public function create(CreatableModels\Email $object)
     {
-        return $this->doCreate($object, 'Applicant with such email already exists');
+        return $this->doCreate($object);
     }
 }
