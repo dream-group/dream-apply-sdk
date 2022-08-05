@@ -108,6 +108,6 @@ final class Trackers extends Collection
      */
     public function create(CreatableModels\Tracker $object)
     {
-        return $this->doCreate($object);
+        return $this->doCreate($object, 'Tracker with such code already exists');
     }
 }

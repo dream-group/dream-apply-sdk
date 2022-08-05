@@ -282,4 +282,21 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
         $request->getBody()->write(JsonHelper::encode($data));
         return $this->sendRequest($request);
     }
+
+    /**
+     * Perform PATCH request with JSON body, return PSR-7 object
+     *
+     * @param $url
+     * @param mixed $data data to be encoded and sent
+     * @return ResponseInterface
+     * @throws HttpClientException
+     */
+    public function patchJson($url, $data)
+    {
+        $request = $this->createRequest('PATCH', $this->createUri($url))
+            ->withHeader('Content-Type', 'application/json')
+        ;
+        $request->getBody()->write(JsonHelper::encode($data));
+        return $this->sendRequest($request);
+    }
 }
