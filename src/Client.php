@@ -12,8 +12,6 @@ use Dream\Apply\Client\OldModels\Application;
 use Dream\Apply\Client\OldModels\ApplicationCollection;
 use Dream\Apply\Client\OldModels\Classificators;
 use Dream\Apply\Client\OldModels\LinkHandlers\CollectionLinks;
-use Dream\Apply\Client\OldModels\Invoice;
-use Dream\Apply\Client\OldModels\InvoiceCollection;
 use Dream\Apply\Client\OldModels\Report;
 use Dream\Apply\Client\OldModels\Reports;
 use Dream\Apply\Client\OldModels\SimpleArray;
@@ -32,9 +30,6 @@ use SensitiveParameter;
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
  *
- * @property-read InvoiceCollection|Invoice[] $invoices
- * @method        InvoiceCollection|Invoice[] invoices(array $filter = [])
- *
  * @property-read SimpleArray $classificators
  *
  * @property-read Reports $reports
@@ -51,7 +46,6 @@ final class Client extends UrlNamespace
 
     protected $collectionLinks = [
         'applications'      => Application::class,
-        'invoices'          => Invoice::class,
         'classificators'    => Classificators::class,
         'reports'           => Report::class,
     ];

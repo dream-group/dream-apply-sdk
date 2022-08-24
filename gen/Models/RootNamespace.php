@@ -14,6 +14,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Fees $fees
  * @property-read Institutions $institutions
  * @property-read Intakes $intakes
+ * @property-read Invoices $invoices
  * @property-read Journal $journal
  * @property-read Scoresheets $scoresheets
  * @property-read TableViews $tableviews
@@ -117,6 +118,18 @@ trait RootNamespace
     }
 
     /**
+     * @return Invoices
+     */
+    public function getInvoices($filter = [])
+    {
+        return $this->buildCollection(
+            Invoices::class,
+            $this->baseUrl . '/invoices',
+            $filter
+        );
+    }
+
+    /**
      * @return Journal
      */
     public function getJournal($filter = [])
@@ -210,6 +223,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'invoices') {
+            return $this->buildCollection(
+                Invoices::class,
+                $this->baseUrl . '/invoices',
+                []
+            );
+        }
         if ($name === 'journal') {
             return $this->buildCollection(
                 Journal::class,
@@ -245,6 +265,7 @@ trait RootNamespace
             'fees',
             'institutions',
             'intakes',
+            'invoices',
             'journal',
             'scoresheets',
             'tableviews',
