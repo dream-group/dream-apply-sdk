@@ -21,6 +21,8 @@ trait CollectionOfCreatable
     protected $client;
     /** @var string */
     protected $baseUrl;
+    /** @var array collection query raw data */
+    protected $data;
 
     /**
      * @param CreatableModel $model
@@ -43,6 +45,9 @@ trait CollectionOfCreatable
             } else {
                 $data = [];
             }
+
+            $this->data = null; // invalidate collection data
+
             return new $class($this->client, $url, $data, true);
         }
         if ($response->getStatusCode() === HttpHelper::STATUS_CONFLICT) {
