@@ -132,6 +132,25 @@ abstract class Record implements ArrayAccess
         return new $class($this->client, null, $dataOrUrl, false);
     }
 
+    protected function hasObjectField($field)
+    {
+        if (!isset($this->data[$field])) {
+            $this->resolvePartial();
+        }
+        $dataOrUrl = $this->data[$field];
+
+        if ($dataOrUrl === null) {
+            return false;
+        }
+
+        if (is_string($dataOrUrl)) {
+            $response = $this->client->http()->head($dataOrUrl);
+            return ResponseHelper::resourceExistsByResponse($response);
+        }
+
+        return true;
+    }
+
     protected function hasField($name)
     {
         return in_array($name, $this->getFieldList());
