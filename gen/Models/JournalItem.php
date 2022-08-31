@@ -55,6 +55,23 @@ final class JournalItem extends Record
         return $this->getObjectField('institution', Institution::class);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasInstitution()
+    {
+        return $this->hasObjectField('institution');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasInstitution() instead
+     */
+    public function institutionExists()
+    {
+        return $this->hasInstitution();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {

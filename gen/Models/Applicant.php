@@ -18,7 +18,11 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string|null $address
  * @property-read string|null $vatin
  * @property-read BinaryRecord $photo
+ * @property-read ApplicantApplications $applications
+ * @property-read ApplicantTrackers $trackers
  * @property-read Documents $documents
+ * @property-read StudyPlans $studyplans
+ * @property-read ApplicantConsents $consents
  * @property-read ApplicantInvoices $invoices
  * @property-read Wishes $wishes
  * @property-read Emails $emails
@@ -149,6 +153,47 @@ final class Applicant extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasPhoto()
+    {
+        return $this->hasObjectField('photo');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasPhoto() instead
+     */
+    public function photoExists()
+    {
+        return $this->hasPhoto();
+    }
+
+    /**
+     * @return ApplicantApplications
+     */
+    public function getApplications()
+    {
+        return $this->buildCollection(
+            ApplicantApplications::class,
+            $this->getRawField('applications'),
+            []
+        );
+    }
+
+    /**
+     * @return ApplicantTrackers
+     */
+    public function getTrackers()
+    {
+        return $this->buildCollection(
+            ApplicantTrackers::class,
+            $this->getRawField('trackers'),
+            []
+        );
+    }
+
+    /**
      * @return Documents
      */
     public function getDocuments()
@@ -156,6 +201,30 @@ final class Applicant extends Record
         return $this->buildCollection(
             Documents::class,
             $this->getRawField('documents'),
+            []
+        );
+    }
+
+    /**
+     * @return StudyPlans
+     */
+    public function getStudyplans()
+    {
+        return $this->buildCollection(
+            StudyPlans::class,
+            $this->getRawField('studyplans'),
+            []
+        );
+    }
+
+    /**
+     * @return ApplicantConsents
+     */
+    public function getConsents()
+    {
+        return $this->buildCollection(
+            ApplicantConsents::class,
+            $this->getRawField('consents'),
             []
         );
     }
@@ -253,10 +322,38 @@ final class Applicant extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'applications') {
+            return $this->buildCollection(
+                ApplicantApplications::class,
+                $this->getRawField('applications'),
+                []
+            );
+        }
+        if ($name === 'trackers') {
+            return $this->buildCollection(
+                ApplicantTrackers::class,
+                $this->getRawField('trackers'),
+                []
+            );
+        }
         if ($name === 'documents') {
             return $this->buildCollection(
                 Documents::class,
                 $this->getRawField('documents'),
+                []
+            );
+        }
+        if ($name === 'studyplans') {
+            return $this->buildCollection(
+                StudyPlans::class,
+                $this->getRawField('studyplans'),
+                []
+            );
+        }
+        if ($name === 'consents') {
+            return $this->buildCollection(
+                ApplicantConsents::class,
+                $this->getRawField('consents'),
                 []
             );
         }
@@ -287,7 +384,11 @@ final class Applicant extends Record
     protected function getNamespaceList()
     {
         return [
+            'applications',
+            'trackers',
             'documents',
+            'studyplans',
+            'consents',
             'invoices',
             'wishes',
             'emails',

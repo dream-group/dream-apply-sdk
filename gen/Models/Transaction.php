@@ -60,6 +60,23 @@ final class Transaction extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasInvoice()
+    {
+        return $this->hasObjectField('invoice');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasInvoice() instead
+     */
+    public function invoiceExists()
+    {
+        return $this->hasInvoice();
+    }
+
+    /**
      * @return Administrator|null
      */
     public function getAdministrator()
@@ -68,11 +85,45 @@ final class Transaction extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasAdministrator()
+    {
+        return $this->hasObjectField('administrator');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasAdministrator() instead
+     */
+    public function administratorExists()
+    {
+        return $this->hasAdministrator();
+    }
+
+    /**
      * @return Payment|null
      */
     public function getPayment()
     {
         return $this->getObjectField('payment', Payment::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPayment()
+    {
+        return $this->hasObjectField('payment');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasPayment() instead
+     */
+    public function paymentExists()
+    {
+        return $this->hasPayment();
     }
 
     protected function getField($name)

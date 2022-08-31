@@ -50,6 +50,23 @@ final class Tracker extends Record
         return $this->getObjectField('reduction', TrackerReduction::class);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasReduction()
+    {
+        return $this->hasObjectField('reduction');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasReduction() instead
+     */
+    public function reductionExists()
+    {
+        return $this->hasReduction();
+    }
+
     protected function getField($name)
     {
         if ($name === 'created') {

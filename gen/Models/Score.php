@@ -94,6 +94,23 @@ final class Score extends Record
         return $this->getObjectField('scoresheet', Scoresheet::class);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasScoresheet()
+    {
+        return $this->hasObjectField('scoresheet');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasScoresheet() instead
+     */
+    public function scoresheetExists()
+    {
+        return $this->hasScoresheet();
+    }
+
     protected function getField($name)
     {
         if ($name === 'scored') {
