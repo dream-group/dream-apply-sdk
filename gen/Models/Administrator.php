@@ -68,6 +68,15 @@ final class Administrator extends Record
         );
     }
 
+    /**
+     * @deprecated Use getRoles() instead
+     * @return AdministratorRoles
+     */
+    public function roles()
+    {
+        return $this->getRoles();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {

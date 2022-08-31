@@ -57,6 +57,15 @@ final class AcademicTerm extends Record
     }
 
     /**
+     * @return AcademicYear
+     * @deprecated Use getYear() instead
+     */
+    public function year()
+    {
+        return $this->getYear();
+    }
+
+    /**
      * @return bool
      */
     public function hasYear()
@@ -79,6 +88,15 @@ final class AcademicTerm extends Record
     public function getType()
     {
         return $this->getObjectField('type', AcademicTermType::class);
+    }
+
+    /**
+     * @return AcademicTermType
+     * @deprecated Use getType() instead
+     */
+    public function type()
+    {
+        return $this->getType();
     }
 
     /**

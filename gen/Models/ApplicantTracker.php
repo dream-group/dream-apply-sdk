@@ -29,6 +29,15 @@ final class ApplicantTracker extends Record
     }
 
     /**
+     * @return Tracker
+     * @deprecated Use getTracker() instead
+     */
+    public function tracker()
+    {
+        return $this->getTracker();
+    }
+
+    /**
      * @return bool
      */
     public function hasTracker()

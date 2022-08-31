@@ -4,6 +4,9 @@ namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
+use Dream\Apply\Client\BaseModels\CollectionOfCreatable;
+use Dream\Apply\Client\BaseModels\CollectionOfDeletable;
+use Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -13,36 +16,16 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, AcademicTerm>
- * @implements IteratorAggregate<int, AcademicTerm>
- * @property-read AcademicTermTypes $types
+ * @implements ArrayAccess<int, Flag>
+ * @implements IteratorAggregate<int, Flag>
  */
-final class AcademicTerms extends Collection
+final class Flags extends Collection
 {
-    /**
-     * @return AcademicTermTypes
-     */
-    public function getTypes()
-    {
-        return $this->buildCollection(
-            AcademicTermTypes::class,
-            $this->baseUrl . '/types',
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getTypes() instead
-     * @return AcademicTermTypes
-     */
-    public function types()
-    {
-        return $this->getTypes();
-    }
+    use CollectionOfCreatable, CollectionOfDeletable;
 
     protected function getItemClass()
     {
-        return AcademicTerm::class;
+        return Flag::class;
     }
 
     protected function isItemInQueryPartial()
@@ -60,7 +43,7 @@ final class AcademicTerms extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicTerm
+     * @return Flag
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -81,7 +64,7 @@ final class AcademicTerms extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicTerm
+     * @return Flag
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -99,7 +82,7 @@ final class AcademicTerms extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int|string $id
-     * @return AcademicTerm
+     * @return Flag
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -112,20 +95,28 @@ final class AcademicTerms extends Collection
 
     protected function getNamespace($name)
     {
-        if ($name === 'types') {
-            return $this->buildCollection(
-                AcademicTermTypes::class,
-                $this->baseUrl . '/types',
-                []
-            );
-        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
-            'types',
         ];
+    }
+
+    /**
+     * @return Flag
+     */
+    public function create(CreatableModels\Flag $object)
+    {
+        return $this->doCreate($object, 'Flag with such name already exists');
+    }
+
+    /**
+     * @param Flag|int $idOrObject
+     */
+    public function delete($idOrObject)
+    {
+        $this->doDelete($idOrObject);
     }
 }

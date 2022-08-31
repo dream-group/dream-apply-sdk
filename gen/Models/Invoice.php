@@ -113,6 +113,15 @@ final class Invoice extends Record
     }
 
     /**
+     * @return Applicant|null
+     * @deprecated Use getApplicant() instead
+     */
+    public function applicant()
+    {
+        return $this->getApplicant();
+    }
+
+    /**
      * @return bool
      */
     public function hasApplicant()
@@ -135,6 +144,15 @@ final class Invoice extends Record
     public function getApplication()
     {
         return $this->getObjectField('application', Application::class);
+    }
+
+    /**
+     * @return Application|null
+     * @deprecated Use getApplication() instead
+     */
+    public function application()
+    {
+        return $this->getApplication();
     }
 
     /**
@@ -163,6 +181,15 @@ final class Invoice extends Record
     }
 
     /**
+     * @return Course|null
+     * @deprecated Use getCourse() instead
+     */
+    public function course()
+    {
+        return $this->getCourse();
+    }
+
+    /**
      * @return bool
      */
     public function hasCourse()
@@ -185,6 +212,15 @@ final class Invoice extends Record
     public function getPayer()
     {
         return $this->getObjectField('payer', InvoicePayer::class);
+    }
+
+    /**
+     * @return InvoicePayer
+     * @deprecated Use getPayer() instead
+     */
+    public function payer()
+    {
+        return $this->getPayer();
     }
 
     /**

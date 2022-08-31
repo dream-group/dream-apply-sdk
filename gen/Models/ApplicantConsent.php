@@ -38,6 +38,15 @@ final class ApplicantConsent extends Record
     }
 
     /**
+     * @return Consent
+     * @deprecated Use getConsent() instead
+     */
+    public function consent()
+    {
+        return $this->getConsent();
+    }
+
+    /**
      * @return bool
      */
     public function hasConsent()

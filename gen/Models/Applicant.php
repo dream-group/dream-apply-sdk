@@ -153,6 +153,15 @@ final class Applicant extends Record
     }
 
     /**
+     * @return BinaryRecord
+     * @deprecated Use getPhoto() instead
+     */
+    public function photo()
+    {
+        return $this->getPhoto();
+    }
+
+    /**
      * @return bool
      */
     public function hasPhoto()
@@ -182,6 +191,15 @@ final class Applicant extends Record
     }
 
     /**
+     * @deprecated Use getApplications() instead
+     * @return ApplicantApplications
+     */
+    public function applications()
+    {
+        return $this->getApplications();
+    }
+
+    /**
      * @return ApplicantTrackers
      */
     public function getTrackers()
@@ -191,6 +209,15 @@ final class Applicant extends Record
             $this->getRawField('trackers'),
             []
         );
+    }
+
+    /**
+     * @deprecated Use getTrackers() instead
+     * @return ApplicantTrackers
+     */
+    public function trackers()
+    {
+        return $this->getTrackers();
     }
 
     /**
@@ -206,6 +233,15 @@ final class Applicant extends Record
     }
 
     /**
+     * @deprecated Use getDocuments() instead
+     * @return Documents
+     */
+    public function documents()
+    {
+        return $this->getDocuments();
+    }
+
+    /**
      * @return StudyPlans
      */
     public function getStudyplans()
@@ -215,6 +251,15 @@ final class Applicant extends Record
             $this->getRawField('studyplans'),
             []
         );
+    }
+
+    /**
+     * @deprecated Use getStudyplans() instead
+     * @return StudyPlans
+     */
+    public function studyplans()
+    {
+        return $this->getStudyplans();
     }
 
     /**
@@ -230,6 +275,15 @@ final class Applicant extends Record
     }
 
     /**
+     * @deprecated Use getConsents() instead
+     * @return ApplicantConsents
+     */
+    public function consents()
+    {
+        return $this->getConsents();
+    }
+
+    /**
      * @return ApplicantInvoices
      */
     public function getInvoices()
@@ -239,6 +293,15 @@ final class Applicant extends Record
             $this->getRawField('invoices'),
             []
         );
+    }
+
+    /**
+     * @deprecated Use getInvoices() instead
+     * @return ApplicantInvoices
+     */
+    public function invoices()
+    {
+        return $this->getInvoices();
     }
 
     /**
@@ -254,6 +317,15 @@ final class Applicant extends Record
     }
 
     /**
+     * @deprecated Use getWishes() instead
+     * @return Wishes
+     */
+    public function wishes()
+    {
+        return $this->getWishes();
+    }
+
+    /**
      * @return Emails
      */
     public function getEmails()
@@ -263,6 +335,15 @@ final class Applicant extends Record
             $this->baseUrl . '/emails',
             []
         );
+    }
+
+    /**
+     * @deprecated Use getEmails() instead
+     * @return Emails
+     */
+    public function emails()
+    {
+        return $this->getEmails();
     }
 
     protected function getField($name)

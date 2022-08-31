@@ -35,6 +35,15 @@ final class Invoices extends Collection
         );
     }
 
+    /**
+     * @deprecated Use getTransactions() instead
+     * @return Transactions
+     */
+    public function transactions($filter = [])
+    {
+        return $this->getTransactions($filter);
+    }
+
     protected function getItemClass()
     {
         return Invoice::class;

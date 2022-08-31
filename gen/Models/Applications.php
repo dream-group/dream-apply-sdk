@@ -16,10 +16,72 @@ use IteratorAggregate;
  * @generated
  * @implements ArrayAccess<int, Application>
  * @implements IteratorAggregate<int, Application>
+ * @property-read Flags $flags
+ * @property-read ApplicationStatuses $statuses
+ * @property-read Offers $offers
  */
 final class Applications extends Collection
 {
     use CollectionWithFilter;
+
+    /**
+     * @return Flags
+     */
+    public function getFlags()
+    {
+        return $this->buildCollection(
+            Flags::class,
+            $this->baseUrl . '/flags',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getFlags() instead
+     * @return Flags
+     */
+    public function flags()
+    {
+        return $this->getFlags();
+    }
+
+    /**
+     * @return ApplicationStatuses
+     */
+    public function getStatuses()
+    {
+        return $this->buildCollection(
+            ApplicationStatuses::class,
+            $this->baseUrl . '/statuses',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getStatuses() instead
+     * @return ApplicationStatuses
+     */
+    public function statuses()
+    {
+        return $this->getStatuses();
+    }
+
+    /**
+     * @return Offers
+     */
+    public function getOffers()
+    {
+        return $this->buildNamespace(Offers::class, $this->baseUrl . '/offers');
+    }
+
+    /**
+     * @deprecated Use getOffers() instead
+     * @return Offers
+     */
+    public function offers()
+    {
+        return $this->getOffers();
+    }
 
     protected function getItemClass()
     {
@@ -93,12 +155,32 @@ final class Applications extends Collection
 
     protected function getNamespace($name)
     {
+        if ($name === 'flags') {
+            return $this->buildCollection(
+                Flags::class,
+                $this->baseUrl . '/flags',
+                []
+            );
+        }
+        if ($name === 'statuses') {
+            return $this->buildCollection(
+                ApplicationStatuses::class,
+                $this->baseUrl . '/statuses',
+                []
+            );
+        }
+        if ($name === 'offers') {
+            return $this->buildNamespace(Offers::class, $this->baseUrl . '/offers');
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'flags',
+            'statuses',
+            'offers',
         ];
     }
 }

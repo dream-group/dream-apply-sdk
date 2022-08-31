@@ -3,7 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
-use Dream\Apply\Client\BaseModels\Collection;
+use Dream\Apply\Client\BaseModels\CollectionWithNoRecordRequests;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -13,41 +13,14 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, AcademicTerm>
- * @implements IteratorAggregate<int, AcademicTerm>
- * @property-read AcademicTermTypes $types
+ * @implements ArrayAccess<int, OfferType>
+ * @implements IteratorAggregate<int, OfferType>
  */
-final class AcademicTerms extends Collection
+final class OfferTypes extends CollectionWithNoRecordRequests
 {
-    /**
-     * @return AcademicTermTypes
-     */
-    public function getTypes()
-    {
-        return $this->buildCollection(
-            AcademicTermTypes::class,
-            $this->baseUrl . '/types',
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getTypes() instead
-     * @return AcademicTermTypes
-     */
-    public function types()
-    {
-        return $this->getTypes();
-    }
-
     protected function getItemClass()
     {
-        return AcademicTerm::class;
-    }
-
-    protected function isItemInQueryPartial()
-    {
-        return false;
+        return OfferType::class;
     }
 
     /**
@@ -60,7 +33,7 @@ final class AcademicTerms extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicTerm
+     * @return OfferType
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -81,7 +54,7 @@ final class AcademicTerms extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return AcademicTerm
+     * @return OfferType
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -99,7 +72,7 @@ final class AcademicTerms extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int|string $id
-     * @return AcademicTerm
+     * @return OfferType
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -112,20 +85,12 @@ final class AcademicTerms extends Collection
 
     protected function getNamespace($name)
     {
-        if ($name === 'types') {
-            return $this->buildCollection(
-                AcademicTermTypes::class,
-                $this->baseUrl . '/types',
-                []
-            );
-        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
-            'types',
         ];
     }
 }

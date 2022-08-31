@@ -51,6 +51,15 @@ final class Tracker extends Record
     }
 
     /**
+     * @return TrackerReduction|null
+     * @deprecated Use getReduction() instead
+     */
+    public function reduction()
+    {
+        return $this->getReduction();
+    }
+
+    /**
      * @return bool
      */
     public function hasReduction()

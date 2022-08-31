@@ -40,6 +40,15 @@ final class Wish extends Record
     }
 
     /**
+     * @return Applicant
+     * @deprecated Use getApplicant() instead
+     */
+    public function applicant()
+    {
+        return $this->getApplicant();
+    }
+
+    /**
      * @return bool
      */
     public function hasApplicant()
@@ -65,6 +74,15 @@ final class Wish extends Record
     }
 
     /**
+     * @return Course
+     * @deprecated Use getCourse() instead
+     */
+    public function course()
+    {
+        return $this->getCourse();
+    }
+
+    /**
      * @return bool
      */
     public function hasCourse()
@@ -87,6 +105,15 @@ final class Wish extends Record
     public function getIntake()
     {
         return $this->getObjectField('intake', Intake::class);
+    }
+
+    /**
+     * @return Intake|null
+     * @deprecated Use getIntake() instead
+     */
+    public function intake()
+    {
+        return $this->getIntake();
     }
 
     /**

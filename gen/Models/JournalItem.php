@@ -56,6 +56,15 @@ final class JournalItem extends Record
     }
 
     /**
+     * @return Institution|null
+     * @deprecated Use getInstitution() instead
+     */
+    public function institution()
+    {
+        return $this->getInstitution();
+    }
+
+    /**
      * @return bool
      */
     public function hasInstitution()

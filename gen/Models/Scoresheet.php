@@ -135,6 +135,15 @@ final class Scoresheet extends Record
         );
     }
 
+    /**
+     * @deprecated Use getScores() instead
+     * @return Scores
+     */
+    public function scores($filter = [])
+    {
+        return $this->getScores($filter);
+    }
+
     protected function getField($name)
     {
         if ($name === 'created') {

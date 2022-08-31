@@ -56,6 +56,15 @@ final class TableView extends Record
     }
 
     /**
+     * @return BinaryRecord
+     * @deprecated Use getTabledata() instead
+     */
+    public function tabledata()
+    {
+        return $this->getTabledata();
+    }
+
+    /**
      * @return bool
      */
     public function hasTabledata()

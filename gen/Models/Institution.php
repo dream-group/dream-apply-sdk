@@ -122,6 +122,15 @@ final class Institution extends Record
         );
     }
 
+    /**
+     * @deprecated Use getDepartments() instead
+     * @return InstitutionDepartments
+     */
+    public function departments($filter = [])
+    {
+        return $this->getDepartments($filter);
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {

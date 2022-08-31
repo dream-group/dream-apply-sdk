@@ -95,6 +95,15 @@ final class Score extends Record
     }
 
     /**
+     * @return Scoresheet
+     * @deprecated Use getScoresheet() instead
+     */
+    public function scoresheet()
+    {
+        return $this->getScoresheet();
+    }
+
+    /**
      * @return bool
      */
     public function hasScoresheet()
