@@ -74,6 +74,15 @@ final class Payment extends Record
     }
 
     /**
+     * @return PaymentGateway
+     * @deprecated Use getGateway() instead
+     */
+    public function gateway()
+    {
+        return $this->getGateway();
+    }
+
+    /**
      * @return bool
      */
     public function hasGateway()

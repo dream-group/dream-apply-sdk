@@ -56,6 +56,15 @@ final class StudyPlanSubject extends Record
     }
 
     /**
+     * @return AcademicTermType|null
+     * @deprecated Use getAcademicTermType() instead
+     */
+    public function academicTermType()
+    {
+        return $this->getAcademicTermType();
+    }
+
+    /**
      * @return bool
      */
     public function hasAcademicTermType()

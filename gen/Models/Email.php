@@ -77,6 +77,15 @@ final class Email extends Record
         );
     }
 
+    /**
+     * @deprecated Use getAttachments() instead
+     * @return EmailAttachments
+     */
+    public function attachments()
+    {
+        return $this->getAttachments();
+    }
+
     protected function getField($name)
     {
         if ($name === 'inserted') {

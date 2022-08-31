@@ -38,6 +38,15 @@ final class Applicants extends Collection
     }
 
     /**
+     * @deprecated Use getConsents() instead
+     * @return Consents
+     */
+    public function consents()
+    {
+        return $this->getConsents();
+    }
+
+    /**
      * @return Trackers
      */
     public function getTrackers()
@@ -47,6 +56,15 @@ final class Applicants extends Collection
             $this->baseUrl . '/trackers',
             []
         );
+    }
+
+    /**
+     * @deprecated Use getTrackers() instead
+     * @return Trackers
+     */
+    public function trackers()
+    {
+        return $this->getTrackers();
     }
 
     protected function getItemClass()

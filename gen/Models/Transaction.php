@@ -60,6 +60,15 @@ final class Transaction extends Record
     }
 
     /**
+     * @return Invoice
+     * @deprecated Use getInvoice() instead
+     */
+    public function invoice()
+    {
+        return $this->getInvoice();
+    }
+
+    /**
      * @return bool
      */
     public function hasInvoice()
@@ -85,6 +94,15 @@ final class Transaction extends Record
     }
 
     /**
+     * @return Administrator|null
+     * @deprecated Use getAdministrator() instead
+     */
+    public function administrator()
+    {
+        return $this->getAdministrator();
+    }
+
+    /**
      * @return bool
      */
     public function hasAdministrator()
@@ -107,6 +125,15 @@ final class Transaction extends Record
     public function getPayment()
     {
         return $this->getObjectField('payment', Payment::class);
+    }
+
+    /**
+     * @return Payment|null
+     * @deprecated Use getPayment() instead
+     */
+    public function payment()
+    {
+        return $this->getPayment();
     }
 
     /**

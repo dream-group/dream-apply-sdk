@@ -86,6 +86,15 @@ final class Intake extends Record
     }
 
     /**
+     * @return IntakePre
+     * @deprecated Use getPre() instead
+     */
+    public function pre()
+    {
+        return $this->getPre();
+    }
+
+    /**
      * @return bool
      */
     public function hasPre()
@@ -108,6 +117,15 @@ final class Intake extends Record
     public function getDecision()
     {
         return $this->getObjectField('decision', IntakeDecision::class);
+    }
+
+    /**
+     * @return IntakeDecision
+     * @deprecated Use getDecision() instead
+     */
+    public function decision()
+    {
+        return $this->getDecision();
     }
 
     /**
@@ -137,6 +155,15 @@ final class Intake extends Record
             $this->getRawField('deadlines'),
             []
         );
+    }
+
+    /**
+     * @deprecated Use getDeadlines() instead
+     * @return IntakeDeadlines
+     */
+    public function deadlines()
+    {
+        return $this->getDeadlines();
     }
 
     protected function getField($name)

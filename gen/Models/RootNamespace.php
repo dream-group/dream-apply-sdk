@@ -35,6 +35,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getAcademicTerms() instead
+     * @return AcademicTerms
+     */
+    public function academicTerms()
+    {
+        return $this->getAcademicTerms();
+    }
+
+    /**
      * @return AcademicYears
      */
     public function getAcademicYears()
@@ -44,6 +53,15 @@ trait RootNamespace
             $this->baseUrl . '/academic-years',
             []
         );
+    }
+
+    /**
+     * @deprecated Use getAcademicYears() instead
+     * @return AcademicYears
+     */
+    public function academicYears()
+    {
+        return $this->getAcademicYears();
     }
 
     /**
@@ -59,6 +77,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getAdministrators() instead
+     * @return Administrators
+     */
+    public function administrators()
+    {
+        return $this->getAdministrators();
+    }
+
+    /**
      * @return Applicants
      */
     public function getApplicants($filter = [])
@@ -68,6 +95,15 @@ trait RootNamespace
             $this->baseUrl . '/applicants',
             $filter
         );
+    }
+
+    /**
+     * @deprecated Use getApplicants() instead
+     * @return Applicants
+     */
+    public function applicants($filter = [])
+    {
+        return $this->getApplicants($filter);
     }
 
     /**
@@ -83,6 +119,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getApplications() instead
+     * @return Applications
+     */
+    public function applications($filter = [])
+    {
+        return $this->getApplications($filter);
+    }
+
+    /**
      * @return Courses
      */
     public function getCourses($filter = [])
@@ -92,6 +137,15 @@ trait RootNamespace
             $this->baseUrl . '/courses',
             $filter
         );
+    }
+
+    /**
+     * @deprecated Use getCourses() instead
+     * @return Courses
+     */
+    public function courses($filter = [])
+    {
+        return $this->getCourses($filter);
     }
 
     /**
@@ -107,6 +161,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getFees() instead
+     * @return Fees
+     */
+    public function fees()
+    {
+        return $this->getFees();
+    }
+
+    /**
      * @return Institutions
      */
     public function getInstitutions($filter = [])
@@ -116,6 +179,15 @@ trait RootNamespace
             $this->baseUrl . '/institutions',
             $filter
         );
+    }
+
+    /**
+     * @deprecated Use getInstitutions() instead
+     * @return Institutions
+     */
+    public function institutions($filter = [])
+    {
+        return $this->getInstitutions($filter);
     }
 
     /**
@@ -131,6 +203,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getIntakes() instead
+     * @return Intakes
+     */
+    public function intakes()
+    {
+        return $this->getIntakes();
+    }
+
+    /**
      * @return Invoices
      */
     public function getInvoices($filter = [])
@@ -140,6 +221,15 @@ trait RootNamespace
             $this->baseUrl . '/invoices',
             $filter
         );
+    }
+
+    /**
+     * @deprecated Use getInvoices() instead
+     * @return Invoices
+     */
+    public function invoices($filter = [])
+    {
+        return $this->getInvoices($filter);
     }
 
     /**
@@ -155,6 +245,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getJournal() instead
+     * @return Journal
+     */
+    public function journal($filter = [])
+    {
+        return $this->getJournal($filter);
+    }
+
+    /**
      * @return Scoresheets
      */
     public function getScoresheets()
@@ -167,6 +266,15 @@ trait RootNamespace
     }
 
     /**
+     * @deprecated Use getScoresheets() instead
+     * @return Scoresheets
+     */
+    public function scoresheets()
+    {
+        return $this->getScoresheets();
+    }
+
+    /**
      * @return TableViews
      */
     public function getTableviews()
@@ -176,6 +284,15 @@ trait RootNamespace
             $this->baseUrl . '/tableviews',
             []
         );
+    }
+
+    /**
+     * @deprecated Use getTableviews() instead
+     * @return TableViews
+     */
+    public function tableviews()
+    {
+        return $this->getTableviews();
     }
 
     protected function getNamespace($name)

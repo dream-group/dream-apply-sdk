@@ -50,6 +50,15 @@ final class Fee extends Record
         );
     }
 
+    /**
+     * @deprecated Use getAmounts() instead
+     * @return FeeAmounts
+     */
+    public function amounts()
+    {
+        return $this->getAmounts();
+    }
+
     protected function getField($name)
     {
         if ($name === 'name') {

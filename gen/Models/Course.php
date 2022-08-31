@@ -178,6 +178,15 @@ final class Course extends Record
     }
 
     /**
+     * @return Institution
+     * @deprecated Use getInstitution() instead
+     */
+    public function institution()
+    {
+        return $this->getInstitution();
+    }
+
+    /**
      * @return bool
      */
     public function hasInstitution()
@@ -207,6 +216,15 @@ final class Course extends Record
     }
 
     /**
+     * @deprecated Use getIntakes() instead
+     * @return CourseIntakes
+     */
+    public function intakes()
+    {
+        return $this->getIntakes();
+    }
+
+    /**
      * @return CourseAwards
      */
     public function getAwards()
@@ -216,6 +234,15 @@ final class Course extends Record
             $this->getRawField('awards'),
             []
         );
+    }
+
+    /**
+     * @deprecated Use getAwards() instead
+     * @return CourseAwards
+     */
+    public function awards()
+    {
+        return $this->getAwards();
     }
 
     protected function getField($name)
