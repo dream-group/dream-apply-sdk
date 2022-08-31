@@ -18,6 +18,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $instructions
  * @property-read string $smallprint
  * @property-read Applicant|null $applicant
+ * @property-read Application|null $application
  * @property-read Course|null $course
  * @property-read InvoicePayer $payer
  */
@@ -112,6 +113,48 @@ final class Invoice extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasApplicant()
+    {
+        return $this->hasObjectField('applicant');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplicant() instead
+     */
+    public function applicantExists()
+    {
+        return $this->hasApplicant();
+    }
+
+    /**
+     * @return Application|null
+     */
+    public function getApplication()
+    {
+        return $this->getObjectField('application', Application::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApplication()
+    {
+        return $this->hasObjectField('application');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplication() instead
+     */
+    public function applicationExists()
+    {
+        return $this->hasApplication();
+    }
+
+    /**
      * @return Course|null
      */
     public function getCourse()
@@ -120,11 +163,45 @@ final class Invoice extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasCourse()
+    {
+        return $this->hasObjectField('course');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasCourse() instead
+     */
+    public function courseExists()
+    {
+        return $this->hasCourse();
+    }
+
+    /**
      * @return InvoicePayer
      */
     public function getPayer()
     {
         return $this->getObjectField('payer', InvoicePayer::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPayer()
+    {
+        return $this->hasObjectField('payer');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasPayer() instead
+     */
+    public function payerExists()
+    {
+        return $this->hasPayer();
     }
 
     protected function getField($name)
@@ -162,6 +239,9 @@ final class Invoice extends Record
         if ($name === 'applicant') {
             return $this->getObjectField('applicant', Applicant::class);
         }
+        if ($name === 'application') {
+            return $this->getObjectField('application', Application::class);
+        }
         if ($name === 'course') {
             return $this->getObjectField('course', Course::class);
         }
@@ -185,6 +265,7 @@ final class Invoice extends Record
             'instructions',
             'smallprint',
             'applicant',
+            'application',
             'course',
             'payer',
         ];

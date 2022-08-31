@@ -178,6 +178,23 @@ final class Course extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasInstitution()
+    {
+        return $this->hasObjectField('institution');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasInstitution() instead
+     */
+    public function institutionExists()
+    {
+        return $this->hasInstitution();
+    }
+
+    /**
      * @return CourseIntakes
      */
     public function getIntakes()

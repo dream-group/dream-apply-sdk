@@ -40,6 +40,23 @@ final class Wish extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasApplicant()
+    {
+        return $this->hasObjectField('applicant');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplicant() instead
+     */
+    public function applicantExists()
+    {
+        return $this->hasApplicant();
+    }
+
+    /**
      * @return Course
      */
     public function getCourse()
@@ -48,11 +65,45 @@ final class Wish extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasCourse()
+    {
+        return $this->hasObjectField('course');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasCourse() instead
+     */
+    public function courseExists()
+    {
+        return $this->hasCourse();
+    }
+
+    /**
      * @return Intake|null
      */
     public function getIntake()
     {
         return $this->getObjectField('intake', Intake::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasIntake()
+    {
+        return $this->hasObjectField('intake');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasIntake() instead
+     */
+    public function intakeExists()
+    {
+        return $this->hasIntake();
     }
 
     protected function getField($name)

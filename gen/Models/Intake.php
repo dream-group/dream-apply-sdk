@@ -86,11 +86,45 @@ final class Intake extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasPre()
+    {
+        return $this->hasObjectField('pre');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasPre() instead
+     */
+    public function preExists()
+    {
+        return $this->hasPre();
+    }
+
+    /**
      * @return IntakeDecision
      */
     public function getDecision()
     {
         return $this->getObjectField('decision', IntakeDecision::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDecision()
+    {
+        return $this->hasObjectField('decision');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasDecision() instead
+     */
+    public function decisionExists()
+    {
+        return $this->hasDecision();
     }
 
     /**

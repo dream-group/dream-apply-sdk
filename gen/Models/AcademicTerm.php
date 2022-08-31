@@ -57,11 +57,45 @@ final class AcademicTerm extends Record
     }
 
     /**
+     * @return bool
+     */
+    public function hasYear()
+    {
+        return $this->hasObjectField('year');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasYear() instead
+     */
+    public function yearExists()
+    {
+        return $this->hasYear();
+    }
+
+    /**
      * @return AcademicTermType
      */
     public function getType()
     {
         return $this->getObjectField('type', AcademicTermType::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasType()
+    {
+        return $this->hasObjectField('type');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasType() instead
+     */
+    public function typeExists()
+    {
+        return $this->hasType();
     }
 
     protected function getField($name)

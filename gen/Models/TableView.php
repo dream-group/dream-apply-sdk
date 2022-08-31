@@ -55,6 +55,23 @@ final class TableView extends Record
         return $this->getObjectField('tabledata', BinaryRecord::class);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasTabledata()
+    {
+        return $this->hasObjectField('tabledata');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasTabledata() instead
+     */
+    public function tabledataExists()
+    {
+        return $this->hasTabledata();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {

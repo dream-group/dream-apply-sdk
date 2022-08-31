@@ -13,6 +13,10 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  */
 final class Consent extends Record
 {
+    const DECISION_ACCEPT = 'Accept';
+
+    const DECISION_REJECT = 'Reject';
+
     /**
      * @return string
      */

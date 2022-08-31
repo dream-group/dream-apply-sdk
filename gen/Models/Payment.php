@@ -73,6 +73,23 @@ final class Payment extends Record
         return $this->getObjectField('gateway', PaymentGateway::class);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasGateway()
+    {
+        return $this->hasObjectField('gateway');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasGateway() instead
+     */
+    public function gatewayExists()
+    {
+        return $this->hasGateway();
+    }
+
     protected function getField($name)
     {
         if ($name === 'payment') {
