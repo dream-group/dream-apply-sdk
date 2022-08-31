@@ -108,13 +108,17 @@ abstract class Record implements ArrayAccess
 
     protected function getRawField($field)
     {
-        $this->resolvePartial();
+        if (!isset($this->data[$field])) {
+            $this->resolvePartial();
+        }
         return isset($this->data[$field]) ? $this->data[$field] : null;
     }
 
     protected function getObjectField($field, $class)
     {
-        $this->resolvePartial();
+        if (!isset($this->data[$field])) {
+            $this->resolvePartial();
+        }
         $dataOrUrl = $this->data[$field];
 
         if ($dataOrUrl === null) {
