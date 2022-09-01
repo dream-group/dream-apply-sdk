@@ -13,19 +13,19 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, BinaryRecord>
- * @implements IteratorAggregate<int, BinaryRecord>
+ * @implements ArrayAccess<int, ApplicationCourse>
+ * @implements IteratorAggregate<int, ApplicationCourse>
  */
-final class Documents extends Collection
+final class ApplicationCourses extends Collection
 {
     protected function getItemClass()
     {
-        return BinaryRecord::class;
+        return ApplicationCourse::class;
     }
 
     protected function isItemInQueryPartial()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -38,7 +38,7 @@ final class Documents extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return BinaryRecord
+     * @return ApplicationCourse
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -59,7 +59,7 @@ final class Documents extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return BinaryRecord
+     * @return ApplicationCourse
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -77,7 +77,7 @@ final class Documents extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int|string $id
-     * @return BinaryRecord
+     * @return ApplicationCourse
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
