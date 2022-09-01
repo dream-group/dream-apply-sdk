@@ -186,6 +186,16 @@ abstract class Record implements ArrayAccess
         $this->data[$field] = null; // if response was successful, update value in the object
     }
 
+    protected function callMethod($methodUrl, $params = [])
+    {
+        // currently only void return and no params
+        $response = $this->client->http()->postFormData($this->getRecordUrl() . '/' . $methodUrl, $params);
+
+        ResponseHelper::verifyResponseSuccessful($response);
+
+        return null; // we don't currently have any method-like calls that return non-empty results
+    }
+
     /* Magic */
 
     public function __get($name)
