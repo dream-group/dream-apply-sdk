@@ -8,7 +8,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 /**
  * @generated
  */
-class Reports extends UrlNamespace
+final class Reports extends UrlNamespace
 {
     protected function getNamespace($name)
     {
