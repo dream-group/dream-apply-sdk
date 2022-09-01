@@ -9,7 +9,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @generated
  * @property-read OfferTypes $types
  */
-class Offers extends UrlNamespace
+final class Offers extends UrlNamespace
 {
     /**
      * @return OfferTypes
