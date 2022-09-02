@@ -16,6 +16,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Applicant $applicant
  * @property-read BinaryRecord $pdf
  * @property-read ApplicationCourses $courses
+ * @property-read ApplicationDocuments $documents
  */
 final class Application extends Record
 {
@@ -183,6 +184,27 @@ final class Application extends Record
     }
 
     /**
+     * @return ApplicationDocuments
+     */
+    public function getDocuments()
+    {
+        return $this->buildCollection(
+            ApplicationDocuments::class,
+            $this->getRawField('documents'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getDocuments() instead
+     * @return ApplicationDocuments
+     */
+    public function documents()
+    {
+        return $this->getDocuments();
+    }
+
+    /**
      * @return void
      */
     public function close()
@@ -258,6 +280,13 @@ final class Application extends Record
                 []
             );
         }
+        if ($name === 'documents') {
+            return $this->buildCollection(
+                ApplicationDocuments::class,
+                $this->getRawField('documents'),
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -265,6 +294,7 @@ final class Application extends Record
     {
         return [
             'courses',
+            'documents',
         ];
     }
 }
