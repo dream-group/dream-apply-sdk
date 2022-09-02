@@ -295,6 +295,17 @@ trait RootNamespace
         return $this->getTableviews();
     }
 
+    protected function getField($name)
+    {
+        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getFieldList()
+    {
+        return [
+        ];
+    }
+
     protected function getNamespace($name)
     {
         if ($name === 'academicTerms') {

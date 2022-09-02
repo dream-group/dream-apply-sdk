@@ -15,9 +15,44 @@ use IteratorAggregate;
  * @generated
  * @implements ArrayAccess<int, BinaryRecord>
  * @implements IteratorAggregate<int, BinaryRecord>
+ * @property-read BinaryRecord $zip
  */
 final class ApplicationDocuments extends Collection
 {
+    /**
+     * @return BinaryRecord
+     */
+    public function getZip()
+    {
+        return $this->getObjectField('zip', BinaryRecord::class);
+    }
+
+    /**
+     * @return BinaryRecord
+     * @deprecated Use getZip() instead
+     */
+    public function zip()
+    {
+        return $this->getZip();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasZip()
+    {
+        return $this->hasObjectField('zip');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasZip() instead
+     */
+    public function zipExists()
+    {
+        return $this->hasZip();
+    }
+
     protected function getItemClass()
     {
         return BinaryRecord::class;
@@ -86,6 +121,21 @@ final class ApplicationDocuments extends Collection
     public function lazy($id)
     {
         return parent::lazy($id);
+    }
+
+    protected function getField($name)
+    {
+        if ($name === 'zip') {
+            return $this->getObjectField('zip', BinaryRecord::class);
+        }
+        throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
+    }
+
+    protected function getFieldList()
+    {
+        return [
+            'zip',
+        ];
     }
 
     protected function getNamespace($name)
