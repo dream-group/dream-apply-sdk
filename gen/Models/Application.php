@@ -215,7 +215,7 @@ final class Application extends Record
     {
         return $this->buildCollection(
             ApplicationExports::class,
-            $this->getRawField('exports'),
+            $this->baseUrl . '/exports',
             []
         );
     }
@@ -378,7 +378,7 @@ final class Application extends Record
         if ($name === 'exports') {
             return $this->buildCollection(
                 ApplicationExports::class,
-                $this->getRawField('exports'),
+                $this->baseUrl . '/exports',
                 []
             );
         }
