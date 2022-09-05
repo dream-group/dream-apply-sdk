@@ -11,7 +11,14 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $logged
  * @property-read string $event
  * @property-read array $bind
+ * @property-read Applicant|null $applicant
+ * @property-read Application|null $application
+ * @property-read Course|null $course
  * @property-read Institution|null $institution
+ * @property-read Invoice|null $invoice
+ * @property-read BinaryRecord|null $document
+ * @property-read Flag|null $flag
+ * @property-read Tracker|null $tracker
  */
 final class JournalItem extends Record
 {
@@ -48,6 +55,108 @@ final class JournalItem extends Record
     }
 
     /**
+     * @return Applicant|null
+     */
+    public function getApplicant()
+    {
+        return $this->getObjectField('applicant', Applicant::class);
+    }
+
+    /**
+     * @return Applicant|null
+     * @deprecated Use getApplicant() instead
+     */
+    public function applicant()
+    {
+        return $this->getApplicant();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApplicant()
+    {
+        return $this->hasObjectField('applicant');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplicant() instead
+     */
+    public function applicantExists()
+    {
+        return $this->hasApplicant();
+    }
+
+    /**
+     * @return Application|null
+     */
+    public function getApplication()
+    {
+        return $this->getObjectField('application', Application::class);
+    }
+
+    /**
+     * @return Application|null
+     * @deprecated Use getApplication() instead
+     */
+    public function application()
+    {
+        return $this->getApplication();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApplication()
+    {
+        return $this->hasObjectField('application');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplication() instead
+     */
+    public function applicationExists()
+    {
+        return $this->hasApplication();
+    }
+
+    /**
+     * @return Course|null
+     */
+    public function getCourse()
+    {
+        return $this->getObjectField('course', Course::class);
+    }
+
+    /**
+     * @return Course|null
+     * @deprecated Use getCourse() instead
+     */
+    public function course()
+    {
+        return $this->getCourse();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCourse()
+    {
+        return $this->hasObjectField('course');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasCourse() instead
+     */
+    public function courseExists()
+    {
+        return $this->hasCourse();
+    }
+
+    /**
      * @return Institution|null
      */
     public function getInstitution()
@@ -81,6 +190,142 @@ final class JournalItem extends Record
         return $this->hasInstitution();
     }
 
+    /**
+     * @return Invoice|null
+     */
+    public function getInvoice()
+    {
+        return $this->getObjectField('invoice', Invoice::class);
+    }
+
+    /**
+     * @return Invoice|null
+     * @deprecated Use getInvoice() instead
+     */
+    public function invoice()
+    {
+        return $this->getInvoice();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasInvoice()
+    {
+        return $this->hasObjectField('invoice');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasInvoice() instead
+     */
+    public function invoiceExists()
+    {
+        return $this->hasInvoice();
+    }
+
+    /**
+     * @return BinaryRecord|null
+     */
+    public function getDocument()
+    {
+        return $this->getObjectField('document', BinaryRecord::class);
+    }
+
+    /**
+     * @return BinaryRecord|null
+     * @deprecated Use getDocument() instead
+     */
+    public function document()
+    {
+        return $this->getDocument();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDocument()
+    {
+        return $this->hasObjectField('document');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasDocument() instead
+     */
+    public function documentExists()
+    {
+        return $this->hasDocument();
+    }
+
+    /**
+     * @return Flag|null
+     */
+    public function getFlag()
+    {
+        return $this->getObjectField('flag', Flag::class);
+    }
+
+    /**
+     * @return Flag|null
+     * @deprecated Use getFlag() instead
+     */
+    public function flag()
+    {
+        return $this->getFlag();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFlag()
+    {
+        return $this->hasObjectField('flag');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasFlag() instead
+     */
+    public function flagExists()
+    {
+        return $this->hasFlag();
+    }
+
+    /**
+     * @return Tracker|null
+     */
+    public function getTracker()
+    {
+        return $this->getObjectField('tracker', Tracker::class);
+    }
+
+    /**
+     * @return Tracker|null
+     * @deprecated Use getTracker() instead
+     */
+    public function tracker()
+    {
+        return $this->getTracker();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTracker()
+    {
+        return $this->hasObjectField('tracker');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasTracker() instead
+     */
+    public function trackerExists()
+    {
+        return $this->hasTracker();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -95,8 +340,29 @@ final class JournalItem extends Record
         if ($name === 'bind') {
             return $this->getRawField('bind');
         }
+        if ($name === 'applicant') {
+            return $this->getObjectField('applicant', Applicant::class);
+        }
+        if ($name === 'application') {
+            return $this->getObjectField('application', Application::class);
+        }
+        if ($name === 'course') {
+            return $this->getObjectField('course', Course::class);
+        }
         if ($name === 'institution') {
             return $this->getObjectField('institution', Institution::class);
+        }
+        if ($name === 'invoice') {
+            return $this->getObjectField('invoice', Invoice::class);
+        }
+        if ($name === 'document') {
+            return $this->getObjectField('document', BinaryRecord::class);
+        }
+        if ($name === 'flag') {
+            return $this->getObjectField('flag', Flag::class);
+        }
+        if ($name === 'tracker') {
+            return $this->getObjectField('tracker', Tracker::class);
         }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
@@ -108,7 +374,14 @@ final class JournalItem extends Record
             'logged',
             'event',
             'bind',
+            'applicant',
+            'application',
+            'course',
             'institution',
+            'invoice',
+            'document',
+            'flag',
+            'tracker',
         ];
     }
 
