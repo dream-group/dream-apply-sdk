@@ -15,8 +15,12 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read AcademicTerm $academicTerm
  * @property-read Applicant $applicant
  * @property-read BinaryRecord $pdf
+ * @property-read ApplicationFlags $flags
  * @property-read ApplicationCourses $courses
+ * @property-read ApplicationExports $exports
  * @property-read ApplicationDocuments $documents
+ * @property-read ApplicationStudyPlans $studyplans
+ * @property-read ApplicationScores $scores
  */
 final class Application extends Record
 {
@@ -163,6 +167,27 @@ final class Application extends Record
     }
 
     /**
+     * @return ApplicationFlags
+     */
+    public function getFlags()
+    {
+        return $this->buildCollection(
+            ApplicationFlags::class,
+            $this->getRawField('flags'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getFlags() instead
+     * @return ApplicationFlags
+     */
+    public function flags()
+    {
+        return $this->getFlags();
+    }
+
+    /**
      * @return ApplicationCourses
      */
     public function getCourses()
@@ -184,6 +209,27 @@ final class Application extends Record
     }
 
     /**
+     * @return ApplicationExports
+     */
+    public function getExports()
+    {
+        return $this->buildCollection(
+            ApplicationExports::class,
+            $this->getRawField('exports'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getExports() instead
+     * @return ApplicationExports
+     */
+    public function exports()
+    {
+        return $this->getExports();
+    }
+
+    /**
      * @return ApplicationDocuments
      */
     public function getDocuments()
@@ -202,6 +248,48 @@ final class Application extends Record
     public function documents()
     {
         return $this->getDocuments();
+    }
+
+    /**
+     * @return ApplicationStudyPlans
+     */
+    public function getStudyplans()
+    {
+        return $this->buildCollection(
+            ApplicationStudyPlans::class,
+            $this->getRawField('studyplans'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getStudyplans() instead
+     * @return ApplicationStudyPlans
+     */
+    public function studyplans()
+    {
+        return $this->getStudyplans();
+    }
+
+    /**
+     * @return ApplicationScores
+     */
+    public function getScores()
+    {
+        return $this->buildCollection(
+            ApplicationScores::class,
+            $this->getRawField('scores'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getScores() instead
+     * @return ApplicationScores
+     */
+    public function scores()
+    {
+        return $this->getScores();
     }
 
     /**
@@ -273,10 +361,24 @@ final class Application extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'flags') {
+            return $this->buildCollection(
+                ApplicationFlags::class,
+                $this->getRawField('flags'),
+                []
+            );
+        }
         if ($name === 'courses') {
             return $this->buildCollection(
                 ApplicationCourses::class,
                 $this->getRawField('courses'),
+                []
+            );
+        }
+        if ($name === 'exports') {
+            return $this->buildCollection(
+                ApplicationExports::class,
+                $this->getRawField('exports'),
                 []
             );
         }
@@ -287,14 +389,32 @@ final class Application extends Record
                 []
             );
         }
+        if ($name === 'studyplans') {
+            return $this->buildCollection(
+                ApplicationStudyPlans::class,
+                $this->getRawField('studyplans'),
+                []
+            );
+        }
+        if ($name === 'scores') {
+            return $this->buildCollection(
+                ApplicationScores::class,
+                $this->getRawField('scores'),
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'flags',
             'courses',
+            'exports',
             'documents',
+            'studyplans',
+            'scores',
         ];
     }
 }
