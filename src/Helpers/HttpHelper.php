@@ -2,6 +2,7 @@
 
 namespace Dream\Apply\Client\Helpers;
 
+use Dream\Apply\Client\Client;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\ItemNotFoundException;
@@ -55,7 +56,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
         $requestFactory,
         $uriFactory
     ) {
-        $this->endpoint = rtrim($endpoint, '/') . '/'; // be tolerant to ending slash
+        $this->endpoint = rtrim($endpoint, '/') . '/v' . Client::API_VERSION . '/'; // be tolerant to ending slash
         $this->apiKey   = $apiKey;
 
         if ($client === null) {
