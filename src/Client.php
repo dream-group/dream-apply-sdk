@@ -39,7 +39,7 @@ final class Client extends UrlNamespace
     use CollectionLinks;
     use Models\RootNamespace;
 
-    const API_VERSION = 3;
+    const API_VERSION = 4;
 
     /**
      * @var HttpHelper
