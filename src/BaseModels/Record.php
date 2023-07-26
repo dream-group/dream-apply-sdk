@@ -58,6 +58,11 @@ abstract class Record implements ArrayAccess
         return $this->data;
     }
 
+    public function toArray($requestFull = false)
+    {
+        return $this->getRawData($requestFull);
+    }
+
     protected function retrieveData()
     {
         if ($this instanceof BinaryRecord) {
