@@ -148,7 +148,7 @@ abstract class Collection extends UrlNamespace implements Countable, ArrayAccess
     public function getIterator()
     {
         $class = $this->getItemClass();
-        foreach ($this->getRawData() as $id => $row) {
+        foreach ($this->getRawData(true) as $id => $row) {
             yield $id => new $class(
                 $this->client,
                 $this->urlForId($id),
