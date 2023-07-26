@@ -10,10 +10,7 @@ use Dream\Apply\Client\Helpers\HttpHelper;
 use Dream\Apply\Client\Helpers\StringHelper;
 use Dream\Apply\Client\OldModels\Application;
 use Dream\Apply\Client\OldModels\ApplicationCollection;
-use Dream\Apply\Client\OldModels\Classificators;
 use Dream\Apply\Client\OldModels\LinkHandlers\CollectionLinks;
-use Dream\Apply\Client\OldModels\Report;
-use Dream\Apply\Client\OldModels\Reports;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
@@ -23,13 +20,8 @@ use Psr\Http\Message\UriFactoryInterface;
 use SensitiveParameter;
 
 /**
- * Class Client
- * @package Dream\DreamApply\Client
- *
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
- *
- * @property-read Reports $reports
  */
 final class Client extends UrlNamespace
 {
@@ -45,7 +37,6 @@ final class Client extends UrlNamespace
 
     protected $collectionLinks = [
         'applications'      => Application::class,
-        'reports'           => Report::class,
     ];
 
     /**
