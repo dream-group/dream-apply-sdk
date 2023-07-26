@@ -14,6 +14,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $date
  * @property-read Scoresheet $scoresheet
  * @property-read Application $application
+ * @property-read Offer|null $offer
  */
 final class Score extends Record
 {
@@ -155,6 +156,40 @@ final class Score extends Record
         return $this->hasApplication();
     }
 
+    /**
+     * @return Offer|null
+     */
+    public function getOffer()
+    {
+        return $this->getObjectField('offer', Offer::class);
+    }
+
+    /**
+     * @return Offer|null
+     * @deprecated Use getOffer() instead
+     */
+    public function offer()
+    {
+        return $this->getOffer();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOffer()
+    {
+        return $this->hasObjectField('offer');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasOffer() instead
+     */
+    public function offerExists()
+    {
+        return $this->hasOffer();
+    }
+
     protected function getField($name)
     {
         if ($name === 'scored') {
@@ -178,6 +213,9 @@ final class Score extends Record
         if ($name === 'application') {
             return $this->getObjectField('application', Application::class);
         }
+        if ($name === 'offer') {
+            return $this->getObjectField('offer', Offer::class);
+        }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -191,6 +229,7 @@ final class Score extends Record
             'date',
             'scoresheet',
             'application',
+            'offer',
         ];
     }
 
