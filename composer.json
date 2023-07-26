@@ -11,7 +11,8 @@
     ],
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
         },
         "sort-packages": true
     },
@@ -26,7 +27,6 @@
     "require": {
         "php": ">= 5.5",
         "ext-json": "*",
-        "danielstjules/stringy": "^2.0 || ^3.0",
         "fig/http-message-util": "^1.1",
         "laminas/laminas-filter": "^2.0",
         "php-http/discovery": "^1.0",
