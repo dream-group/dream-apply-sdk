@@ -18,7 +18,7 @@ use IteratorAggregate;
  * @implements IteratorAggregate<int, Application>
  * @property-read Flags $flags
  * @property-read ApplicationStatuses $statuses
- * @property-read Offers $offers
+ * @property-read OffersNamespace $offers
  */
 final class Applications extends Collection
 {
@@ -67,16 +67,16 @@ final class Applications extends Collection
     }
 
     /**
-     * @return Offers
+     * @return OffersNamespace
      */
     public function getOffers()
     {
-        return $this->buildNamespace(Offers::class, $this->baseUrl . '/offers');
+        return $this->buildNamespace(OffersNamespace::class, $this->baseUrl . '/offers');
     }
 
     /**
      * @deprecated Use getOffers() instead
-     * @return Offers
+     * @return OffersNamespace
      */
     public function offers()
     {
@@ -181,7 +181,7 @@ final class Applications extends Collection
             );
         }
         if ($name === 'offers') {
-            return $this->buildNamespace(Offers::class, $this->baseUrl . '/offers');
+            return $this->buildNamespace(OffersNamespace::class, $this->baseUrl . '/offers');
         }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
