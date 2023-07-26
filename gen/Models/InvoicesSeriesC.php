@@ -3,9 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
-use Dream\Apply\Client\BaseModels\Collection;
-use Dream\Apply\Client\BaseModels\CollectionOfDeletable;
-use Dream\Apply\Client\BaseModels\CollectionWithFilter;
+use Dream\Apply\Client\BaseModels\CollectionWithNoRecordRequests;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -15,65 +13,14 @@ use IteratorAggregate;
 
 /**
  * @generated
- * @implements ArrayAccess<int, Invoice>
- * @implements IteratorAggregate<int, Invoice>
- * @property-read InvoicesSeriesC $series
- * @property-read Transactions $transactions
+ * @implements ArrayAccess<int, InvoicesSeries>
+ * @implements IteratorAggregate<int, InvoicesSeries>
  */
-final class Invoices extends Collection
+final class InvoicesSeriesC extends CollectionWithNoRecordRequests
 {
-    use CollectionWithFilter, CollectionOfDeletable;
-
-    /**
-     * @return InvoicesSeriesC
-     */
-    public function getSeries()
-    {
-        return $this->buildCollection(
-            InvoicesSeriesC::class,
-            $this->baseUrl . '/series',
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getSeries() instead
-     * @return InvoicesSeriesC
-     */
-    public function series()
-    {
-        return $this->getSeries();
-    }
-
-    /**
-     * @return Transactions
-     */
-    public function getTransactions($filter = [])
-    {
-        return $this->buildCollection(
-            Transactions::class,
-            $this->baseUrl . '/transactions',
-            $filter
-        );
-    }
-
-    /**
-     * @deprecated Use getTransactions() instead
-     * @return Transactions
-     */
-    public function transactions($filter = [])
-    {
-        return $this->getTransactions($filter);
-    }
-
     protected function getItemClass()
     {
-        return Invoice::class;
-    }
-
-    protected function isItemInQueryPartial()
-    {
-        return false;
+        return InvoicesSeries::class;
     }
 
     /**
@@ -86,7 +33,7 @@ final class Invoices extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Invoice
+     * @return InvoicesSeries
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -107,7 +54,7 @@ final class Invoices extends Collection
      *         false = do not expand
      *         true = expand all
      *         string is a comma separated list
-     * @return Invoice
+     * @return InvoicesSeries
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
      * @throws HttpClientException
@@ -125,7 +72,7 @@ final class Invoices extends Collection
      * NOTE: may throw later when retrieving a field or a child
      *
      * @param int|string $id
-     * @return Invoice
+     * @return InvoicesSeries
      * @throws ItemNotFoundException
      * @throws HttpFailResponseException
      * @throws TooManyRequestsException
@@ -149,36 +96,12 @@ final class Invoices extends Collection
 
     protected function getNamespace($name)
     {
-        if ($name === 'series') {
-            return $this->buildCollection(
-                InvoicesSeriesC::class,
-                $this->baseUrl . '/series',
-                []
-            );
-        }
-        if ($name === 'transactions') {
-            return $this->buildCollection(
-                Transactions::class,
-                $this->baseUrl . '/transactions',
-                []
-            );
-        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
-            'series',
-            'transactions',
         ];
-    }
-
-    /**
-     * @param Invoice|int $idOrObject
-     */
-    public function delete($idOrObject)
-    {
-        $this->doDelete($idOrObject);
     }
 }
