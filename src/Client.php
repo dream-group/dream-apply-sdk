@@ -14,7 +14,6 @@ use Dream\Apply\Client\OldModels\Classificators;
 use Dream\Apply\Client\OldModels\LinkHandlers\CollectionLinks;
 use Dream\Apply\Client\OldModels\Report;
 use Dream\Apply\Client\OldModels\Reports;
-use Dream\Apply\Client\OldModels\SimpleArray;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
@@ -29,8 +28,6 @@ use SensitiveParameter;
  *
  * @property-read ApplicationCollection|Application[] $applications
  * @method        ApplicationCollection|Application[] applications(array $filter = [])
- *
- * @property-read SimpleArray $classificators
  *
  * @property-read Reports $reports
  */
