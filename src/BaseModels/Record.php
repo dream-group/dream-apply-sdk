@@ -58,9 +58,9 @@ abstract class Record implements ArrayAccess
         return $this->data;
     }
 
-    public function toArray($requestFull = false)
+    public function toArray()
     {
-        return $this->getRawData($requestFull);
+        return $this->getRawData(true);
     }
 
     protected function retrieveData()

@@ -18,7 +18,7 @@ abstract class CollectionWithNoRecordRequests extends Collection
 
     public function get($id, $expand = false)
     {
-        $this->getRawData();
+        $this->getRawData(true);
         $class = $this->getItemClass();
 
         if (isset($this->data[$id])) {
@@ -35,7 +35,7 @@ abstract class CollectionWithNoRecordRequests extends Collection
 
     public function exists($id)
     {
-        $this->getRawData();
+        $this->getRawData(true);
         return isset($this->data[$id]);
     }
 }
