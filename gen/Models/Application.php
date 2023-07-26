@@ -17,6 +17,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read BinaryRecord $pdf
  * @property-read ApplicationFlags $flags
  * @property-read ApplicationCourses $courses
+ * @property-read Offers $offers
  * @property-read ApplicationExports $exports
  * @property-read ApplicationDocuments $documents
  * @property-read ApplicationStudyPlans $studyplans
@@ -210,6 +211,27 @@ final class Application extends Record
     }
 
     /**
+     * @return Offers
+     */
+    public function getOffers()
+    {
+        return $this->buildCollection(
+            Offers::class,
+            $this->getRawField('offers'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getOffers() instead
+     * @return Offers
+     */
+    public function offers()
+    {
+        return $this->getOffers();
+    }
+
+    /**
      * @return ApplicationExports
      */
     public function getExports()
@@ -397,6 +419,13 @@ final class Application extends Record
                 []
             );
         }
+        if ($name === 'offers') {
+            return $this->buildCollection(
+                Offers::class,
+                $this->getRawField('offers'),
+                []
+            );
+        }
         if ($name === 'exports') {
             return $this->buildCollection(
                 ApplicationExports::class,
@@ -440,6 +469,7 @@ final class Application extends Record
         return [
             'flags',
             'courses',
+            'offers',
             'exports',
             'documents',
             'studyplans',

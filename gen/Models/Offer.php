@@ -20,6 +20,8 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read int|null $decided
  * @property-read int $scored
  * @property-read string $notes
+ * @property-read Course $course
+ * @property-read Intake|null $intake
  */
 final class Offer extends Record
 {
@@ -169,6 +171,74 @@ final class Offer extends Record
         $this->setField('notes', $value);
     }
 
+    /**
+     * @return Course
+     */
+    public function getCourse()
+    {
+        return $this->getObjectField('course', Course::class);
+    }
+
+    /**
+     * @return Course
+     * @deprecated Use getCourse() instead
+     */
+    public function course()
+    {
+        return $this->getCourse();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCourse()
+    {
+        return $this->hasObjectField('course');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasCourse() instead
+     */
+    public function courseExists()
+    {
+        return $this->hasCourse();
+    }
+
+    /**
+     * @return Intake|null
+     */
+    public function getIntake()
+    {
+        return $this->getObjectField('intake', Intake::class);
+    }
+
+    /**
+     * @return Intake|null
+     * @deprecated Use getIntake() instead
+     */
+    public function intake()
+    {
+        return $this->getIntake();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasIntake()
+    {
+        return $this->hasObjectField('intake');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasIntake() instead
+     */
+    public function intakeExists()
+    {
+        return $this->hasIntake();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -210,6 +280,12 @@ final class Offer extends Record
         if ($name === 'notes') {
             return $this->getRawField('notes');
         }
+        if ($name === 'course') {
+            return $this->getObjectField('course', Course::class);
+        }
+        if ($name === 'intake') {
+            return $this->getObjectField('intake', Intake::class);
+        }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -229,6 +305,8 @@ final class Offer extends Record
             'decided',
             'scored',
             'notes',
+            'course',
+            'intake',
         ];
     }
 
