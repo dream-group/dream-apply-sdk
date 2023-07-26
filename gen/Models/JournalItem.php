@@ -16,6 +16,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Course|null $course
  * @property-read Institution|null $institution
  * @property-read Invoice|null $invoice
+ * @property-read Offer|null $offer
  * @property-read BinaryRecord|null $document
  * @property-read Flag|null $flag
  * @property-read Tracker|null $tracker
@@ -225,6 +226,40 @@ final class JournalItem extends Record
     }
 
     /**
+     * @return Offer|null
+     */
+    public function getOffer()
+    {
+        return $this->getObjectField('offer', Offer::class);
+    }
+
+    /**
+     * @return Offer|null
+     * @deprecated Use getOffer() instead
+     */
+    public function offer()
+    {
+        return $this->getOffer();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOffer()
+    {
+        return $this->hasObjectField('offer');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasOffer() instead
+     */
+    public function offerExists()
+    {
+        return $this->hasOffer();
+    }
+
+    /**
      * @return BinaryRecord|null
      */
     public function getDocument()
@@ -355,6 +390,9 @@ final class JournalItem extends Record
         if ($name === 'invoice') {
             return $this->getObjectField('invoice', Invoice::class);
         }
+        if ($name === 'offer') {
+            return $this->getObjectField('offer', Offer::class);
+        }
         if ($name === 'document') {
             return $this->getObjectField('document', BinaryRecord::class);
         }
@@ -379,6 +417,7 @@ final class JournalItem extends Record
             'course',
             'institution',
             'invoice',
+            'offer',
             'document',
             'flag',
             'tracker',
