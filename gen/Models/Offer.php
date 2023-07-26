@@ -22,6 +22,8 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $notes
  * @property-read Course $course
  * @property-read Intake|null $intake
+ * @property-read OfferType $type
+ * @property-read OfferType $typeConfirmed
  */
 final class Offer extends Record
 {
@@ -239,6 +241,82 @@ final class Offer extends Record
         return $this->hasIntake();
     }
 
+    /**
+     * @return OfferType
+     */
+    public function getType()
+    {
+        return $this->getObjectField('type', OfferType::class);
+    }
+
+    /**
+     * @return OfferType
+     * @deprecated Use getType() instead
+     */
+    public function type()
+    {
+        return $this->getType();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasType()
+    {
+        return $this->hasObjectField('type');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasType() instead
+     */
+    public function typeExists()
+    {
+        return $this->hasType();
+    }
+
+    /**
+     * @return OfferType
+     */
+    public function getTypeConfirmed()
+    {
+        return $this->getObjectField('type-confirmed', OfferType::class);
+    }
+
+    /**
+     * @return OfferType
+     * @deprecated Use getTypeConfirmed() instead
+     */
+    public function typeConfirmed()
+    {
+        return $this->getTypeConfirmed();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTypeConfirmed()
+    {
+        return $this->hasObjectField('type-confirmed');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasTypeConfirmed() instead
+     */
+    public function typeConfirmedExists()
+    {
+        return $this->hasTypeConfirmed();
+    }
+
+    /**
+     * @return void
+     */
+    public function confirm()
+    {
+        return $this->callMethod('confirm');
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -286,6 +364,12 @@ final class Offer extends Record
         if ($name === 'intake') {
             return $this->getObjectField('intake', Intake::class);
         }
+        if ($name === 'type') {
+            return $this->getObjectField('type', OfferType::class);
+        }
+        if ($name === 'typeConfirmed') {
+            return $this->getObjectField('type-confirmed', OfferType::class);
+        }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -307,6 +391,8 @@ final class Offer extends Record
             'notes',
             'course',
             'intake',
+            'type',
+            'type-confirmed',
         ];
     }
 
