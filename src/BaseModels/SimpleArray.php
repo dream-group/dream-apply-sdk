@@ -2,7 +2,9 @@
 
 namespace Dream\Apply\Client\BaseModels;
 
-abstract class SimpleArray extends UrlNamespace
+use Dream\Apply\Client\Exceptions\BadMethodCallException;
+
+abstract class SimpleArray extends UrlNamespace implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     protected $data;
 
@@ -29,5 +31,37 @@ abstract class SimpleArray extends UrlNamespace
         }
 
         return $this->data;
+    }
+
+    // implement interfaces
+
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
+    }
+
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->data);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->data[$offset];
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new BadMethodCallException('Array is immutable');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new BadMethodCallException('Array is immutable');
+    }
+
+    public function count()
+    {
+        return count($this->data);
     }
 }
