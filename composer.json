@@ -28,7 +28,6 @@
         "php": ">= 5.5",
         "ext-json": "*",
         "fig/http-message-util": "^1.1",
-        "laminas/laminas-filter": "^2.0",
         "php-http/discovery": "^1.0",
         "php-http/httplug": "^1 | ^2"
     },
