@@ -48,7 +48,6 @@ final class Client extends UrlNamespace
 
     protected $collectionLinks = [
         'applications'      => Application::class,
-        'classificators'    => Classificators::class,
         'reports'           => Report::class,
     ];
 
