@@ -3,7 +3,7 @@
 namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
-use Dream\Apply\Client\BaseModels\CollectionWithNoRecordRequests;
+use Dream\Apply\Client\BaseModels\Collection;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -16,11 +16,16 @@ use IteratorAggregate;
  * @implements ArrayAccess<int, OfferType>
  * @implements IteratorAggregate<int, OfferType>
  */
-final class OfferTypes extends CollectionWithNoRecordRequests
+final class OfferTypes extends Collection
 {
     protected function getItemClass()
     {
         return OfferType::class;
+    }
+
+    protected function isItemInQueryPartial()
+    {
+        return false;
     }
 
     /**
