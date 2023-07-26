@@ -5,12 +5,7 @@ namespace Dream\Apply\Client;
 use Dream\Apply\Client\BaseModels\UrlNamespace;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
-use Dream\Apply\Client\Exceptions\BadMethodCallException;
 use Dream\Apply\Client\Helpers\HttpHelper;
-use Dream\Apply\Client\Helpers\StringHelper;
-use Dream\Apply\Client\OldModels\Application;
-use Dream\Apply\Client\OldModels\ApplicationCollection;
-use Dream\Apply\Client\OldModels\LinkHandlers\CollectionLinks;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Message\UriFactory;
@@ -19,13 +14,8 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use SensitiveParameter;
 
-/**
- * @property-read ApplicationCollection|Application[] $applications
- * @method        ApplicationCollection|Application[] applications(array $filter = [])
- */
 final class Client extends UrlNamespace
 {
-    use CollectionLinks;
     use Models\RootNamespace;
 
     const API_VERSION = 4;
@@ -34,10 +24,6 @@ final class Client extends UrlNamespace
      * @var HttpHelper
      */
     private $http;
-
-    protected $collectionLinks = [
-        'applications'      => Application::class,
-    ];
 
     /**
      * @param $endpoint
@@ -68,26 +54,6 @@ final class Client extends UrlNamespace
     {
         $data = $this->http()->getJson('ping');
         return $data['pong'];
-    }
-
-    /* root collections handling */
-
-    private function getCollection($name, $filter = [])
-    {
-        $uriName = StringHelper::makeUriName($name);
-        return $this->resolveCollectionLink($this, $uriName, $uriName, $filter);
-    }
-
-    public function __call($name, $arguments)
-    {
-        $filter = isset($arguments[0]) ? $arguments[0] : [];
-
-        $collection = $this->getCollection($name, $filter);
-        if ($collection) {
-            return $collection;
-        }
-
-        throw new BadMethodCallException(sprintf('Method "%s" is not defined for "%s"', $name, static::class));
     }
 
     /**
