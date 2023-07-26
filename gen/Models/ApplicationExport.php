@@ -10,6 +10,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $exported
  * @property-read string $processed
  * @property-read string $cancelled
+ * @property-read Offer $offer
  * @property-read ApplicationExportProfile $profile
  * @property-read ApplicationExportBlobs $blobs
  */
@@ -37,6 +38,40 @@ final class ApplicationExport extends Record
     public function getCancelled()
     {
         return $this->getRawField('cancelled');
+    }
+
+    /**
+     * @return Offer
+     */
+    public function getOffer()
+    {
+        return $this->getObjectField('offer', Offer::class);
+    }
+
+    /**
+     * @return Offer
+     * @deprecated Use getOffer() instead
+     */
+    public function offer()
+    {
+        return $this->getOffer();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOffer()
+    {
+        return $this->hasObjectField('offer');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasOffer() instead
+     */
+    public function offerExists()
+    {
+        return $this->hasOffer();
     }
 
     /**
@@ -105,6 +140,9 @@ final class ApplicationExport extends Record
         if ($name === 'cancelled') {
             return $this->getRawField('cancelled');
         }
+        if ($name === 'offer') {
+            return $this->getObjectField('offer', Offer::class);
+        }
         if ($name === 'profile') {
             return $this->getObjectField('profile', ApplicationExportProfile::class);
         }
@@ -117,6 +155,7 @@ final class ApplicationExport extends Record
             'exported',
             'processed',
             'cancelled',
+            'offer',
             'profile',
         ];
     }
