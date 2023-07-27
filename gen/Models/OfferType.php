@@ -7,6 +7,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $title
  * @property-read string $colour
  * @property-read string $ranking
@@ -27,6 +28,14 @@ final class OfferType extends Record
     const RANKING_PENDING = 'Pending';
 
     const RANKING_ELIMINATED = 'Eliminated';
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
 
     /**
      * @return string
@@ -126,6 +135,9 @@ final class OfferType extends Record
 
     protected function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'title') {
             return $this->getRawField('title');
         }
@@ -168,6 +180,7 @@ final class OfferType extends Record
     protected function getFieldList()
     {
         return [
+            'id',
             'title',
             'colour',
             'ranking',

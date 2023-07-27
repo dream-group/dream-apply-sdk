@@ -312,7 +312,6 @@ final class Offer extends Record
 
     /**
      * @param OfferType|int|string $value Object or object id
-     * @return $this
      */
     public function setType($value)
     {
@@ -325,8 +324,7 @@ final class Offer extends Record
             }
             $value = $value->getId();
         }
-        $this->data['type'] = $value;
-        return $this;
+        $this->setField('type', $value);
     }
 
     /**
