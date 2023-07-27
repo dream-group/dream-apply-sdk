@@ -22,6 +22,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $notes
  * @property-read Course $course
  * @property-read Intake|null $intake
+ * @property-read OfferScore $score
  * @property-read OfferType $type
  * @property-read OfferType $typeConfirmed
  */
@@ -242,6 +243,40 @@ final class Offer extends Record
     }
 
     /**
+     * @return OfferScore
+     */
+    public function getScore()
+    {
+        return $this->getObjectField('score', OfferScore::class);
+    }
+
+    /**
+     * @return OfferScore
+     * @deprecated Use getScore() instead
+     */
+    public function score()
+    {
+        return $this->getScore();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasScore()
+    {
+        return $this->hasObjectField('score');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasScore() instead
+     */
+    public function scoreExists()
+    {
+        return $this->hasScore();
+    }
+
+    /**
      * @return OfferType
      */
     public function getType()
@@ -364,6 +399,9 @@ final class Offer extends Record
         if ($name === 'intake') {
             return $this->getObjectField('intake', Intake::class);
         }
+        if ($name === 'score') {
+            return $this->getObjectField('score', OfferScore::class);
+        }
         if ($name === 'type') {
             return $this->getObjectField('type', OfferType::class);
         }
@@ -391,6 +429,7 @@ final class Offer extends Record
             'notes',
             'course',
             'intake',
+            'score',
             'type',
             'type-confirmed',
         ];

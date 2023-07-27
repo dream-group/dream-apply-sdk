@@ -21,6 +21,8 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Application|null $application
  * @property-read Course|null $course
  * @property-read InvoicePayer $payer
+ * @property-read InvoiceItems $items
+ * @property-read InvoiceCollections $collections
  */
 final class Invoice extends Record
 {
@@ -240,6 +242,48 @@ final class Invoice extends Record
         return $this->hasPayer();
     }
 
+    /**
+     * @return InvoiceItems
+     */
+    public function getItems()
+    {
+        return $this->buildCollection(
+            InvoiceItems::class,
+            $this->getRawField('items'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getItems() instead
+     * @return InvoiceItems
+     */
+    public function items()
+    {
+        return $this->getItems();
+    }
+
+    /**
+     * @return InvoiceCollections
+     */
+    public function getCollections()
+    {
+        return $this->buildCollection(
+            InvoiceCollections::class,
+            $this->getRawField('collections'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getCollections() instead
+     * @return InvoiceCollections
+     */
+    public function collections()
+    {
+        return $this->getCollections();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -309,12 +353,28 @@ final class Invoice extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'items') {
+            return $this->buildCollection(
+                InvoiceItems::class,
+                $this->getRawField('items'),
+                []
+            );
+        }
+        if ($name === 'collections') {
+            return $this->buildCollection(
+                InvoiceCollections::class,
+                $this->getRawField('collections'),
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'items',
+            'collections',
         ];
     }
 }
