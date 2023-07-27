@@ -311,6 +311,25 @@ final class Offer extends Record
     }
 
     /**
+     * @param OfferType|int|string $value Object or object id
+     * @return $this
+     */
+    public function setType($value)
+    {
+        if (is_object($value)) {
+            if (!($value instanceof OfferType)) {
+                throw new InvalidArgumentException(sprintf(
+                    '$value must be an instance of Dream\Apply\Client\Models\OfferType, %s given',
+                    get_class($value)
+                ));
+            }
+            $value = $value->getId();
+        }
+        $this->data['type'] = $value;
+        return $this;
+    }
+
+    /**
      * @return OfferType
      */
     public function getTypeConfirmed()
