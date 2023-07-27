@@ -134,7 +134,12 @@ abstract class Record implements ArrayAccess
             return new $class($this->client, $dataOrUrl, [], true);
         }
 
-        return new $class($this->client, null, $dataOrUrl, false);
+        // try to guess url by field name
+        $url = $this->baseUrl === null ?
+            null :
+            $this->baseUrl . '/' . $field; // may be invalid but it saves us a few times
+
+        return new $class($this->client, $url, $dataOrUrl, false);
     }
 
     protected function hasObjectField($field)
