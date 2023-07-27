@@ -4,6 +4,8 @@ namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
+use Dream\Apply\Client\BaseModels\CollectionOfCreatable;
+use Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -18,6 +20,8 @@ use IteratorAggregate;
  */
 final class ApplicantInvoices extends Collection
 {
+    use CollectionOfCreatable;
+
     protected function getItemClass()
     {
         return Invoice::class;
@@ -108,5 +112,13 @@ final class ApplicantInvoices extends Collection
     {
         return [
         ];
+    }
+
+    /**
+     * @return Invoice
+     */
+    public function create(CreatableModels\ApplicantInvoice $object)
+    {
+        return $this->doCreate($object);
     }
 }
