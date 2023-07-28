@@ -20,6 +20,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read int|null $decided
  * @property-read int $scored
  * @property-read string $notes
+ * @property-read string $subject
  * @property-read Course $course
  * @property-read Intake|null $intake
  * @property-read OfferScore $score
@@ -172,6 +173,22 @@ final class Offer extends Record
     public function setNotes($value)
     {
         $this->setField('notes', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->getRawField('subject');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setSubject($value)
+    {
+        $this->setField('subject', $value);
     }
 
     /**
@@ -410,6 +427,9 @@ final class Offer extends Record
         if ($name === 'notes') {
             return $this->getRawField('notes');
         }
+        if ($name === 'subject') {
+            return $this->getRawField('subject');
+        }
         if ($name === 'course') {
             return $this->getObjectField('course', Course::class);
         }
@@ -444,6 +464,7 @@ final class Offer extends Record
             'decided',
             'scored',
             'notes',
+            'subject',
             'course',
             'intake',
             'score',
