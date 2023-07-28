@@ -9,6 +9,13 @@ PHP 5.5, 7.x or later.
 This library uses Guzzle 6.2 and later and Stringy 2.0 and later. Please make sure
 that it won't conflict with your dependencies.
 
+## SDK and API versions
+
+* SDK version 1 supports API version 3
+* SDK version 2 supports API version 4
+
+See [UPGRADE.md](UPGRADE.md) for upgrade instructions.
+
 ## Initialization
 
 ```php
@@ -57,7 +64,7 @@ record existence check ignore current filter for the collection
 ```php
 <?php
 // filters are required to iterate over applications
-$applications = $client->applications(['byCommenceYear' => 2016, 'byStatuses' => 'Submitted']);
+$applications = $client->getApplications(['byCommenceYear' => 2016, 'byStatuses' => 'Submitted']);
 
 $inactive = $applications->filter(['byStatuses' => 'Inactive']); // add or override conditions in filter
 
@@ -79,7 +86,7 @@ $client->applicants[1]->trackers[1]->tracker;  // get actual tracker from associ
 
 // when iterating over collections, object properties are lazy loaded
 // please note when calculating API request count
-$applications = $client->applications(['byCommenceYear' => 2016, 'byStatuses' => 'Submitted']);
+$applications = $client->getApplications(['byCommenceYear' => 2016, 'byStatuses' => 'Submitted']);
 
 // one request
 foreach ($applications as $id => $app) {
@@ -119,9 +126,17 @@ Flags, Trackers, and Applicants can be created in API
 
 ```php
 <?php
-$newTracker     = $client->applicants->trackers->create('tracker code', 'notes');
-$newFlag        = $client->applications->flags->create('flag name');
-$newApplicant   = $client->applicants->create([
+
+use Dream\Apply\Client\CreatableModels\Applicant;
+use Dream\Apply\Client\CreatableModels\Flag;
+use Dream\Apply\Client\CreatableModels\Tracker;
+
+$newTracker     = $client->applicants->trackers->create(new Tracker([
+    'code' => 'tracker code', 
+    'notes' => 'notes',
+]));
+$newFlag        = $client->applications->flags->create(new Flag(['name' => 'flag name']));
+$newApplicant   = $client->applicants->create(new Applicant([
     'email'         => 'email@example.com',
     'name_given'    => 'Name',
     'name_family'   => 'Surname',
@@ -182,7 +197,7 @@ Reports object has two methods:
 ```php
 <?php
 // list all available reports
-$client->reports->available();
+$client->reports->getAvailable();
 // get report as binary record
-$client->reports->report('ReportStatus', ['regions' => 1, 'academicTerm' => 1, 'institutions' => 1]);
+$client->reports->getReport('ReportStatus', ['regions' => 1, 'academicTerm' => 1, 'institutions' => 1]);
 ```
