@@ -124,10 +124,10 @@ final class ApplicationFlags extends Collection
     }
 
     /**
-     * @param ApplicationFlag|int $idOrObject
+     * @param Flag|int $idOrObject
      */
     public function delete($idOrObject)
     {
-        $this->doDelete($idOrObject);
+        $this->doDelete($idOrObject, Flag::class);
     }
 }

@@ -124,10 +124,10 @@ final class ApplicantTrackers extends Collection
     }
 
     /**
-     * @param ApplicantTracker|int $idOrObject
+     * @param Tracker|int $idOrObject
      */
     public function delete($idOrObject)
     {
-        $this->doDelete($idOrObject);
+        $this->doDelete($idOrObject, Tracker::class);
     }
 }
