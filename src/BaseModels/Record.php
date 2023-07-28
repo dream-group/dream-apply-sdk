@@ -51,7 +51,7 @@ abstract class Record implements ArrayAccess
 
     public function getRawData($requestFull = false)
     {
-        if ($requestFull) {
+        if ($this->data === null || $requestFull) {
             $this->resolvePartial();
         }
 
