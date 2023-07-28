@@ -38,5 +38,9 @@
         "phpcompatibility/php-compatibility": "*",
         "psy/psysh": "*",
         "squizlabs/php_codesniffer": "*"
+    },
+    "suggest": {
+        "psr/http-client-implementation": "PSR-18 or HTTPlug compatible client is required",
+        "php-http/client-implementation": "PSR-18 or HTTPlug compatible client is required"
     }
 }
