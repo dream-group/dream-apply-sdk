@@ -1,6 +1,8 @@
 <?php
 
-$client = new Dream\Apply\Client\Client(
+use Dream\Apply\Client\Client;
+
+$client = new Client(
     'https://instance.dreamapply.com/api/',
     'abcdefghijklmnopqrstuvwxyz123456'
 );
