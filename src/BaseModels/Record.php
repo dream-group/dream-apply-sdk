@@ -39,12 +39,12 @@ abstract class Record implements ArrayAccess
      * @param array $data
      * @param bool $partial
      */
-    public function __construct(Client $client, $url, array $data, $partial)
+    public function __construct(Client $client, $url, $data, $partial)
     {
         $this->client   = $client;
         $this->baseUrl  = $url;
         $this->data     = $data;
-        $this->partial  = empty($data) ? true : $partial; // empty data always means that object is incomplete
+        $this->partial  = $data === null ? true : $partial; // empty data always means that object is incomplete
 
         $this->afterSetData();
     }
@@ -131,7 +131,7 @@ abstract class Record implements ArrayAccess
         }
 
         if (is_string($dataOrUrl)) {
-            return new $class($this->client, $dataOrUrl, [], true);
+            return new $class($this->client, $dataOrUrl, null, true);
         }
 
         // try to guess url by field name
@@ -172,6 +172,7 @@ abstract class Record implements ArrayAccess
 
         ResponseHelper::verifyResponseSuccessful($response);
 
+        $this->getRawData();
         $this->data[$field] = $value; // if response was successful, update value in the object
     }
 
@@ -193,6 +194,7 @@ abstract class Record implements ArrayAccess
 
         ResponseHelper::verifyResponseSuccessful($response);
 
+        $this->getRawData();
         $this->data[$field] = null; // if response was successful, update value in the object
     }
 

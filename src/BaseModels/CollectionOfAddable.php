@@ -39,6 +39,6 @@ trait CollectionOfAddable
 
         ResponseHelper::verifyResponseSuccessful($response); // check response for 404 and unexpected codes
 
-        return new $itemClass($this->client, $url, [], true); // return new association
+        return new $itemClass($this->client, $url, null, true); // return new association
     }
 }
