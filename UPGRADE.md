@@ -8,6 +8,17 @@
 
 You are required to do these changes for a successful upgrade.
 
+* Hard dependency on Guzzle was dropped. You need to install a compatible client library.
+  * If you use Symfony or Laravel, the best choice is `symfony/http-client`:
+     ```bash
+     composer require symfony/http-client
+     ```
+  
+  * If you use other framework on PHP 7.0 and later, we recommend Guzzle version 7 and later:
+    ```bash
+    composer require guzzlehttp/guzzle
+    ```
+  * If you still use PHP 5.x, install `php-http/guzzle6-adapter` or `php-http/curl-client`
 * Offer types are now returned according to API v4, see [API docs][api].
 * `create()` methods now use creatable model objects instead of param lists:
   ```php

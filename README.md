@@ -4,10 +4,20 @@ Dream Apply SDK is a client tool for the [Dream Apply API](http://docs.dreamgrou
 
 ## Requirements
 
-PHP 5.5, 7.x or later. 
+PHP 5.5 or later.
 
-This library uses Guzzle 6.2 and later and Stringy 2.0 and later. Please make sure
-that it won't conflict with your dependencies.
+This library requires a PSR-18 or HTTPlug compatible HTTP client to function.
+
+Recommended clients:
+
+* (PHP >= 7.2) [guzzlehttp/guzzle](https://packagist.org/packages/guzzlehttp/guzzle) versions 7 and later
+* (PHP >= 7.1) [symfony/http-client](https://packagist.org/packages/symfony/http-client)
+* (PHP >= 5.5) [php-http/guzzle6-adapter](https://packagist.org/packages/php-http/guzzle6-adapter)
+
+Full lists:
+
+* [PSR-18](https://packagist.org/providers/psr/http-client-implementation) (recommended standard, PHP >= 7.0)
+* [HTTPlug](https://packagist.org/providers/php-http/client-implementation)
 
 ## SDK and API versions
 
