@@ -12,6 +12,21 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string|null $revised
  * @property-read string|null $submitted
  * @property-read string $status
+ * @property-read array $profile
+ * @property-read array $legal
+ * @property-read array $contact
+ * @property-read array $home
+ * @property-read array $host
+ * @property-read array $education
+ * @property-read array $grades
+ * @property-read array $languages
+ * @property-read array $career
+ * @property-read array $activities
+ * @property-read array $residences
+ * @property-read array $motivation
+ * @property-read array $visa
+ * @property-read array $misc
+ * @property-read array $extras
  * @property-read AcademicTerm $academicTerm
  * @property-read Applicant $applicant
  * @property-read BinaryRecord $pdf
@@ -64,6 +79,126 @@ final class Application extends Record
     public function getStatus()
     {
         return $this->getRawField('status');
+    }
+
+    /**
+     * @return array
+     */
+    public function getProfile()
+    {
+        return $this->getRawField('profile');
+    }
+
+    /**
+     * @return array
+     */
+    public function getLegal()
+    {
+        return $this->getRawField('legal');
+    }
+
+    /**
+     * @return array
+     */
+    public function getContact()
+    {
+        return $this->getRawField('contact');
+    }
+
+    /**
+     * @return array
+     */
+    public function getHome()
+    {
+        return $this->getRawField('home');
+    }
+
+    /**
+     * @return array
+     */
+    public function getHost()
+    {
+        return $this->getRawField('host');
+    }
+
+    /**
+     * @return array
+     */
+    public function getEducation()
+    {
+        return $this->getRawField('education');
+    }
+
+    /**
+     * @return array
+     */
+    public function getGrades()
+    {
+        return $this->getRawField('grades');
+    }
+
+    /**
+     * @return array
+     */
+    public function getLanguages()
+    {
+        return $this->getRawField('languages');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCareer()
+    {
+        return $this->getRawField('career');
+    }
+
+    /**
+     * @return array
+     */
+    public function getActivities()
+    {
+        return $this->getRawField('activities');
+    }
+
+    /**
+     * @return array
+     */
+    public function getResidences()
+    {
+        return $this->getRawField('residences');
+    }
+
+    /**
+     * @return array
+     */
+    public function getMotivation()
+    {
+        return $this->getRawField('motivation');
+    }
+
+    /**
+     * @return array
+     */
+    public function getVisa()
+    {
+        return $this->getRawField('visa');
+    }
+
+    /**
+     * @return array
+     */
+    public function getMisc()
+    {
+        return $this->getRawField('misc');
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtras()
+    {
+        return $this->getRawField('extras');
     }
 
     /**
@@ -377,6 +512,51 @@ final class Application extends Record
         if ($name === 'status') {
             return $this->getRawField('status');
         }
+        if ($name === 'profile') {
+            return $this->getRawField('profile');
+        }
+        if ($name === 'legal') {
+            return $this->getRawField('legal');
+        }
+        if ($name === 'contact') {
+            return $this->getRawField('contact');
+        }
+        if ($name === 'home') {
+            return $this->getRawField('home');
+        }
+        if ($name === 'host') {
+            return $this->getRawField('host');
+        }
+        if ($name === 'education') {
+            return $this->getRawField('education');
+        }
+        if ($name === 'grades') {
+            return $this->getRawField('grades');
+        }
+        if ($name === 'languages') {
+            return $this->getRawField('languages');
+        }
+        if ($name === 'career') {
+            return $this->getRawField('career');
+        }
+        if ($name === 'activities') {
+            return $this->getRawField('activities');
+        }
+        if ($name === 'residences') {
+            return $this->getRawField('residences');
+        }
+        if ($name === 'motivation') {
+            return $this->getRawField('motivation');
+        }
+        if ($name === 'visa') {
+            return $this->getRawField('visa');
+        }
+        if ($name === 'misc') {
+            return $this->getRawField('misc');
+        }
+        if ($name === 'extras') {
+            return $this->getRawField('extras');
+        }
         if ($name === 'academicTerm') {
             return $this->getObjectField('academic_term', AcademicTerm::class);
         }
@@ -397,6 +577,21 @@ final class Application extends Record
             'revised',
             'submitted',
             'status',
+            'profile',
+            'legal',
+            'contact',
+            'home',
+            'host',
+            'education',
+            'grades',
+            'languages',
+            'career',
+            'activities',
+            'residences',
+            'motivation',
+            'visa',
+            'misc',
+            'extras',
             'academic_term',
             'applicant',
             'pdf',
