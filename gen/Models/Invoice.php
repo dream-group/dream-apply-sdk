@@ -23,6 +23,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read InvoicePayer $payer
  * @property-read InvoiceItems $items
  * @property-read InvoiceCollections $collections
+ * @property-read InvoiceTransactions $transactions
  */
 final class Invoice extends Record
 {
@@ -284,6 +285,27 @@ final class Invoice extends Record
         return $this->getCollections();
     }
 
+    /**
+     * @return InvoiceTransactions
+     */
+    public function getTransactions()
+    {
+        return $this->buildCollection(
+            InvoiceTransactions::class,
+            $this->baseUrl . '/transactions',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getTransactions() instead
+     * @return InvoiceTransactions
+     */
+    public function transactions()
+    {
+        return $this->getTransactions();
+    }
+
     protected function getField($name)
     {
         if ($name === 'id') {
@@ -367,6 +389,13 @@ final class Invoice extends Record
                 []
             );
         }
+        if ($name === 'transactions') {
+            return $this->buildCollection(
+                InvoiceTransactions::class,
+                $this->baseUrl . '/transactions',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -375,6 +404,7 @@ final class Invoice extends Record
         return [
             'items',
             'collections',
+            'transactions',
         ];
     }
 }
