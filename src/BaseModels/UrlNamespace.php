@@ -49,7 +49,7 @@ abstract class UrlNamespace
     {
         $url = $this->baseUrl . '/' . $field;
 
-        return new $class($this->client, $url, [], true);
+        return new $class($this->client, $url, null, true);
     }
 
     protected function hasField($name)
