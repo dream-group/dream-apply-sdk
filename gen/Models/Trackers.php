@@ -5,6 +5,7 @@ namespace Dream\Apply\Client\Models;
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
 use Dream\Apply\Client\BaseModels\CollectionOfCreatable;
+use Dream\Apply\Client\BaseModels\CollectionOfDeletable;
 use Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
@@ -20,7 +21,7 @@ use IteratorAggregate;
  */
 final class Trackers extends Collection
 {
-    use CollectionOfCreatable;
+    use CollectionOfCreatable, CollectionOfDeletable;
 
     protected function getItemClass()
     {
@@ -120,5 +121,13 @@ final class Trackers extends Collection
     public function create(CreatableModels\Tracker $object)
     {
         return $this->doCreate($object, 'Tracker with such code already exists');
+    }
+
+    /**
+     * @param Tracker|int $idOrObject
+     */
+    public function delete($idOrObject)
+    {
+        $this->doDelete($idOrObject);
     }
 }

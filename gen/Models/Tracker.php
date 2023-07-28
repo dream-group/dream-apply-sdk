@@ -7,6 +7,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $created
  * @property-read string $code
  * @property-read string $notes
@@ -17,6 +18,14 @@ final class Tracker extends Record
     const REDUCTION_PERCENT = 'Percent';
 
     const REDUCTION_AMOUNT = 'Amount';
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
 
     /**
      * @return string
@@ -78,6 +87,9 @@ final class Tracker extends Record
 
     protected function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'created') {
             return $this->getRawField('created');
         }
@@ -96,6 +108,7 @@ final class Tracker extends Record
     protected function getFieldList()
     {
         return [
+            'id',
             'created',
             'code',
             'notes',
