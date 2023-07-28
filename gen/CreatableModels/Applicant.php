@@ -3,6 +3,8 @@
 namespace Dream\Apply\Client\CreatableModels;
 
 use Dream\Apply\Client\BaseModels\CreatableModel;
+use Dream\Apply\Client\Exceptions\InvalidArgumentException;
+use Dream\Apply\Client\Models\Tracker;
 
 /**
  * @generated
@@ -141,18 +143,18 @@ final class Applicant implements CreatableModel
      * @param string|null $value
      * @return $this
      */
-    public function setTracker($value)
+    public function setReference($value)
     {
-        $this->data['tracker'] = $value;
+        $this->data['reference'] = $value;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getTracker()
+    public function getReference()
     {
-        return isset($this->data['tracker']) ? $this->data['tracker'] : null;
+        return isset($this->data['reference']) ? $this->data['reference'] : null;
     }
 
     /**
@@ -171,6 +173,33 @@ final class Applicant implements CreatableModel
     public function getNotes()
     {
         return isset($this->data['notes']) ? $this->data['notes'] : null;
+    }
+
+    /**
+     * @param Tracker|int|string $value Object or object id
+     * @return $this
+     */
+    public function setTrackerID($value)
+    {
+        if (is_object($value)) {
+            if (!($value instanceof Tracker)) {
+                throw new InvalidArgumentException(sprintf(
+                    '$value must be an instance of Dream\Apply\Client\Models\Tracker, %s given',
+                    get_class($value)
+                ));
+            }
+            $value = $value->getId();
+        }
+        $this->data['tracker_ID'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return int|string Object id
+     */
+    public function getTrackerID()
+    {
+        return isset($this->data['tracker_ID']) ? $this->data['tracker_ID'] : null;
     }
 
     /**
@@ -220,11 +249,17 @@ final class Applicant implements CreatableModel
         if (isset($fields['citizenship'])) {
             $this->setCitizenship($fields['citizenship']);
         }
-        if (isset($fields['tracker'])) {
-            $this->setTracker($fields['tracker']);
+        if (isset($fields['reference'])) {
+            $this->setReference($fields['reference']);
         }
         if (isset($fields['notes'])) {
             $this->setNotes($fields['notes']);
+        }
+        if (isset($fields['trackerID'])) {
+            $this->setTrackerID($fields['trackerID']);
+        }
+        if (isset($fields['tracker_ID'])) {
+            $this->setTrackerID($fields['tracker_ID']);
         }
         if (isset($fields['region'])) {
             $this->setRegion($fields['region']);

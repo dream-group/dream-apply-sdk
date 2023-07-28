@@ -5,6 +5,7 @@ namespace Dream\Apply\Client\Models;
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
 use Dream\Apply\Client\BaseModels\CollectionOfAddable;
+use Dream\Apply\Client\BaseModels\CollectionOfDeletable;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -19,7 +20,7 @@ use IteratorAggregate;
  */
 final class ApplicantTrackers extends Collection
 {
-    use CollectionOfAddable;
+    use CollectionOfAddable, CollectionOfDeletable;
 
     protected function getItemClass()
     {
@@ -120,5 +121,13 @@ final class ApplicantTrackers extends Collection
     public function add($idOrObject)
     {
         return $this->doAdd($idOrObject, Tracker::class);
+    }
+
+    /**
+     * @param ApplicantTracker|int $idOrObject
+     */
+    public function delete($idOrObject)
+    {
+        $this->doDelete($idOrObject);
     }
 }
