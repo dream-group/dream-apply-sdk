@@ -65,9 +65,10 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             } catch (NotFoundException $e) {
                 $client = HttpClientDiscovery::find();
             }
-        } elseif (!($client instanceof HttpClient || $client instanceof ClientInterface)) {
+        // don't trust IDE warning below, only HttpClient v2 extends ClientInterface, not HttpClient v1
+        } elseif (!($client instanceof ClientInterface || $client instanceof HttpClient)) {
             throw new \InvalidArgumentException(
-                '$client must be an instance of PSR-18 client or Httplug client'
+                '$client must be an instance of PSR-18 client or HTTPlug client'
             );
         }
 
@@ -82,7 +83,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             }
         } elseif (!($requestFactory instanceof RequestFactoryInterface || $requestFactory instanceof MessageFactory)) {
             throw new \InvalidArgumentException(
-                '$requestFactory must be an instance of PSR-17 factory or Httplug factory'
+                '$requestFactory must be an instance of PSR-17 request factory or HTTPlug message factory'
             );
         }
 
@@ -97,7 +98,7 @@ final class HttpHelper implements RequestMethodInterface, StatusCodeInterface
             }
         } elseif (!($uriFactory instanceof UriFactoryInterface || $uriFactory instanceof UriFactory)) {
             throw new \InvalidArgumentException(
-                '$requestFactory must be an instance of PSR-17 factory or Httplug factory'
+                '$uriFactory must be an instance of PSR-17 URI factory or HTTPlug URI factory'
             );
         }
 

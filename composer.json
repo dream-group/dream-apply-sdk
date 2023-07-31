@@ -35,6 +35,7 @@
         "dealerdirect/phpcodesniffer-composer-installer": "*",
         "nyholm/psr7": "^1.5",
         "php-http/curl-client": "*",
+        "php-http/message-factory": "^1.1",
         "phpcompatibility/php-compatibility": "*",
         "psy/psysh": "*",
         "squizlabs/php_codesniffer": "*"
