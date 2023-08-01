@@ -9,7 +9,8 @@ $client = new Client(
 );
 
 // collect some amount for invoice with id = 3
-$client->invoices[3]->transactions->create(new Transaction([
-    'amount' => '1050.20',  // amount in decimal form
-    'currency' => 'EUR'     // currency, must be same as the currency value of the invoice
-]));
+$client->invoices[3]->transactions->create(
+    (new Transaction())
+        ->setAmount('1050.20')  // amount in decimal form
+        ->setCurrency('EUR')    // currency, must be same as the currency value of the invoice
+);
