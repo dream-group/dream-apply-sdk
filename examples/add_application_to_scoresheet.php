@@ -13,14 +13,16 @@ $client = new Client(
 // binds together a scoresheet and an application.
 
 // Add application ID:321 to scoresheet ID:123 with an initial score of 12
-$client->scoresheets[123]->scores->create(new Score([
-    'application' => 321,
-    'points' => 12,
-    'comments' => 'Did very well!',
-]));
+$client->scoresheets[123]->scores->create(
+    (new Score())
+        ->setApplication(321)
+        ->setPoints(12)
+        ->setComments('Did very well!')
+);
 
 // Add application ID:321 to scoresheet ID:123 with an initial score of 0 and no comments
-$client->scoresheets[123]->scores->create(new Score([
-    'application' => 321,
-    'points' => 0,
-]));
+$client->scoresheets[123]->scores->create(
+    (new Score())
+        ->setApplication(321)
+        ->setPoints(0)
+);

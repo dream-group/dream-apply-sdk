@@ -9,7 +9,7 @@ $client = new Client(
 );
 
 // create a flag
-$newFlag = $client->applications->flags->create(new Flag(['name' => 'flag name']));
+$newFlag = $client->applications->flags->create((new Flag())->setName('flag name'));
 
 // add the new flag to the application with id = 1
 $flagAssoc = $client->applications[1]->flags->add($newFlag);
