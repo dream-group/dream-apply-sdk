@@ -2,9 +2,13 @@
 
 namespace Dream\Apply\Client\BaseModels;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
 use Dream\Apply\Client\Exceptions\BadMethodCallException;
+use IteratorAggregate;
 
-abstract class SimpleArray extends UrlNamespace implements \IteratorAggregate, \ArrayAccess, \Countable
+abstract class SimpleArray extends UrlNamespace implements IteratorAggregate, ArrayAccess, Countable
 {
     protected $data;
 
@@ -37,7 +41,7 @@ abstract class SimpleArray extends UrlNamespace implements \IteratorAggregate, \
 
     public function getIterator()
     {
-        return new \ArrayIterator($this->data);
+        return new ArrayIterator($this->data);
     }
 
     public function offsetExists($offset)
