@@ -21,6 +21,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read TableViews $tableviews
  * @property-read Classificators $classificators
  * @property-read Reports $reports
+ * @property-read Logins $logins
  */
 trait RootNamespace
 {
@@ -331,6 +332,27 @@ trait RootNamespace
         return $this->getReports();
     }
 
+    /**
+     * @return Logins
+     */
+    public function getLogins($filter = [])
+    {
+        return $this->buildCollection(
+            Logins::class,
+            $this->baseUrl . '/logins',
+            $filter
+        );
+    }
+
+    /**
+     * @deprecated Use getLogins() instead
+     * @return Logins
+     */
+    public function logins($filter = [])
+    {
+        return $this->getLogins($filter);
+    }
+
     protected function getField($name)
     {
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
@@ -441,6 +463,13 @@ trait RootNamespace
         if ($name === 'reports') {
             return $this->buildNamespace(Reports::class, $this->baseUrl . '/reports');
         }
+        if ($name === 'logins') {
+            return $this->buildCollection(
+                Logins::class,
+                $this->baseUrl . '/logins',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -462,6 +491,7 @@ trait RootNamespace
             'tableviews',
             'classificators',
             'reports',
+            'logins',
         ];
     }
 }
