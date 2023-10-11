@@ -21,7 +21,6 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read BinaryRecord $photo
  * @property-read ApplicantApplications $applications
  * @property-read ApplicantTrackers $trackers
- * @property-read ApplicantDocuments $documents
  * @property-read StudyPlans $studyplans
  * @property-read ApplicantConsents $consents
  * @property-read ApplicantInvoices $invoices
@@ -256,27 +255,6 @@ final class Applicant extends Record
     }
 
     /**
-     * @return ApplicantDocuments
-     */
-    public function getDocuments()
-    {
-        return $this->buildCollection(
-            ApplicantDocuments::class,
-            $this->getRawField('documents'),
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getDocuments() instead
-     * @return ApplicantDocuments
-     */
-    public function documents()
-    {
-        return $this->getDocuments();
-    }
-
-    /**
      * @return StudyPlans
      */
     public function getStudyplans()
@@ -456,13 +434,6 @@ final class Applicant extends Record
                 []
             );
         }
-        if ($name === 'documents') {
-            return $this->buildCollection(
-                ApplicantDocuments::class,
-                $this->getRawField('documents'),
-                []
-            );
-        }
         if ($name === 'studyplans') {
             return $this->buildCollection(
                 StudyPlans::class,
@@ -506,7 +477,6 @@ final class Applicant extends Record
         return [
             'applications',
             'trackers',
-            'documents',
             'studyplans',
             'consents',
             'invoices',
