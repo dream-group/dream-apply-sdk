@@ -2,6 +2,10 @@
 
 [api]: https://docs.dreamapply.com/doku.php?id=api:manual
 
+## 2.x to 3.0
+
+API endpoints removed in APIv5 were removed from the SDK, see [the API docs][api].
+
 ## 1.x to 2.0
 
 ### Backwards incompatible changes
@@ -38,14 +42,14 @@ You are required to do these changes for a successful upgrade.
 
 ### Deprecations
 
-Recommended upgrades, old behavior will be removed in 3.0.
+Recommended upgrades, old behavior will be removed in a later major version.
 
 * The namespace changed from `Dream\DreamApply\Client` to `Dream\Apply\Client`
   * Both namespaces contain all classes
 * Getter names have changed (`get` and `has` prefixes were added):
   * `consent()` -> `getConsent()`
   * `consentExists()` -> `hasConsent()`
-  
+
   Old methods will continue to work unless they overlap with action calls.
 
 ### Behavior changes
