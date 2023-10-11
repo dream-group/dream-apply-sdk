@@ -17,6 +17,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $notes
  * @property-read string|null $address
  * @property-read string|null $vatin
+ * @property-read ApplicantName $name
  * @property-read BinaryRecord $photo
  * @property-read ApplicantApplications $applications
  * @property-read ApplicantTrackers $trackers
@@ -142,6 +143,40 @@ final class Applicant extends Record
     public function getVatin()
     {
         return $this->getRawField('vatin');
+    }
+
+    /**
+     * @return ApplicantName
+     */
+    public function getName()
+    {
+        return $this->getObjectField('name', ApplicantName::class);
+    }
+
+    /**
+     * @return ApplicantName
+     * @deprecated Use getName() instead
+     */
+    public function name()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasName()
+    {
+        return $this->hasObjectField('name');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasName() instead
+     */
+    public function nameExists()
+    {
+        return $this->hasName();
     }
 
     /**
@@ -378,6 +413,9 @@ final class Applicant extends Record
         if ($name === 'vatin') {
             return $this->getRawField('vatin');
         }
+        if ($name === 'name') {
+            return $this->getObjectField('name', ApplicantName::class);
+        }
         if ($name === 'photo') {
             return $this->getObjectField('photo', BinaryRecord::class);
         }
@@ -397,6 +435,7 @@ final class Applicant extends Record
             'notes',
             'address',
             'vatin',
+            'name',
             'photo',
         ];
     }
