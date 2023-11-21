@@ -2,6 +2,14 @@
 
 Dream Apply SDK is a client tool for the [Dream Apply API](http://docs.dreamgroup.info/doku.php?id=api:manual)
 
+## Installation
+
+Since version 3.0.0 the SDK is published on the Packagist.
+
+```bash
+composer require dream-group/dream-apply-sdk
+````
+
 ## Requirements
 
 PHP 5.5 or later.
