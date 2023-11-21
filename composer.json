@@ -2,7 +2,7 @@
     "name": "dream-group/dream-apply-sdk",
     "description": "Dream Apply SDK",
     "type": "library",
-    "license": "private",
+    "license": "MIT",
     "authors": [
         {
             "name": "Anton Smirnov",
