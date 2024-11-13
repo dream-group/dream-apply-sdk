@@ -4,7 +4,7 @@ Dream Apply SDK is a client tool for the [Dream Apply API](http://docs.dreamgrou
 
 ## Installation
 
-Since version 3.0.0 the SDK is published on the Packagist.
+Since version 3.0.0 the SDK is [published on the Packagist](https://packagist.org/packages/dream-group/dream-apply-sdk).
 
 ```bash
 composer require dream-group/dream-apply-sdk
