@@ -11,7 +11,7 @@ use Dream\Apply\Client\Models\InvoicesSeries;
 /**
  * @generated
  */
-final class ApplicantInvoice implements CreatableModel
+final class ApplicationInvoice implements CreatableModel
 {
     /**
      * @var array $data
