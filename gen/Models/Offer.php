@@ -26,6 +26,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read OfferScore $score
  * @property-read OfferType $type
  * @property-read OfferType $typeConfirmed
+ * @property-read OfferAttachments $attachments
  */
 final class Offer extends Record
 {
@@ -377,6 +378,27 @@ final class Offer extends Record
     }
 
     /**
+     * @return OfferAttachments
+     */
+    public function getAttachments()
+    {
+        return $this->buildCollection(
+            OfferAttachments::class,
+            $this->baseUrl . '/attachments',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getAttachments() instead
+     * @return OfferAttachments
+     */
+    public function attachments()
+    {
+        return $this->getAttachments();
+    }
+
+    /**
      * @return void
      */
     public function confirm()
@@ -473,12 +495,20 @@ final class Offer extends Record
 
     protected function getNamespace($name)
     {
+        if ($name === 'attachments') {
+            return $this->buildCollection(
+                OfferAttachments::class,
+                $this->baseUrl . '/attachments',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
     protected function getNamespaceList()
     {
         return [
+            'attachments',
         ];
     }
 }
