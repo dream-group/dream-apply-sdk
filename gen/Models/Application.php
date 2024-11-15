@@ -35,7 +35,6 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Offers $offers
  * @property-read ApplicationExports $exports
  * @property-read ApplicationDocuments $documents
- * @property-read ApplicationStudyPlans $studyplans
  * @property-read ApplicationScores $scores
  * @property-read ApplicationTasks $tasks
  */
@@ -427,27 +426,6 @@ final class Application extends Record
     }
 
     /**
-     * @return ApplicationStudyPlans
-     */
-    public function getStudyplans()
-    {
-        return $this->buildCollection(
-            ApplicationStudyPlans::class,
-            $this->getRawField('studyplans'),
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getStudyplans() instead
-     * @return ApplicationStudyPlans
-     */
-    public function studyplans()
-    {
-        return $this->getStudyplans();
-    }
-
-    /**
      * @return ApplicationScores
      */
     public function getScores()
@@ -653,13 +631,6 @@ final class Application extends Record
                 []
             );
         }
-        if ($name === 'studyplans') {
-            return $this->buildCollection(
-                ApplicationStudyPlans::class,
-                $this->getRawField('studyplans'),
-                []
-            );
-        }
         if ($name === 'scores') {
             return $this->buildCollection(
                 ApplicationScores::class,
@@ -685,7 +656,6 @@ final class Application extends Record
             'offers',
             'exports',
             'documents',
-            'studyplans',
             'scores',
             'tasks',
         ];

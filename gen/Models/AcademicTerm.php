@@ -7,6 +7,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 
 /**
  * @generated
+ * @property-read int $id
  * @property-read string $name
  * @property-read string $start
  * @property-read string $grace
@@ -16,6 +17,14 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  */
 final class AcademicTerm extends Record
 {
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->getRawField('id');
+    }
+
     /**
      * @return string
      */
@@ -118,6 +127,9 @@ final class AcademicTerm extends Record
 
     protected function getField($name)
     {
+        if ($name === 'id') {
+            return $this->getRawField('id');
+        }
         if ($name === 'name') {
             return $this->getRawField('name');
         }
@@ -142,6 +154,7 @@ final class AcademicTerm extends Record
     protected function getFieldList()
     {
         return [
+            'id',
             'name',
             'start',
             'grace',

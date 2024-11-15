@@ -43,9 +43,7 @@ final class Offer extends Record
 
     const SCORE_VISIBILITY_NONE = 'None';
 
-    const SCORE_VISIBILITY_RANKING_ONLY = 'Ranking only';
-
-    const SCORE_VISIBILITY_RANKING_AND_SCORE = 'Ranking and score';
+    const SCORE_VISIBILITY_VISIBLE = 'Visible';
 
     /**
      * @return int

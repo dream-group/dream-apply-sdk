@@ -40,49 +40,37 @@ final class Classificators extends SimpleArray
 
     const CLASS_GRADE_TYPE = 'Grade type';
 
-    const CLASS_LANGUAGE_TEST = 'Advisor group';
+    const CLASS_LANGUAGE_TEST = 'Language test';
 
-    const CLASS_LANGUAGE_PROFICIENCY = 'Education level';
+    const CLASS_LANGUAGE_PROFICIENCY = 'Language proficiency';
 
-    const CLASS_INVOICE_TYPE = 'Education institution';
+    const CLASS_INVOICE_TYPE = 'Invoice type';
 
-    const CLASS_INSTITUTION_SIZE = 'Education honor';
+    const CLASS_INSTITUTION_TYPE = 'Institution type';
 
-    const CLASS_INSTITUTION_SUBJECT = 'Education mode';
+    const CLASS_SPECIAL_NEEDS = 'Special needs';
 
-    const CLASS_INSTITUTION_TYPE = 'Education finance';
+    const CLASS_DISADVANTAGED_BACKGROUND = 'Disadvantaged background';
 
-    const CLASS_TEACHING_LEVEL = 'Education status';
+    const CLASS_EMPLOYMENT_COMPANY = 'Employment company';
 
-    const CLASS_TRAINING_TYPE = 'Education term';
+    const CLASS_EMPLOYMENT_TYPE = 'Employment type';
 
-    const CLASS_SPECIAL_NEEDS = 'Course type';
+    const CLASS_GENDER = 'Gender';
 
-    const CLASS_DISADVANTAGED_BACKGROUND = 'Course mode';
+    const CLASS_SALUTATION = 'Salutation';
 
-    const CLASS_EMPLOYMENT_COMPANY = 'Course entry';
+    const CLASS_HOME_INSTITUTION = 'Home institution';
 
-    const CLASS_EMPLOYMENT_TYPE = 'Course entry assurance';
+    const CLASS_HOST_INSTITUTION = 'Host institution';
 
-    const CLASS_SENIORITY_LEVEL = 'Subject type';
+    const CLASS_VISA_TYPE = 'Visa type';
 
-    const CLASS_STAFF_CATEGORY = 'Subject mode';
+    const CLASS_VISA_GRADUATION_PLAN = 'Visa graduation plan';
 
-    const CLASS_GENDER = 'Grade type';
+    const CLASS_ORGANIZATION_TYPE = 'Organization type';
 
-    const CLASS_SALUTATION = 'Advisor group';
-
-    const CLASS_HOME_INSTITUTION = 'Education level';
-
-    const CLASS_HOST_INSTITUTION = 'Education institution';
-
-    const CLASS_VISA_TYPE = 'Education honor';
-
-    const CLASS_VISA_GRADUATION_PLAN = 'Education mode';
-
-    const CLASS_ORGANIZATION_TYPE = 'Education finance';
-
-    const CLASS_DECLINE_REASON = 'Education status';
+    const CLASS_DECLINE_REASON = 'Decline reason';
 
     protected function getField($name)
     {

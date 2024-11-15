@@ -161,6 +161,24 @@ final class Applicant implements CreatableModel
      * @param string|null $value
      * @return $this
      */
+    public function setMatriculation($value)
+    {
+        $this->data['matriculation'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMatriculation()
+    {
+        return isset($this->data['matriculation']) ? $this->data['matriculation'] : null;
+    }
+
+    /**
+     * @param string|null $value
+     * @return $this
+     */
     public function setNotes($value)
     {
         $this->data['notes'] = $value;
@@ -251,6 +269,9 @@ final class Applicant implements CreatableModel
         }
         if (isset($fields['reference'])) {
             $this->setReference($fields['reference']);
+        }
+        if (isset($fields['matriculation'])) {
+            $this->setMatriculation($fields['matriculation']);
         }
         if (isset($fields['notes'])) {
             $this->setNotes($fields['notes']);

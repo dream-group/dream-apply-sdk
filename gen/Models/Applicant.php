@@ -13,6 +13,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $email
  * @property-read string $phone
  * @property-read string $reference
+ * @property-read string $matriculation
  * @property-read string $citizenship
  * @property-read string $notes
  * @property-read string|null $address
@@ -21,7 +22,6 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read BinaryRecord $photo
  * @property-read ApplicantApplications $applications
  * @property-read ApplicantTrackers $trackers
- * @property-read StudyPlans $studyplans
  * @property-read ApplicantConsents $consents
  * @property-read ApplicantInvoices $invoices
  * @property-read Wishes $wishes
@@ -89,6 +89,22 @@ final class Applicant extends Record
     public function setReference($value)
     {
         $this->setField('reference', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMatriculation()
+    {
+        return $this->getRawField('matriculation');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setMatriculation($value)
+    {
+        $this->setField('matriculation', $value);
     }
 
     /**
@@ -255,27 +271,6 @@ final class Applicant extends Record
     }
 
     /**
-     * @return StudyPlans
-     */
-    public function getStudyplans()
-    {
-        return $this->buildCollection(
-            StudyPlans::class,
-            $this->getRawField('studyplans'),
-            []
-        );
-    }
-
-    /**
-     * @deprecated Use getStudyplans() instead
-     * @return StudyPlans
-     */
-    public function studyplans()
-    {
-        return $this->getStudyplans();
-    }
-
-    /**
      * @return ApplicantConsents
      */
     public function getConsents()
@@ -379,6 +374,9 @@ final class Applicant extends Record
         if ($name === 'reference') {
             return $this->getRawField('reference');
         }
+        if ($name === 'matriculation') {
+            return $this->getRawField('matriculation');
+        }
         if ($name === 'citizenship') {
             return $this->getRawField('citizenship');
         }
@@ -409,6 +407,7 @@ final class Applicant extends Record
             'email',
             'phone',
             'reference',
+            'matriculation',
             'citizenship',
             'notes',
             'address',
@@ -431,13 +430,6 @@ final class Applicant extends Record
             return $this->buildCollection(
                 ApplicantTrackers::class,
                 $this->getRawField('trackers'),
-                []
-            );
-        }
-        if ($name === 'studyplans') {
-            return $this->buildCollection(
-                StudyPlans::class,
-                $this->getRawField('studyplans'),
                 []
             );
         }
@@ -477,7 +469,6 @@ final class Applicant extends Record
         return [
             'applications',
             'trackers',
-            'studyplans',
             'consents',
             'invoices',
             'wishes',
