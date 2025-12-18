@@ -34,6 +34,7 @@ Supported SDK and API versions:
 * SDK version 1 supports API version 3
 * SDK version 2 supports API version 4
 * SDK version 3 supports API version 5
+* SDK version 8 supports API version 8
 
 See [UPGRADE.md](UPGRADE.md) for upgrade instructions.
 
