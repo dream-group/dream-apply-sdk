@@ -18,7 +18,7 @@ final class Client extends UrlNamespace
 {
     use Models\RootNamespace;
 
-    const API_VERSION = 5;
+    const API_VERSION = 8;
 
     /**
      * @var HttpHelper
