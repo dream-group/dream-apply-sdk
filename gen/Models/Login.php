@@ -10,7 +10,6 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read int $id
  * @property-read string $logged
  * @property-read string $ip
- * @property-read string|null $ipv4
  * @property-read int $roleId
  * @property-read string $role
  * @property-read string $result
@@ -39,14 +38,6 @@ final class Login extends Record
     public function getIp()
     {
         return $this->getRawField('ip');
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getIpv4()
-    {
-        return $this->getRawField('ipv4');
     }
 
     /**
@@ -84,9 +75,6 @@ final class Login extends Record
         if ($name === 'ip') {
             return $this->getRawField('ip');
         }
-        if ($name === 'ipv4') {
-            return $this->getRawField('ipv4');
-        }
         if ($name === 'roleId') {
             return $this->getRawField('roleId');
         }
@@ -105,7 +93,6 @@ final class Login extends Record
             'id',
             'logged',
             'ip',
-            'ipv4',
             'roleId',
             'role',
             'result',

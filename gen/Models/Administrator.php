@@ -10,6 +10,8 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read int $id
  * @property-read string $name
  * @property-read string $email
+ * @property-read string $outgoingName
+ * @property-read string $outgoingEmail
  * @property-read string $phone
  * @property-read string $function
  * @property-read AdministratorRoles $roles
@@ -38,6 +40,22 @@ final class Administrator extends Record
     public function getEmail()
     {
         return $this->getRawField('email');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutgoingName()
+    {
+        return $this->getRawField('outgoing_name');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutgoingEmail()
+    {
+        return $this->getRawField('outgoing_email');
     }
 
     /**
@@ -88,6 +106,12 @@ final class Administrator extends Record
         if ($name === 'email') {
             return $this->getRawField('email');
         }
+        if ($name === 'outgoingName') {
+            return $this->getRawField('outgoing_name');
+        }
+        if ($name === 'outgoingEmail') {
+            return $this->getRawField('outgoing_email');
+        }
         if ($name === 'phone') {
             return $this->getRawField('phone');
         }
@@ -103,6 +127,8 @@ final class Administrator extends Record
             'id',
             'name',
             'email',
+            'outgoing_name',
+            'outgoing_email',
             'phone',
             'function',
         ];

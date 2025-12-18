@@ -24,6 +24,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Course $course
  * @property-read Intake|null $intake
  * @property-read OfferScore $score
+ * @property-read OfferTypeReason $reason
  * @property-read OfferType $type
  * @property-read OfferType $typeConfirmed
  * @property-read OfferAttachments $attachments
@@ -293,6 +294,40 @@ final class Offer extends Record
     }
 
     /**
+     * @return OfferTypeReason
+     */
+    public function getReason()
+    {
+        return $this->getObjectField('reason', OfferTypeReason::class);
+    }
+
+    /**
+     * @return OfferTypeReason
+     * @deprecated Use getReason() instead
+     */
+    public function reason()
+    {
+        return $this->getReason();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasReason()
+    {
+        return $this->hasObjectField('reason');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasReason() instead
+     */
+    public function reasonExists()
+    {
+        return $this->hasReason();
+    }
+
+    /**
      * @return OfferType
      */
     public function getType()
@@ -459,6 +494,9 @@ final class Offer extends Record
         if ($name === 'score') {
             return $this->getObjectField('score', OfferScore::class);
         }
+        if ($name === 'reason') {
+            return $this->getObjectField('reason', OfferTypeReason::class);
+        }
         if ($name === 'type') {
             return $this->getObjectField('type', OfferType::class);
         }
@@ -488,6 +526,7 @@ final class Offer extends Record
             'course',
             'intake',
             'score',
+            'reason',
             'type',
             'type-confirmed',
         ];

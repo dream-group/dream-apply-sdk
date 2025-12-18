@@ -19,6 +19,10 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $rangeMax
  * @property-read int $scale
  * @property-read string $instructions
+ * @property-read string $reference
+ * @property-read string $subject
+ * @property-read string $language
+ * @property-read object|null $group
  * @property-read Scores $scores
  */
 final class Scoresheet extends Record
@@ -124,6 +128,38 @@ final class Scoresheet extends Record
     }
 
     /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->getRawField('reference');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->getRawField('subject');
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->getRawField('language');
+    }
+
+    /**
+     * @return object|null
+     */
+    public function getGroup()
+    {
+        return $this->getRawField('group');
+    }
+
+    /**
      * @return Scores
      */
     public function getScores($filter = [])
@@ -182,6 +218,18 @@ final class Scoresheet extends Record
         if ($name === 'instructions') {
             return $this->getRawField('instructions');
         }
+        if ($name === 'reference') {
+            return $this->getRawField('reference');
+        }
+        if ($name === 'subject') {
+            return $this->getRawField('subject');
+        }
+        if ($name === 'language') {
+            return $this->getRawField('language');
+        }
+        if ($name === 'group') {
+            return $this->getRawField('group');
+        }
         throw new InvalidArgumentException(sprintf('Field "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -200,6 +248,10 @@ final class Scoresheet extends Record
             'range_max',
             'scale',
             'instructions',
+            'reference',
+            'subject',
+            'language',
+            'group',
         ];
     }
 

@@ -58,6 +58,8 @@ final class Classificators extends SimpleArray
 
     const CLASS_GENDER = 'Gender';
 
+    const CLASS_MARITAL_STATUS = 'Marital status';
+
     const CLASS_SALUTATION = 'Salutation';
 
     const CLASS_HOME_INSTITUTION = 'Home institution';

@@ -12,6 +12,9 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read array|null $mapped
  * @property-read string $comments
  * @property-read string $date
+ * @property-read string $reference
+ * @property-read string $subject
+ * @property-read string $language
  * @property-read Scoresheet $scoresheet
  * @property-read Application $application
  * @property-read Offer|null $offer
@@ -86,6 +89,82 @@ final class Score extends Record
     public function getDate()
     {
         return $this->getRawField('date');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setDate($value)
+    {
+        $this->setField('date', $value);
+    }
+
+    public function deleteDate()
+    {
+        $this->deleteField('date');
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->getRawField('reference');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setReference($value)
+    {
+        $this->setField('reference', $value);
+    }
+
+    public function deleteReference()
+    {
+        $this->deleteField('reference');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->getRawField('subject');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setSubject($value)
+    {
+        $this->setField('subject', $value);
+    }
+
+    public function deleteSubject()
+    {
+        $this->deleteField('subject');
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->getRawField('language');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setLanguage($value)
+    {
+        $this->setField('language', $value);
+    }
+
+    public function deleteLanguage()
+    {
+        $this->deleteField('language');
     }
 
     /**
@@ -207,6 +286,15 @@ final class Score extends Record
         if ($name === 'date') {
             return $this->getRawField('date');
         }
+        if ($name === 'reference') {
+            return $this->getRawField('reference');
+        }
+        if ($name === 'subject') {
+            return $this->getRawField('subject');
+        }
+        if ($name === 'language') {
+            return $this->getRawField('language');
+        }
         if ($name === 'scoresheet') {
             return $this->getObjectField('scoresheet', Scoresheet::class);
         }
@@ -227,6 +315,9 @@ final class Score extends Record
             'mapped',
             'comments',
             'date',
+            'reference',
+            'subject',
+            'language',
             'scoresheet',
             'application',
             'offer',

@@ -50,13 +50,9 @@ final class Application extends Record
 
     const STATUS_SUBMITTED = 'Submitted';
 
-    const STATUS_ACCEPTED = 'Accepted';
-
     const STATUS_WITHDRAWN = 'Withdrawn';
 
     const STATUS_CLOSED = 'Closed';
-
-    const STATUS_REJECTED = 'Rejected';
 
     /**
      * @return int

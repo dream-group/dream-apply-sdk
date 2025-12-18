@@ -11,6 +11,7 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read string $logged
  * @property-read string $event
  * @property-read array $bind
+ * @property-read Administrator|null $administrator
  * @property-read Applicant|null $applicant
  * @property-read Application|null $application
  * @property-read Course|null $course
@@ -53,6 +54,40 @@ final class JournalItem extends Record
     public function getBind()
     {
         return $this->getRawField('bind');
+    }
+
+    /**
+     * @return Administrator|null
+     */
+    public function getAdministrator()
+    {
+        return $this->getObjectField('administrator', Administrator::class);
+    }
+
+    /**
+     * @return Administrator|null
+     * @deprecated Use getAdministrator() instead
+     */
+    public function administrator()
+    {
+        return $this->getAdministrator();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAdministrator()
+    {
+        return $this->hasObjectField('administrator');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasAdministrator() instead
+     */
+    public function administratorExists()
+    {
+        return $this->hasAdministrator();
     }
 
     /**
@@ -375,6 +410,9 @@ final class JournalItem extends Record
         if ($name === 'bind') {
             return $this->getRawField('bind');
         }
+        if ($name === 'administrator') {
+            return $this->getObjectField('administrator', Administrator::class);
+        }
         if ($name === 'applicant') {
             return $this->getObjectField('applicant', Applicant::class);
         }
@@ -412,6 +450,7 @@ final class JournalItem extends Record
             'logged',
             'event',
             'bind',
+            'administrator',
             'applicant',
             'application',
             'course',
