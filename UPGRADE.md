@@ -2,6 +2,10 @@
 
 [api]: https://docs.dreamapply.com/doku.php?id=api:manual
 
+## 3.x to 8.0
+
+Updated to reflect APIv8
+
 ## 2.x to 3.0
 
 API endpoints removed in APIv5 were removed from the SDK, see [the API docs][api].
