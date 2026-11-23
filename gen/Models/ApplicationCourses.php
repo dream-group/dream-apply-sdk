@@ -4,6 +4,7 @@ namespace Dream\Apply\Client\Models;
 
 use ArrayAccess;
 use Dream\Apply\Client\BaseModels\Collection;
+use Dream\Apply\Client\BaseModels\CollectionOfDeletable;
 use Dream\Apply\Client\Exceptions\HttpClientException;
 use Dream\Apply\Client\Exceptions\HttpFailResponseException;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
@@ -18,6 +19,8 @@ use IteratorAggregate;
  */
 final class ApplicationCourses extends Collection
 {
+    use CollectionOfDeletable;
+
     protected function getItemClass()
     {
         return ApplicationCourse::class;
@@ -108,5 +111,13 @@ final class ApplicationCourses extends Collection
     {
         return [
         ];
+    }
+
+    /**
+     * @param ApplicationCourse|int $idOrObject
+     */
+    public function delete($idOrObject)
+    {
+        $this->doDelete($idOrObject);
     }
 }

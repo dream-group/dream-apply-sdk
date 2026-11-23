@@ -31,12 +31,14 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Applicant $applicant
  * @property-read BinaryRecord $pdf
  * @property-read ApplicationFlags $flags
+ * @property-read ApplicationAssignees $assignees
  * @property-read ApplicationCourses $courses
  * @property-read Offers $offers
  * @property-read ApplicationExports $exports
  * @property-read ApplicationDocuments $documents
  * @property-read ApplicationScores $scores
  * @property-read ApplicationTasks $tasks
+ * @property-read ApplicationInterviews $interviews
  */
 final class Application extends Record
 {
@@ -338,6 +340,27 @@ final class Application extends Record
     }
 
     /**
+     * @return ApplicationAssignees
+     */
+    public function getAssignees()
+    {
+        return $this->buildCollection(
+            ApplicationAssignees::class,
+            $this->getRawField('assignees'),
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getAssignees() instead
+     * @return ApplicationAssignees
+     */
+    public function assignees()
+    {
+        return $this->getAssignees();
+    }
+
+    /**
      * @return ApplicationCourses
      */
     public function getCourses()
@@ -461,6 +484,27 @@ final class Application extends Record
     public function tasks()
     {
         return $this->getTasks();
+    }
+
+    /**
+     * @return ApplicationInterviews
+     */
+    public function getInterviews()
+    {
+        return $this->buildCollection(
+            ApplicationInterviews::class,
+            $this->baseUrl . '/interviews',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getInterviews() instead
+     * @return ApplicationInterviews
+     */
+    public function interviews()
+    {
+        return $this->getInterviews();
     }
 
     /**
@@ -599,6 +643,13 @@ final class Application extends Record
                 []
             );
         }
+        if ($name === 'assignees') {
+            return $this->buildCollection(
+                ApplicationAssignees::class,
+                $this->getRawField('assignees'),
+                []
+            );
+        }
         if ($name === 'courses') {
             return $this->buildCollection(
                 ApplicationCourses::class,
@@ -641,6 +692,13 @@ final class Application extends Record
                 []
             );
         }
+        if ($name === 'interviews') {
+            return $this->buildCollection(
+                ApplicationInterviews::class,
+                $this->baseUrl . '/interviews',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -648,12 +706,14 @@ final class Application extends Record
     {
         return [
             'flags',
+            'assignees',
             'courses',
             'offers',
             'exports',
             'documents',
             'scores',
             'tasks',
+            'interviews',
         ];
     }
 }

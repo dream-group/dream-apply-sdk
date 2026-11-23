@@ -16,12 +16,15 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read Institutions $institutions
  * @property-read Intakes $intakes
  * @property-read Invoices $invoices
+ * @property-read Interviews $interviews
  * @property-read Journal $journal
  * @property-read Scoresheets $scoresheets
+ * @property-read Rankings $rankings
  * @property-read TableViews $tableviews
  * @property-read Classificators $classificators
  * @property-read Reports $reports
  * @property-read Logins $logins
+ * @property-read PurgedResources $purgedResources
  */
 trait RootNamespace
 {
@@ -236,6 +239,27 @@ trait RootNamespace
     }
 
     /**
+     * @return Interviews
+     */
+    public function getInterviews($filter = [])
+    {
+        return $this->buildCollection(
+            Interviews::class,
+            $this->baseUrl . '/interviews',
+            $filter
+        );
+    }
+
+    /**
+     * @deprecated Use getInterviews() instead
+     * @return Interviews
+     */
+    public function interviews($filter = [])
+    {
+        return $this->getInterviews($filter);
+    }
+
+    /**
      * @return Journal
      */
     public function getJournal($filter = [])
@@ -275,6 +299,27 @@ trait RootNamespace
     public function scoresheets()
     {
         return $this->getScoresheets();
+    }
+
+    /**
+     * @return Rankings
+     */
+    public function getRankings()
+    {
+        return $this->buildCollection(
+            Rankings::class,
+            $this->baseUrl . '/rankings',
+            []
+        );
+    }
+
+    /**
+     * @deprecated Use getRankings() instead
+     * @return Rankings
+     */
+    public function rankings()
+    {
+        return $this->getRankings();
     }
 
     /**
@@ -351,6 +396,27 @@ trait RootNamespace
     public function logins($filter = [])
     {
         return $this->getLogins($filter);
+    }
+
+    /**
+     * @return PurgedResources
+     */
+    public function getPurgedResources($filter = [])
+    {
+        return $this->buildCollection(
+            PurgedResources::class,
+            $this->baseUrl . '/purged-resources',
+            $filter
+        );
+    }
+
+    /**
+     * @deprecated Use getPurgedResources() instead
+     * @return PurgedResources
+     */
+    public function purgedResources($filter = [])
+    {
+        return $this->getPurgedResources($filter);
     }
 
     protected function getField($name)
@@ -436,6 +502,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'interviews') {
+            return $this->buildCollection(
+                Interviews::class,
+                $this->baseUrl . '/interviews',
+                []
+            );
+        }
         if ($name === 'journal') {
             return $this->buildCollection(
                 Journal::class,
@@ -447,6 +520,13 @@ trait RootNamespace
             return $this->buildCollection(
                 Scoresheets::class,
                 $this->baseUrl . '/scoresheets',
+                []
+            );
+        }
+        if ($name === 'rankings') {
+            return $this->buildCollection(
+                Rankings::class,
+                $this->baseUrl . '/rankings',
                 []
             );
         }
@@ -470,6 +550,13 @@ trait RootNamespace
                 []
             );
         }
+        if ($name === 'purgedResources') {
+            return $this->buildCollection(
+                PurgedResources::class,
+                $this->baseUrl . '/purged-resources',
+                []
+            );
+        }
         throw new InvalidArgumentException(sprintf('Namespace "%s" does not exist in class "%s"', $name, self::class));
     }
 
@@ -486,12 +573,15 @@ trait RootNamespace
             'institutions',
             'intakes',
             'invoices',
+            'interviews',
             'journal',
             'scoresheets',
+            'rankings',
             'tableviews',
             'classificators',
             'reports',
             'logins',
+            'purgedResources',
         ];
     }
 }

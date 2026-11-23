@@ -5,6 +5,7 @@ namespace Dream\Apply\Client\CreatableModels;
 use Dream\Apply\Client\BaseModels\CreatableModel;
 use Dream\Apply\Client\Exceptions\InvalidArgumentException;
 use Dream\Apply\Client\Models\Administrator;
+use Dream\Apply\Client\Models\Course;
 use Dream\Apply\Client\Models\Institution;
 use Dream\Apply\Client\Models\InvoicesSeries;
 
@@ -148,6 +149,33 @@ final class ApplicationInvoice implements CreatableModel
     public function getSerieID()
     {
         return isset($this->data['serie_ID']) ? $this->data['serie_ID'] : null;
+    }
+
+    /**
+     * @param Course|int|string $value Object or object id
+     * @return $this
+     */
+    public function setCourseID($value)
+    {
+        if (is_object($value)) {
+            if (!($value instanceof Course)) {
+                throw new InvalidArgumentException(sprintf(
+                    '$value must be an instance of Dream\Apply\Client\Models\Course, %s given',
+                    get_class($value)
+                ));
+            }
+            $value = $value->getId();
+        }
+        $this->data['course_ID'] = $value;
+        return $this;
+    }
+
+    /**
+     * @return int|string Object id
+     */
+    public function getCourseID()
+    {
+        return isset($this->data['course_ID']) ? $this->data['course_ID'] : null;
     }
 
     /**
@@ -361,6 +389,12 @@ final class ApplicationInvoice implements CreatableModel
         }
         if (isset($fields['serie_ID'])) {
             $this->setSerieID($fields['serie_ID']);
+        }
+        if (isset($fields['courseID'])) {
+            $this->setCourseID($fields['courseID']);
+        }
+        if (isset($fields['course_ID'])) {
+            $this->setCourseID($fields['course_ID']);
         }
         if (isset($fields['deadline'])) {
             $this->setDeadline($fields['deadline']);

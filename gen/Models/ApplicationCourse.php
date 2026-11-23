@@ -24,6 +24,14 @@ final class ApplicationCourse extends Record
     }
 
     /**
+     * @param int $value
+     */
+    public function setPriority($value)
+    {
+        $this->setField('priority', $value);
+    }
+
+    /**
      * @return string
      */
     public function getSubmitted()

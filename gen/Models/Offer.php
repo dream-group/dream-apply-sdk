@@ -21,6 +21,8 @@ use Dream\Apply\Client\Exceptions\InvalidArgumentException;
  * @property-read int $scored
  * @property-read string $notes
  * @property-read string $subject
+ * @property-read Applicant $applicant
+ * @property-read Application $application
  * @property-read Course $course
  * @property-read Intake|null $intake
  * @property-read OfferScore $score
@@ -189,6 +191,74 @@ final class Offer extends Record
     public function setSubject($value)
     {
         $this->setField('subject', $value);
+    }
+
+    /**
+     * @return Applicant
+     */
+    public function getApplicant()
+    {
+        return $this->getObjectField('applicant', Applicant::class);
+    }
+
+    /**
+     * @return Applicant
+     * @deprecated Use getApplicant() instead
+     */
+    public function applicant()
+    {
+        return $this->getApplicant();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApplicant()
+    {
+        return $this->hasObjectField('applicant');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplicant() instead
+     */
+    public function applicantExists()
+    {
+        return $this->hasApplicant();
+    }
+
+    /**
+     * @return Application
+     */
+    public function getApplication()
+    {
+        return $this->getObjectField('application', Application::class);
+    }
+
+    /**
+     * @return Application
+     * @deprecated Use getApplication() instead
+     */
+    public function application()
+    {
+        return $this->getApplication();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasApplication()
+    {
+        return $this->hasObjectField('application');
+    }
+
+    /**
+     * @return bool
+     * @deprecated Use hasApplication() instead
+     */
+    public function applicationExists()
+    {
+        return $this->hasApplication();
     }
 
     /**
@@ -485,6 +555,12 @@ final class Offer extends Record
         if ($name === 'subject') {
             return $this->getRawField('subject');
         }
+        if ($name === 'applicant') {
+            return $this->getObjectField('applicant', Applicant::class);
+        }
+        if ($name === 'application') {
+            return $this->getObjectField('application', Application::class);
+        }
         if ($name === 'course') {
             return $this->getObjectField('course', Course::class);
         }
@@ -523,6 +599,8 @@ final class Offer extends Record
             'scored',
             'notes',
             'subject',
+            'applicant',
+            'application',
             'course',
             'intake',
             'score',
