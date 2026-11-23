@@ -2,6 +2,11 @@
 
 [api]: https://docs.dreamapply.com/doku.php?id=api:manual
 
+## 8.x to 10.0
+
+* Updated to reflect APIv10
+* Removed autoloader for the old namespace ``Dream\DreamApply\``. Please use the current one, `Dream\Apply\`
+
 ## 3.x to 8.0
 
 Updated to reflect APIv8
